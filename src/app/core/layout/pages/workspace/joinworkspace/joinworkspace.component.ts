@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { TokenService } from '../../../../../shared/services/token.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-joinworkspace',
@@ -20,6 +21,7 @@ export class JoinworkspaceComponent {
     workspace_id: 0,
     role_id: 0
   };
+  error=""
 
   constructor(private userWorkspaceService: UserworkspaceService, private route: Router,private aRoute: ActivatedRoute, private tokenService: TokenService) {
     this.userId = this.tokenService.getUserId();
@@ -44,7 +46,7 @@ export class JoinworkspaceComponent {
     );
   }
 
-  createUserWorkspace() {
+  joinUserWorkspace() {
     this.userWorkspaceData.user_id = this.userId;
     this.userWorkspaceData.role_id = 3;
     console.log(this.userWorkspaceData)
@@ -55,7 +57,7 @@ export class JoinworkspaceComponent {
         this.route.navigate(['../workspacelist'])
       },
       (error: any) => {
-        console.error('Error creating workspace:', error);
+        this.error = "workspace id does not exist"
       }
     );
   }

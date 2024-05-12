@@ -8,6 +8,7 @@ import { NavigationComponent } from "../../../../../shared/navigation/navigation
 import { title } from 'process';
 import { CommonModule } from '@angular/common';
 import { ReportService } from '../../../../../shared/services/report.service';
+import { ReportselectionService } from '../../../../../shared/services/reportselection.service';
 
 @Component({
     selector: 'app-annualreportlist',
@@ -17,69 +18,80 @@ import { ReportService } from '../../../../../shared/services/report.service';
     imports: [NavigationComponent, FormsModule, CommonModule, RouterModule]
 })
 export class AnnualreportlistComponent {
-workspaceId: any;
-annualReportId: any;
-annualReport: any[] = [];
-reports: any[]=[];
+    workspaceId: any;
+    annualReportId: any;
+    reportSelections: any[] = [];
+    annualReport: any[]=[];
+    old_annualReport: any[]= [];
+    annualReport_filter = "";
 
-  constructor(
-    private annualReportService: AnnualreportService,
-    private route: Router,
-    private aRoute: ActivatedRoute,
-    private reportService: ReportService
-  ){}
+    constructor(
+        private route: Router,
+        private aRoute: ActivatedRoute,
+        private reportSelect: ReportselectionService,
+        private annualReportService: AnnualreportService
+    ) {}
 
-  ngOnInit(): void {
-    this.aRoute.paramMap.subscribe((params: Params) => {
-      this.workspaceId = params["params"]["workspace_id"];
-      console.log(this.workspaceId)
-    });
-    this.fetchAnnualReports();
-    this.fetchReports();
-  }
+    ngOnInit(): void {
+        this.aRoute.paramMap.subscribe((params: Params) => {
+            this.workspaceId = params["params"]["workspace_id"];
+            console.log(this.workspaceId);
+            this.fetchAnnualReports();
+            this.fetchReportSelection();
+        });
+    }
 
-  fetchAnnualReports() {
-    this.annualReportService.getAnnualReports(this.workspaceId).subscribe(
-        (response) => {
-            this.annualReport = response.data.reports;
-            console.log('Fetched Annual Reports:', this.annualReport);
-        },
-        (error) => {
-            console.log('Error fetching annual reports:', error);
-        }
-    );
-}
-
-fetchReports() {
-    this.reportService.getReports(this.workspaceId).subscribe(
-        (response) => {
-            if (response && response.data && Array.isArray(response.data.report)) {
-                this.reports = response.data.report;
-                console.log('Fetched Reports:', this.reports);
-
-                // Now you have both annualReport and reports fetched
-            } else {
-                console.log('Invalid or empty response for fetchReports');
+    fetchAnnualReports() {
+        this.annualReportService.getAnnualReports(this.workspaceId).subscribe(
+            (response) => {
+                this.annualReport = response.data.reports;
+                this.old_annualReport = this.annualReport
+                console.log('Fetched Annual Reports:', this.annualReport);
+            },
+            (error) => {
+                console.log('Error fetching annual reports:', error);
             }
-        },
-        (error) => {
-            console.log('Error fetching reports:', error);
-        }
-    );
-}
+        );
+    }
 
-openAnnualReport(annualReportId: any) {
-    console.log('Selected Annual Report ID:', annualReportId);
+    fetchReportSelection(): void {
+        this.reportSelect.getReportSelections().subscribe(
+            (response) => {
+                if (response && response.data && Array.isArray(response.data.reportSelections)) {
+                    this.reportSelections = response.data.reportSelections;
+                    console.log('Fetched Report Selection:', this.reportSelections);
 
-    // Find the selected annual report from annualReport array
-    const selectedAnnualReport = this.annualReport.find(report => report.annual_report_id === annualReportId);
+                    // After fetching reportSelections, you can directly handle navigation
+                    // based on the data retrieved
+                } else {
+                    console.log('Invalid or empty response for fetchReportSelection');
+                }
+            },
+            (error) => {
+                console.log('Error fetching report selections:', error);
+            }
+        );
+    }
 
-    if (selectedAnnualReport) {
-        // Find the associated report from reports array based on annual_report_id
-        const matchedReport = this.reports.find(report => report.report_id === annualReportId);
+    searchReport() {
+      this.annualReport = this.old_annualReport;
+      console.log('old:',this.annualReport);
+      this.annualReport = this.old_annualReport.filter(annualReport => {
+        return annualReport.annualreport_title.includes(this.annualReport_filter); 
+      });
+      console.log(this.annualReport_filter);
+    }
 
-        if (matchedReport) {
-            const reportTypeId = matchedReport.report_type_id;
+
+    openAnnualReport(annualReportId: any) {
+        console.log('Selected Annual Report ID:', annualReportId);
+
+        // Find the selected report selection based on annualReportId
+        const selectedReport = this.reportSelections.find(selection => selection.annual_report_id === annualReportId);
+
+        if (selectedReport) {
+            const reportId = selectedReport.report_id;
+            const reportTypeId = selectedReport.report_type_id;
 
             if (typeof reportTypeId !== 'undefined') {
                 if (reportTypeId === 1) {
@@ -89,28 +101,27 @@ openAnnualReport(annualReportId: any) {
                     // Navigate to accomplishment report view
                     this.route.navigate([`../viewannualreport-accomplishmentreport/${annualReportId}`], { relativeTo: this.aRoute });
                 } else {
-                    console.log(`Unknown report type: ${reportTypeId}`);
+                    console.log(`Unsupported report type ID: ${reportTypeId}`);
                 }
             } else {
                 console.log('Report type ID is undefined');
             }
         } else {
-            console.log(`No report found for Annual Report ID: ${annualReportId}`);
+            console.log(`No report selection found for Annual Report ID: ${annualReportId}`);
+            // Navigate to create report selection for the annual report
+            this.route.navigate([`../createreportselection/${annualReportId}`], { relativeTo: this.aRoute });
         }
-    } else {
-        console.log(`Annual report with ID ${annualReportId} not found in annualReport`);
     }
-}
 
-navigateToCreateAnnualReport() {
-    this.route.navigate([`../createannualreport/${this.workspaceId}`], { relativeTo: this.aRoute });
-}
+    navigateToCreateAnnualReport() {
+        this.route.navigate([`../createannualreport/${this.workspaceId}`], { relativeTo: this.aRoute });
+    }
 
-navigateToDeleteAnnualReport(annualReportId: any) {
-    this.route.navigate([`../deleteannualreport/${annualReportId}`], { relativeTo: this.aRoute });
-}
+    navigateToDeleteAnnualReport(annualReportId: any) {
+        this.route.navigate([`../deleteannualreport/${annualReportId}`], { relativeTo: this.aRoute });
+    }
 
-navigateToEditAnnualReport(annualReportId: any) {
-  this.route.navigate([`../editannualreport/${annualReportId}`], { relativeTo: this.aRoute });
-}
+    navigateToEditAnnualReport(annualReportId: any) {
+        this.route.navigate([`../editannualreport/${annualReportId}`], { relativeTo: this.aRoute });
+    }
 }

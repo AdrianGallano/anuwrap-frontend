@@ -6,6 +6,7 @@ import { ReportService } from '../../../../../shared/services/report.service';
 import { TokenService } from '../../../../../shared/services/token.service';
 import { initFlowbite } from 'flowbite';
 import { FacultymatrixService } from '../../../../../shared/services/facultymatrix.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-createreport',
@@ -23,6 +24,7 @@ export class CreatereportComponent implements OnInit {
   };
   reportTypes: any;
   reportId: any;
+  error= ""
 
   constructor(
     private reportService: ReportService,
@@ -68,6 +70,7 @@ export class CreatereportComponent implements OnInit {
     this.report.report_type_id = this.report.report_type_id.toString();
 
     console.log('Prepared Report:', this.report);
+    
 
     this.reportService.createReport(this.report).subscribe(
       (response) => {
@@ -78,10 +81,7 @@ export class CreatereportComponent implements OnInit {
           this.route.navigate([`../../reportlist`], { relativeTo: this.aRoute });
       },
       (error) => {
-        console.error('Create Report Error:', error);
-        console.log('Error Response:', error.error);
-        console.log('Error Status:', error.status);
-        console.log('Error Message:', error.message);
+        this.error = "Pick a report type"
       }
     );
   }

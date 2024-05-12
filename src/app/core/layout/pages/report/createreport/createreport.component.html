@@ -1,4 +1,4 @@
-Create Report Title
+
 <!-- Modal toggle -->
 <!-- Removed the button element here -->
 
@@ -13,7 +13,7 @@ Create Report Title
                     Create Report
                 </h3>
                 <div class="relative">
-                    <select name="report_type" id="report_type" [(ngModel)]="report.report_type_id"
+                    <select name="report_type" id="report_type" [(ngModel)]="report.report_type_id" 
                     class="text-black bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5 px-4 py-2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
                         <option value="0">Select report type</option>
                         <option value="1">Faculty Matrix</option>
@@ -25,6 +25,7 @@ Create Report Title
             </div>
             <!-- For Faculty Matrix -->
             <form action="#">
+                <span class="text-red-600">{{ error }}</span>
                 <div class="grid gap-4 mb-4 text-center sm:grid-cols-1 ">
                     <div>
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>

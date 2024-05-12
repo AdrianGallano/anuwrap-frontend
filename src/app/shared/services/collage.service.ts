@@ -7,8 +7,9 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class CollageService {
-  private apiUrl = 'http://localhost/anuwrap/backend/public/api';
+  private apiUrl = 'https://saddlebrown-hyena-720529.hostingersite.com/anuwrap-api/public/api';
 
+  
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
   createCollage(collageData: any): Observable<any> {

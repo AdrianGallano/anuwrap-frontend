@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnnualreportitemComponent } from './annualreportitem.component';
+import { LeaveworkspaceComponent } from './leaveworkspace.component';
 
-describe('AnnualreportitemComponent', () => {
-  let component: AnnualreportitemComponent;
-  let fixture: ComponentFixture<AnnualreportitemComponent>;
+describe('LeaveworkspaceComponent', () => {
+  let component: LeaveworkspaceComponent;
+  let fixture: ComponentFixture<LeaveworkspaceComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AnnualreportitemComponent]
+      imports: [LeaveworkspaceComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AnnualreportitemComponent);
+    fixture = TestBed.createComponent(LeaveworkspaceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

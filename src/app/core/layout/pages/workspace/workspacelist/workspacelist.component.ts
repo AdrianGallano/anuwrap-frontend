@@ -1,28 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { NavigationBarComponent } from '../../../../../shared/navigation-bar/navigation-bar.component';
 import { WorkspaceService } from '../../../../../shared/services/workspace.service';
 import { CommonModule, NgFor } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { UserworkspaceService } from '../../../../../shared/services/userworkspace.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-workspacelist',
   standalone: true,
   templateUrl: './workspacelist.component.html',
   styleUrl: './workspacelist.component.css',
-  imports: [RouterModule, NavigationBarComponent, CommonModule],
+  imports: [RouterModule, NavigationBarComponent, CommonModule, FormsModule],
   providers: [DatePipe]
 })
 export class WorkspacelistComponent implements OnInit {
   workspaces: any[] = [];
+  old_workspace: any[] = [];
+  workspace_filter= ""
   private roles:any;
-  constructor(private workspaceService: WorkspaceService, private userWorkspaceService: UserworkspaceService, private route: Router, private datePipe: DatePipe) { }
+  constructor(private workspaceService: WorkspaceService, private userWorkspaceService: UserworkspaceService, private route: Router, private datePipe: DatePipe, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.fetchWorkspaces();
     this.roles = {
-      "1": "super admin",
+      "1": "superadmin",
       "2": "admin",
       "3": "user"
     }
@@ -30,46 +33,37 @@ export class WorkspacelistComponent implements OnInit {
   }
 
   fetchWorkspaces(): void {
-    this.workspaceService.getWorkspaces().subscribe(
+    this.userWorkspaceService.getUserWorkspaces().subscribe(
       (response) => {
-        this.workspaces = response.data.workspace;
-
-        this.workspaces.forEach((workspace: any) => {
-          this.userWorkspaceService.getUserWorkspace(workspace.workspace_id).subscribe(
-            (response: any) => {
-              let role = response.data.userWorkspace.role_id;
-              workspace.role = this.roles[role]
-              console.log(workspace.role);
-            },
-            (error: any) => {
-              if (!error.error) return
-              if (error.error['message'] == "userworkspaces not found") {
-                this.workspaces = []
-              } else {
-                console.error('Error fetching userworkspaces:', error);
-              }
-            });
-        }
-        );
+        this.workspaces = response.data.userWorkspace;
+        this.old_workspace = this.workspaces;
+        console.log(this.workspaces);
       },
       (error) => {
         console.error('Error fetching workspaces:', error);
       }
     );
-
+    this.cdr.detectChanges();
   }
 
   getRoleName(roleId: number): string {
     switch (roleId) {
       case 1:
-        return 'Super Admin';
+        return 'superadmin';
       case 2:
-        return 'Admin';
+        return 'admin';
       case 3:
-        return 'User';
+        return 'user';
       default:
         return '';
     }
+  }
+
+  searchWorkspace() {
+    this.workspaces = this.old_workspace;
+    this.workspaces = this.workspaces.filter(workspace => {
+      return workspace.name.includes(this.workspace_filter); 
+    });
   }
 
   navigateToCreateWorkspace(): void {
@@ -93,13 +87,6 @@ export class WorkspacelistComponent implements OnInit {
   }
 
   leaveWorkspace(workspaceId: any): void {
-    this.userWorkspaceService.deleteUserWorkspace(workspaceId).subscribe(
-      (response: any) => {
-        this.fetchWorkspaces();
-      },
-      (error: any) => {
-        console.error('Error deleting workspace:', error);
-      }
-    );
+    this.route.navigate(['/leaveworkspace', workspaceId]);
   }
 }

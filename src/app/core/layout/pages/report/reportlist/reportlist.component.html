@@ -1,14 +1,12 @@
-report
-
 <app-navigation></app-navigation>
 <div class="antialiased md:ml-60">
 
-    <main class="p-4 md:mx-[35px] h-auto pt-20">
+    <main class="p-4 md:mx-[35px] h-auto pt-20 mt-5">
         <!--Fist Container -->
         <div class=" h-96 mb-4">
 
             <h1 class="text-2xl font-bold mb-[30px] text-start mt-5">Reports</h1>
-            <hr class="h-px my-2  mx-16">
+
 
             <!-- Start block -->
             <section class="bg-gray-50 antialiased">
@@ -16,9 +14,9 @@ report
                     <div class="bg-white relative shadow-md sm:rounded-lg">
 
                         <div
-                            class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 border-t dark:border-gray-700">
+                            class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
                             <div class="w-full md:w-1/2">
-                                <form class="flex items-center">
+                                <div class="flex items-center">
                                     <label for="simple-search" class="sr-only">Search</label>
                                     <div class="relative w-full">
                                         <div
@@ -30,11 +28,11 @@ report
                                                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                                             </svg>
                                         </div>
-                                        <input type="text" id="simple-search" placeholder="Search for reports"
-                                            required=""
+                                        <input type="text" [(ngModel)]="report_filter" (keydown.enter)="searchReport()"
+                                            id="simple-search" placeholder="Search for reports"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     </div>
-                                </form>
+                                </div>
                             </div>
                             <div
                                 class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
@@ -83,14 +81,14 @@ report
                                         <td
                                             class="flex justify-center items-center px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
                                             <div class="flex items-center justify-evenly gap-3 min-w-80 max-w-md">
-                                                <button (click)="openReport(report.report_id, report.report_type_id)" 
-                                                        class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 gap-2">
-                                                <img src="../../assets/img/eye.png" alt="eye logo" class="w-5 h-5">
-                                                <span>Open</span>
+                                                <button (click)="openReport(report.report_id, report.report_type_id)"
+                                                    class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 gap-2">
+                                                    <img src="../../assets/img/eye.png" alt="eye logo" class="w-5 h-5">
+                                                    <span>Open</span>
                                                 </button>
 
                                                 <button (click)="navigateToEditReport(report['report_id'])"
-                                                class="py-2 px-3 flex items-center text-sm font-medium text-black text-center bg-white border border-gray-300 rounded-lg hover:text-blue-500 focus:ring-4  dark:bg-primary-600 dark:hover:bg-primary-700 gap-2">
+                                                    class="py-2 px-3 flex items-center text-sm font-medium text-black text-center bg-white border border-gray-300 rounded-lg hover:text-blue-500 focus:ring-4  dark:bg-primary-600 dark:hover:bg-primary-700 gap-2">
                                                     <img src="../../assets/img/edit-icon.png" alt="edit logo"
                                                         class="w-5 h-5">
                                                     <span>Edit</span>

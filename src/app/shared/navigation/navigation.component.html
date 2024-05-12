@@ -57,9 +57,9 @@
                 role="menuitem">Workspaces</a>
             </li>
             <li>
-              <a (click)="signOut()"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                role="menuitem">Sign out</a>
+              <button (click)="signOut()"
+                class="block px-4 py-2 text-sm text-start w-full text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                role="menuitem">Sign out</button>
             </li>
           </ul>
         </div>
@@ -98,19 +98,12 @@
           </button>
         </li>
         <li>
-          <a routerLink="../collagelist"
-          class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-          <img src="../../assets/img/layout.png" alt="edit logo" class="w-5 h-5">
-          <span class="ml-2">Collage</span>
-        </a>
-      </li>
-      <li>
-        <button (click)="navigateToChatWithAI()"
-          class="flex w-full items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-          <img src="../../assets/img/sheet.png" alt="edit logo" class="w-5 h-5">
-          <span class="ml-2">Chat with AI</span>
-        </button>
-      </li>
+          <button (click)="navigateToChatWithAI()"
+            class="flex w-full items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <img src="../../assets/img/chat-gpt.png" alt="edit logo" class="w-5 h-5">
+            <span class="ml-2">Chat with AI</span>
+          </button>
+        </li>
       </ul>
     </div>
   </aside>

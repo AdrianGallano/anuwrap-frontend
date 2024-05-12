@@ -24,6 +24,7 @@ export class EditreportComponent implements OnInit {
   };
   reportId: any;
   reportTypes: any;
+  error=""
 
   constructor(
     private reportService: ReportService,
@@ -81,7 +82,7 @@ export class EditreportComponent implements OnInit {
         this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });
       },
       (error) => {
-        console.log('Error editing report:', error);
+        this.error = "Pick a report type"
       }
     );
   }

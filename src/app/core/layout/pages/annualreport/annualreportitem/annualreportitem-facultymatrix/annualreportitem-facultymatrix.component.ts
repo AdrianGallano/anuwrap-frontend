@@ -1,24 +1,24 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AnnualreportService } from '../../../../../shared/services/annualreport.service';
 import { CommonModule } from '@angular/common';
-import { ReportselectionService } from '../../../../../shared/services/reportselection.service';
-import { ReportService } from '../../../../../shared/services/report.service';
-import { FacultymatrixService } from '../../../../../shared/services/facultymatrix.service';
-import { NavigationBarComponent } from "../../../../../shared/navigation-bar/navigation-bar.component";
+import { NavigationBarComponent } from '../../../../../../shared/navigation-bar/navigation-bar.component';
+import { AnnualreportService } from '../../../../../../shared/services/annualreport.service';
+import { ReportselectionService } from '../../../../../../shared/services/reportselection.service';
+import { ReportService } from '../../../../../../shared/services/report.service';
+import { FacultymatrixService } from '../../../../../../shared/services/facultymatrix.service';
 
 
 @Component({
     selector: 'app-viewannualreport',
     standalone: true,
-    templateUrl: './annualreportitem.component.html',
-    styleUrl: './annualreportitem.component.css',
+    templateUrl: './annualreportitem-facultymatrix.component.html',
+    styleUrl: './annualreportitem-facultymatrix.component.css',
     imports: [CommonModule, NavigationBarComponent]
 })
-export class AnnualreportitemComponent {
+export class AnnualreportitemFacultyMatrixComponent {
   annualReport = {
     annual_report_id: 0,
-    title: '',
+    annualreport_title: '',
     description: '',
     workspace_id: 0
   };
@@ -50,7 +50,7 @@ export class AnnualreportitemComponent {
     this.annualReportService.getAnnualReport(this.annualReport.annual_report_id).subscribe(
       (response) => {
         const fetchedAnnualReport = response.data.report;
-        this.annualReport.title = fetchedAnnualReport.title;
+        this.annualReport.annualreport_title = fetchedAnnualReport.annualreport_title;
         this.annualReport.description = fetchedAnnualReport.description;
         this.fetchReportSelection();
         this.fetchReports();

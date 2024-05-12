@@ -47,7 +47,7 @@ export class NavigationBarComponent implements OnInit {
 
   signOut(): void {
     this.tokenService.clearAuth();
-    this.route.navigate(["../login"]);
+    this.route.navigate(['/login']);
   }
 
 }

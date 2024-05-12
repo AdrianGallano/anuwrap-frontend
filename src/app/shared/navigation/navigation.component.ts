@@ -50,8 +50,7 @@ export class NavigationComponent implements OnInit {
   }
   signOut(): void {
     this.tokenService.clearAuth();
-    this.route.navigate(["/login"], { relativeTo: this.aRoute });
-  }
+}
  
   navigateToAnnualReportList(){
     this.route.navigate([`../annualreportlist`], { relativeTo: this.aRoute });

@@ -14,10 +14,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class EditprofileComponent implements OnInit {
   user: any = {
-    username: "",
-    first_name: "",
-    last_name: "",
-    email: ""
+    first_name: '',
+    last_name: '',
+    image_name: '',
+    status: 1,
   };
 
   
@@ -27,10 +27,12 @@ export class EditprofileComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserInformation().subscribe(
       (response) => {
+        console.log(response)
         this.user.username = response.data.user.username;
         this.user.first_name = response.data.user.first_name;
         this.user.last_name = response.data.user.last_name;
         this.user.email = response.data.user.email;
+        this.user.image_name = response.data.user.image_name;
       },
       (error) => {
         console.error('Error fetching user information:', error);

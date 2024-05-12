@@ -1,3 +1,4 @@
+
 <app-navigation-bar></app-navigation-bar>
 
 <div class="antialiased">
@@ -14,7 +15,7 @@
     <!-- First Container -->
     <div class="h-96 mb-4">
       <!-- Start block -->
-      <section class="bg-gray-50 antialiased mt-20">
+      <section class="bg-gray-50 antialiased mt-10">
         <div class="mx-auto max-w-screen-2xl">
           <div class="bg-white relative shadow-md sm:rounded-lg">
             <!-- Container for the table -->
@@ -24,7 +25,7 @@
               </div>
 
               <!-- Display annual report details -->
-              <h2>{{ annualReport.title }}</h2>
+              <h2>{{ annualReport.annualreport_title }}</h2>
               <p><strong>Description:</strong> {{ annualReport.description }}</p>
 
               <!-- Loop through each report selection -->
@@ -57,7 +58,7 @@
                       <!-- Loop through faculty matrices associated with this report -->
                       <tr *ngFor="let faculty of getFacultyMatrices(selection.report_id)">
                         <!-- Display faculty details -->
-                        <td class="border border-gray-300 px-3 py-2">{{ faculty.name }}</td>
+                        <td class="border border-gray-300 px-3 py-2 whitespace-normal sm:whitespace-nowrap">{{ faculty.name }}</td>
                         <td class="border border-gray-300 px-3 py-2">{{ faculty.position }}</td>
                         <td class="border border-gray-300 px-3 py-2">{{ faculty.tenure }}</td>
                         <td class="border border-gray-300 px-3 py-2">{{ faculty.status === 1 ? 'true' : 'false' }}</td>

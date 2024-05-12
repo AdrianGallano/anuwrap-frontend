@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class TokenService {
   private readonly USER_ID_KEY = 'user_id';
   private headers: HttpHeaders | undefined;
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private route: Router) { }
 
   setAuthorization(token: string, userId: string): void {
     this.cookieService.set(this.TOKEN_KEY, token);
@@ -37,12 +38,18 @@ export class TokenService {
   }
 
   clearAuth(): void {
-    console.log('Clearing auth...');
-    this.cookieService.delete(this.TOKEN_KEY);
-    this.cookieService.delete(this.USER_ID_KEY);
-    console.log('Auth cleared.');
+    try {
+      console.log('Clearing auth...');
+      this.cookieService.delete(this.TOKEN_KEY);
+      this.cookieService.delete(this.USER_ID_KEY);
+      console.log('Auth cleared.');
+      
+      this.route.navigate(['/login']);
+    } catch (error) {
+      console.error('Error clearing auth:', error);
+    }
   }
-  
+
 
   getUserId(): string | null {
     return this.cookieService.get(this.USER_ID_KEY);
@@ -50,6 +57,10 @@ export class TokenService {
 
   getToken(): string | null {
     return this.cookieService.get(this.TOKEN_KEY);
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 
 }

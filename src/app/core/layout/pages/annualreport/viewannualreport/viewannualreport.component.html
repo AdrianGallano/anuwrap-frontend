@@ -1,59 +1,82 @@
-<button (click)="navigateToCreateReportSelection()">Select Report</button>
-<br>
-<button (click)="navigateToAnnualreportItem()">Export</button>
-<br>
 
-<!-- Display annual report details -->
-<h2>{{ annualReport.title }}</h2>
-<p><strong>Description:</strong> {{ annualReport.description }}</p>
+<div class="flex justify-center items-center ">
+  <div class="w-3/4"> <!-- Adjust the width (e.g., w-3/4 for 3/4 of the container width) -->
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white border border-gray-300 p-4 mt-10">
+      <!-- Added border and padding -->
+      <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+        <button (click)="navigateToCreateReportSelection()"
+        class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5 gap-2">
+        <img src="../../assets/img/export.png" alt="back logo" class="w-5 h-5">Select Report</button>
+        <button (click)="navigateToExport()"
+        class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5 gap-2">
+        <img src="../../assets/img/export.png" alt="back logo" class="w-5 h-5">Export</button>
+      </div>
+      <div>
+        <!-- Display annual report details -->
+        <div class="flex justify-between ">
+          <div>
+            <h2><strong>Title</strong> {{ annualReport.annualreport_title }}</h2>
+          
+   
+            <p> {{ annualReport.description }}</p>
+          </div>
+        </div>
+        
 
-<!-- Loop through each report selection -->
-<div *ngFor="let selection of reportSelection">
-  <div style="margin-bottom: 20px;"> <!-- Add spacing between report sections -->
-    <!-- Display report title and creation date -->
-    <h3>{{ selection.report_title }}</h3>
-    <p><strong>Report Created:</strong> {{ selection.date_created | date }}</p>
 
-    <!-- Fetch and display faculty matrices for this report -->
-    <table class="w-full table-auto">
-      <thead class="bg-orange-500 text-white">
-        <tr>
-          <th class="border border-gray-300 px-3 py-2">Name</th>
-          <th class="border border-gray-300 px-3 py-2">Position</th>
-          <th class="border border-gray-300 px-3 py-2">Tenure</th>
-          <th class="border border-gray-300 px-3 py-2">Status</th>
-          <th class="border border-gray-300 px-3 py-2">Related Certification</th>
-          <th class="border border-gray-300 px-3 py-2">Doctorate Degree</th>
-          <th class="border border-gray-300 px-3 py-2">Masters Degree</th>
-          <th class="border border-gray-300 px-3 py-2">Baccalaureate Degree</th>
-          <th class="border border-gray-300 px-3 py-2">Specialization</th>
-          <th class="border border-gray-300 px-3 py-2">Enrollment Status</th>
-          <th class="border border-gray-300 px-3 py-2">Designation</th>
-          <th class="border border-gray-300 px-3 py-2">Teaching Experience</th>
-          <th class="border border-gray-300 px-3 py-2">Membership Organization</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Loop through faculty matrices associated with this report -->
-        <tr *ngFor="let faculty of getFacultyMatrices(selection.report_id)">
-          <!-- Display faculty details -->
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.name }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.position }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.tenure }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.status === 1 ? 'true' : 'false' }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.related_certificate }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.doctorate_degree }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.masters_degree }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.baccalaureate_degree }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.specification }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.enrollment_status }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.designation }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.teaching_experience }}</td>
-          <td class="border border-gray-300 px-3 py-2">{{ faculty.organization_membership }}</td>
-        </tr>
-      </tbody>
-    </table>
+        <!-- Loop through each report selection -->
+        <div *ngFor="let selection of reportSelections">
+          <div style="margin-bottom: 20px "> <!-- Add spacing between report sections -->
+            <!-- Display report title andion date -->
+            <h3>{{ selection.report_title }}</h3>
+            <p class="mb-5"><strong>Report Created:</strong> {{ selection.date_created | date }}</p>
+
+            <!-- Fetch and display faculty matrices for this report -->
+            <table class="w-full table-auto">
+              <thead class="bg-orange-500 text-white">
+                <tr>
+                  <th class="border border-gray-300 px-3 py-2">Name</th>
+                  <th class="border border-gray-300 px-3 py-2">Position</th>
+                  <th class="border border-gray-300 px-3 py-2">Tenure</th>
+                  <th class="border border-gray-300 px-3 py-2">Status</th>
+                  <th class="border border-gray-300 px-3 py-2">Related Certification</th>
+                  <th class="border border-gray-300 px-3 py-2">Doctorate Degree</th>
+                  <th class="border border-gray-300 px-3 py-2">Masters Degree</th>
+                  <th class="border border-gray-300 px-3 py-2">Baccalaureate Degree</th>
+                  <th class="border border-gray-300 px-3 py-2">Specialization</th>
+                  <th class="border border-gray-300 px-3 py-2">Enrollment Status</th>
+                  <th class="border border-gray-300 px-3 py-2">Designation</th>
+                  <th class="border border-gray-300 px-3 py-2">Teaching Experience</th>
+                  <th class="border border-gray-300 px-3 py-2">Membership Organization</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Loop through faculty matrices associated with this report -->
+                <tr *ngFor="let faculty of getFacultyMatrices(selection.report_id)">
+                  <!-- Display faculty details -->
+                  <td class="border border-gray-300 px-3 py-2 whitespace-normal sm:whitespace-nowrap">{{ faculty.name }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.position }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.tenure }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.status === 1 ? 'true' : 'false' }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.related_certificate }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.doctorate_degree }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.masters_degree }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.baccalaureate_degree }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.specification }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.enrollment_status }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.designation }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.teaching_experience }}</td>
+                  <td class="border border-gray-300 px-3 py-2">{{ faculty.organization_membership }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <button (click)="navigateToAnnualReportList()"
+        class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5">
+        <img src="../../assets/img/previous.png" alt="back logo" class="w-5 h-5">
+        <span class="ml-3 text-lg">Back to Reports</span></button>
+      </div>
+    </div>
   </div>
-</div>
-
-<button (click)="navigateToAnnualReportList()">Back</button>

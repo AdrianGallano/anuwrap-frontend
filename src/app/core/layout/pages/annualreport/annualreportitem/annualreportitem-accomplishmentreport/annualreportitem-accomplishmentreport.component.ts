@@ -1,26 +1,29 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
-import { AnnualreportService } from '../../../../../shared/services/annualreport.service';
 import { CommonModule } from '@angular/common';
-import { ReportselectionService } from '../../../../../shared/services/reportselection.service';
-import { ReportService } from '../../../../../shared/services/report.service';
-import { FacultymatrixService } from '../../../../../shared/services/facultymatrix.service';
-import { AccomplishmentreportService } from '../../../../../shared/services/accomplishmentreport.service';
 import { forkJoin, map } from 'rxjs';
+import { AnnualreportService } from '../../../../../../shared/services/annualreport.service';
+import { ReportselectionService } from '../../../../../../shared/services/reportselection.service';
+import { ReportService } from '../../../../../../shared/services/report.service';
+import { FacultymatrixService } from '../../../../../../shared/services/facultymatrix.service';
+import { AccomplishmentreportService } from '../../../../../../shared/services/accomplishmentreport.service';
+import { FormsModule } from '@angular/forms';
+import { NavigationBarComponent } from "../../../../../../shared/navigation-bar/navigation-bar.component";
 
 @Component({
-  selector: 'app-viewannualreport-accomplishmentreport',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './viewannualreport-accomplishmentreport.component.html',
-  styleUrls: ['./viewannualreport-accomplishmentreport.component.css']
+    selector: 'app-annualreportitem-accomplishmentreport',
+    standalone: true,
+    templateUrl: './annualreportitem-accomplishmentreport.component.html',
+    styleUrl: './annualreportitem-accomplishmentreport.component.css',
+    imports: [CommonModule, FormsModule, NavigationBarComponent]
 })
-export class ViewannualreportAccomplishmentreportComponent implements OnInit {
+export class AnnualreportitemAccomplishmentreportComponent {
   annualReport = {
     annual_report_id: 0,
     annualreport_title: '',
     description: '',
-    workspace_id: 0
+    workspace_id: 0,
+    date_created: 0
   };
   reportSelections: any[] = [];
   accomplishmentReports: any[] = [];
@@ -60,6 +63,7 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
         const fetchedAnnualReport = response.data.report;
         this.annualReportId = fetchedAnnualReport.annual_report_id;
         this.annualReport.annualreport_title = fetchedAnnualReport.annualreport_title;
+        this.annualReport.date_created = fetchedAnnualReport.date_created;
         this.annualReport.description = fetchedAnnualReport.description;
         console.log(fetchedAnnualReport)
         this.fetchReportSelection();
@@ -113,16 +117,8 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
     );
   }
 
-  navigateToAnnualReportList(): void {
-    this.route.navigate(['../../annualreportlist'], { relativeTo: this.aRoute });
-  }
-
-  navigateToCreateReportSelection(): void {
-    this.route.navigate(['../../createreportselection', this.annualReport.annual_report_id], { relativeTo: this.aRoute });
-  }
-
-  navigateToExport(): void {
-    this.route.navigate(['../../annualreportitem-accomplishmentreport', this.annualReport.annual_report_id], { relativeTo: this.aRoute });
+  navigateToViewAnnualReport(): void {
+    this.route.navigate([`../../viewannualreport-accomplishmentreport/${this.annualReport.annual_report_id}`], { relativeTo: this.aRoute });
   }
 
 }

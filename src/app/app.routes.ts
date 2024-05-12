@@ -43,6 +43,11 @@ import { CreateaccomplishmentreportComponent } from './core/layout/pages/accompl
 import { EditaccomplishmentreportComponent } from './core/layout/pages/accomplishmentreport/editaccomplishmentreport/editaccomplishmentreport.component';
 import { DeleteaccomplishmentreportComponent } from './core/layout/pages/accomplishmentreport/deleteaccomplishmentreport/deleteaccomplishmentreport.component';
 import { ViewannualreportAccomplishmentreportComponent } from './core/layout/pages/annualreport/viewannualreport-accomplishmentreport/viewannualreport-accomplishmentreport.component';
+import { CreatereportselectionAccomplishmentComponent } from './core/layout/pages/reportselection/createreportselection-accomplishment/createreportselection-accomplishment.component';
+import { AnnualreportitemFacultyMatrixComponent } from './core/layout/pages/annualreport/annualreportitem/annualreportitem-facultymatrix/annualreportitem-facultymatrix.component';
+import { AnnualreportitemAccomplishmentreportComponent } from './core/layout/pages/annualreport/annualreportitem/annualreportitem-accomplishmentreport/annualreportitem-accomplishmentreport.component';
+import { AccomplishmentreportitemComponent } from './core/layout/pages/accomplishmentreport/accomplishmentreportitem/accomplishmentreportitem.component';
+import { LeaveworkspaceComponent } from './core/layout/pages/workspace/leaveworkspace/leaveworkspace.component';
 
 
 export const routes: Routes = [
@@ -98,6 +103,11 @@ export const routes: Routes = [
                 {
                     path: 'joinworkspace',
                     component: JoinworkspaceComponent,
+                    canActivate: [authenticationGuard]
+                },
+                {
+                    path: 'leaveworkspace/:workspace_id',
+                    component: LeaveworkspaceComponent,
                     canActivate: [authenticationGuard]
                 },
                 {
@@ -265,6 +275,11 @@ export const routes: Routes = [
                         canActivate: [authenticationGuard]
                     },
                     {
+                        path: 'accomplishmentreportitem/:accomplishment_report_id',
+                        component: AccomplishmentreportitemComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
                         path: 'viewannualreport-facultymatrix/:annual_report_id',
                         component: ViewannualreportComponent,
                         canActivate: [authenticationGuard]
@@ -274,9 +289,34 @@ export const routes: Routes = [
                         component: ViewannualreportAccomplishmentreportComponent,
                         canActivate: [authenticationGuard]
                     },
+                    {
+                        path: 'createreportselection/:annual_report_id',
+                        component: CreatereportselectionComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
+                        path: 'createreportselection-accomplishmentreport/:annual_report_id',
+                        component: CreatereportselectionAccomplishmentComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
+                        path: 'annualreportitem-facultymatrix/:annual_report_id',
+                        component: AnnualreportitemFacultyMatrixComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
+                        path: 'annualreportitem-accomplishmentreport/:annual_report_id',
+                        component: AnnualreportitemAccomplishmentreportComponent,
+                        canActivate: [authenticationGuard]
+                    },
                 ]
-            }
+            },
+            {
+                path: '**',
+                component: NotfoundComponent
+            },
             
             ]
+            
         }
 ];

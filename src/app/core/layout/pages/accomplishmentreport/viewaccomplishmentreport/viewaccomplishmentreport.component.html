@@ -1,43 +1,97 @@
-<div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Accomplishment Report Details</h1>
-    
-    <div class="grid grid-cols-2 gap-4">
-      <!-- Display Accomplishment Report Details -->
-      <div>
-        <p><strong>Activity Name:</strong> {{ accomplishmentReport.name_of_activity }}</p>
-        <p><strong>Date of Activity:</strong> {{ accomplishmentReport.date_of_activity }}</p>
-        <p><strong>Venue of Activity:</strong> {{ accomplishmentReport.venue_of_activity }}</p>
-        <p><strong>Nature of Activity:</strong> {{ accomplishmentReport.nature_of_activity }}</p>
-        <p><strong>Benefits to the Participants:</strong> {{ accomplishmentReport.benefits_of_the_participants }}</p>
-      </div>
-  
-      <div>
-        <!-- Display Narrative Report -->
-        <h2 class="text-lg font-bold mb-2">Narrative Report</h2>
-        <p>{{ accomplishmentReport.narrative_report }}</p>
-  
-        <!-- Display Image (if available) -->
-        <div *ngIf="accomplishmentReport.image_name">
-          <img [src]="'path/to/images/' + accomplishmentReport.image_name" alt="Activity Image" class="mt-4 w-full h-auto">
+<!-- Modal toggle -->
+<!-- Removed the button element here -->
+
+<!-- Main modal -->
+<div id="defaultModal" tabindex="-1" aria-hidden="true"
+  class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center w-full bg-gray-50">
+  <div class="relative p-4 w-full max-w-3xl">
+    <!-- Modal content -->
+    <div class="relative p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 sm:p-5 max-h-[90vh]">
+      <!-- Modal header -->
+      <button (click)="navigateToExport()"
+        class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group gap-2">
+        <img src="../../assets/img/export.png" alt="back logo" class="w-5 h-5">
+        Export
+      </button>
+      <div class="flex justify-center items-center pb-4 mb-5 rounded-t border-b sm:mb-5 dark:border-gray-600">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+          Accomplishment Report Details
+        </h3>
+        <div class="relative">
         </div>
       </div>
+      <!-- Modal body -->
+      <div class="max-h-[70vh] overflow-y-auto px-5">
+        <form action="#">
+          <div class="grid gap-4 mb-4 sm:grid-cols-1">
+
+            <div class="grid  mb-4 sm:grid-cols-2">
+              <p><strong>Activity Name:</strong> {{ accomplishmentReport.name_of_activity }}</p>
+              <p class="ml-10"><strong>Date of Activity:</strong> {{ accomplishmentReport.date_of_activity }}</p>
+              <p><strong>Venue of Activity:</strong> {{ accomplishmentReport.venue_of_activity }}</p>
+              <p class="ml-10"><strong>Nature of Activity:</strong> {{ accomplishmentReport.nature_of_activity }}</p>
+              <p><strong>Benefits to the Participants:</strong> {{ accomplishmentReport.benefits_of_the_participants }}
+              </p>
+            </div>
+
+
+
+            <div class="text-center"> <!-- Center the Narrative Report heading -->
+              <h2 class="text-lg font-bold">Narrative Report</h2>
+            </div>
+
+            <div class="chat-wrapper bg-white border border-gray-300 rounded-xl p-4">
+              <!-- Chat messages here -->
+              <div class="col-start-1 col-end-8 p-3 rounded-lg mr-8">
+                <div class="flex flex-row items-center">
+
+                  <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl whitespace-pre-line"
+                    style="min-width: 200px;">
+                    <div class=" max-height-100px overflow-y-auto">
+
+                      <p>{{ accomplishmentReport.narrative_report }}</p>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Display Image (if available) -->
+            <div *ngIf="accomplishmentReport.image_name">
+              <img [src]="'path/to/images/' + accomplishmentReport.image_name" alt="Activity Image"
+                class="mt-4 w-full h-auto">
+            </div>
+
+            <!-- Other input fields -->
+          </div>
+        </form>
+        <div class="flex justify-between mt-6 space-x-4">
+          <div class="flex space-x-4">
+            <button type="submit" (click)="navigateToCreateAccomplishmentReport()"
+              class="flex items-center justify-center text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2 dark:bg-primary-600 dark:hover:bg-primary-700">
+              Create
+            </button>
+            <button type="button" (click)="navigateToEditAccomplishmentReport()"
+              class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800 mt-2"
+              data-modal-toggle="defaultModal">
+              Edit
+            </button>
+          </div>
+          <div class="flex space-x-4">
+            <button type="button" (click)="navigateToDeleteAccomplishmentReport()"
+              class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+              Delete
+            </button>
+            <button type="button" (click)="navigateToReportList()"
+              class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800 mt-2"
+              data-modal-toggle="defaultModal">
+              Back
+            </button>
+          </div>
+        </div>
+      </div>
+     
     </div>
-  
-    <!-- Navigation Buttons -->
-    <div class="mt-6">
-      <button (click)="navigateToCreateAccomplishmentReport()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-        Insert Information
-      </button>
-      <button (click)="navigateToEditAccomplishmentReport()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">
-        Edit Report
-      </button>
-      <button (click)="navigateToDeleteAccomplishmentReport()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-        Delete Report
-      </button>
-      <button (click)="navigateToReportList()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
-        Back
-      </button>
-    </div>
-    
   </div>
-  
+</div>

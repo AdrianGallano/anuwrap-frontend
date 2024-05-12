@@ -1,1 +1,52 @@
-<p>accomplishmentreportitem works!</p>
+<button type="button" (click)="navigateToViewAccomplishReport()"
+    class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5 ml-10">
+    <img src="../../assets/img/previous.png" alt="back logo" class="w-5 h-5">
+    <span class="ml-3 text-lg">Back to Reports</span>
+</button>
+
+<div class="grid grid-cols-1 gap-8 container mx-auto py-10 px-5">
+    <!-- First bond paper -->
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-4 sm:p-6">
+            <div class="flex justify-center items-center mb-4">
+                <img src="../../../../../../assets/img/gordon.png" alt="edit logo" class="w-[700px] h-auto">
+            </div>
+            <div class="flex items-center justify-between mb-4">
+                <div class="text-center flex-grow">
+                    <div class="ml-[15%]">
+                        <h2 class="text-2xl font-semibold">Faculty</h2>
+                        <h2 class="text-2xl font-semibold">Accomplishment Report</h2>
+                        <p class="text-sm text-gray-600">2nd Semester A.Y 2023 - 2024</p>
+                    </div>
+                </div>
+                <div class="flex-shrink-0 ml-4">
+                    <img class="h-auto w-20 rounded-lg" src="../../../../../../assets/img/hacker.png"
+                        alt="image description">
+                </div>
+            </div>
+
+            <hr class="my-4">
+            <div class="px-20 whitespace-nowrap">
+                <h3 class="text-base font-semibold mb-2">Name of Activity: {{ accomplishmentReport.name_of_activity
+                    }}</h3>
+                <h3 class="text-base font-semibold mb-2">Date of Activity: {{accomplishmentReport.date_of_activity}}
+                </h3>
+                <h3 class="text-base font-semibold mb-2">Venue of Activity:
+                    {{accomplishmentReport.venue_of_activity}}</h3>
+                <h3 class="text-base font-semibold mb-2">Nature of Activity:
+                    {{accomplishmentReport.nature_of_activity}}</h3>
+            </div>
+            <div class="mt-5 px-20">
+                <h4 class="text-base font-semibold mb-2">Narrative Report:</h4>
+                <div class="text-sm leading-6 whitespace-break-spaces">
+                    <p></p>
+                    <p class="mt-2">{{accomplishmentReport.narrative_report}}</p>
+                </div>
+                <h4 class="text-base font-semibold mb-2 mt-2">Benefits to the Participants / Members:</h4>
+                <div class="text-sm leading-6 whitespace-break-spaces">
+                    <p class="mt-2">{{accomplishmentReport.benefits_of_the_participants}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

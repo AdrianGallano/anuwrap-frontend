@@ -68,6 +68,11 @@ export class ViewaccomplishmentreportComponent {
   navigateToCreateAccomplishmentReport(): void {
     this.route.navigate([`../../createaccomplishmentreport/${this.accomplishmentReport.report_id}`], { relativeTo: this.aRoute });
   }
+
+  navigateToExport(): void {
+    this.route.navigate([`../../accomplishmentreportitem/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
+  }
+
   navigateToReportList(): void {
     this.route.navigate([`../../reportlist`], { relativeTo: this.aRoute });
   }
@@ -77,4 +82,5 @@ export class ViewaccomplishmentreportComponent {
   navigateToDeleteAccomplishmentReport(): void {
     this.route.navigate([`../../deleteaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
   }
+
 }
