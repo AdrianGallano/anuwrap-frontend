@@ -1,0 +1,18 @@
+<div class="relative">
+    <select name="report_type" id="report_type" [(ngModel)]="annualReport.report_type_id"
+    class="text-black bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5 px-4 py-2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+        <option value="0">Select report type</option>
+        <option value="1">Faculty Matrix</option>
+        <option value="2">Accomplishment Report</option>
+    </select>
+
+</div>
+<label for="title">Enter Title:</label>
+<input type="text" name="title" id="title" [(ngModel)]="annualReport.annualreport_title">
+<br>
+<label for="description">Enter Description</label>
+<input type="text" name="description" id="description" [(ngModel)]="annualReport.description">
+<br>
+<button (click)="createAnnualReport()">Submit</button>
+<br>
+<button (click)="navigateToAnnualReportList()">Back</button>

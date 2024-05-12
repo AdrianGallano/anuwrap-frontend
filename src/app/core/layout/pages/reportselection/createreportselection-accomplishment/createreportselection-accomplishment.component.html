@@ -1,0 +1,11 @@
+<h2>Create Report Selection</h2>
+
+<div *ngFor="let report of reports">
+  <label>
+    <input type="checkbox" [checked]="isChecked(report.report_id)" (change)="toggleCheckbox(report.report_id)">
+    {{ report.title }}
+  </label>
+</div>
+
+<button (click)="createReportSelection()">Submit</button>
+<button (click)="navigateToViewAnnualReport()">Back to Annual Report</button>

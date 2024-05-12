@@ -1,0 +1,42 @@
+<button (click)="navigateToCreateReportSelection()">Select Report</button>
+<br>
+<button (click)="navigateToAnnualreportItem()">Export</button>
+<br>
+<h2>{{ annualReport.title }}</h2>
+<p>{{ annualReport.description }}</p>
+<!-- viewannualreport-accomplishmentreport.component.html -->
+
+<!-- viewannualreport-accomplishmentreport.component.html -->
+
+<div *ngIf="accomplishmentReports.length > 0">
+  <h2>Accomplishment Reports</h2>
+  <ul>
+    <!-- Loop through each accomplishment report -->
+    <li *ngFor="let report of accomplishmentReports">
+      <div>
+        <strong>Name of Activity:</strong> {{ report.name_of_activity }}
+      </div>
+      <div>
+        <strong>Date of Activity:</strong> {{ report.date_of_activity }}
+      </div>
+      <div>
+        <strong>Venue of Activity:</strong> {{ report.venue_of_activity }}
+      </div>
+      <div>
+        <strong>Nature of Activity:</strong> {{ report.nature_of_activity }}
+      </div>
+      <div>
+        <strong>Benefits of Participants:</strong> {{ report.benefits_of_the_participants }}
+      </div>
+      <div>
+        <strong>Narrative Report:</strong> {{ report.narrative_report }}
+      </div>
+      <!-- Add more properties as needed -->
+      <hr>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="accomplishmentReports.length === 0">
+  <p>No accomplishment reports available.</p>
+</div>

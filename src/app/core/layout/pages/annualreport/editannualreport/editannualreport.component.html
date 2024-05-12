@@ -1,0 +1,9 @@
+<label for="title">Enter Title:</label>
+<input type="text" name="title" id="title" [(ngModel)]="annualReport.annualreport_title">
+<br>
+<label for="description">Enter Description</label>
+<input type="text" name="description" id="description" [(ngModel)]="annualReport.description">
+<br>
+<button (click)="editAnnualReport()">Submit</button>
+<br>
+<button (click)="navigateToAnnualReportList()">Back</button>

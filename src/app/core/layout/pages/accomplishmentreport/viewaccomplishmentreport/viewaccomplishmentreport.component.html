@@ -1,0 +1,43 @@
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Accomplishment Report Details</h1>
+    
+    <div class="grid grid-cols-2 gap-4">
+      <!-- Display Accomplishment Report Details -->
+      <div>
+        <p><strong>Activity Name:</strong> {{ accomplishmentReport.name_of_activity }}</p>
+        <p><strong>Date of Activity:</strong> {{ accomplishmentReport.date_of_activity }}</p>
+        <p><strong>Venue of Activity:</strong> {{ accomplishmentReport.venue_of_activity }}</p>
+        <p><strong>Nature of Activity:</strong> {{ accomplishmentReport.nature_of_activity }}</p>
+        <p><strong>Benefits to the Participants:</strong> {{ accomplishmentReport.benefits_of_the_participants }}</p>
+      </div>
+  
+      <div>
+        <!-- Display Narrative Report -->
+        <h2 class="text-lg font-bold mb-2">Narrative Report</h2>
+        <p>{{ accomplishmentReport.narrative_report }}</p>
+  
+        <!-- Display Image (if available) -->
+        <div *ngIf="accomplishmentReport.image_name">
+          <img [src]="'path/to/images/' + accomplishmentReport.image_name" alt="Activity Image" class="mt-4 w-full h-auto">
+        </div>
+      </div>
+    </div>
+  
+    <!-- Navigation Buttons -->
+    <div class="mt-6">
+      <button (click)="navigateToCreateAccomplishmentReport()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+        Insert Information
+      </button>
+      <button (click)="navigateToEditAccomplishmentReport()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">
+        Edit Report
+      </button>
+      <button (click)="navigateToDeleteAccomplishmentReport()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+        Delete Report
+      </button>
+      <button (click)="navigateToReportList()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+        Back
+      </button>
+    </div>
+    
+  </div>
+  
