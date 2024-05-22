@@ -1,0 +1,68 @@
+<div class="max-w-3xl mx-auto px-4 py-8 bg-white border border-gray-300 rounded-lg shadow-md">
+  <div class="flex justify-between">
+    <button (click)="navigateToCreateReportSelection()"
+      class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group gap-2">Select
+      Report</button>
+
+    <button (click)="navigateToExport()"
+      class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group gap-2">
+      <img src="../../assets/img/export.png" alt="back logo" class="w-5 h-5">
+      Export</button>
+  </div>
+  <h2 class="text-lg font-bold">{{ annualReport.annualreport_title }}</h2>
+  <p>{{ annualReport.description }}</p>
+
+  <hr class="my-4">
+
+  <div *ngIf="accomplishmentReports.length > 0">
+    <div class="flex justify-center items-center pb-4 mb-5 rounded-t border-b sm:mb-5 dark:border-gray-600">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+        Accomplishment Report Details
+      </h3>
+      <div class="relative">
+      </div>
+    </div>
+    <div class="list-none ml-6">
+
+      <div *ngFor="let reports of accomplishmentReports">
+        <div *ngFor="let report of reports" class="grid  mb-4 sm:grid-cols-1">
+          <div class="grid  mb-4 sm:grid-cols-2">
+            <p><strong>Activity Name:</strong> {{ report.name_of_activity }}</p>
+            <p class="ml-10"><strong>Date of Activity:</strong> {{ report.date_of_activity }}</p>
+            <p><strong>Venue of Activity:</strong> {{ report.venue_of_activity }}</p>
+            <p class="ml-10"><strong>Nature of Activity:</strong> {{ report.nature_of_activity }}</p>
+            <p><strong>Benefits to the Participants:</strong> {{ report.benefits_of_the_participants }}
+            </p>
+          </div>
+
+          <div class="chat-wrapper bg-white border border-gray-300 rounded-xl p-4">
+            <!-- Chat messages here -->
+            <strong class="ml-10">Narrative Report</strong>
+            <div class="col-start-1 col-end-8 p-3 rounded-lg mr-8">
+              <div class="flex flex-row items-center">
+
+                <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl whitespace-pre-line"
+                  style="min-width: 200px;">
+                  <div class=" max-height-100px overflow-y-auto">
+
+                    <p> {{ report.narrative_report }}</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="accomplishmentReports.length === 0">
+      <p>No accomplishment reports available.</p>
+    </div>
+
+    <button (click)="navigateToAnnualReportList()"
+      class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5 gap-2">
+      <img src="../../assets/img/previous.png" alt="back logo" class="w-5 h-5">Back</button>
+  </div>

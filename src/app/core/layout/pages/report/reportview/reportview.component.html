@@ -1,0 +1,96 @@
+Updated Report View.txt
+<app-navigation-bar></app-navigation-bar>
+<div class="antialiased">
+
+  <main class="p-4 md:mx-[35px] h-auto pt-20">
+    <!-- Button Container -->
+    <div class="flex justify-between mb-4">
+      <!-- Button on the left -->
+      <button (click)="navigateToReportList()"
+        class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5">
+        <img src="../../assets/img/previous.png" alt="back logo" class="w-5 h-5">
+        <span class="ml-3 text-lg">Back to report</span>
+      </button>
+
+      <!-- Buttons on the right -->
+      <div class="flex gap-2">
+        <button (click)="navigateToCreateFacultyMatrix()"
+          class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5">
+          Insert Field
+        </button>
+        <button (click)="navigateToReportItem(reportId)"
+          class="flex items-center justify-start p-2 text-base font-medium text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5 gap-2">
+          <img src="../../assets/img/export.png" alt="back logo" class="w-5 h-5">
+          Export
+        </button>
+      </div>
+    </div>
+
+
+    <!-- First Container -->
+    <div class="h-96 mb-4">
+
+      <!-- Start block -->
+      <section class="bg-gray-50 antialiased mt-20">
+        <div class="mx-auto max-w-screen-2xl">
+          <div class="bg-white relative shadow-md sm:rounded-lg">
+            <!-- Container for the table -->
+            <div class="overflow-x-auto px-4 py-2 border border-gray-300 bg-white rounded-md">
+             
+              <table class="w-full table-auto">
+                <thead class="bg-orange-500 text-white">
+                  <tr>
+                    <th class="border border-gray-300 px-3 py-2">Action</th>
+                    <th class="border border-gray-300 px-3 py-2">Name</th>
+                    <th class="border border-gray-300 px-3 py-2">Position</th>
+                    <th class="border border-gray-300 px-3 py-2">Tenure</th>
+                    <th class="border border-gray-300 px-3 py-2">Status</th>
+                    <th class="border border-gray-300 px-3 py-2">Related Certification</th>
+                    <th class="border border-gray-300 px-3 py-2">Doctorate Degree</th>
+                    <th class="border border-gray-300 px-3 py-2">Masters Degree</th>
+                    <th class="border border-gray-300 px-3 py-2">Baccalaureate Degree</th>
+                    <th class="border border-gray-300 px-3 py-2">Specialization</th>
+                    <th class="border border-gray-300 px-3 py-2">Enrollment Status</th>
+                    <th class="border border-gray-300 px-3 py-2">Designation</th>
+                    <th class="border border-gray-300 px-3 py-2">Teaching Experience</th>
+                    <th class="border border-gray-300 px-3 py-2">Membership Organization</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let faculty of facultyMatrices overflow-x-auto"  >
+                  <!-- Use ngFor to loop through facultyMatrices -->
+                  <tr class="hover:bg-gray-100">
+                    <button (click)="navigateToEditFacultyMatrix(faculty.faculty_matrix_id)"
+                    class="flex items-center justify-center text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 mt-5 ml-2">Edit</button>
+                    <br>
+                    <button (click)="navigateToDeleteFacultyMatrix(faculty.faculty_matrix_id)"
+                    class="text-white bg-orange-500 hover:bg-orange-900 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-3 mb-3">Delete</button>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal sm:whitespace-nowrap">{{ faculty.name }}</td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.position }}</td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.tenure }}</td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">
+                      {{ faculty.status === 1 ? 'true' : 'false' }}
+                    </td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.related_certificate }}
+                    </td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.doctorate_degree }}</td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.masters_degree }}</td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.baccalaureate_degree }}
+                    </td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.specification }}</td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.enrollment_status }}
+                    </td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.designation }}</td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.teaching_experience }}
+                    </td>
+                    <td class="border border-gray-300 px-3 py-2 whitespace-normal">{{ faculty.organization_membership
+                      }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

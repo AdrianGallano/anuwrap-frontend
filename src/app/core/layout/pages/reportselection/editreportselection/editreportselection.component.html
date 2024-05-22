@@ -1,0 +1,21 @@
+<h2>Edit Report Selection</h2>
+<div>
+  <label for="reportTypeSelect">Select Report Type:</label>
+  <select id="reportTypeSelect" [(ngModel)]="selectedReportTypeId" (change)="onReportTypeChange($event)">
+    <option value="1">Faculty Matrix</option>
+    <option value="2">Accomplishment</option>
+  </select>
+  
+  
+</div>
+
+<div *ngFor="let report of reports">
+  <label>
+    <input type="checkbox" [checked]="isChecked(report.report_id)" (change)="toggleCheckbox(report.report_id)">
+    {{ report.title }}
+  </label>
+</div>
+
+
+<button (click)="editReportSelection()">Submit</button>
+<button (click)="navigateToViewAnnualReport()">Back to Annual Report</button>

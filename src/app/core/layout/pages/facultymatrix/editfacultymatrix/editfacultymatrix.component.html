@@ -1,0 +1,167 @@
+Create facultyMatrix Title
+<!-- Modal toggle -->
+<!-- Removed the button element here -->
+
+<!-- Main modal -->
+<div id="defaultModal" tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-screen bg-gray-50">
+    <div class="relative p-4 w-full max-w-2xl">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 sm:p-5">
+            <!-- Modal header -->
+            <div class="flex justify-between items-center pb-4 mb-5 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Edit Faculty Matrix
+                </h3>
+                <div class="relative">
+
+                </div>
+            </div>
+            <!-- Modal body -->
+            <form action="#">
+                <div class="grid gap-4 mb-4  sm:grid-cols-3 ">
+                     <!-- Name Class -->
+                    <div>
+                        <label for="name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Name
+                        </label>
+                        <input type="text" name="name" id="name" [(ngModel)]="facultyMatrix.name"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Enter Name" required />
+                    </div>
+
+                     <!--Position Class  -->
+                     <div>
+                        <label for="position" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                            Position </label>
+                        <input type="text" name="position" id="position" [(ngModel)]="facultyMatrix.position"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Position" required />
+                    </div>
+
+                    <!--Tenure Class -->
+                    <div>
+                      <label for="status" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                          Tenure</label>
+                      <input type="text" name="status" id="status" [(ngModel)]="facultyMatrix.tenure"
+                          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                          placeholder="Status" required />
+                  </div>
+
+                    <!--Status Class  -->
+                    <div>
+                        <label for="tenure" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                            Status</label>
+                            <select name="status" id="status" [(ngModel)]="facultyMatrix.status"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            required>
+                        <option [ngValue]="1">True</option>
+                        <option [ngValue]="2">False</option>
+                    </select>
+                    </div>
+                    
+                    <!--Related Certificates  -->
+                    <div>
+                        <label for="related_cert"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Certificate
+                        </label>
+                        <input type="text" name="related_cert" id="related_cert" [(ngModel)]="facultyMatrix.related_certificate"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Certificates" required />
+                    </div>
+
+                    <!--Doctorate Degree -->
+                    <div>
+                        <label for="doctorate_degree"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Doctorate Degree
+                        </label>
+                        <input type="text" name="doctorate_degree" id="doctorate_degree"
+                            [(ngModel)]="facultyMatrix.doctorate_degree"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Doctorate Degree" required />
+                    </div>
+
+                    <!--Masters Degree -->
+                    <div>
+                        <label for="masters_degree"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Masters Degree
+                        </label>
+                        <input type="text" name="masters_degree" id="masters_degree"
+                            [(ngModel)]="facultyMatrix.masters_degree"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Masters Degree" required />
+                    </div>
+
+                    <!--Baccalaureate Degree -->
+                    <div>
+                        <label for="baccalaureate_degree"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Baccalaureate
+                            Degree </label>
+                        <input type="text" name="baccalaureate_degree" id="baccalaureate_degree"
+                            [(ngModel)]="facultyMatrix.baccalaureate_degree"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Baccalaureate" required />
+                    </div>
+
+                    <!--Specification -->
+                    <div>
+                        <label for="specification"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                            Specification</label>
+                        <input type="text" name="specification" id="specification"
+                            [(ngModel)]="facultyMatrix.specification"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Specification" required />
+                    </div>
+
+                    <!--Enrollment Status -->
+                    <div>
+                        <label for="enrollment_stats"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Enrollment
+                            Status</label>
+                        <input type="text" name="enrollment_stats" id="enrollment_stats"
+                            [(ngModel)]="facultyMatrix.enrollment_status"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Enrollment Statistics" required />
+                    </div>
+
+                    <!--Designation -->
+                    <div>
+                        <label for="designation"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Designation</label>
+                        <input type="text" name="designation" id="designation" [(ngModel)]="facultyMatrix.designation"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Designation" required />
+                    </div>
+
+                    <!--Teaching Experience-->
+                    <div>
+                        <label for="teaching_exp"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Teaching Experience</label>
+                        <input type="text" name="teaching_exp" id="teaching_exp" [(ngModel)]="facultyMatrix.teaching_experience"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Teaching Experience" required />
+                    </div>
+
+                    <!--Organization Membership-->
+                    <div>
+                        <label for="org_membership"
+                            class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Organization
+                            Membership</label>
+                        <input type="text" name="org_membership" id="org_membership"
+                            [(ngModel)]="facultyMatrix.organization_membership"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                            placeholder="Organization Membership" required />
+                    </div>
+
+                </div>
+                <div class="flex justify-center gap-5">
+                    <button (click)="editFacultyMatrix()" type="submit" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                       Edit facultyMatrix
+                    </button>
+                    <button (click)="navigateToReportView()" type="button" class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800 mr-2" data-modal-toggle="defaultModal">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
