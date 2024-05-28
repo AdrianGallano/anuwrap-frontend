@@ -42,12 +42,10 @@ export class EditworkspaceComponent implements OnInit {
     this.workspaceService.editWorkspace(workspaceData, this.workspaceId).subscribe(
       (response) => {
         if (response.success) {
-          console.log("Workspace updated successfully");
           // Update workspaceName with the new name returned from the backend, if available
           if (response.data && response.data.name) {
             this.workspaceName = response.data.name;
           }
-          console.log(response);
         } else {
           console.warn('No workspace data found in the response.');
         }
@@ -64,7 +62,6 @@ export class EditworkspaceComponent implements OnInit {
     this.workspaceService.getWorkspace(workspaceId).subscribe(
       (response) => {
         this.workspaceName = response.data.workspace.name;
-        console.log("Workspace fetched successfully");
       },
       (error) => {
         console.error('Error fetching workspace:', error);

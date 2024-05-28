@@ -37,9 +37,7 @@ createWorkspace() {
   this.workspaceService.createWorkspace(workspaceData).subscribe(
     (response) => {
       if (response.data) {
-        console.log("created")
         this.workspaceId = response.data.workspace_id.workspace_id;
-        console.log(response.data)
         this.createUserWorkspace(); 
       } else {
         console.warn('No workspace data found in the response.');
@@ -61,11 +59,8 @@ createUserWorkspace() {
     workspace_id: this.workspaceId,
     role_id: this.roleId['superAdmin'] 
   };
-  console.log(userWorkspaceData)
   this.workspaceService.createUserWorkspace(userWorkspaceData).subscribe(
     (response) => {
-      console.log("User workspace created successfully");
-      console.log(response);
     },
     (error) => {
       console.error('Error creating user workspace:', error);

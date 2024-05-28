@@ -49,7 +49,6 @@ export class JoinworkspaceComponent {
   joinUserWorkspace() {
     this.userWorkspaceData.user_id = this.userId;
     this.userWorkspaceData.role_id = 3;
-    console.log(this.userWorkspaceData)
     this.userWorkspaceService.createUserWorkspace(this.userWorkspaceData).subscribe(
       (response: any) => {
         if (response.data) {

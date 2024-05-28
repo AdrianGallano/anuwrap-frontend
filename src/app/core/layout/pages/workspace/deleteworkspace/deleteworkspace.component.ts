@@ -31,7 +31,6 @@ export class DeleteworkspaceComponent {
     if (this.workspaceId) {
       this.workspaceService.deleteWorkspace(this.workspaceId).subscribe(
         (response) => {
-          console.log("delete")
           this.goToWorkspaceList();
         },
         (error) => {
@@ -49,7 +48,6 @@ export class DeleteworkspaceComponent {
       (response) => {
         // Update workspaces array with the fetched data
         this.workspaceName = response.data.workspace.name;
-        console.log("fetched")
       },
       (error) => {
         if (!error.error) return

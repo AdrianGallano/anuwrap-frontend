@@ -42,8 +42,7 @@ export class DeletereportComponent implements OnInit {
 
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
-      this.reportId = params["params"]["report_id"];-
-      console.log(this.reportId)
+      this.reportId = params["params"]["report_id"];
       this.fetchReport();
     });
   }
@@ -58,7 +57,6 @@ export class DeletereportComponent implements OnInit {
         const fetchedReport = response.data.report;
         this.report.report_type_id = fetchedReport.report_type_id;
         this.report.title = fetchedReport.title;
-        console.log(fetchedReport);
       },
       (error) => {
         console.log('Error fetching report:', error);
@@ -70,15 +68,8 @@ export class DeletereportComponent implements OnInit {
     if (this.reportId) {
       this.reportService.deleteReport(this.reportId).subscribe(
         (response) => {
-          console.log('Report deletion response:', response);
           this.route.navigate(["../../reportlist"], { relativeTo: this.aRoute });
         },
-        (error) => {
-          console.error('Error deleting report:', error);
-          if (error && error.error && error.error.message) {
-            console.error('Error Message:', error.error.message);
-          }
-        }
       );
     } else {
       console.error('Report ID is missing.');

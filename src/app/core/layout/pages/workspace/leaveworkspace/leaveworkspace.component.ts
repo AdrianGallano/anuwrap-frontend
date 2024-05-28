@@ -26,9 +26,7 @@ export class LeaveworkspaceComponent {
     // Call authService to get the list of workspaces
     this.userWorkspaceService.getUserWorkspace(workspaceId).subscribe(
       (response: any) => {
-        console.log(response)
         this.workspaceName = response.data.userWorkspace.name
-        console.log(this.workspaceName)
       },
       (error: any) => {
         if (!error.error) return
@@ -45,7 +43,6 @@ export class LeaveworkspaceComponent {
     if (this.workspaceId) {
       this.userWorkspaceService.deleteUserWorkspace(this.workspaceId).subscribe(
         (response: any) => {
-          console.log("delete")
           this.goToWorkspaceList();
         },
         (error: any) => {

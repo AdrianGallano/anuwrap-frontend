@@ -28,7 +28,6 @@ export class WorkspaceService {
     if (authInfo) {
       const userId = authInfo[1];
       const headers = authInfo[2];
-      console.log("Route", workspaceId);
       return this.http.get<any>(`${this.apiUrl}/workspaces/${workspaceId}`, { headers: headers });
     } else {
       // Handle unauthorized access

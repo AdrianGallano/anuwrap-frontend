@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Route, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthenticationService } from '../../../../../shared/services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -32,10 +31,10 @@ export class RegisterComponent {
     password1: ""
   }
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthenticationService) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   registerUser() {
-    this.authService.register(this.registrationData)
+    this.http.post('http://localhost/anuwrap/backend/public/api/users', this.registrationData)
       .subscribe(
         (response: any) => {
           this.router.navigate(['/register-success']);

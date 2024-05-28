@@ -31,22 +31,17 @@ export class CreateaccomplishmentreportComponent {
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.accomplishmentReport.report_id = params["params"]["report_id"];
-      console.log(this.accomplishmentReport.report_id)
     });
   }
 
   createAccomplishmentReport(): void {
     this.accomplishmentReportService.createAccomplishmentReport(this.accomplishmentReport).subscribe(
       (response: any) => {
-        console.log('Create Report Response:', response);
 
           this.route.navigate([`../../viewaccomplishmentreport/${this.accomplishmentReport.report_id}`], { relativeTo: this.aRoute });
       },
       (error: any) => {
         console.error('Create Report Error:', error);
-        console.log('Error Response:', error.error);
-        console.log('Error Status:', error.status);
-        console.log('Error Message:', error.message);
       }
     );
   }

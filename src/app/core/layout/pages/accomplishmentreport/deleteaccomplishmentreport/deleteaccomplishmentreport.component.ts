@@ -31,8 +31,6 @@ export class DeleteaccomplishmentreportComponent {
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.accomplishmentReport.accomplishment_report_id = params["params"]["accomplishment_report_id"];
-      console.log(this.accomplishmentReport.report_id)
-      console.log(this.accomplishmentReport.accomplishment_report_id)
     });
     this.fetchAccomplishmentReport();
   }
@@ -40,7 +38,6 @@ export class DeleteaccomplishmentreportComponent {
   fetchAccomplishmentReport(): void {
     this.accomplishmentReportService.getAccomplishmentReport(this.accomplishmentReport.accomplishment_report_id).subscribe(
       (response) => {
-        console.log(response); 
           this.accomplishmentReport.accomplishment_report_id = response.data.accomplishmentReport.accomplishment_report_id;
           this.accomplishmentReport.report_id = response.data.accomplishmentReport.report_id;
           this.accomplishmentReport.benefits_of_the_participants = response.data.accomplishmentReport.benefits_of_the_participants;
@@ -50,8 +47,6 @@ export class DeleteaccomplishmentreportComponent {
           this.accomplishmentReport.narrative_report = response.data.accomplishmentReport.narrative_report;
           this.accomplishmentReport.nature_of_activity = response.data.accomplishmentReport.nature_of_activity;
           this.accomplishmentReport.venue_of_activity = response.data.accomplishmentReport.venue_of_activity;
-       
-          console.log('No accomplishment reports found');
         },
       (error) => {
         console.log('Error fetching report:', error);
@@ -62,8 +57,6 @@ export class DeleteaccomplishmentreportComponent {
   deleteAccomplishmentReport(): void {
     this.accomplishmentReportService.deleteAccomplishmentReport( this.accomplishmentReport.accomplishment_report_id).subscribe(
       (response: any) => {
-        console.log('Create Report Response:', response);
-
           this.route.navigate([`../../viewaccomplishmentreport/${this.accomplishmentReport.report_id}`], { relativeTo: this.aRoute });
       },
       (error: any) => {
