@@ -39,13 +39,18 @@ export class UserService {
     }
   }
 
-  createUserAvatar(picture: any, userId: any): Observable<any> {
+  createUserAvatar(avatar: any, userId: any): Observable<any> {
     const authInfo = this.tokenService.getAuth();
     if (authInfo) {
       const headers = authInfo[2];
-      return this.http.post<any>(`${this.apiUrl}/users/${userId}/avatar`, picture, { headers: headers});
-  } else {
-    return throwError('Unauthorized access');
-  }
+  
+      const formData = new FormData();
+      formData.append('avatar', avatar); 
+  
+      return this.http.post<any>(`${this.apiUrl}/users/${userId}/avatar`, formData, { headers: headers });
+    } else {
+      return throwError('Unauthorized access');
+    }
 }
+  
 }

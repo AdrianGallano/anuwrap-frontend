@@ -56,9 +56,6 @@ export class EditfacultymatrixComponent {
         this.facultyMatrix.faculty_matrix_id = response.data.facultyMatrix.faculty_matrix_id;
         this.facultyMatrix.report_id = response.data.facultyMatrix.report_id;
         this.facultyMatrix = response.data.facultyMatrix;
-        console.log(this.facultyMatrix.faculty_matrix_id)
-        console.log(this.facultyMatrix.report_id)
-        console.log('Faculty Matrices:', response);
       },
       (error) => {
         console.log('Error fetching faculty matrices:', error);
@@ -69,15 +66,10 @@ export class EditfacultymatrixComponent {
   editFacultyMatrix(): void {
     this.facultyMatrixService.editFacultyMatrix(this.facultyMatrix, this.facultyMatrix.faculty_matrix_id).subscribe(
       (response) => {
-        console.log('Create Faculty Matrix Response:', response);
         this.route.navigate([`../../reportview/${this.facultyMatrix.report_id}`], { relativeTo: this.aRoute });
       },
       (error) => {
         console.error('Create Faculty Matrix Error:', error);
-        console.log(this.facultyMatrix);
-        console.log('Error Response:', error.error);
-        console.log('Error Status:', error.status);
-        console.log('Error Message:', error.message);
       }
     );
   }

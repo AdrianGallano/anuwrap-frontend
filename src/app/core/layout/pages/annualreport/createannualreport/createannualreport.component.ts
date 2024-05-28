@@ -31,7 +31,6 @@ export class CreateannualreportComponent {
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.annualReport.workspace_id = params["params"]["workspace_id"];
-      console.log(this.annualReport.workspace_id)
     });
     this.fetchReportTypes();
   }
@@ -40,7 +39,6 @@ export class CreateannualreportComponent {
     this.reportService.getReportType().subscribe(
       (response) => {
         this.reportTypes = response.data.reportType;
-        console.log(this.reportTypes);
       },
       (error) => {
         console.log(error);
@@ -52,7 +50,6 @@ export class CreateannualreportComponent {
 
     this.annualReportService.createAnnualReport(this.annualReport).subscribe(
       (response) => {
-        console.log('Create Report Response:', response);
         this.route.navigate([`../../annualreportlist`], {relativeTo: this.aRoute})
     },
     (error) => {

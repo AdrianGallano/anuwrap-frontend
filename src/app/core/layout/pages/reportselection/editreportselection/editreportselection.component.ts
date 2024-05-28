@@ -42,27 +42,18 @@ export class EditreportselectionComponent {
   }
 
   fetchData(): void {
-    console.log('Selected Report Type ID:', this.selectedReportTypeId);
     
     if (this.selectedReportTypeId === undefined) {
-      console.log('No report type selected.');
       return;
     }
   
     this.reportService.getReports(this.workspaceId).subscribe(
       (response) => {
-        console.log('Fetched reports:', response.data.report);
         
         this.reports = response.data.report.filter((report: any) => {
-          console.log('Report Type ID:', report.report_type_id, typeof report.report_type_id);
-          console.log('Selected Report Type ID:', this.selectedReportTypeId, typeof this.selectedReportTypeId);
           return report.report_type_id === this.selectedReportTypeId;
         });
-        console.log('Selected Report Type ID:', this.selectedReportTypeId, typeof this.selectedReportTypeId);
 
-      
-        console.log('Filtered reports:', this.reports);
-        
         this.fetchReportSelection(); // Fetch report selections after filtering reports
       },
       (error) => {
@@ -124,7 +115,6 @@ export class EditreportselectionComponent {
 
   editReportSelection(): void {
     if (this.checkedReports.length === 0) {
-      console.log('No reports selected.');
       return;
     }
   
@@ -132,7 +122,6 @@ export class EditreportselectionComponent {
     const distinctReportTypeIds = Array.from(new Set(reportTypeIds));
   
     if (distinctReportTypeIds.length > 1) {
-      console.log('Mixing of different kinds of reports is not allowed.');
       return;
     }
   
@@ -143,7 +132,6 @@ export class EditreportselectionComponent {
         // Delete report selection for checked report
         this.reportSelect.deleteReportSelection(this.annual_report_id, reportId).subscribe(
           (response) => {
-            console.log(`Report ${reportId} deleted successfully.`);
           },
           (error) => {
             console.error(`Error deleting report ${reportId}:`, error);
@@ -153,7 +141,6 @@ export class EditreportselectionComponent {
         // Create report selection for unchecked report
         this.reportSelect.createReportSelection({ report_id: reportId, annual_report_id: this.annual_report_id }).subscribe(
           (response) => {
-            console.log(`Report ${reportId} submitted successfully.`);
           },
           (error) => {
             console.error(`Error submitting report ${reportId}:`, error);
@@ -161,8 +148,6 @@ export class EditreportselectionComponent {
         );
       }
     });
-  
-    console.log('All selected reports have been processed.');
   
     // Navigate based on the singleReportTypeId
     if (singleReportTypeId === 1) {

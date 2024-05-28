@@ -39,10 +39,8 @@ export class TokenService {
 
   clearAuth(): void {
     try {
-      console.log('Clearing auth...');
       this.cookieService.delete(this.TOKEN_KEY);
       this.cookieService.delete(this.USER_ID_KEY);
-      console.log('Auth cleared.');
       
       this.route.navigate(['/login']);
     } catch (error) {

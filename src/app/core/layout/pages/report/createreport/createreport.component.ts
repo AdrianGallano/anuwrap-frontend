@@ -40,14 +40,10 @@ export class CreatereportComponent implements OnInit {
     }
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.report.workspace_id = params['params']['workspace_id'];
-      console.log(this.report.workspace_id);
       this.fetchReportTypes();
     });
     const modal = document.getElementById('defaultModal');
         if (modal) {
-            // Initialize modal here using your modal library (e.g., Bootstrap, ng-bootstrap)
-            // For example, if using Bootstrap's modal:
-            // new bootstrap.Modal(modal).show();
         } else {
             console.error("Modal with id defaultModal not found or not initialized.");
         }
@@ -57,7 +53,6 @@ export class CreatereportComponent implements OnInit {
     this.reportService.getReportType().subscribe(
       (response) => {
         this.reportTypes = response.data.reportType;
-        console.log(this.reportTypes);
       },
       (error) => {
         console.log(error);
@@ -69,19 +64,14 @@ export class CreatereportComponent implements OnInit {
   createReport(): void {
     this.report.report_type_id = this.report.report_type_id.toString();
 
-    console.log('Prepared Report:', this.report);
-    
-
     this.reportService.createReport(this.report).subscribe(
       (response) => {
-        console.log('Create Report Response:', response);
         this.reportId = response.data.report.report_id;
-        console.log(this.reportId);
 
           this.route.navigate([`../../reportlist`], { relativeTo: this.aRoute });
       },
       (error) => {
-        this.error = "Pick a report type"
+        this.error = "Select a report type"
       }
     );
   }

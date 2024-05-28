@@ -20,7 +20,6 @@ export class NavigationComponent implements OnInit {
     }
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.workspaceId = params['params']['workspace_id'];
-      console.log(this.workspaceId);
     });
 
     this.getData();
