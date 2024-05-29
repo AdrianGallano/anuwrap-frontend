@@ -6,6 +6,19 @@ import { CommonModule, NgFor } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { UserworkspaceService } from '../../../../../shared/services/userworkspace.service';
 import { FormsModule } from '@angular/forms';
+import {
+  initAccordions,
+  initCarousels,
+  initCollapses,
+  initDials,
+  initDismisses,
+  initDrawers,
+  initDropdowns,
+  initModals,
+  initPopovers,
+  initTabs,
+  initTooltips,
+} from 'flowbite';
 
 @Component({
   selector: 'app-workspacelist',
@@ -23,6 +36,17 @@ export class WorkspacelistComponent implements OnInit {
   constructor(private workspaceService: WorkspaceService, private userWorkspaceService: UserworkspaceService, private route: Router, private datePipe: DatePipe, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    initAccordions();
+    initCarousels();
+    initCollapses();
+    initDials();
+    initDismisses();
+    initDrawers();
+    initDropdowns();
+    initModals();
+    initPopovers();
+    initTabs();
+    initTooltips();
     this.fetchWorkspaces();
     this.roles = {
       "1": "superadmin",
