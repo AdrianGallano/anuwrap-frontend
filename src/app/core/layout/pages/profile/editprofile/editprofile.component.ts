@@ -30,7 +30,6 @@ export class EditprofileComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserInformation().subscribe(
       (response) => {
-        console.log(response)
         this.user.username = response.data.user.username;
         this.user.first_name = response.data.user.first_name;
         this.user.last_name = response.data.user.last_name;
@@ -53,7 +52,6 @@ export class EditprofileComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching user information:', error);
-        console.log(this.user)
       }
     );
   }

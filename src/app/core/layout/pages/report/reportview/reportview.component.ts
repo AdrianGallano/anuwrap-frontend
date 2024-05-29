@@ -55,8 +55,6 @@ reportTypes: any[] = [];
   
         // Filter faculty matrices by report_id that matches this.reportId
         this.facultyMatrices = facultyMatrices.filter((matrix: any) => {
-          console.log('Matrix report_id:', matrix.report_id);
-          console.log('this.reportId:', this.reportId);
           return matrix.report_id === +this.reportId; 
         });
       },

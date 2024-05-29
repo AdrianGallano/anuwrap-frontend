@@ -61,9 +61,6 @@ export class DeleteaccomplishmentreportComponent {
       },
       (error: any) => {
         console.error('Create Report Error:', error);
-        console.log('Error Response:', error.error);
-        console.log('Error Status:', error.status);
-        console.log('Error Message:', error.message);
       }
     );
   }

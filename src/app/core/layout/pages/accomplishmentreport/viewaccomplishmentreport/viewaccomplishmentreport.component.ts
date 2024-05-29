@@ -28,6 +28,7 @@ export class ViewaccomplishmentreportComponent {
   createError = "";
   deleteError = "";
   exportError = "";
+  editError = "";
 
   constructor(
     private accomplishmentReportService: AccomplishmentreportService,
@@ -88,8 +89,12 @@ export class ViewaccomplishmentreportComponent {
     this.route.navigate([`../../reportlist`], { relativeTo: this.aRoute });
   }
   navigateToEditAccomplishmentReport(): void {
-    this.route.navigate([`../../editaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
-  }
+    if (!this.accomplishmentReport.accomplishment_report_id) {
+      this.editError = "Accomplishment report does not exist"
+    } else {
+        this.route.navigate([`../../editaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
+      }
+    }
   navigateToDeleteAccomplishmentReport(): void {
     if (!this.accomplishmentReport.accomplishment_report_id) {
       this.deleteError = "Accomplishment report does not exist"
