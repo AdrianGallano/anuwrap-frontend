@@ -44,8 +44,7 @@ export class CreatereportselectionComponent {
     this.reportService.getReportType().subscribe(
       (response) => {
         this.reportTypes = response.data.reportType; // Assign fetched reportTypes to the property
-        console.log('Report Types:', this.reportTypes);
-        
+
         // Find specific report_type_ids for Faculty Matrix and Accomplishment Report
         this.facultyMatrixReportTypeId = this.findReportTypeId('Faculty Matrix');
         this.accomplishmentReportTypeId = this.findReportTypeId('Accomplishment Report');
@@ -75,7 +74,6 @@ export class CreatereportselectionComponent {
     this.reportService.getReports(this.workspaceId).subscribe(
       (response) => {
         this.reports = response.data.report;
-        console.log('Fetched Reports:', this.reports);
         this.fetchReportSelection();
         this.cdr.detectChanges(); // Trigger change detection
       },
@@ -89,7 +87,6 @@ export class CreatereportselectionComponent {
     this.reportService.getFacultyMatrixReport(this.facultyMatrixReportTypeId).subscribe(
       (response) => {
         this.reports = response.data.report;
-        console.log('Fetched Faculty Matrix Reports:', this.reports);
         this.fetchReportSelection();
         this.cdr.detectChanges(); // Trigger change detection
       },
@@ -103,7 +100,6 @@ export class CreatereportselectionComponent {
     this.reportService.getAccomplishmentReport(this.accomplishmentReportTypeId).subscribe(
       (response) => {
         this.reports = response.data.report;
-        console.log('Fetched Accomplishment Reports:', this.reports);
         this.fetchReportSelection();
         this.cdr.detectChanges(); // Trigger change detection
       },
@@ -120,7 +116,6 @@ export class CreatereportselectionComponent {
         this.reportSelection = reportSelections.filter((selection: any) => {
           return selection.annual_report_id === Number(this.annual_report_id);
         });
-        console.log('Report Selections:', this.reportSelection);
         this.cdr.detectChanges(); // Trigger change detection
       },
       (error) => {
@@ -145,6 +140,12 @@ export class CreatereportselectionComponent {
   createReportSelection(): void {
     if (this.checkedReports.length === 0) {
       this.error = "No reports selected";
+  
+      // Clear the error message after 3 seconds
+      setTimeout(() => {
+        this.error = '';
+      }, 3000);
+  
       return;
     }
 
@@ -155,7 +156,6 @@ export class CreatereportselectionComponent {
         // Delete report selection for checked report
         this.reportSelect.deleteReportSelection(this.annual_report_id, reportId).subscribe(
           (response) => {
-            console.log(`Report ${reportId} deleted successfully.`);
           },
           (error) => {
             console.error(`Error deleting report ${reportId}:`, error);
@@ -165,7 +165,6 @@ export class CreatereportselectionComponent {
         // Create report selection for unchecked report
         this.reportSelect.createReportSelection({ report_id: reportId, annual_report_id: this.annual_report_id }).subscribe(
           (response) => {
-            console.log(`Report ${reportId} submitted successfully.`);
           },
           (error) => {
             console.error(`Error submitting report ${reportId}:`, error);
@@ -173,9 +172,7 @@ export class CreatereportselectionComponent {
         );
       }
     });
-
-    console.log('All selected reports have been processed.');
-
+    
     // Redirect based on selected report type after submission
     if (this.selectedReportType === this.facultyMatrixReportTypeId) {
       this.route.navigate([`../../viewannualreport-facultymatrix/${this.annual_report_id}`], { relativeTo: this.aRoute });

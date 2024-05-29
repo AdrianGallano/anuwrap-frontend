@@ -45,7 +45,6 @@ export class CreatefacultymatrixComponent {
       }
       this.aRoute.paramMap.subscribe((params: Params) => {
         this.facultyMatrix.report_id = params['params']['report_id'];
-        console.log(this.facultyMatrix.report_id);
       });
       const modal = document.getElementById('defaultModal');
         if (modal) {
@@ -60,15 +59,10 @@ export class CreatefacultymatrixComponent {
     createFacultyMatrix(): void {
       this.facultyMatrixService.createFacultyMatrix(this.facultyMatrix).subscribe(
         (response) => {
-          console.log('Create Faculty Matrix Response:', response);
           this.route.navigate([`../../reportview/${this.facultyMatrix.report_id}`], { relativeTo: this.aRoute });
         },
         (error) => {
           console.error('Create Faculty Matrix Error:', error);
-          console.log(this.facultyMatrix);
-          console.log('Error Response:', error.error);
-          console.log('Error Status:', error.status);
-          console.log('Error Message:', error.message);
         }
       );
     } 

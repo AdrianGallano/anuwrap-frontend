@@ -110,7 +110,6 @@ export class CreatereportselectionAccomplishmentComponent {
         // Delete report selection for checked report
         this.reportSelect.deleteReportSelection(this.annual_report_id, reportId).subscribe(
           (response) => {
-            console.log(`Report ${reportId} deleted successfully.`);
           },
           (error) => {
             console.error(`Error deleting report ${reportId}:`, error);
@@ -120,7 +119,6 @@ export class CreatereportselectionAccomplishmentComponent {
         // Create report selection for unchecked report
         this.reportSelect.createReportSelection({ report_id: reportId, annual_report_id: this.annual_report_id }).subscribe(
           (response) => {
-            console.log(`Report ${reportId} submitted successfully.`);
           },
           (error) => {
             console.error(`Error submitting report ${reportId}:`, error);
@@ -128,8 +126,6 @@ export class CreatereportselectionAccomplishmentComponent {
         );
       }
     });
-
-    console.log('All selected reports have been processed.');
     this.route.navigate([`../../viewannualreport-accomplishmentreport/${this.annual_report_id}`], { relativeTo: this.aRoute });
   }
 

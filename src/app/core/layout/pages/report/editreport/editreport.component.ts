@@ -24,7 +24,7 @@ export class EditreportComponent implements OnInit {
   };
   reportId: any;
   reportTypes: any;
-  error=""
+  error: string | null = null;
 
   constructor(
     private reportService: ReportService,
@@ -51,7 +51,6 @@ export class EditreportComponent implements OnInit {
     this.reportService.getReportType().subscribe(
       (response) => {
         this.reportTypes = response.data.reportType;
-        console.log(this.reportTypes);
       },
       (error) => {
         console.log(error);
@@ -65,7 +64,6 @@ export class EditreportComponent implements OnInit {
         const fetchedReport = response.data.report;
         this.report.report_type_id = fetchedReport.report_type_id;
         this.report.title = fetchedReport.title;
-        console.log(fetchedReport);
       },
       (error) => {
         console.log('Error fetching report:', error);
@@ -76,16 +74,22 @@ export class EditreportComponent implements OnInit {
   editReport(): void {
     this.report.workspace_id = this.workspaceId;
     this.report.report_type_id = this.report.report_type_id.toString();
+  
     this.reportService.editReport(this.report, this.reportId).subscribe(
       (response) => {
-        console.log('Edit Report Response:', response);
         this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });
       },
       (error) => {
-        this.error = "Pick a report type"
+        this.error = "Select a report type";
+  
+        // Clear the error message after 3 seconds
+        setTimeout(() => {
+          this.error = '';
+        }, 3000);
       }
     );
   }
+  
   
   goToReports(): void {
     this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });

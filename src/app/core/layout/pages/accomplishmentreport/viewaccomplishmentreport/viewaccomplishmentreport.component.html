@@ -13,6 +13,7 @@
         <img src="../../assets/img/export.png" alt="back logo" class="w-5 h-5">
         Export
       </button>
+      <span class="text-red-600">{{ exportError }}</span>
       <div class="flex justify-center items-center pb-4 mb-5 rounded-t border-b sm:mb-5 dark:border-gray-600">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
           Accomplishment Report Details
@@ -68,27 +69,36 @@
         </form>
         <div class="flex justify-between mt-6 space-x-4">
           <div class="flex space-x-4">
-            <button type="submit" (click)="navigateToCreateAccomplishmentReport()"
-              class="flex items-center justify-center text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2 dark:bg-primary-600 dark:hover:bg-primary-700">
-              Create
-            </button>
-            <button type="button" (click)="navigateToEditAccomplishmentReport()"
-              class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800 mt-2"
-              data-modal-toggle="defaultModal">
-              Edit
-            </button>
+            <div class="flex flex-col items-start space-y-2">
+              <button type="submit" (click)="navigateToCreateAccomplishmentReport()"
+                class="flex items-center justify-center text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2 dark:bg-primary-600 dark:hover:bg-primary-700">
+                Create
+              </button>
+              <span *ngIf="createError" class="text-red-600">{{ createError }}</span>
+            </div>
+            <div class="flex flex-col items-start space-y-2">
+              <button type="button" (click)="navigateToEditAccomplishmentReport()"
+                class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                Edit
+              </button>
+              <span *ngIf="editError" class="text-red-600">{{ editError }}</span>
+            </div>
           </div>
+              
+          
           <div class="flex space-x-4">
-            <button type="button" (click)="navigateToDeleteAccomplishmentReport()"
-              class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800">
-              Delete
-            </button>
+            <div class="flex flex-col items-start space-y-2">
+              <button type="button" (click)="navigateToDeleteAccomplishmentReport()"
+                class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                Delete
+              </button>
+              <span class="text-red-600">{{ deleteError }}</span>
+            </div>
             <button type="button" (click)="navigateToReportList()"
-              class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800 mt-2"
-              data-modal-toggle="defaultModal">
+              class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800">
               Back
             </button>
-          </div>
+          </div>          
         </div>
       </div>
      

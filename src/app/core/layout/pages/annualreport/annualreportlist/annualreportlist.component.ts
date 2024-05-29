@@ -35,7 +35,6 @@ export class AnnualreportlistComponent {
     ngOnInit(): void {
         this.aRoute.paramMap.subscribe((params: Params) => {
             this.workspaceId = params["params"]["workspace_id"];
-            console.log(this.workspaceId);
             this.fetchAnnualReports();
             this.fetchReportSelection();
         });
@@ -46,7 +45,6 @@ export class AnnualreportlistComponent {
             (response) => {
                 this.annualReport = response.data.reports;
                 this.old_annualReport = this.annualReport
-                console.log('Fetched Annual Reports:', this.annualReport);
             },
             (error) => {
                 console.log('Error fetching annual reports:', error);
@@ -59,7 +57,6 @@ export class AnnualreportlistComponent {
             (response) => {
                 if (response && response.data && Array.isArray(response.data.reportSelections)) {
                     this.reportSelections = response.data.reportSelections;
-                    console.log('Fetched Report Selection:', this.reportSelections);
 
                     // After fetching reportSelections, you can directly handle navigation
                     // based on the data retrieved
@@ -75,7 +72,6 @@ export class AnnualreportlistComponent {
 
     searchReport() {
       this.annualReport = this.old_annualReport;
-      console.log('old:',this.annualReport);
       this.annualReport = this.old_annualReport.filter(annualReport => {
         return annualReport.annualreport_title.includes(this.annualReport_filter); 
       });
@@ -84,7 +80,6 @@ export class AnnualreportlistComponent {
 
 
     openAnnualReport(annualReportId: any) {
-        console.log('Selected Annual Report ID:', annualReportId);
 
         // Find the selected report selection based on annualReportId
         const selectedReport = this.reportSelections.find(selection => selection.annual_report_id === annualReportId);

@@ -32,7 +32,7 @@
           </tr>
       </thead>
       <tbody>
-        <span class="text-red-600">{{ error }}</span>
+        <span *ngIf="error" class="text-red-600">{{ error }}</span>
          <div *ngIf="reports && reports.length > 0">
           <div *ngFor="let report of reports">
             <div *ngIf="!selectedReportType || report.report_type_id === selectedReportType">

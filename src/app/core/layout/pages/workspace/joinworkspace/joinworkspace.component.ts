@@ -49,7 +49,6 @@ export class JoinworkspaceComponent {
   joinUserWorkspace() {
     this.userWorkspaceData.user_id = this.userId;
     this.userWorkspaceData.role_id = 3;
-    console.log(this.userWorkspaceData)
     this.userWorkspaceService.createUserWorkspace(this.userWorkspaceData).subscribe(
       (response: any) => {
         if (response.data) {
@@ -57,7 +56,11 @@ export class JoinworkspaceComponent {
         this.route.navigate(['../workspacelist'])
       },
       (error: any) => {
-        this.error = "workspace id does not exist"
+        this.error = "workspace id does not exist";
+        // Clear the error message after 3 seconds
+        setTimeout(() => {
+          this.error = '';
+        }, 3000);
       }
     );
   }

@@ -25,6 +25,5 @@ export class ChatwithaiComponent {
   async submitPrompt() {
     this.aiResponse = await this.aiService.postAIResponse(this.prompt);
     this.text = this.aiResponse;
-    console.log(this.text)
     }
 }

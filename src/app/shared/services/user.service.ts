@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { Observable, throwError } from 'rxjs';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -37,4 +38,19 @@ export class UserService {
       return throwError('Unauthorized access');
     }
   }
+
+  createUserAvatar(avatar: any, userId: any): Observable<any> {
+    const authInfo = this.tokenService.getAuth();
+    if (authInfo) {
+      const headers = authInfo[2];
+  
+      const formData = new FormData();
+      formData.append('avatar', avatar); 
+  
+      return this.http.post<any>(`${this.apiUrl}/users/${userId}/avatar`, formData, { headers: headers });
+    } else {
+      return throwError('Unauthorized access');
+    }
+}
+  
 }

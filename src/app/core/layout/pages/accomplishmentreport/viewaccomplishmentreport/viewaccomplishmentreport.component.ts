@@ -25,6 +25,11 @@ export class ViewaccomplishmentreportComponent {
     venue_of_activity: ''
   };
 
+  createError: string | null = null;
+  deleteError: string | null = null;
+  exportError: string | null = null;
+  editError: string | null = null;
+
   constructor(
     private accomplishmentReportService: AccomplishmentreportService,
     private route: Router,
@@ -41,11 +46,9 @@ export class ViewaccomplishmentreportComponent {
   fetchAccomplishmentReport(): void {
     this.accomplishmentReportService.getAccomplishmentReports(this.accomplishmentReport.report_id).subscribe(
       (response) => {
-        console.log(response); 
         const accomplishmentReports = response.data.accomplishmentReports;
         if (accomplishmentReports && accomplishmentReports.length > 0) {
           const report = accomplishmentReports[0]; 
-          console.log(report.accomplishment_report_id);
           this.accomplishmentReport.accomplishment_report_id = report.accomplishment_report_id;
           this.accomplishmentReport.benefits_of_the_participants = report.benefits_of_the_participants;
           this.accomplishmentReport.date_of_activity = report.date_of_activity;
@@ -66,21 +69,50 @@ export class ViewaccomplishmentreportComponent {
   
 
   navigateToCreateAccomplishmentReport(): void {
-    this.route.navigate([`../../createaccomplishmentreport/${this.accomplishmentReport.report_id}`], { relativeTo: this.aRoute });
+    if (this.accomplishmentReport.accomplishment_report_id) {
+      this.createError = "Accomplishment report already exists";
+      setTimeout(() => {
+        this.createError = null;
+      }, 3000); // Clear the error message after 3 seconds
+    } else {
+      this.route.navigate([`../../createaccomplishmentreport/${this.accomplishmentReport.report_id}`], { relativeTo: this.aRoute });
+    }
   }
-
+  
   navigateToExport(): void {
-    this.route.navigate([`../../accomplishmentreportitem/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
+    if (!this.accomplishmentReport.accomplishment_report_id) {
+      this.exportError = "Accomplishment report does not exist";
+      setTimeout(() => {
+        this.exportError = null;
+      }, 3000); // Clear the error message after 3 seconds
+    } else {
+      this.route.navigate([`../../accomplishmentreportitem/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
+    }
   }
-
+  
   navigateToReportList(): void {
     this.route.navigate([`../../reportlist`], { relativeTo: this.aRoute });
   }
+  
   navigateToEditAccomplishmentReport(): void {
-    this.route.navigate([`../../editaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
+    if (!this.accomplishmentReport.accomplishment_report_id) {
+      this.editError = "Accomplishment report does not exist";
+      setTimeout(() => {
+        this.editError = null;
+      }, 3000); // Clear the error message after 3 seconds
+    } else {
+      this.route.navigate([`../../editaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
+    }
   }
+  
   navigateToDeleteAccomplishmentReport(): void {
-    this.route.navigate([`../../deleteaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
+    if (!this.accomplishmentReport.accomplishment_report_id) {
+      this.deleteError = "Accomplishment report does not exist";
+      setTimeout(() => {
+        this.deleteError = null;
+      }, 3000); // Clear the error message after 3 seconds
+    } else {
+      this.route.navigate([`../../deleteaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
+    }
   }
-
 }

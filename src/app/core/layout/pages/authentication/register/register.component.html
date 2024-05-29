@@ -7,7 +7,7 @@
                 Anuwrap
             </a>
         </div>
-        <form (ngSubmit)="registerUser()" class="flex flex-col items-center" method="post">
+        <form (ngSubmit)="registerUser()" class="flex flex-col items-center">
             <div class="grid gap-6 mb-6 md:grid-cols-2 max-w-screen-md ">
                 <div class="mb-4">
                     <label for="username"
@@ -15,7 +15,7 @@
                     <input type="text" name="username" id="username" [(ngModel)]="registrationData.username"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="John" required />
-                    <span class="text-red-600">{{ errors.username }}</span>
+                        <span *ngIf="errors.username" class="text-red-600">{{ errors.username }}</span>
                 </div>
                 <div class="mb-4">
                     <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
@@ -23,7 +23,7 @@
                     <input type="text" name="firstname" id="firstname" [(ngModel)]="registrationData.first_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="John" required />
-                    <span class="text-red-600">{{ errors.firstname }}</span>
+                        <span *ngIf="errors.firstname" class="text-red-600">{{ errors.firstname }}</span>
                 </div>
                 <div class="mb-4">
                     <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
@@ -31,7 +31,7 @@
                     <input type="text" name="lastname" id="lastname" [(ngModel)]="registrationData.last_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Doe" required />
-                    <span class="text-red-600">{{ errors.lastname }}</span>
+                    <span *ngIf="errors.username" class="text-red-600">{{ errors.username }}</span>
                 </div>
                 <div class="mb-4">
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email or
@@ -40,7 +40,7 @@
                     <input type="text" name="email" id="email" [(ngModel)]="registrationData.email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="name@company.com" required />
-                    <span class="text-red-600">{{ errors.email }}</span>
+                        <span *ngIf="errors.email" class="text-red-600">{{ errors.email }}</span>
                 </div>
                 <div class="mb-4">
                     <label for="password"
@@ -48,7 +48,7 @@
                     <input type="password" name="password" id="password" [(ngModel)]="registrationData.password"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="•••••••••" required />
-                    <span class="text-red-600">{{ errors.password }}</span>
+                        <span *ngIf="errors.password" class="text-red-600">{{ errors.password }}</span>
                 </div>
                 <div class="mb-4">
                     <label for="confirm_password"
@@ -57,7 +57,7 @@
                         [(ngModel)]="registrationData.confirm_password"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="•••••••••" required />
-                    <span class="text-red-600">{{ errors.password1 }}</span>
+                        <span *ngIf="errors.password1" class="text-red-600">{{ errors.password1 }}</span>
                 </div>
                 <div class="flex flex-col items-start mb-4 mt-[-10px]">
                     <div class="flex items-center justify-between">

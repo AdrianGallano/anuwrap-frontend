@@ -20,6 +20,9 @@ export class EditprofileComponent implements OnInit {
     status: 1,
   };
 
+  avatar='';
+  userId=0;
+
   
 
   constructor(private userService: UserService, private route: Router) { }
@@ -27,12 +30,12 @@ export class EditprofileComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserInformation().subscribe(
       (response) => {
-        console.log(response)
         this.user.username = response.data.user.username;
         this.user.first_name = response.data.user.first_name;
         this.user.last_name = response.data.user.last_name;
         this.user.email = response.data.user.email;
         this.user.image_name = response.data.user.image_name;
+        this.userId = response.data.user.user_id;
       },
       (error) => {
         console.error('Error fetching user information:', error);
@@ -49,8 +52,11 @@ export class EditprofileComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching user information:', error);
-        console.log(this.user)
       }
     );
+  }
+
+  createAvatar(): void {
+    this.userService.createUserAvatar(this.avatar, this.userId)
   }
 }
