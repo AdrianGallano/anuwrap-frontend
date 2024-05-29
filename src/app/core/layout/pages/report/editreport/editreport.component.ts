@@ -24,7 +24,7 @@ export class EditreportComponent implements OnInit {
   };
   reportId: any;
   reportTypes: any;
-  error=""
+  error: string | null = null;
 
   constructor(
     private reportService: ReportService,
@@ -74,15 +74,22 @@ export class EditreportComponent implements OnInit {
   editReport(): void {
     this.report.workspace_id = this.workspaceId;
     this.report.report_type_id = this.report.report_type_id.toString();
+  
     this.reportService.editReport(this.report, this.reportId).subscribe(
       (response) => {
         this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });
       },
       (error) => {
-        this.error = "Pick a report type"
+        this.error = "Pick a report type";
+  
+        // Clear the error message after 3 seconds
+        setTimeout(() => {
+          this.error = '';
+        }, 3000);
       }
     );
   }
+  
   
   goToReports(): void {
     this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });

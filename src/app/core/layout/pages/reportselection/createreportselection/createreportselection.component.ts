@@ -140,6 +140,12 @@ export class CreatereportselectionComponent {
   createReportSelection(): void {
     if (this.checkedReports.length === 0) {
       this.error = "No reports selected";
+  
+      // Clear the error message after 3 seconds
+      setTimeout(() => {
+        this.error = '';
+      }, 3000);
+  
       return;
     }
 

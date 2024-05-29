@@ -24,8 +24,7 @@ export class CreatereportComponent implements OnInit {
   };
   reportTypes: any;
   reportId: any;
-  error= ""
-
+  error: string | null = null;
   constructor(
     private reportService: ReportService,
     private route: Router,
@@ -63,19 +62,23 @@ export class CreatereportComponent implements OnInit {
 
   createReport(): void {
     this.report.report_type_id = this.report.report_type_id.toString();
-
+  
     this.reportService.createReport(this.report).subscribe(
       (response) => {
         this.reportId = response.data.report.report_id;
-
-          this.route.navigate([`../../reportlist`], { relativeTo: this.aRoute });
+        this.route.navigate([`../../reportlist`], { relativeTo: this.aRoute });
       },
       (error) => {
-        this.error = "Select a report type"
+        this.error = "Select a report type";
+  
+        // Clear the error message after 3 seconds
+        setTimeout(() => {
+          this.error = '';
+        }, 3000);
       }
     );
   }
-
+  
   goToReports() {
     this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });
   }

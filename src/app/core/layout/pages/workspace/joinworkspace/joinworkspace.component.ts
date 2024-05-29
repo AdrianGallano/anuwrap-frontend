@@ -56,7 +56,11 @@ export class JoinworkspaceComponent {
         this.route.navigate(['../workspacelist'])
       },
       (error: any) => {
-        this.error = "workspace id does not exist"
+        this.error = "workspace id does not exist";
+        // Clear the error message after 3 seconds
+        setTimeout(() => {
+          this.error = '';
+        }, 3000);
       }
     );
   }
