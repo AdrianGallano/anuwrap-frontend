@@ -8,7 +8,7 @@ import { Observable, throwError } from 'rxjs';
 })
 export class UserService {
 
-  private apiUrl = 'https://saddlebrown-hyena-720529.hostingersite.com/anuwrap-api/public/api';
+  private apiUrl = 'http://localhost/anuwrap-api/public/api';
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
   

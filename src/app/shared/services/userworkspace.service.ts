@@ -7,7 +7,7 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class UserworkspaceService {
-  private apiUrl = 'https://saddlebrown-hyena-720529.hostingersite.com/anuwrap-api/public/api';
+  private apiUrl = 'http://localhost/anuwrap-api/public/api';
   constructor(private tokenService: TokenService, private http: HttpClient) { }
 
 
