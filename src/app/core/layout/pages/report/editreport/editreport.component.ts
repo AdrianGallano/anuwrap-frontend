@@ -80,7 +80,7 @@ export class EditreportComponent implements OnInit {
         this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });
       },
       (error) => {
-        this.error = "Pick a report type";
+        this.error = "Select a report type";
   
         // Clear the error message after 3 seconds
         setTimeout(() => {
