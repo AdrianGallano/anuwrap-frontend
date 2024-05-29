@@ -150,7 +150,7 @@ export const routes: Routes = [
                         canActivate: [authenticationGuard]
                     },
                     {
-                        path: 'templatelist/:workspace_id/:title',
+                        path: 'templatelist/:report_id/:title/:report_type_id',
                         component: TemplatelistComponent,
                         canActivate: [authenticationGuard]
                     },

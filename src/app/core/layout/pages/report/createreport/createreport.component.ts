@@ -19,11 +19,13 @@ export class CreatereportComponent implements OnInit {
   workspaceId: any = null;
   report = {
     title: '',
-    workspace_id: '',
+    report_type_id: 0,
+    workspace_id: 0
   };
   reportTypes: any;
   reportId: any;
-  error: string | null = null;
+  error= ""
+
   constructor(
     private reportService: ReportService,
     private route: Router,
@@ -38,21 +40,51 @@ export class CreatereportComponent implements OnInit {
     }
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.report.workspace_id = params['params']['workspace_id'];
-      console.log(this.report.workspace_id)
+      console.log(this.report.workspace_id);
+      this.fetchReportTypes();
     });
     const modal = document.getElementById('defaultModal');
         if (modal) {
+            // Initialize modal here using your modal library (e.g., Bootstrap, ng-bootstrap)
+            // For example, if using Bootstrap's modal:
+            // new bootstrap.Modal(modal).show();
         } else {
             console.error("Modal with id defaultModal not found or not initialized.");
         }
   }
 
+  fetchReportTypes(): void {
+    this.reportService.getReportType().subscribe(
+      (response) => {
+        this.reportTypes = response.data.reportType;
+        console.log(this.reportTypes);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
   createReport(): void {
-    this.route.navigate([`../templatelist/${this.report.workspace_id}/${this.report.title}`], { relativeTo: this.aRoute }).catch(error => {
-      console.log(error);
-    });
-  }   
-  
+
+    console.log('Prepared Report:', this.report);
+    
+
+    this.reportService.createReport(this.report).subscribe(
+      (response) => {
+        console.log('Create Report Response:', response);
+        this.reportId = response.data.report.report_id;
+        console.log(this.reportId);
+
+        this.route.navigate([`../templatelist/${this.reportId}/${this.report.title}/${this.report.report_type_id}`], { relativeTo: this.aRoute })
+        },
+      (error) => {
+        this.error = "Pick a report type"
+      }
+    );
+  }
+
   goToReports() {
     this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });
   }
