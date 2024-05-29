@@ -12,8 +12,8 @@ import { initFlowbite } from 'flowbite';
 export class TemplatelistComponent {
 
   report = {
+    report_id: 0,
     title: '',
-    workspace_id: '',
     report_type_id: 0
   };
 
@@ -24,8 +24,13 @@ export class TemplatelistComponent {
       initFlowbite();
     }
     this.aRoute.paramMap.subscribe((params: Params) => {
-      this.report.workspace_id = params['params']['workspace_id'];
-      this.report.title = params['params']['title'];
+      const title = params['params']['title'];
+      const reportTypeId = params['params']['report_type_id'];
+      const reportId = params['params']['report_id'];
+
+      this.report.report_type_id = reportTypeId ? parseInt(reportTypeId, 10) : 0;
+      this.report.report_id = reportId ? parseInt(reportId, 10) : 0;
+      this.report.title = title || '';
       console.log(this.report)
     });
     const modal = document.getElementById('defaultModal');
