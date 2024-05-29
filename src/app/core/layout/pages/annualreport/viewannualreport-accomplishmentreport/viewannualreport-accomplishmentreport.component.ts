@@ -61,7 +61,6 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
         this.annualReportId = fetchedAnnualReport.annual_report_id;
         this.annualReport.annualreport_title = fetchedAnnualReport.annualreport_title;
         this.annualReport.description = fetchedAnnualReport.description;
-        console.log(fetchedAnnualReport)
         this.fetchReportSelection();
       },
       (error) => {
@@ -74,16 +73,12 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
     this.reportSelect.getReportSelections().subscribe(
       (response) => {
         const reportSelections = response.data.reportSelections || [];
-        console.log('Raw Report Selections:', reportSelections);
-        console.log('Current annual_report_id:', this.annualReport.annual_report_id);
   
         // Filter report selections by matching annual_report_id and report_type_id
         this.reportSelections = reportSelections.filter((selection: any) => {
           return selection.annual_report_id === this.annualReportId && 
                  selection.report_type_id === 2;
         });
-  
-        console.log('Filtered Report Selections:', this.reportSelections);
   
         if (this.reportSelections.length === 0) {
           console.warn('No matching report selections found for the current annual report.');

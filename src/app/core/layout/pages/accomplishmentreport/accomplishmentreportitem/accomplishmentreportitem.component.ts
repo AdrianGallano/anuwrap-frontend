@@ -30,7 +30,6 @@ export class AccomplishmentreportitemComponent {
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.accomplishmentReport.accomplishment_report_id = params["params"]["accomplishment_report_id"];
-      console.log(this.accomplishmentReport.accomplishment_report_id)
     });
     this.fetchAccomplishmentReport();
   }
@@ -38,12 +37,9 @@ export class AccomplishmentreportitemComponent {
   fetchAccomplishmentReport(): void {
     this.accomplishmentReportService.getAccomplishmentReport(this.accomplishmentReport.accomplishment_report_id).subscribe(
       (response) => {
-        console.log(response); 
          this.accomplishmentReport = response.data.accomplishmentReport;
-          console.log('No accomplishment reports found');
         },
       (error) => {
-        console.log('Error fetching report:', error);
       }
     );
   }

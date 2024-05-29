@@ -25,6 +25,9 @@ export class ViewaccomplishmentreportComponent {
     venue_of_activity: ''
   };
 
+  createError = "";
+  deleteError = "";
+
   constructor(
     private accomplishmentReportService: AccomplishmentreportService,
     private route: Router,
@@ -41,11 +44,9 @@ export class ViewaccomplishmentreportComponent {
   fetchAccomplishmentReport(): void {
     this.accomplishmentReportService.getAccomplishmentReports(this.accomplishmentReport.report_id).subscribe(
       (response) => {
-        console.log(response); 
         const accomplishmentReports = response.data.accomplishmentReports;
         if (accomplishmentReports && accomplishmentReports.length > 0) {
           const report = accomplishmentReports[0]; 
-          console.log(report.accomplishment_report_id);
           this.accomplishmentReport.accomplishment_report_id = report.accomplishment_report_id;
           this.accomplishmentReport.benefits_of_the_participants = report.benefits_of_the_participants;
           this.accomplishmentReport.date_of_activity = report.date_of_activity;
@@ -66,8 +67,13 @@ export class ViewaccomplishmentreportComponent {
   
 
   navigateToCreateAccomplishmentReport(): void {
-    this.route.navigate([`../../createaccomplishmentreport/${this.accomplishmentReport.report_id}`], { relativeTo: this.aRoute });
+    if (this.accomplishmentReport.accomplishment_report_id) {
+      this.createError = "Annual report already exist"
+    } else {
+      this.route.navigate([`../../createaccomplishmentreport/${this.accomplishmentReport.report_id}`], { relativeTo: this.aRoute });
+    }
   }
+  
 
   navigateToExport(): void {
     this.route.navigate([`../../accomplishmentreportitem/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
@@ -80,7 +86,10 @@ export class ViewaccomplishmentreportComponent {
     this.route.navigate([`../../editaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
   }
   navigateToDeleteAccomplishmentReport(): void {
-    this.route.navigate([`../../deleteaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
-  }
+    if (!this.accomplishmentReport.accomplishment_report_id) {
+      this.deleteError = "Annual report does not exist"
+    } else {
+      this.route.navigate([`../../deleteaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
+    }}
 
 }

@@ -88,8 +88,6 @@ export class AnnualreportitemFacultyMatrixComponent {
           return selection.annual_report_id === Number(this.annualReport.annual_report_id);
         });
 
-        console.log('Fetched Report Selections:', this.reportSelection);
-
         // Fetch faculty matrices for each report_id in reportSelection
         this.reportSelection.forEach((selection) => {
           this.fetchFacultyMatrices(selection.report_id);
@@ -114,7 +112,6 @@ export class AnnualreportitemFacultyMatrixComponent {
     this.facultyMatrixService.getFacultyMatrices(reportId).subscribe(
       (response) => {
         const facultyMatrices = response.data.facultyMatrix;
-        console.log('All Faculty Matrices:', facultyMatrices);
 
         // Filter faculty matrices by report_id that matches the given reportId
         const filteredMatrices = facultyMatrices.filter((matrix: any) => {
@@ -123,8 +120,6 @@ export class AnnualreportitemFacultyMatrixComponent {
 
         // Append filtered matrices to the facultyMatrices array
         this.facultyMatrices.push(...filteredMatrices);
-
-        console.log('Filtered Faculty Matrices:', this.facultyMatrices);
       },
       (error) => {
         console.log('Error fetching faculty matrices:', error);

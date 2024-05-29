@@ -29,7 +29,6 @@ export class EditannualreportComponent {
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.annualReport.workspace_id = params["params"]["workspace_id"];
       this.annualReport.annual_report_id = params["params"]["annual_report_id"];
-      console.log(this.annualReport.workspace_id)
 
       this.fetchAnnualReport();
     });
@@ -41,7 +40,6 @@ export class EditannualreportComponent {
         const fetchedAnnualReport = response.data.report;
         this.annualReport.annualreport_title = fetchedAnnualReport.annualreport_title;
         this.annualReport.description = fetchedAnnualReport.description;
-        console.log(fetchedAnnualReport);
       },
       (error) => {
         console.log('Error fetching report:', error);
@@ -52,7 +50,6 @@ export class EditannualreportComponent {
   editAnnualReport(): void {
     this.annualReportService.editAnnualReport(this.annualReport, this.annualReport.annual_report_id).subscribe(
       (response) => {
-        console.log('Create Report Response:', response);
         this.route.navigate([`../../annualreportlist`], {relativeTo: this.aRoute})
     },
     (error) => {

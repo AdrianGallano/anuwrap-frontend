@@ -63,7 +63,6 @@ export class ViewannualreportComponent {
         this.annualReportId = fetchedAnnualReport.annual_report_id;
         this.annualReport.annualreport_title = fetchedAnnualReport.annualreport_title;
         this.annualReport.description = fetchedAnnualReport.description;
-        console.log(fetchedAnnualReport)
         this.fetchReportSelection();
       },
       (error) => {
@@ -76,16 +75,12 @@ export class ViewannualreportComponent {
     this.reportSelect.getReportSelections().subscribe(
       (response) => {
         const reportSelections = response.data.reportSelections || [];
-        console.log('Raw Report Selections:', reportSelections);
-        console.log('Current annual_report_id:', this.annualReport.annual_report_id);
   
         // Filter report selections by matching annual_report_id and report_type_id
         this.reportSelections = reportSelections.filter((selection: any) => {
           return selection.annual_report_id === this.annualReportId && 
                  selection.report_type_id === 1;
         });
-  
-        console.log('Filtered Report Selections:', this.reportSelections);
   
         if (this.reportSelections.length === 0) {
           console.warn('No matching report selections found for the current annual report.');
@@ -103,10 +98,8 @@ export class ViewannualreportComponent {
   }
   
   fetchFacultyMatrices(reportId: number): void {
-    console.log('Fetching faculty matrices for Report ID:', reportId);
     
     if (this.facultyMatrices.some(matrix => matrix.report_id === reportId)) {
-      console.log('Faculty matrices for Report ID', reportId, 'already fetched');
       return;
     }
     
@@ -124,8 +117,6 @@ export class ViewannualreportComponent {
         if (filteredMatrices.length > 0) {
           // Store the fetched matrices for the specific report_id
           this.facultyMatrices.push(...filteredMatrices);
-          
-          console.log('Faculty Matrices for Report ID', reportId, ':', filteredMatrices);
           
           // Manually trigger change detection after data update
           this.cdr.detectChanges();
