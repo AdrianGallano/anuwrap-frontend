@@ -13,13 +13,7 @@
                     Create Report
                 </h3>
                 <div class="relative">
-                    <select name="report_type" id="report_type" [(ngModel)]="report.report_type_id" 
-                    class="text-black bg-white rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 group mt-5 px-4 py-2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
-                        <option value="0">Select report type</option>
-                        <option value="1">Faculty Matrix</option>
-                        <option value="2">Accomplishment Report</option>
-                    </select>
-            
+                    
                     <!-- Dropdown Content -->
                 </div>
             </div>
@@ -33,8 +27,8 @@
                     </div>
                 </div>
                 <div class="flex justify-center gap-5">
-                    <button (click)="createReport()" type="submit" class="flex items-center justify-center text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 gap-2">
-                       Create Report
+                    <button (click)="navigateToTemplate()" type="submit" class="flex items-center justify-center text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 gap-2">
+                       Next
                     </button>
                     <button (click)="goToReports()" type="button" class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800 mr-2" data-modal-toggle="defaultModal">
                         Cancel

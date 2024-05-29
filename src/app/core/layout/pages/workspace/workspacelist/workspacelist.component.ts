@@ -6,19 +6,6 @@ import { CommonModule, NgFor } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { UserworkspaceService } from '../../../../../shared/services/userworkspace.service';
 import { FormsModule } from '@angular/forms';
-import {
-  initAccordions,
-  initCarousels,
-  initCollapses,
-  initDials,
-  initDismisses,
-  initDrawers,
-  initDropdowns,
-  initModals,
-  initPopovers,
-  initTabs,
-  initTooltips,
-} from 'flowbite';
 
 @Component({
   selector: 'app-workspacelist',
@@ -32,21 +19,11 @@ export class WorkspacelistComponent implements OnInit {
   workspaces: any[] = [];
   old_workspace: any[] = [];
   workspace_filter= ""
+  owner =""
   private roles:any;
   constructor(private workspaceService: WorkspaceService, private userWorkspaceService: UserworkspaceService, private route: Router, private datePipe: DatePipe, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    initAccordions();
-    initCarousels();
-    initCollapses();
-    initDials();
-    initDismisses();
-    initDrawers();
-    initDropdowns();
-    initModals();
-    initPopovers();
-    initTabs();
-    initTooltips();
     this.fetchWorkspaces();
     this.roles = {
       "1": "superadmin",
@@ -60,7 +37,10 @@ export class WorkspacelistComponent implements OnInit {
     this.userWorkspaceService.getUserWorkspaces().subscribe(
       (response) => {
         this.workspaces = response.data.userWorkspace;
+        this.owner = response.data.username;
         this.old_workspace = this.workspaces;
+        console.log(this.owner)
+        console.log(this.workspaces);
       },
       (error) => {
         console.error('Error fetching workspaces:', error);
@@ -72,11 +52,11 @@ export class WorkspacelistComponent implements OnInit {
   getRoleName(roleId: number): string {
     switch (roleId) {
       case 1:
-        return 'superadmin';
+        return 'Me';
       case 2:
         return 'admin';
       case 3:
-        return 'user';
+        return this.owner;
       default:
         return '';
     }
