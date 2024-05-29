@@ -27,6 +27,7 @@ export class ViewaccomplishmentreportComponent {
 
   createError = "";
   deleteError = "";
+  exportError = "";
 
   constructor(
     private accomplishmentReportService: AccomplishmentreportService,
@@ -68,7 +69,7 @@ export class ViewaccomplishmentreportComponent {
 
   navigateToCreateAccomplishmentReport(): void {
     if (this.accomplishmentReport.accomplishment_report_id) {
-      this.createError = "Annual report already exist"
+      this.createError = "Accomplishment report already exist"
     } else {
       this.route.navigate([`../../createaccomplishmentreport/${this.accomplishmentReport.report_id}`], { relativeTo: this.aRoute });
     }
@@ -76,8 +77,12 @@ export class ViewaccomplishmentreportComponent {
   
 
   navigateToExport(): void {
-    this.route.navigate([`../../accomplishmentreportitem/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
-  }
+    if (!this.accomplishmentReport.accomplishment_report_id) {
+      this.exportError = "Accomplishment report does not exist"
+    } else {
+        this.route.navigate([`../../accomplishmentreportitem/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
+      }
+    }
 
   navigateToReportList(): void {
     this.route.navigate([`../../reportlist`], { relativeTo: this.aRoute });
@@ -87,7 +92,7 @@ export class ViewaccomplishmentreportComponent {
   }
   navigateToDeleteAccomplishmentReport(): void {
     if (!this.accomplishmentReport.accomplishment_report_id) {
-      this.deleteError = "Annual report does not exist"
+      this.deleteError = "Accomplishment report does not exist"
     } else {
       this.route.navigate([`../../deleteaccomplishmentreport/${this.accomplishmentReport.accomplishment_report_id}`], { relativeTo: this.aRoute });
     }}
