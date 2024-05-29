@@ -88,7 +88,7 @@ import { Component, OnInit } from '@angular/core';
     }
 
     navigateToCreateReport(): void {
-      this.route.navigate([`../createreport/${this.workspaceId}`], {
+      this.route.navigate([`../createreport`], {
         relativeTo: this.aRoute,
       });
     }

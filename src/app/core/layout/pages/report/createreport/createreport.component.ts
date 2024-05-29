@@ -38,7 +38,7 @@ export class CreatereportComponent implements OnInit {
     }
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.report.workspace_id = params['params']['workspace_id'];
-      this.fetchReportTypes();
+      console.log(this.report.workspace_id)
     });
     const modal = document.getElementById('defaultModal');
         if (modal) {
@@ -47,30 +47,11 @@ export class CreatereportComponent implements OnInit {
         }
   }
 
-  fetchReportTypes(): void {
-    this.reportService.getReportType().subscribe(
-      (response) => {
-        this.reportTypes = response.data.reportType;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-
   createReport(): void {
-  
-    this.reportService.createReport(this.report).subscribe(
-      (response) => {
-        this.reportId = response.data.report.report_id;
-        this.route.navigate([`../templatelist/${this.reportId}`], { relativeTo: this.aRoute });
-      },
-      (error) => {
-        console.log(error)
-      }
-    );
-  }
+    this.route.navigate([`../templatelist/${this.report.workspace_id}/${this.report.title}`], { relativeTo: this.aRoute }).catch(error => {
+      console.log(error);
+    });
+  }   
   
   goToReports() {
     this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });

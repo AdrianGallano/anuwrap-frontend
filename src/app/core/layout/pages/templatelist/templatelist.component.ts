@@ -11,7 +11,11 @@ import { initFlowbite } from 'flowbite';
 })
 export class TemplatelistComponent {
 
-  reportId= 0
+  report = {
+    title: '',
+    workspace_id: '',
+    report_type_id: 0
+  };
 
   constructor( private aRoute: ActivatedRoute, private route: Router){}
 
@@ -20,7 +24,9 @@ export class TemplatelistComponent {
       initFlowbite();
     }
     this.aRoute.paramMap.subscribe((params: Params) => {
-      this.reportId = params['params']['report_id'];
+      this.report.workspace_id = params['params']['workspace_id'];
+      this.report.title = params['params']['title'];
+      console.log(this.report)
     });
     const modal = document.getElementById('defaultModal');
         if (modal) {
@@ -28,4 +34,9 @@ export class TemplatelistComponent {
             console.error("Modal with id defaultModal not found or not initialized.");
         }
   }
+
+  pickTemplate(): void {
+
+  }
+
 }

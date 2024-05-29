@@ -48,6 +48,7 @@ import { AnnualreportitemFacultyMatrixComponent } from './core/layout/pages/annu
 import { AnnualreportitemAccomplishmentreportComponent } from './core/layout/pages/annualreport/annualreportitem/annualreportitem-accomplishmentreport/annualreportitem-accomplishmentreport.component';
 import { AccomplishmentreportitemComponent } from './core/layout/pages/accomplishmentreport/accomplishmentreportitem/accomplishmentreportitem.component';
 import { LeaveworkspaceComponent } from './core/layout/pages/workspace/leaveworkspace/leaveworkspace.component';
+import { TemplatelistComponent } from './core/layout/pages/templatelist/templatelist.component';
 
 
 export const routes: Routes = [
@@ -139,8 +140,13 @@ export const routes: Routes = [
                         canActivate: [authenticationGuard]
                     },
                     {
-                        path: 'createreport/:report_id',
+                        path: 'createreport',
                         component: CreatereportComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
+                        path: 'templatelist/:workspace_id/:title',
+                        component: TemplatelistComponent,
                         canActivate: [authenticationGuard]
                     },
                     {
