@@ -6,14 +6,15 @@ import { Component, OnInit } from '@angular/core';
   import { CommonModule } from '@angular/common';
   import { response } from 'express';
   import { AnnualreportService } from '../../../../../shared/services/annualreport.service';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
   @Component({
     selector: 'app-report',
     standalone: true,
     templateUrl: './reportlist.component.html',
     styleUrl: './reportlist.component.css',
-    imports: [RouterModule, NavigationComponent, FormsModule, CommonModule],
-  })
+    imports: [RouterModule, NavigationComponent, FormsModule, CommonModule, AiComponent]
+})
   export class ReportlistComponent implements OnInit {
     reports: any[] = [];
     old_state: any[] = [];

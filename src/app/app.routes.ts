@@ -49,6 +49,7 @@ import { AnnualreportitemAccomplishmentreportComponent } from './core/layout/pag
 import { AccomplishmentreportitemComponent } from './core/layout/pages/accomplishmentreport/accomplishmentreportitem/accomplishmentreportitem.component';
 import { LeaveworkspaceComponent } from './core/layout/pages/workspace/leaveworkspace/leaveworkspace.component';
 import { TemplatelistComponent } from './core/layout/pages/templatelist/templatelist.component';
+import { ContentComponent } from './core/layout/pages/content/content.component';
 
 
 export const routes: Routes = [
@@ -142,6 +143,11 @@ export const routes: Routes = [
                     {
                         path: 'createreport',
                         component: CreatereportComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
+                        path: 'content/:report_id',
+                        component: ContentComponent,
                         canActivate: [authenticationGuard]
                     },
                     {

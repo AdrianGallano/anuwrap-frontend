@@ -41,7 +41,7 @@ export class TemplatelistComponent {
   }
 
   pickTemplate(): void {
-
+    this.route.navigate([`./content/${this.report.report_id}`], { relativeTo: this.aRoute })
   }
 
 }
