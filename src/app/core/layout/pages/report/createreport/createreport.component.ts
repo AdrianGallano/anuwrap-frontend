@@ -19,7 +19,6 @@ export class CreatereportComponent implements OnInit {
   workspaceId: any = null;
   report = {
     title: '',
-    report_type_id: '0',
     workspace_id: '',
   };
   reportTypes: any;
@@ -60,11 +59,20 @@ export class CreatereportComponent implements OnInit {
   }
 
 
-  navigateToTemplate(): void {
-    this.route.navigate([``])
+  createReport(): void {
+  
+    this.reportService.createReport(this.report).subscribe(
+      (response) => {
+        this.reportId = response.data.report.report_id;
+        this.route.navigate([`../templatelist/${this.reportId}`], { relativeTo: this.aRoute });
+      },
+      (error) => {
+        console.log(error)
+      }
+    );
   }
   
   goToReports() {
-    this.route.navigate([`../../reportlist`], { relativeTo: this.aRoute });
+    this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });
   }
 }

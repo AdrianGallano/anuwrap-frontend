@@ -139,7 +139,7 @@ export const routes: Routes = [
                         canActivate: [authenticationGuard]
                     },
                     {
-                        path: 'createreport/:workspace_id',
+                        path: 'createreport/:report_id',
                         component: CreatereportComponent,
                         canActivate: [authenticationGuard]
                     },
