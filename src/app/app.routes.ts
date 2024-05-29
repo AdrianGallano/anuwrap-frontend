@@ -49,6 +49,7 @@ import { AnnualreportitemAccomplishmentreportComponent } from './core/layout/pag
 import { AccomplishmentreportitemComponent } from './core/layout/pages/accomplishmentreport/accomplishmentreportitem/accomplishmentreportitem.component';
 import { LeaveworkspaceComponent } from './core/layout/pages/workspace/leaveworkspace/leaveworkspace.component';
 import { TemplatelistComponent } from './core/layout/pages/templatelist/templatelist.component';
+import { ContentComponent } from './core/layout/pages/content/content.component';
 
 
 export const routes: Routes = [
@@ -68,6 +69,10 @@ export const routes: Routes = [
         {
             path: 'login',
             component: LoginComponent
+        },
+        {
+            path: 'content',
+            component: ContentComponent
         },
         {
             path:'',
