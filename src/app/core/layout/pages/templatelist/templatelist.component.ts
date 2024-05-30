@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { TemplatelistParentComponent } from '../report/templatelist-parent/templatelist-parent.component';
+import { ContentService } from '../../../../shared/services/content.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-templatelist',
@@ -18,7 +20,14 @@ export class TemplatelistComponent {
     report_type_id: 0
   };
 
-  constructor( private aRoute: ActivatedRoute, private route: Router){}
+  content = {
+    report_id: 0,
+    body: ''
+  }
+
+  contentId: number|undefined
+
+  constructor( private aRoute: ActivatedRoute, private route: Router, private contService: ContentService){}
 
   ngOnInit(): void {
     if (typeof document !== 'undefined') {
@@ -30,9 +39,9 @@ export class TemplatelistComponent {
       const reportId = params['params']['report_id'];
 
       this.report.report_type_id = reportTypeId ? parseInt(reportTypeId, 10) : 0;
-      this.report.report_id = reportId ? parseInt(reportId, 10) : 0;
+      this.content.report_id = reportId ? parseInt(reportId, 10) : 0;
       this.report.title = title || '';
-      console.log(this.report.report_id)
+      console.log(this.content.report_id)
     });
     const modal = document.getElementById('defaultModal');
         if (modal) {
@@ -42,12 +51,20 @@ export class TemplatelistComponent {
   }
 
   pickTemplate(): void {
-    if (this.report.report_id) {
-        this.route.navigate([`./content`, this.report.report_id], { relativeTo: this.aRoute });
-    } else {
-        console.error('Report ID is not available.');
-    }
+    this.contService.createContent(this.content).subscribe(
+        (response)=> {
+            this.contentId = response.data.content.content_id;
+            console.log(response)
+            console.log(this.contentId)
+            
+                this.route.navigate([`./content/${this.contentId}`], { relativeTo: this.aRoute });
+
+        }, (error)=> {
+            console.error('Error creating content:', error);
+        } 
+    );
 }
+
 
 
 }

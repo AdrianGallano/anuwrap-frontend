@@ -1,6 +1,6 @@
 <app-navigation-bar></app-navigation-bar>
 
-<div class="flex justify-center mt-14 w-full md:inset-0">
+<div class="flex justify-center mt-32 w-full md:inset-0">
   <div class="flex justify-center p-4 w-full">
     <!-- Modal content -->
     <div class=" p-4 bg-white rounded-lg  sm:p-5">
@@ -13,16 +13,28 @@
             </h3>
           </div>
           <div class="flex flex-col items-center">
-            <form action="post">
-            <img src="../../assets/img/hacker.png" alt="hacker" class="w-32 h-32 rounded-full object-cover bg-black">
-            <p class="mt-4 text-center font-normal text-gray-500 dark:text-gray-400">
-          
-              Username:
-              <span class="font-medium">
-                #{{user.username}}
-              </span>
-            </p>
-            </form>
+
+            <div class="flex items-center justify-center rounded-full relative group">
+              <label for="dropzone-file"
+                class="flex flex-col col-2 items-center justify-center w-full h-64 border-2 border-gray-300 rounded-full cursor-pointer bg-gray-50 dark:bg-gray-700  dark:border-gray-600 ">
+                <div class="flex flex-col items-center  justify-center pt-5 pb-6">
+                  <form action="post">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                      <img class="rounded-full h-64 w-64 mt-2" src="{{user.imageName}}" alt="profile">
+                    </div>
+                    
+                  </form>
+
+                </div>
+
+              </label>
+              <!-- Tooltip -->
+
+            </div>
+
+            <p class="mt-8 text-center font-normal text-gray-500 dark:text-gray-400">Username: <span
+                class="font-medium">#{{user.username}}</span></p>
+
           </div>
         </div>
 
@@ -34,7 +46,7 @@
             <div>
               <label for="username"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-              <input type="text" name="username" id="username" 
+              <input type="text" name="username" id="username"
                 class="max-w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="JohnDoe" value="{{user.username}}" disabled>
             </div>
@@ -60,7 +72,7 @@
             </div>
 
           </div>
-          <button type="submit" (click)="editUser()" 
+          <button type="submit" (click)="editUser()"
             class="cursor-pointer mt-5 text-white inline-flex items-center float-right bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
             <span>Save</span>
           </button>

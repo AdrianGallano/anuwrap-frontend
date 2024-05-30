@@ -15,7 +15,8 @@ export class ProfileComponent implements OnInit {
     username: "",
     firstname: "",
     lastname: "",
-    email: ""
+    email: "",
+    imageName: ""
   };
 
   constructor(private userService: UserService) { }

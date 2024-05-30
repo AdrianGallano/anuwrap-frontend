@@ -51,6 +51,7 @@ import { LeaveworkspaceComponent } from './core/layout/pages/workspace/leavework
 import { TemplatelistComponent } from './core/layout/pages/templatelist/templatelist.component';
 import { ContentComponent } from './core/layout/pages/content/content.component';
 import { TemplatelistParentComponent } from './core/layout/pages/report/templatelist-parent/templatelist-parent.component';
+import { ChartComponent } from './core/layout/pages/chart/chart.component';
 
 
 export const routes: Routes = [
@@ -70,6 +71,10 @@ export const routes: Routes = [
         {
             path: 'login',
             component: LoginComponent
+        },
+        {
+            path: 'chart',
+            component: ChartComponent
         },
         {
             path:'',
@@ -157,7 +162,7 @@ export const routes: Routes = [
                             canActivate: [authenticationGuard]
                           },
                           {
-                            path: 'content/:report_id',
+                            path: 'content/:content_id',
                             component: ContentComponent,
                             canActivate: [authenticationGuard]
                           }
