@@ -29,7 +29,8 @@ export class NavigationComponent implements OnInit {
     username: "",
     firstname: "",
     lastname: "",
-    email: ""
+    email: "",
+    imageName: ""
   };
 
   constructor(private userService: UserService, private tokenService: TokenService, private route: Router, private aRoute: ActivatedRoute) { }
@@ -41,6 +42,7 @@ export class NavigationComponent implements OnInit {
         this.user.firstname = response.data.user.first_name;
         this.user.lastname = response.data.user.last_name;
         this.user.email = response.data.user.email;
+        this.user.imageName = response.data.user.image_name;
       },
       (error) => {
         console.error('Error fetching user information:', error);
