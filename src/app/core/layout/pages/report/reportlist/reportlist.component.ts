@@ -25,7 +25,7 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
     old_state: any[] = [];
     workspaceId = '';
     reportTypes: any[] = [];
-    report_filter = ""
+    report_filter = "";
     constructor(
       private reportService: ReportService,
       private route: Router,
@@ -41,13 +41,13 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
         this.workspaceId = params['params']['workspace_id'];
         this.fetchReports();
         this.fetchReportTypes();
-        this.fetchWorspaces();
       });
     }
 
     fetchReports(): void {
       this.reportService.getReports(this.workspaceId).subscribe(
         (response) => {
+          console.log(response)
           this.reports = response.data.report;
           this.old_state = this.reports
         },
@@ -56,30 +56,6 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
         }
       );
     }
-
-    fetchWorspaces(): void {
-      this.userWorkspaceService.getUserWorkspaces().subscribe(
-        (response)=> {
-          console.log(response)
-          this.workspaces = response.data.userWorkspace
-          console.log(this.workspaces)
-        },
-        (error)=> {
-
-        }
-      )
-    }
-
-    // fetchContents(): void {
-    //   this.contentService.getContents(this.reports.report_id).subscribe(
-    //     (response)=>{
-
-    //     },
-    //     (error)=> {
-
-    //     }
-    //   )
-    // }
 
     fetchReportTypes(): void {
       this.reportService.getReportType().subscribe(
@@ -99,18 +75,10 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
       return reportType ? reportType.name : '';
     }
 
-    openReport(reportId: any, reportTypeId: number): void {
-      if (reportTypeId === 1) {
-        this.route.navigate([`../content/${reportId}`], {
+    openReport(reportId: any, contentId: any): void {
+        this.route.navigate([`../report/${reportId}/content/${contentId}`], {
           relativeTo: this.aRoute,
         });
-      } else if (reportTypeId === 2) {
-        this.route.navigate([`../viewaccomplishmentreport/${reportId}`], {
-          relativeTo: this.aRoute,
-        });
-      } else {
-        // Handle other report types if needed
-      }
     }
 
     searchReport() {

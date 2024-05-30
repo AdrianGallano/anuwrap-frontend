@@ -51,7 +51,7 @@ export class TemplatelistComponent {
         }
   }
 
-  pickTemplate(): void {
+  pickTemplate(contentId: any): void {
     this.contService.createContent(this.content).subscribe(
         (response)=> {
             this.contentId = response.data.content.content_id;

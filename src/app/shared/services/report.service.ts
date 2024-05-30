@@ -16,7 +16,7 @@ export class ReportService {
 
     if (authInfo) {
       const headers = authInfo[2];
-      return this.http.get<any>(`${this.apiUrl}/reports?workspace_id=${workspaceId}`, { headers: headers }).pipe(
+      return this.http.get<any>(`${this.apiUrl}/workspaces/${workspaceId}/reports/content`, { headers: headers }).pipe(
         catchError((error: any) => {
           return throwError(() => 'Error fetching workspace');
         })
