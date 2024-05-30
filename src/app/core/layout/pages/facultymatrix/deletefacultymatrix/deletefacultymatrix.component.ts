@@ -5,13 +5,14 @@ import { FacultymatrixService } from '../../../../../shared/services/facultymatr
 import { initFlowbite } from 'flowbite';
 import { ReportService } from '../../../../../shared/services/report.service';
 import { CommonModule } from '@angular/common';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-deletefacultymatrix',
-  standalone: true,
-  imports: [FormsModule, RouterModule],
-  templateUrl: './deletefacultymatrix.component.html',
-  styleUrl: './deletefacultymatrix.component.css'
+    selector: 'app-deletefacultymatrix',
+    standalone: true,
+    templateUrl: './deletefacultymatrix.component.html',
+    styleUrl: './deletefacultymatrix.component.css',
+    imports: [FormsModule, RouterModule, AiComponent]
 })
 export class DeletefacultymatrixComponent {
   facultyMatrix = {

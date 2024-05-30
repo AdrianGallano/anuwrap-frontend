@@ -1,1 +1,9 @@
+<button (click)="navigateToReportList()">Back</button>
+<div *ngIf="successMessage" class="message-popup success-popup">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="message-popup error-popup">
+    {{ errorMessage }}
+  </div>
 <editor apiKey="wosa4nwcx3nlec1v6cen5dztn0bu47iepff6m1h3jxcq4l5v" [init]="editorConfig"></editor>
+<app-ai></app-ai>

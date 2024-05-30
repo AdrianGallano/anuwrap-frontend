@@ -4,13 +4,14 @@ import { initFlowbite } from 'flowbite';
 import { TemplatelistParentComponent } from '../report/templatelist-parent/templatelist-parent.component';
 import { ContentService } from '../../../../shared/services/content.service';
 import { response } from 'express';
+import { AiComponent } from "../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-templatelist',
-  standalone: true,
-  imports: [RouterModule, TemplatelistParentComponent],
-  templateUrl: './templatelist.component.html',
-  styleUrl: './templatelist.component.css'
+    selector: 'app-templatelist',
+    standalone: true,
+    templateUrl: './templatelist.component.html',
+    styleUrl: './templatelist.component.css',
+    imports: [RouterModule, TemplatelistParentComponent, AiComponent]
 })
 export class TemplatelistComponent {
 

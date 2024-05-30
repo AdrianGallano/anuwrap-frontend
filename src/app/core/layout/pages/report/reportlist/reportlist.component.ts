@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   import { response } from 'express';
   import { AnnualreportService } from '../../../../../shared/services/annualreport.service';
 import { AiComponent } from "../../../../../shared/ai/ai.component";
+import { ContentService } from '../../../../../shared/services/content.service';
+import { error } from 'console';
+import { WorkspaceService } from '../../../../../shared/services/workspace.service';
+import { UserworkspaceService } from '../../../../../shared/services/userworkspace.service';
 
   @Component({
     selector: 'app-report',
@@ -16,6 +20,7 @@ import { AiComponent } from "../../../../../shared/ai/ai.component";
     imports: [RouterModule, NavigationComponent, FormsModule, CommonModule, AiComponent]
 })
   export class ReportlistComponent implements OnInit {
+    workspaces: any[] = [];
     reports: any[] = [];
     old_state: any[] = [];
     workspaceId = '';
@@ -25,7 +30,9 @@ import { AiComponent } from "../../../../../shared/ai/ai.component";
       private reportService: ReportService,
       private route: Router,
       private aRoute: ActivatedRoute,
-      private annualReportService: AnnualreportService
+      private annualReportService: AnnualreportService,
+      private contentService: ContentService,
+      private userWorkspaceService: UserworkspaceService
     ) {
     }
 
@@ -34,6 +41,7 @@ import { AiComponent } from "../../../../../shared/ai/ai.component";
         this.workspaceId = params['params']['workspace_id'];
         this.fetchReports();
         this.fetchReportTypes();
+        this.fetchWorspaces();
       });
     }
 
@@ -48,6 +56,30 @@ import { AiComponent } from "../../../../../shared/ai/ai.component";
         }
       );
     }
+
+    fetchWorspaces(): void {
+      this.userWorkspaceService.getUserWorkspaces().subscribe(
+        (response)=> {
+          console.log(response)
+          this.workspaces = response.data.userWorkspace
+          console.log(this.workspaces)
+        },
+        (error)=> {
+
+        }
+      )
+    }
+
+    // fetchContents(): void {
+    //   this.contentService.getContents(this.reports.report_id).subscribe(
+    //     (response)=>{
+
+    //     },
+    //     (error)=> {
+
+    //     }
+    //   )
+    // }
 
     fetchReportTypes(): void {
       this.reportService.getReportType().subscribe(
@@ -69,7 +101,7 @@ import { AiComponent } from "../../../../../shared/ai/ai.component";
 
     openReport(reportId: any, reportTypeId: number): void {
       if (reportTypeId === 1) {
-        this.route.navigate([`../reportview/${reportId}`], {
+        this.route.navigate([`../content/${reportId}`], {
           relativeTo: this.aRoute,
         });
       } else if (reportTypeId === 2) {

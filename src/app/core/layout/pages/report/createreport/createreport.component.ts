@@ -7,13 +7,14 @@ import { TokenService } from '../../../../../shared/services/token.service';
 import { initFlowbite } from 'flowbite';
 import { FacultymatrixService } from '../../../../../shared/services/facultymatrix.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-createreport',
-  templateUrl: './createreport.component.html',
-  styleUrls: ['./createreport.component.css'],
-  imports: [CommonModule, FormsModule],
-  standalone: true,
+    selector: 'app-createreport',
+    templateUrl: './createreport.component.html',
+    styleUrls: ['./createreport.component.css'],
+    standalone: true,
+    imports: [CommonModule, FormsModule, AiComponent]
 })
 export class CreatereportComponent implements OnInit {
   workspaceId: any = null;

@@ -4,13 +4,14 @@ import { NavigationBarComponent } from '../../../../../shared/navigation-bar/nav
 import { UserService } from '../../../../../shared/services/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-profile',
-  standalone: true,
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css',
-  imports: [RouterModule, NavigationBarComponent, FormsModule, CommonModule]
+    selector: 'app-profile',
+    standalone: true,
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.css',
+    imports: [RouterModule, NavigationBarComponent, FormsModule, CommonModule, AiComponent]
 })
 export class ProfileComponent implements OnInit {
   user = {

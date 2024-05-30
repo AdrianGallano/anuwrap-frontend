@@ -5,13 +5,14 @@ import { FacultymatrixService } from '../../../../../shared/services/facultymatr
 import { initFlowbite } from 'flowbite';
 import { ReportService } from '../../../../../shared/services/report.service';
 import { relative } from 'path';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-createfacultymatrix',
-  standalone: true,
-  imports: [FormsModule, RouterModule],
-  templateUrl: './createfacultymatrix.component.html',
-  styleUrl: './createfacultymatrix.component.css'
+    selector: 'app-createfacultymatrix',
+    standalone: true,
+    templateUrl: './createfacultymatrix.component.html',
+    styleUrl: './createfacultymatrix.component.css',
+    imports: [FormsModule, RouterModule, AiComponent]
 })
 export class CreatefacultymatrixComponent {
   facultyMatrix = {

@@ -3,13 +3,14 @@ import { AccomplishmentreportService } from '../../../../../shared/services/acco
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-deleteaccomplishmentreport',
-  standalone: true,
-  imports: [],
-  templateUrl: './deleteaccomplishmentreport.component.html',
-  styleUrl: './deleteaccomplishmentreport.component.css'
+    selector: 'app-deleteaccomplishmentreport',
+    standalone: true,
+    templateUrl: './deleteaccomplishmentreport.component.html',
+    styleUrl: './deleteaccomplishmentreport.component.css',
+    imports: [AiComponent]
 })
 export class DeleteaccomplishmentreportComponent {
   accomplishmentReport: any = {
