@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { HttpClient } from '@angular/common/http';
+import tinymce from 'tinymce';
+import { ContentService } from '../../../../shared/services/content.service'
+
 
 @Component({
   selector: 'app-content',
@@ -13,7 +17,7 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
     { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
   ]
 })
-export class ContentComponent {
+export class ContentComponent implements OnInit {
   public editorConfig = {
     selector: "#editor",
     height: '700px',
@@ -21,7 +25,6 @@ export class ContentComponent {
     base_url: '/tinymce',
     suffix: '.min',
     toolbar_sticky: true,
-    icons: "thin",
 
     powerpaste_word_import: "clean",
     powerpaste_googledocs_import: "clean",
@@ -29,9 +32,6 @@ export class ContentComponent {
 
     autosave_restore_when_empty: true,
     autosave_interval: "60s",
-
-    a11ychecker_html_version: "html5",
-    a11ychecker_level: "aaa",
 
     pagebreak_separator: '<div class="break"></div>',
 
@@ -59,9 +59,55 @@ export class ContentComponent {
                           padding: 4rem;
                       }
                   }`,
-    plugins: 'a11ychecker advcode advlist anchor autolink autosave bdmap charmap code colorpicker contextmenu directionality emoticons fullscreen hr image imagetools insertdatetime legacyoutput link lists media mentions nonbreaking pagebreak paste powerpaste preview print quickbars searchreplace  secunity spellchecker table template textcolor textpattern toc visualblocks wordcount',
-    toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | image media | table | codesample fullscreen | insertdatetime preview print | searchreplace | a11ycheck',
-    
+    plugins: 'save anchor autolink autosave  charmap code directionality fullscreen  image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
+    toolbar: 'save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | image media | table | codesample fullscreen | insertdatetime preview print | searchreplace | a11ycheck',
+    setup: (editor: any) => {
+      editor.on('init', this.initializeContent(editor));
+    },
+    save_onsavecallback: (editor: any) => {
+      this.saveContent(editor);
+    }
   };
 
+  constructor(private contentService: ContentService) { }
+
+  content: any = {
+    body: "",
+    report_id: 0
+  }
+
+  ngOnInit(): void { }
+
+  initializeContent(editor: any) {
+
+    this.content.report_id = 1;
+
+    this.contentService.getContent(this.content.report_id).subscribe(
+      (response) => {
+        editor.setContent(response.data.content.body);
+      },
+      (error) => {
+        console.log("Error content")
+        console.log(error);
+      }
+    )
+  }
+
+  saveContent(editor: any): void {
+    const contentBody = editor.getContent();
+
+    this.content.body = contentBody;
+    this.content.report_id = 1;
+
+
+    this.contentService.editContent(this.content, 1).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
+  }
 }
