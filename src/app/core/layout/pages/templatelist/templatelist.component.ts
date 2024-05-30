@@ -23,7 +23,7 @@ export class TemplatelistComponent {
 
   content = {
     report_id: 0,
-    body: ''
+    body: '',
   }
 
   contentId: number|undefined

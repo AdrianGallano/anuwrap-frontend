@@ -45,21 +45,14 @@ export class WorkspacelistComponent implements OnInit {
       "2": "admin",
       "3": "user"
     };
+    
   }
 
   fetchWorkspaces(): void {
     this.userWorkspaceService.getUserWorkspaces().subscribe(
       (response) => {
         this.workspaces = response.data.userWorkspace;
-        this.owner = response.data.username;
         this.old_workspace = this.workspaces;
-
-        // Separate workspaces based on role_id
-        this.owned_workspaces = this.workspaces.filter(workspace => workspace.role_id === 1);
-        this.notOwned_workspaces = this.workspaces.filter(workspace => workspace.role_id !== 1);
-
-        console.log(this.workspaces);
-        this.cdr.detectChanges();
       },
       (error) => {
         console.error('Error fetching workspaces:', error);
@@ -69,27 +62,14 @@ export class WorkspacelistComponent implements OnInit {
 
   filterWorkspaces(): void {
     if (this.workspaceFilterOption === 'all') {
-      this.filteredWorkspaces = this.workspaces;
+      this.workspaces = this.old_workspace
     } else if (this.workspaceFilterOption === 'owned') {
-      this.filteredWorkspaces = this.owned_workspaces;
+      this.workspaces = this.old_workspace.filter(workspace => workspace.role_id == 1);
     } else if (this.workspaceFilterOption === 'notOwned') {
-      this.filteredWorkspaces = this.notOwned_workspaces;
+      this.workspaces = this.old_workspace.filter(workspace => workspace.role_id !== 1);
     }
-    this.cdr.detectChanges();
   }
 
-  getRoleName(roleId: number): string {
-    switch (roleId) {
-      case 1:
-        return 'Me';
-      case 2:
-        return 'admin';
-      case 3:
-        return this.owner;
-      default:
-        return '';
-    }
-  }
 
   searchWorkspace() {
     this.workspaces = this.old_workspace;

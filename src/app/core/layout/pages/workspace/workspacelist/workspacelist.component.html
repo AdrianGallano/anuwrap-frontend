@@ -18,7 +18,7 @@
                 </div>
                 <div class="flex items-center mt-2 space-x-4">
                   <label class="flex items-center space-x-2">
-                    <input type="radio" name="filter" value="all" [(ngModel)]="workspaceFilterOption" (change)="filterWorkspaces()" class="form-radio h-4 w-4 text-primary-600">
+                    <input  type="radio" name="filter" value="all" [(ngModel)]="workspaceFilterOption" (change)="filterWorkspaces()" class="form-radio h-4 w-4 text-primary-600">
                     <span>All</span>
                   </label>
                   <label class="flex items-center space-x-2">
@@ -48,14 +48,13 @@
                   <tr class="text-center">
                     <th scope="col" class="p-4 whitespace-nowrap">Workspace ID</th>
                     <th scope="col" class="p-4 whitespace-nowrap">Workspace Name</th>
-                    <th scope="col" class="p-4 whitespace-nowrap">Owner</th>
                     <th scope="col" class="p-2 whitespace-nowrap">Date Created</th>
                     <th scope="col" class="p-2 whitespace-nowrap">Last Edited</th>
                     <th scope="col" class="p-2 whitespace-nowrap">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let workspace of filteredWorkspaces" class="border-b text-black hover:bg-gray-100 ">
+                  <tr *ngFor="let workspace of workspaces" class="border-b text-black hover:bg-gray-100 ">
                     <th scope="row" class="py-2 px-6 font-medium whitespace-nowrap">
                       <div class="flex items-center justify-center text-center">
                         <h2>{{ workspace["workspace_id"] }}</h2>
@@ -64,12 +63,6 @@
                     <td scope="row" class="py-2 px-6 font-medium whitespace-nowrap">
                       <div class="flex items-center justify-start">
                         <h2>{{ workspace.name }}</h2>
-                      </div>
-                    </td>
-                    <td scope="row" class="py-2 px-6 font-medium whitespace-nowrap">
-                      <div class="flex items-center justify-start">
-                        <h2 *ngIf="workspace.role_id === 1">Me</h2>
-                        <h2 *ngIf="workspace.role_id === 3">{{ owner }}</h2>
                       </div>
                     </td>
                     <td class="px-6 py-3 font-medium whitespace-nowrap">
