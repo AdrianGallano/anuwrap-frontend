@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { ContentService } from '../../../../shared/services/content.service';
 
 @Component({
   selector: 'app-content',
@@ -14,6 +16,28 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
   ]
 })
 export class ContentComponent {
+
+  content = {
+    report_id: 0,
+    body: ''
+  }
+  
+
+  constructor( private aRoute: ActivatedRoute, private route: Router, private contentservice: ContentService){}
+
+  ngOnInit(): void {
+    this.aRoute.paramMap.subscribe((params: Params) => {
+      this.content.report_id = +params['params']['report_id'];
+
+      console.log(this.content)
+    });
+    const modal = document.getElementById('defaultModal');
+        if (modal) {
+        } else {
+            console.error("Modal with id defaultModal not found or not initialized.");
+        }
+  }
+
   public editorConfig = {
     selector: "#editor",
     height: '700px',
@@ -63,5 +87,15 @@ export class ContentComponent {
     toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | image media | table | codesample fullscreen | insertdatetime preview print | searchreplace | a11ycheck',
     
   };
+
+  createContent(): void{
+    this.contentservice.createContent(this.content).subscribe(
+      (response)=> {
+
+      }, (error)=> {
+
+      }
+    )
+  }
 
 }

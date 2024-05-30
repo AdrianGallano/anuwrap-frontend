@@ -39,7 +39,6 @@ export class WorkspacelistComponent implements OnInit {
         this.workspaces = response.data.userWorkspace;
         this.owner = response.data.username;
         this.old_workspace = this.workspaces;
-        console.log(this.owner)
         console.log(this.workspaces);
       },
       (error) => {

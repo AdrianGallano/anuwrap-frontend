@@ -77,10 +77,10 @@ export class CreatereportComponent implements OnInit {
         this.reportId = response.data.report.report_id;
         console.log(this.reportId);
 
-        this.route.navigate([`../templatelist/${this.reportId}/${this.report.title}/${this.report.report_type_id}`], { relativeTo: this.aRoute })
+        this.route.navigate([`../report/${this.reportId}`], { relativeTo: this.aRoute })
         },
       (error) => {
-        this.error = "Pick a report type"
+        this.error = "Select a report type"
       }
     );
   }

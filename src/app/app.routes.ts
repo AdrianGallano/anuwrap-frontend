@@ -50,6 +50,7 @@ import { AccomplishmentreportitemComponent } from './core/layout/pages/accomplis
 import { LeaveworkspaceComponent } from './core/layout/pages/workspace/leaveworkspace/leaveworkspace.component';
 import { TemplatelistComponent } from './core/layout/pages/templatelist/templatelist.component';
 import { ContentComponent } from './core/layout/pages/content/content.component';
+import { TemplatelistParentComponent } from './core/layout/pages/report/templatelist-parent/templatelist-parent.component';
 
 
 export const routes: Routes = [
@@ -71,10 +72,6 @@ export const routes: Routes = [
             component: LoginComponent
         },
         {
-            path: 'content',
-            component: ContentComponent
-        },
-        {
             path:'',
             component: ParentComponent,
             children: [
@@ -92,9 +89,9 @@ export const routes: Routes = [
                     canActivate: [authenticationGuard]
                 },
                 {
-                path: 'profile',    
-                component: ProfileComponent,
-                canActivate: [authenticationGuard]
+                    path: 'profile',    
+                    component: ProfileComponent,
+                    canActivate: [authenticationGuard]
                 },
                 {
                     path: 'editprofile',
@@ -150,15 +147,22 @@ export const routes: Routes = [
                         canActivate: [authenticationGuard]
                     },
                     {
-                        path: 'content/:report_id',
-                        component: ContentComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'templatelist/:report_id/:title/:report_type_id',
-                        component: TemplatelistComponent,
-                        canActivate: [authenticationGuard]
-                    },
+                        path: 'report/:report_id',
+                        component: TemplatelistParentComponent,
+                        canActivate: [authenticationGuard],
+                        children: [
+                          {
+                            path: '',
+                            component: TemplatelistComponent,
+                            canActivate: [authenticationGuard]
+                          },
+                          {
+                            path: 'content/:report_id',
+                            component: ContentComponent,
+                            canActivate: [authenticationGuard]
+                          }
+                        ]
+                      },
                     {
                         path: 'reportitem/:report_id',
                         component: ReportitemComponent,
