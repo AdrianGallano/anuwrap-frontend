@@ -81,32 +81,7 @@ export class AnnualreportlistComponent {
 
 
     openAnnualReport(annualReportId: any) {
-
-        // Find the selected report selection based on annualReportId
-        const selectedReport = this.reportSelections.find(selection => selection.annual_report_id === annualReportId);
-
-        if (selectedReport) {
-            const reportId = selectedReport.report_id;
-            const reportTypeId = selectedReport.report_type_id;
-
-            if (typeof reportTypeId !== 'undefined') {
-                if (reportTypeId === 1) {
-                    // Navigate to faculty matrix view
-                    this.route.navigate([`../viewannualreport-facultymatrix/${annualReportId}`], { relativeTo: this.aRoute });
-                } else if (reportTypeId === 2) {
-                    // Navigate to accomplishment report view
-                    this.route.navigate([`../viewannualreport-accomplishmentreport/${annualReportId}`], { relativeTo: this.aRoute });
-                } else {
-                    console.log(`Unsupported report type ID: ${reportTypeId}`);
-                }
-            } else {
-                console.log('Report type ID is undefined');
-            }
-        } else {
-            console.log(`No report selection found for Annual Report ID: ${annualReportId}`);
-            // Navigate to create report selection for the annual report
-            this.route.navigate([`../createreportselection/${annualReportId}`], { relativeTo: this.aRoute });
-        }
+        this.route.navigate([`../annualcontent/${annualReportId}`], { relativeTo: this.aRoute });
     }
 
     navigateToCreateAnnualReport() {

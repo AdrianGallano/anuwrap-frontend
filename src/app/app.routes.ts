@@ -52,6 +52,7 @@ import { TemplatelistComponent } from './core/layout/pages/templatelist/template
 import { ContentComponent } from './core/layout/pages/content/content.component';
 import { TemplatelistParentComponent } from './core/layout/pages/report/templatelist-parent/templatelist-parent.component';
 import { ChartComponent } from './core/layout/pages/chart/chart.component';
+import { AnnualcontentComponent } from './core/layout/pages/annualcontent/annualcontent.component';
 
 
 export const routes: Routes = [
@@ -169,16 +170,6 @@ export const routes: Routes = [
                         ]
                       },
                     {
-                        path: 'reportitem/:report_id',
-                        component: ReportitemComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'reportview/:report_id',
-                        component: ReportviewComponent,
-                        canActivate: [authenticationGuard]  
-                    },
-                    {
                         path: 'editreport/:report_id',
                         component: EditreportComponent,
                         canActivate: [authenticationGuard]
@@ -186,51 +177,6 @@ export const routes: Routes = [
                     {
                         path: 'deletereport/:report_id',
                         component: DeletereportComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'createfacultymatrix/:report_id',
-                        component: CreatefacultymatrixComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'editfacultymatrix/:faculty_matrix_id',
-                        component: EditfacultymatrixComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'deletefacultymatrix/:faculty_matrix_id',
-                        component: DeletefacultymatrixComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'report-design/:report_id',
-                        component: ReportDesignComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'collagelist',
-                        component: CollagelistComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'createcollage',
-                        component: CreatecollageComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'editcollage/:collage_id',
-                        component: EditcollageComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'deletecollage/:collage_id',
-                        component: DeletecollageComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'collageitem/:collage_id',
-                        component: CollageitemComponent,
                         canActivate: [authenticationGuard]
                     },
                     {
@@ -252,6 +198,11 @@ export const routes: Routes = [
                     {
                         path: 'deleteannualreport/:annual_report_id',
                         component: DeleteannualreportComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
+                        path: 'annualcontent/:annual_report_id',
+                        component: AnnualcontentComponent,
                         canActivate: [authenticationGuard]
                     },
                     {
