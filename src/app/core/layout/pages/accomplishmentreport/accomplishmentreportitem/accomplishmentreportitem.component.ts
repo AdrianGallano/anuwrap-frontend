@@ -5,11 +5,11 @@ import { NavigationBarComponent } from "../../../../../shared/navigation-bar/nav
 import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-    selector: 'app-accomplishmentreportitem',
-    standalone: true,
-    templateUrl: './accomplishmentreportitem.component.html',
-    styleUrl: './accomplishmentreportitem.component.css',
-    imports: [NavigationBarComponent, AiComponent]
+  selector: 'app-accomplishmentreportitem',
+  standalone: true,
+  templateUrl: './accomplishmentreportitem.component.html',
+  styleUrl: './accomplishmentreportitem.component.css',
+  imports: [NavigationBarComponent, AiComponent]
 })
 export class AccomplishmentreportitemComponent {
   accomplishmentReport: any = {
@@ -26,7 +26,7 @@ export class AccomplishmentreportitemComponent {
     private accomplishmentReportService: AccomplishmentreportService,
     private route: Router,
     private aRoute: ActivatedRoute
-  ){}
+  ) { }
 
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
@@ -38,14 +38,14 @@ export class AccomplishmentreportitemComponent {
   fetchAccomplishmentReport(): void {
     this.accomplishmentReportService.getAccomplishmentReport(this.accomplishmentReport.accomplishment_report_id).subscribe(
       (response) => {
-         this.accomplishmentReport = response.data.accomplishmentReport;
-        },
+        this.accomplishmentReport = response.data.accomplishmentReport;
+      },
       (error) => {
       }
     );
   }
 
-  navigateToViewAccomplishReport(): void{
+  navigateToViewAccomplishReport(): void {
     this.route.navigate([`../../viewaccomplishmentreport/${this.accomplishmentReport.report_id}`], { relativeTo: this.aRoute });
   }
 
