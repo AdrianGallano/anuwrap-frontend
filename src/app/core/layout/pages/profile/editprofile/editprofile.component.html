@@ -6,36 +6,32 @@
     <div class=" p-4 bg-white rounded-lg  sm:p-5">
       <!-- Modal header -->
       <div class="flex flex-col items-start justify-between gap-16  xl:flex-row">
-        <div class="p-8 bg-white rounded-lg  border-gray-400 shadow-md">
-          <div class="flex items-center pb-4 mb-4  rounded-t border-b sm:mb-5">
-            <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-              Profile
-            </h3>
+        <div class=" p-8 bg-white rounded-lg border-gray-400 shadow-md">
+
+          <div class="flex items-center pb-4 mb-4 rounded-t border-b sm:mb-5">
+            <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Profile</h3>
           </div>
-          <div class="flex flex-col items-center">
 
-            <div class="flex items-center justify-center rounded-full relative group">
-              <label for="dropzone-file"
-                class="flex flex-col col-2 items-center justify-center w-full h-64 border-2 border-gray-300 rounded-full cursor-pointer bg-gray-50 dark:bg-gray-700  dark:border-gray-600 ">
-                <div class="flex flex-col items-center  justify-center pt-5 pb-6">
-                  <form action="post">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                      <img class="rounded-full h-64 w-64 mt-2" src="{{user.imageName}}" alt="profile">
-                    </div>
-                    
-                  </form>
-
-                </div>
-
-              </label>
-              <!-- Tooltip -->
-
+          <div class="h-64 w-64 relative flex items-center justify-center rounded-full">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <img class="rounded-full h-full w-full mt-3" src="{{user.imageName}}" alt="profile">
             </div>
-
-            <p class="mt-8 text-center font-normal text-gray-500 dark:text-gray-400">Username: <span
-                class="font-medium">#{{user.username}}</span></p>
-
+            <div >
+              <label for="dropzone-file" class="absolute left-0 top-1 h-full w-full z-1 flex flex-col col-2 items-center justify-center rounded-full cursor-pointer bg-transparent hover:bg-gray-200 hover:bg-opacity-50">
+                <!-- Tooltip -->
+                <h2 class="absolute bottom-17 left-1/2 transform -translate-x-1/2 px-3 py-2 text-gray-900 bg-white rounded-lg shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 opacity-0 hover:opacity-100 transition-opacity text-nowrap">
+                  Import Image
+                </h2>
+                
+              </label>
+              <input id="dropzone-file" type="file" class="hidden" (change)="uploadAvatar($event)" />
+            </div>
           </div>
+          
+
+
+          <p class="mt-8 text-center font-normal text-gray-500 dark:text-gray-400">Username: <span
+              class="font-medium">#{{user.username}}</span></p>
         </div>
 
         <div class="block p-16 max-w-full bg-white rounded-lg  border-gray-400 shadow-md">

@@ -19,10 +19,10 @@ export class EditprofileComponent implements OnInit {
     last_name: '',
     image_name: '',
     status: 1,
+    user_id: 0
   };
 
   avatar='';
-  userId=0;
 
   
 
@@ -35,8 +35,8 @@ export class EditprofileComponent implements OnInit {
         this.user.first_name = response.data.user.first_name;
         this.user.last_name = response.data.user.last_name;
         this.user.email = response.data.user.email;
-        this.user.image_name = response.data.user.image_name;
-        this.userId = response.data.user.user_id;
+        this.user.imageName = response.data.user.image_name;
+        this.user.user_id = response.data.user.user_id;
       },
       (error) => {
         console.error('Error fetching user information:', error);
@@ -57,7 +57,15 @@ export class EditprofileComponent implements OnInit {
     );
   }
 
-  createAvatar(): void {
-    this.userService.createUserAvatar(this.avatar, this.userId)
+  uploadAvatar(event:any): void {
+
+    this.userService.createUserAvatar(event, this.user.user_id).subscribe(
+      (response) => {
+        console.log('User avatar uploaded successfully:', response);
+      },
+      (error) => {
+        console.error('Error uploading user avatar:', error);
+      }
+    );
   }
 }
