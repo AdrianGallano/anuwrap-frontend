@@ -55,7 +55,6 @@ export class ContentComponent implements OnInit {
                           box-shadow: 0 0 4px rgba(0, 0, 0, .15);
                           box-sizing: border-box;
                           margin: 1rem auto 0;
-                          max-width: 820px;
                           min-height: calc(100vh - 1rem);
                           padding: 4rem;
                       }

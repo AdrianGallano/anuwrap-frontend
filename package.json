@@ -26,6 +26,8 @@
     "@angular/ssr": "^17.2.0",
     "@google/generative-ai": "^0.11.1",
     "@tinymce/tinymce-angular": "^8.0.0",
+    "apexcharts": "^3.49.1",
+    "dayjs": "^1.11.11",
     "express": "^4.18.2",
     "flowbite": "^2.3.0",
     "ngx-cookie-service": "^17.1.0",
