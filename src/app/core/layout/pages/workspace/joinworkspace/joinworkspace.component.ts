@@ -16,14 +16,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class JoinworkspaceComponent {
   private userWorkspaces: any[] = [];
   private userId: any;
+  code: any = "";
   userWorkspaceData = {
     user_id: 0,
     workspace_id: 0,
     role_id: 0
   };
-  error=""
+  private secret_key = "EUNILLELOVEKENT";
+  error = ""
 
-  constructor(private userWorkspaceService: UserworkspaceService, private route: Router,private aRoute: ActivatedRoute, private tokenService: TokenService) {
+  constructor(private userWorkspaceService: UserworkspaceService, private route: Router, private aRoute: ActivatedRoute, private tokenService: TokenService) {
     this.userId = this.tokenService.getUserId();
   }
 
@@ -49,6 +51,12 @@ export class JoinworkspaceComponent {
   joinUserWorkspace() {
     this.userWorkspaceData.user_id = this.userId;
     this.userWorkspaceData.role_id = 3;
+
+    const decrypted = atob(this.code).replace(this.secret_key, '');
+    const decryptedToInt = parseInt(decrypted, 10);
+
+    this.userWorkspaceData.workspace_id = decryptedToInt;
+
     this.userWorkspaceService.createUserWorkspace(this.userWorkspaceData).subscribe(
       (response: any) => {
         if (response.data) {
@@ -65,8 +73,8 @@ export class JoinworkspaceComponent {
     );
   }
 
-  navigateToWorkspaceList(){
-    this.route.navigate([`../workspacelist`], {relativeTo: this.aRoute});
+  navigateToWorkspaceList() {
+    this.route.navigate([`../workspacelist`], { relativeTo: this.aRoute });
   }
 
 }
