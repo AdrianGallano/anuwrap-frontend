@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavigationBarComponent } from '../../../../../shared/navigation-bar/navigation-bar.component';
 import { UserService } from '../../../../../shared/services/user.service';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
     selector: 'app-profile',
     standalone: true,
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.css',
-    imports: [RouterModule, NavigationBarComponent]
+    imports: [RouterModule, NavigationBarComponent, AiComponent]
 })
 export class ProfileComponent implements OnInit {
   user = {

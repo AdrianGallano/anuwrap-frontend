@@ -6,22 +6,37 @@ import { CommonModule, NgFor } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { UserworkspaceService } from '../../../../../shared/services/userworkspace.service';
 import { FormsModule } from '@angular/forms';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-workspacelist',
-  standalone: true,
-  templateUrl: './workspacelist.component.html',
-  styleUrl: './workspacelist.component.css',
-  imports: [RouterModule, NavigationBarComponent, CommonModule, FormsModule],
-  providers: [DatePipe]
+    selector: 'app-workspacelist',
+    standalone: true,
+    templateUrl: './workspacelist.component.html',
+    styleUrls: ['./workspacelist.component.css'],
+    providers: [DatePipe],
+    imports: [RouterModule, NavigationBarComponent, CommonModule, FormsModule, AiComponent]
 })
 export class WorkspacelistComponent implements OnInit {
   workspaces: any[] = [];
   old_workspace: any[] = [];
-  workspace_filter= ""
-  owner =""
-  private roles:any;
-  constructor(private workspaceService: WorkspaceService, private userWorkspaceService: UserworkspaceService, private route: Router, private datePipe: DatePipe, private cdr: ChangeDetectorRef) { }
+  workspace_filter = "";
+  owner = "";
+
+  owned_workspaces: any[] = [];
+  notOwned_workspaces: any[] = [];
+  filteredWorkspaces: any[] = [];
+
+  workspaceFilterOption: string = 'all';
+  
+  private roles: any;
+
+  constructor(
+    private workspaceService: WorkspaceService,
+    private userWorkspaceService: UserworkspaceService,
+    private route: Router,
+    private datePipe: DatePipe,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.fetchWorkspaces();
@@ -29,8 +44,7 @@ export class WorkspacelistComponent implements OnInit {
       "1": "superadmin",
       "2": "admin",
       "3": "user"
-    }
-
+    };
   }
 
   fetchWorkspaces(): void {
@@ -39,12 +53,28 @@ export class WorkspacelistComponent implements OnInit {
         this.workspaces = response.data.userWorkspace;
         this.owner = response.data.username;
         this.old_workspace = this.workspaces;
+
+        // Separate workspaces based on role_id
+        this.owned_workspaces = this.workspaces.filter(workspace => workspace.role_id === 1);
+        this.notOwned_workspaces = this.workspaces.filter(workspace => workspace.role_id !== 1);
+
         console.log(this.workspaces);
+        this.cdr.detectChanges();
       },
       (error) => {
         console.error('Error fetching workspaces:', error);
       }
     );
+  }
+
+  filterWorkspaces(): void {
+    if (this.workspaceFilterOption === 'all') {
+      this.filteredWorkspaces = this.workspaces;
+    } else if (this.workspaceFilterOption === 'owned') {
+      this.filteredWorkspaces = this.owned_workspaces;
+    } else if (this.workspaceFilterOption === 'notOwned') {
+      this.filteredWorkspaces = this.notOwned_workspaces;
+    }
     this.cdr.detectChanges();
   }
 
@@ -72,8 +102,8 @@ export class WorkspacelistComponent implements OnInit {
     this.route.navigate(['/createworkspace']);
   }
 
-  navigateToJoinWorkspace() {
-    this.route.navigate([`/joinworkspace`]);
+  navigateToJoinWorkspace(): void {
+    this.route.navigate(['/joinworkspace']);
   }
 
   openWorkspace(workspaceId: any): void {

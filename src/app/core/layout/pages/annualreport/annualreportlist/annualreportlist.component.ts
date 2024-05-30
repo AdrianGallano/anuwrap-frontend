@@ -9,13 +9,14 @@ import { title } from 'process';
 import { CommonModule } from '@angular/common';
 import { ReportService } from '../../../../../shared/services/report.service';
 import { ReportselectionService } from '../../../../../shared/services/reportselection.service';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
     selector: 'app-annualreportlist',
     standalone: true,
     templateUrl: './annualreportlist.component.html',
     styleUrl: './annualreportlist.component.css',
-    imports: [NavigationComponent, FormsModule, CommonModule, RouterModule]
+    imports: [NavigationComponent, FormsModule, CommonModule, RouterModule, AiComponent]
 })
 export class AnnualreportlistComponent {
     workspaceId: any;

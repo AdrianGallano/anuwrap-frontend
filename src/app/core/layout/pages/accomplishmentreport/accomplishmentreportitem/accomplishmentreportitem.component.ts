@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { AccomplishmentreportService } from '../../../../../shared/services/accomplishmentreport.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NavigationBarComponent } from "../../../../../shared/navigation-bar/navigation-bar.component";
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
     selector: 'app-accomplishmentreportitem',
     standalone: true,
     templateUrl: './accomplishmentreportitem.component.html',
     styleUrl: './accomplishmentreportitem.component.css',
-    imports: [NavigationBarComponent]
+    imports: [NavigationBarComponent, AiComponent]
 })
 export class AccomplishmentreportitemComponent {
   accomplishmentReport: any = {

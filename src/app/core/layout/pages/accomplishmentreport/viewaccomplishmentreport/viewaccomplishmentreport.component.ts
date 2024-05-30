@@ -4,13 +4,14 @@ import { ActivatedRoute, Router, RouterModule, Params } from '@angular/router';
 import { ReportService } from '../../../../../shared/services/report.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-viewaccomplishmentreport',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './viewaccomplishmentreport.component.html',
-  styleUrl: './viewaccomplishmentreport.component.css'
+    selector: 'app-viewaccomplishmentreport',
+    standalone: true,
+    templateUrl: './viewaccomplishmentreport.component.html',
+    styleUrl: './viewaccomplishmentreport.component.css',
+    imports: [CommonModule, FormsModule, AiComponent]
 })
 export class ViewaccomplishmentreportComponent {
   accomplishmentReport: any = {

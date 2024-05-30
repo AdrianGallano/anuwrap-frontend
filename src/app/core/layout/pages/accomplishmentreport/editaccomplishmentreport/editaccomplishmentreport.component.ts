@@ -3,13 +3,14 @@ import { AccomplishmentreportService } from '../../../../../shared/services/acco
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-editaccomplishmentreport',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './editaccomplishmentreport.component.html',
-  styleUrl: './editaccomplishmentreport.component.css'
+    selector: 'app-editaccomplishmentreport',
+    standalone: true,
+    templateUrl: './editaccomplishmentreport.component.html',
+    styleUrl: './editaccomplishmentreport.component.css',
+    imports: [FormsModule, CommonModule, AiComponent]
 })
 export class EditaccomplishmentreportComponent {
   accomplishmentReport: any = {

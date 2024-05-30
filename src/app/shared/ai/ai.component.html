@@ -1,4 +1,74 @@
-<button (click)="openChat()" class="fixed bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-600">
-    AI
-  </button>
-  
+<button (click)="toggleChat()" *ngIf="!isOpen"
+    class="z-50 fixed bottom-4 right-4 h-12 w-12 bg-blue-500 text-white rounded-full flex items-center justify-center overflow-hidden">
+    <img src="assets/img/Robotmascot.png" alt="Chat Icon" class="h-full w-full object-cover">
+</button>
+
+
+<!-- [@slideInOut]="isOpen ? 'in' : 'out'" -->
+
+<div class="chat-popup" *ngIf="isOpen" > 
+  <div class="chat-popup fixed bottom-5 right-5 flex items-end justify-end max-w-full" >
+      <div class="flex flex-col w-full max-w-lg p-6">
+          <div class="flex flex-col flex-auto flex-shrink-0 bg-gray-100 p-4 rounded-2xl shadow-lg">
+              <!-- Profile section -->
+              <div class="flex items-center justify-between pb-3 border-b border-gray-300">
+                  <div class="flex items-center">
+                      <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+                          <img src="../../../assets/img/Robotmascot.png" alt="Profile Picture"
+                              class="rounded-full object-cover w-full h-full">
+                      </div>
+                      <div class="ml-4">
+                          <div class="text-lg font-semibold">CHATBOT</div>
+                          <div class="text-sm text-gray-600">How can I assist you today?</div>
+                      </div>
+                  </div>
+                  <button class="text-gray-500 hover:text-gray-700" (click)="toggleChat()">✕</button>
+              </div>
+              <!-- End of profile section -->
+
+              <!-- Chat wrapper -->
+              <div class="chat-wrapper bg-white border border-gray-300 rounded-xl p-4 overflow-y-auto flex-1 my-4">
+                  <!-- Chat messages here -->
+                  <div class="p-3 rounded-lg">
+                      <div class="flex flex-row items-center">
+                          <div
+                              class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl whitespace-pre-line min-w-50">
+                              <div class="max-h-48 overflow-y-auto">
+                                  <code>
+                                      {{ aiResponse }}
+                                  </code>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- End of chat wrapper -->
+
+              <!-- Input section -->
+              <div class="flex items-center h-16 rounded-xl bg-white w-full px-4">
+                  <div class="flex-grow ml-4">
+                      <div class="relative w-full">
+                          <input type="text" name="input" [(ngModel)]="prompt" id="input"
+                              class="w-full border rounded-xl focus:outline-none focus:border-indigo-300 px-4 h-10"
+                              placeholder="Type your message here..." />
+                      </div>
+                  </div>
+                  <div class="ml-4">
+                      <button (click)="submitPrompt()"
+                          class="flex items-center justify-center text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2">
+                          <span>Send</span>
+                          <span class="ml-2">
+                              <svg class="w-4 h-4 transform rotate-45 -mt-px" fill="none" stroke="currentColor"
+                                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                              </svg>
+                          </span>
+                      </button>
+                  </div>
+              </div>
+              <!-- End of input section -->
+          </div>
+      </div>
+  </div>
+</div>

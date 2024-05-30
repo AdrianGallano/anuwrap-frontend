@@ -16,7 +16,7 @@ export class ContentService {
 
     if (authInfo) {
       const headers = authInfo[2];
-      return this.http.get<any>(`${this.apiUrl}/contents?workspace_id=${reportId}`, { headers: headers }).pipe(
+      return this.http.get<any>(`${this.apiUrl}/contents?report_id=${reportId}`, { headers: headers }).pipe(
         catchError((error: any) => {
           return throwError(() => 'Error fetching content');
         })

@@ -4,13 +4,14 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserworkspaceService } from '../../../../shared/services/userworkspace.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AiComponent } from "../../../../shared/ai/ai.component";
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css',
-    imports: [NavigationComponent, CommonModule, FormsModule]
+    imports: [NavigationComponent, CommonModule, FormsModule, AiComponent]
 })
 export class DashboardComponent {
     userworkspaces: any[] = [];
@@ -40,3 +41,4 @@ export class DashboardComponent {
         );
     }
 }
+

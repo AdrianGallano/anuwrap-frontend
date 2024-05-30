@@ -4,13 +4,14 @@ import { NavigationBarComponent } from '../../../../../shared/navigation-bar/nav
 import { UserService } from '../../../../../shared/services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-editprofile',
-  standalone: true,
-  imports: [RouterModule, NavigationBarComponent, CommonModule, FormsModule],
-  templateUrl: './editprofile.component.html',
-  styleUrl: './editprofile.component.css'
+    selector: 'app-editprofile',
+    standalone: true,
+    templateUrl: './editprofile.component.html',
+    styleUrl: './editprofile.component.css',
+    imports: [RouterModule, NavigationBarComponent, CommonModule, FormsModule, AiComponent]
 })
 export class EditprofileComponent implements OnInit {
   user: any = {

@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { ContentService } from '../../../../shared/services/content.service';
 import { HttpClient } from '@angular/common/http';
 import tinymce from 'tinymce';
+import { AiComponent } from "../../../../shared/ai/ai.component";
+import { relative } from 'path';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-content',
-  standalone: true,
-  imports: [EditorModule],
-  templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css'],
-  providers: [
-    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
-  ],
+    selector: 'app-content',
+    standalone: true,
+    templateUrl: './content.component.html',
+    styleUrls: ['./content.component.css'],
+    providers: [
+        { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
+    ],
+    imports: [EditorModule, AiComponent, CommonModule]
 })
 export class ContentComponent implements OnInit {
   public editorConfig = {
@@ -74,12 +77,16 @@ export class ContentComponent implements OnInit {
     body: '',
   };
 
+  successMessage= '';
+  errorMessage='';
+  successTimeout: any;
   contentId: number | null | undefined;
 
   constructor(
     private aRoute: ActivatedRoute,
     private route: Router,
-    private contentservice: ContentService
+    private contentservice: ContentService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -118,10 +125,37 @@ export class ContentComponent implements OnInit {
     this.contentservice.editContent(this.content, this.contentId).subscribe(
       (response) => {
         console.log(response);
+        this.successMessage = "Updated Successfully"
+        this.showMessage('success');
+        this.cdr.detectChanges();
       },
       (error) => {
         console.log(error);
+        this.errorMessage = "Update Failed"
+        this.showMessage('error');
+        this.cdr.detectChanges();
       }
     );
+  }
+
+  showMessage(type: string): void {
+    // Clear any existing timeout
+    if (this.successTimeout) {
+        clearTimeout(this.successTimeout);
+    }
+
+    // Set timeout to clear the message after 2 seconds
+    this.successTimeout = setTimeout(() => {
+        if (type === 'success') {
+            this.successMessage = '';
+        } else if (type === 'error') {
+            this.errorMessage = '';
+        }
+        this.cdr.detectChanges(); // Trigger change detection to update the view
+    }, 3000);
+}
+
+  navigateToReportList(): void {
+    this.route.navigate([`../../../../reportlist`], {relativeTo: this.aRoute})
   }
 }
