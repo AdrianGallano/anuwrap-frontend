@@ -16,6 +16,9 @@ import { AiComponent } from "../../../../shared/ai/ai.component";
 export class DashboardComponent {
     userworkspaces: any[] = [];
     workspace_id: any;
+    secret_key = "EUNILLELOVEKENT";
+    code:any = "";
+    
     constructor(
         private userWorkspaceService: UserworkspaceService,
         private route: Router,
@@ -26,6 +29,7 @@ export class DashboardComponent {
     ngOnInit(params: Params): void {
         this.aRoute.params.subscribe((params: Params) => {
             this.workspace_id = params['workspace_id'];
+            this.code = btoa(`${this.workspace_id}${this.secret_key}`);
             this.fetchUserWorkspace();
         });
     }

@@ -46,7 +46,6 @@
               <table class="w-full text-sm text-left text-gray-50">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                   <tr class="text-center">
-                    <th scope="col" class="p-4 whitespace-nowrap">Workspace ID</th>
                     <th scope="col" class="p-4 whitespace-nowrap">Workspace Name</th>
                     <th scope="col" class="p-2 whitespace-nowrap">Date Created</th>
                     <th scope="col" class="p-2 whitespace-nowrap">Last Edited</th>
@@ -56,15 +55,10 @@
                 <tbody>
                   <tr *ngFor="let workspace of workspaces" class="border-b text-black hover:bg-gray-100 ">
                     <th scope="row" class="py-2 px-6 font-medium whitespace-nowrap">
-                      <div class="flex items-center justify-center text-center">
-                        <h2>{{ workspace["workspace_id"] }}</h2>
-                      </div>
-                    </th>
-                    <td scope="row" class="py-2 px-6 font-medium whitespace-nowrap">
                       <div class="flex items-center justify-start">
                         <h2>{{ workspace.name }}</h2>
                       </div>
-                    </td>
+                    </th>
                     <td class="px-6 py-3 font-medium whitespace-nowrap">
                       <div class="flex items-center justify-center">
                         {{ workspace.date_created | date:'medium' }}
