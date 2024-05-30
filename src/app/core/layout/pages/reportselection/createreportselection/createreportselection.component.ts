@@ -19,62 +19,31 @@ export class CreatereportselectionComponent {
   checkedReports: number[] = [];
   annual_report_id: number | undefined;
   reportSelection: any[] = [];
-  reportTypes: { report_type_id: number; name: string }[] = []; 
-  selectedReportType: number | null = null;
-  facultyMatrixReportTypeId: number | undefined;
-  accomplishmentReportTypeId: number | undefined;
-  error="";
+  error = '';
+  selectAllChecked: boolean = false;
+
   constructor(
     private route: Router,
     private aRoute: ActivatedRoute,
     private reportService: ReportService,
     private reportSelect: ReportselectionService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
-      this.workspaceId = params["params"]["workspace_id"];
-      this.annual_report_id = params["params"]["annual_report_id"];
-      this.fetchReportTypes();
+      this.workspaceId = params['params']['workspace_id'];
+      this.annual_report_id = +params['params']['annual_report_id'];
+      this.fetchData();
+      this.fetchReportSelection();
     });
-  }
-
-  fetchReportTypes(): void {
-    this.reportService.getReportType().subscribe(
-      (response) => {
-        this.reportTypes = response.data.reportType; // Assign fetched reportTypes to the property
-
-        // Find specific report_type_ids for Faculty Matrix and Accomplishment Report
-        this.facultyMatrixReportTypeId = this.findReportTypeId('Faculty Matrix');
-        this.accomplishmentReportTypeId = this.findReportTypeId('Accomplishment Report');
-      },
-      (error) => {
-        console.log('Error fetching report types:', error);
-      }
-    );
-  }
-
-  findReportTypeId(reportName: string): number | undefined {
-    const reportType = this.reportTypes.find(type => type.name === reportName);
-    return reportType ? reportType.report_type_id : undefined;
-  }
-
-  fetchReportsByType(): void {
-    if (!this.selectedReportType) {
-      this.fetchData(); // Fetch all reports if no report type is selected
-    } else if (this.selectedReportType === 1) {
-      this.fetchFacultyMatrix(); // Fetch reports for Faculty Matrix
-    } else if (this.selectedReportType === 2) {
-      this.fetchAccomplishment(); // Fetch reports for Accomplishment
-    }
   }
 
   fetchData(): void {
     this.reportService.getReports(this.workspaceId).subscribe(
       (response) => {
         this.reports = response.data.report;
-        this.fetchReportSelection();
+        this.updateReportSelectionState(); // Update report selection state after fetching reports
         this.cdr.detectChanges(); // Trigger change detection
       },
       (error) => {
@@ -82,33 +51,7 @@ export class CreatereportselectionComponent {
       }
     );
   }
-
-  fetchFacultyMatrix(): void {
-    this.reportService.getFacultyMatrixReport(this.facultyMatrixReportTypeId).subscribe(
-      (response) => {
-        this.reports = response.data.report;
-        this.fetchReportSelection();
-        this.cdr.detectChanges(); // Trigger change detection
-      },
-      (error) => {
-        console.log('Error fetching Faculty Matrix reports:', error);
-      }
-    );
-  }
-
-  fetchAccomplishment(): void {
-    this.reportService.getAccomplishmentReport(this.accomplishmentReportTypeId).subscribe(
-      (response) => {
-        this.reports = response.data.report;
-        this.fetchReportSelection();
-        this.cdr.detectChanges(); // Trigger change detection
-      },
-      (error) => {
-        console.log('Error fetching Accomplishment reports:', error);
-      }
-    );
-  }
-
+  
   fetchReportSelection(): void {
     this.reportSelect.getReportSelections().subscribe(
       (response) => {
@@ -116,6 +59,7 @@ export class CreatereportselectionComponent {
         this.reportSelection = reportSelections.filter((selection: any) => {
           return selection.annual_report_id === Number(this.annual_report_id);
         });
+        this.updateReportSelectionState(); // Update report selection state after fetching report selections
         this.cdr.detectChanges(); // Trigger change detection
       },
       (error) => {
@@ -123,80 +67,75 @@ export class CreatereportselectionComponent {
       }
     );
   }
+  
+  updateReportSelectionState(): void {
+    // Iterate through reports and update the 'selected' property based on report selections
+    this.reports.forEach(report => {
+      report.selected = this.reportSelection.some(selection => selection.report_id === report.report_id);
+    });
+  }
 
   toggleCheckbox(reportId: number): void {
-    const index = this.checkedReports.indexOf(reportId);
-    if (index === -1) {
-      this.checkedReports.push(reportId); // Add to array if not already checked
+    if (this.checkedReports.includes(reportId)) {
+      this.checkedReports = this.checkedReports.filter((id) => id !== reportId);
     } else {
-      this.checkedReports.splice(index, 1); // Remove from array if already checked
+      this.checkedReports.push(reportId);
     }
+  }
+
+  toggleSelectAll(): void {
+    this.reports.forEach(report => {
+      report.selected = this.selectAllChecked;
+    });
   }
 
   isChecked(reportId: number): boolean {
-    return this.reportSelection.some((selection) => selection.report_id === reportId);
+    return this.checkedReports.includes(reportId);
   }
 
   createReportSelection(): void {
-    if (this.checkedReports.length === 0) {
-      this.error = "No reports selected";
+    // Iterate through reports and perform actions based on 'selected' property
+    this.reports.forEach(report => {
+      if (report.selected) {
+        const payload = {
+          report_id: report.report_id,
+          annual_report_id: this.annual_report_id // Include annual_report_id
+        };
   
-      // Clear the error message after 3 seconds
-      setTimeout(() => {
-        this.error = '';
-      }, 3000);
-  
-      return;
-    }
-
-    this.checkedReports.forEach((reportId) => {
-      const isSelected = this.isChecked(reportId);
-
-      if (isSelected) {
-        // Delete report selection for checked report
-        this.reportSelect.deleteReportSelection(this.annual_report_id, reportId).subscribe(
+        this.reportSelect.createReportSelection(payload).subscribe(
           (response) => {
+            console.log(`Report ${report.report_id} selection created.`);
+            // Log content_id of the selected report
+            console.log(`Content ID of report ${report.report_id}: ${report.content_id}`);
           },
           (error) => {
-            console.error(`Error deleting report ${reportId}:`, error);
+            console.error(`Error submitting report ${report.report_id}:`, error);
+            console.log(this.annual_report_id);
+            console.log(payload)
           }
         );
       } else {
-        // Create report selection for unchecked report
-        this.reportSelect.createReportSelection({ report_id: reportId, annual_report_id: this.annual_report_id }).subscribe(
+        this.reportSelect.deleteReportSelection(this.annual_report_id, report.report_id).subscribe(
           (response) => {
+            console.log(`Report ${report.report_id} selection deleted.`);
           },
           (error) => {
-            console.error(`Error submitting report ${reportId}:`, error);
+            console.error(`Error deleting report ${report.report_id}:`, error);
           }
         );
       }
     });
-    
-    // Redirect based on selected report type after submission
-    if (this.selectedReportType === this.facultyMatrixReportTypeId) {
-      this.route.navigate([`../../viewannualreport-facultymatrix/${this.annual_report_id}`], { relativeTo: this.aRoute });
-    } else if (this.selectedReportType === this.accomplishmentReportTypeId) {
-      this.route.navigate([`../../viewannualreport-accomplishmentreport/${this.annual_report_id}`], { relativeTo: this.aRoute });
-    } else {
-      // Default redirection to viewannualreport
-      this.route.navigate([`../../viewannualreport/${this.annual_report_id}`], { relativeTo: this.aRoute });
-    }
+  
+    this.route.navigate([`../../viewannualreport-accomplishmentreport/${this.annual_report_id}`], { relativeTo: this.aRoute });
   }
+  
+
 
   navigateToAnnualReportList(): void {
     this.route.navigate([`../../annualreportlist`], { relativeTo: this.aRoute });
   }
 
   navigateToViewAnnualReport(): void {
-    if (this.selectedReportType === this.facultyMatrixReportTypeId) {
-      this.route.navigate([`../../viewannualreport-facultymatrix/${this.annual_report_id}`], { relativeTo: this.aRoute });
-    } else if (this.selectedReportType === this.accomplishmentReportTypeId) {
-      this.route.navigate([`../../viewannualreport-accomplishmentreport/${this.annual_report_id}`], { relativeTo: this.aRoute });
-    } else {
-      // Default redirection to viewannualreport
-      this.route.navigate([`../../annualreportlist`], { relativeTo: this.aRoute });
-    }
+    // Implement your navigation logic here
   }
-
 }

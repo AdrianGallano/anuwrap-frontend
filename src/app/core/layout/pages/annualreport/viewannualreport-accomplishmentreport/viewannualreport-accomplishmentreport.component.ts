@@ -7,6 +7,12 @@ import { ReportService } from '../../../../../shared/services/report.service';
 import { FacultymatrixService } from '../../../../../shared/services/facultymatrix.service';
 import { AccomplishmentreportService } from '../../../../../shared/services/accomplishmentreport.service';
 import { forkJoin, map } from 'rxjs';
+import { ContentService } from '../../../../../shared/services/content.service';
+
+interface Report {
+  report_id: number;
+  content_id: number;
+}
 
 @Component({
   selector: 'app-viewannualreport-accomplishmentreport',
@@ -25,6 +31,8 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
   reportSelections: any[] = [];
   accomplishmentReports: any[] = [];
   annualReportId: number|undefined;
+  contentId=0
+  content: { report_id: number; body: string; }[] = [];
 
   constructor(
     private annualReportService: AnnualreportService,
@@ -34,7 +42,9 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
     private reportService: ReportService,
     private facultyMatrixService: FacultymatrixService,
     private accomplishmentReportService: AccomplishmentreportService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private contentservice: ContentService
+
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +67,7 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
   fetchData(): void {
     this.annualReportService.getAnnualReport(this.annualReport.annual_report_id).subscribe(
       (response) => {
+        console.log(response)
         const fetchedAnnualReport = response.data.report;
         this.annualReportId = fetchedAnnualReport.annual_report_id;
         this.annualReport.annualreport_title = fetchedAnnualReport.annualreport_title;
@@ -73,20 +84,21 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
     this.reportSelect.getReportSelections().subscribe(
       (response) => {
         const reportSelections = response.data.reportSelections || [];
-  
+        
         // Filter report selections by matching annual_report_id and report_type_id
         this.reportSelections = reportSelections.filter((selection: any) => {
-          return selection.annual_report_id === this.annualReportId && 
-                 selection.report_type_id === 2;
+          return selection.annual_report_id === this.annualReportId 
         });
+
+        console.log(reportSelections)
   
         if (this.reportSelections.length === 0) {
           console.warn('No matching report selections found for the current annual report.');
         }
-  
+        
+        // Call fetchContents for each reportSelection that needs content fetching
         this.reportSelections.forEach((selection) => {
-          // Fetch faculty matrices only for report IDs associated with the annual report
-          this.fetchAccomplishmentReports(selection.report_id);
+          this.fetchContents(selection.report_id);
         });
       },
       (error) => {
@@ -94,16 +106,41 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
       }
     );
   }
+  
 
-  fetchAccomplishmentReports(reportId: number): void {
-    this.accomplishmentReportService.getAccomplishmentReports(reportId).subscribe(
+  fetchContents(contentId: number): void {
+    // Fetch the reports first
+    this.reportService.getReports(this.annualReport.workspace_id).subscribe(
       (response) => {
-        const accomplishmentReport = response.data.accomplishmentReports;
-        this.accomplishmentReports.push(accomplishmentReport); // Store fetched report in array
-        this.cdr.detectChanges(); // Trigger change detection
+        const reports: Report[] = response.data.report; // Specify the type as Report[]
+        console.log(reports);
+        // Find the report with the matching content_id
+        const matchingReport = reports.find((report: Report) => report.content_id === contentId); // Specify the type as Report
+        if (matchingReport) {
+          // Fetch the content using the content_id of the matching report
+          console.log(matchingReport.content_id);
+          this.contentservice.getContent(matchingReport.content_id).subscribe(
+            (contentResponse) => {
+              // Handle the fetched content here
+              console.log(response);
+              const content = contentResponse.data.content;
+              console.log(content);
+              // Push the fetched content to the content array
+              this.content.push({ report_id: content.report_id, body: content.body });
+              // Update any necessary properties based on the fetched content
+              // For example:
+              // this.content.report_id = content.report_id;
+            },
+            (contentError) => {
+              console.log('Error fetching content:', contentError);
+            }
+          );
+        } else {
+          console.warn('No matching report found for the specified content_id:', contentId);
+        }
       },
       (error) => {
-        console.log('Error fetching accomplishment reports:', error);
+        console.log('Error fetching reports:', error);
       }
     );
   }
