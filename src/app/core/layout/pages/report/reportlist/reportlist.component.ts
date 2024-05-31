@@ -47,7 +47,6 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
     fetchReports(): void {
       this.reportService.getReports(this.workspaceId).subscribe(
         (response) => {
-          console.log(response)
           this.reports = response.data.report;
           this.old_state = this.reports
         },

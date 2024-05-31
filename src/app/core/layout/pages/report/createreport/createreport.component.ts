@@ -41,7 +41,6 @@ export class CreatereportComponent implements OnInit {
     }
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.report.workspace_id = params['params']['workspace_id'];
-      console.log(this.report.workspace_id);
       this.fetchReportTypes();
     });
     const modal = document.getElementById('defaultModal');
@@ -58,7 +57,6 @@ export class CreatereportComponent implements OnInit {
     this.reportService.getReportType().subscribe(
       (response) => {
         this.reportTypes = response.data.reportType;
-        console.log(this.reportTypes);
       },
       (error) => {
         console.log(error);
@@ -69,14 +67,11 @@ export class CreatereportComponent implements OnInit {
 
   createReport(): void {
 
-    console.log('Prepared Report:', this.report);
     
 
     this.reportService.createReport(this.report).subscribe(
       (response) => {
-        console.log('Create Report Response:', response);
         this.reportId = response.data.report.report_id;
-        console.log(this.reportId);
 
         this.route.navigate([`../report/${this.reportId}`], { relativeTo: this.aRoute })
         },

@@ -258,7 +258,6 @@ export class TemplatelistComponent {
         : 0;
       this.content.report_id = reportId ? parseInt(reportId, 10) : 0;
       this.report.title = title || '';
-      console.log(this.content.report_id);
     });
     const modal = document.getElementById('defaultModal');
     if (modal) {
@@ -273,7 +272,6 @@ export class TemplatelistComponent {
   }
 
   pickTemplate(templateIndex: number): void {
-    console.log(this.content)
     this.contService.createContent(this.content).subscribe(
       (response) => {
         this.contentId = response.data.content.content_id;

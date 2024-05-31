@@ -91,7 +91,6 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.contentId = +params['params']['content_id'];
-      console.log(this.contentId);
     });
     const modal = document.getElementById('defaultModal');
     if (modal) {
@@ -105,7 +104,6 @@ export class ContentComponent implements OnInit {
     this.contentservice.getContent(this.contentId).subscribe(
       (response) => {
         editor.setContent(response.data.content.body);
-        console.log(response)
         this.content.report_id = response.data.content.report_id
         this.content.body = response.data.content.body
       },
@@ -123,7 +121,6 @@ export class ContentComponent implements OnInit {
 
     this.contentservice.editContent(this.content, this.contentId).subscribe(
       (response) => {
-        console.log(response);
         this.successMessage = "Updated Successfully"
         this.showMessage('success');
         this.cdr.detectChanges();

@@ -51,7 +51,6 @@ export class CreateannualreportComponent {
 
     this.annualReportService.createAnnualReport(this.annualReport).subscribe(
       (response) => {
-        console.log();
         this.annualReport.annual_report_id = response.data.annualReport.annual_report_id
         this.route.navigate([`../annualreport/${this.annualReport.annual_report_id}`], {relativeTo: this.aRoute})
     },

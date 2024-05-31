@@ -90,7 +90,6 @@ export class AnnualContentComponent implements OnInit{
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.annualContentId = +params['params']['annual_content_id'];
-      console.log("ANNUAL CONTENT ID", this.annualContentId);
     });
     const modal = document.getElementById('defaultModal');
     if (modal) {
@@ -121,7 +120,6 @@ export class AnnualContentComponent implements OnInit{
 
     this.annualContentService.editAnnualContent(this.annual_content, this.annualContentId).subscribe(
       (response) => {
-        console.log(response);
         this.successMessage = "Updated Successfully"
         this.showMessage('success');
         

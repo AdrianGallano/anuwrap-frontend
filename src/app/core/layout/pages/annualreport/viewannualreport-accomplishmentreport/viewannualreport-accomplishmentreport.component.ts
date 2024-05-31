@@ -67,7 +67,6 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
   fetchData(): void {
     this.annualReportService.getAnnualReport(this.annualReport.annual_report_id).subscribe(
       (response) => {
-        console.log(response)
         const fetchedAnnualReport = response.data.report;
         this.annualReportId = fetchedAnnualReport.annual_report_id;
         this.annualReport.annualreport_title = fetchedAnnualReport.annualreport_title;
@@ -90,7 +89,6 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
           return selection.annual_report_id === this.annualReportId 
         });
 
-        console.log(reportSelections)
   
         if (this.reportSelections.length === 0) {
           console.warn('No matching report selections found for the current annual report.');
@@ -113,23 +111,16 @@ export class ViewannualreportAccomplishmentreportComponent implements OnInit {
     this.reportService.getReports(this.annualReport.workspace_id).subscribe(
       (response) => {
         const reports: Report[] = response.data.report; // Specify the type as Report[]
-        console.log(reports);
         // Find the report with the matching content_id
         const matchingReport = reports.find((report: Report) => report.content_id === contentId); // Specify the type as Report
         if (matchingReport) {
           // Fetch the content using the content_id of the matching report
-          console.log(matchingReport.content_id);
           this.contentservice.getContent(matchingReport.content_id).subscribe(
             (contentResponse) => {
               // Handle the fetched content here
-              console.log(response);
               const content = contentResponse.data.content;
-              console.log(content);
               // Push the fetched content to the content array
               this.content.push({ report_id: content.report_id, body: content.body });
-              // Update any necessary properties based on the fetched content
-              // For example:
-              // this.content.report_id = content.report_id;
             },
             (contentError) => {
               console.log('Error fetching content:', contentError);

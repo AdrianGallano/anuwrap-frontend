@@ -54,7 +54,6 @@ export class AnnualreportlistComponent {
             (response) => {
                 this.annualReport = response.data.reports;
                 this.old_annualReport = this.annualReport;
-                console.log(response);
             },
             (error) => {
                 console.log('Error fetching annual reports:', error);
@@ -66,7 +65,6 @@ export class AnnualreportlistComponent {
         this.annualContentService.getAnnualContents().subscribe(
             (response) => {
                 this.annualContents = response.data.annual_content;  // Store fetched contents here
-                console.log('Annual contents:', this.annualContents);
             },
             (error) => {
                 console.log('Error fetching annual content:', error);
@@ -79,7 +77,6 @@ export class AnnualreportlistComponent {
             (response) => {
                 if (response && response.data && Array.isArray(response.data.reportSelections)) {
                     this.reportSelections = response.data.reportSelections;
-                    console.log(this.reportSelections);
                 } else {
                     console.log('Invalid or empty response for fetchReportSelection');
                 }
@@ -94,7 +91,6 @@ export class AnnualreportlistComponent {
         this.annualReport = this.old_annualReport.filter(annualReport => {
             return annualReport.annualreport_title.includes(this.annualReport_filter);
         });
-        console.log(this.annualReport_filter);
     }
 
     openAnnualReport(annualReportId: any) {

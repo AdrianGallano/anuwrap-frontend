@@ -72,7 +72,6 @@ export class CreatereportselectionComponent {
         this.reportSelections = reportSelections.filter((selection: any) => {
           return selection.annual_report_id === this.annual_report_id;
         });
-        console.log('Report selections fetched:', this.reportSelections);
         // Cross-reference with reports
         this.markSelectedReports();
       },
@@ -139,7 +138,6 @@ export class CreatereportselectionComponent {
     this.reportSelectionService.getFilterReportSelections(this.annual_report_id).subscribe(
       (response) => {
         this.newReportSelections = response.data.reportSelections;
-        console.log("NEW Report selection", this.newReportSelections);
 
         this.newReportSelections.forEach((newSelection: any) => {
           this.annualContentArray.push(newSelection.body);
@@ -150,7 +148,6 @@ export class CreatereportselectionComponent {
         this.annualContentService.createAnnualContent(this.annualContent).subscribe(
           (response) => {
             this.annualContent.annual_content_id = response.data.annual_content.annual_content_id;
-            console.log('Annual content ID:', this.annualContent.annual_content_id);
             this.navigateToAnnualReportList()
           },
           (error) => {
