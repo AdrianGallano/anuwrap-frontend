@@ -1,38 +1,33 @@
-<div class="flex justify-center items-center h-screen">
+<div class="flex justify-center items-center m-12">
   <div class="w-3/4">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white border border-gray-300 p-4">
       <h2 class="text-lg font-bold mb-4 ml-5">Create Report Selection</h2>
       <hr class="w-full border-gray-300 mb-4">
 
+      <div *ngIf="error" class="text-red-600 mb-4">{{ error }}</div>
+
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" class="px-6 py-3 text-md font-bold">
-                <input id="checkbox-select-all" type="checkbox" [(ngModel)]="selectAllChecked" (change)="toggleSelectAll()">
+              <th scope="col" class="px-6 py-3 text-md font-bold flex gap-2 items-center">
+                <input id="checkbox-select-all" type="checkbox" (change)="toggleSelectAll();">
                 <label for="checkbox-select-all">Select All</label>
               </th>
             </tr>
           </thead>
           <tbody>
-            <span *ngIf="error" class="text-red-600">{{ error }}</span>
-            <div *ngIf="reports && reports.length > 0">
-              <div>
-                <div>
-                  <tr *ngFor="let report of reports" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center">
-                        <input id="checkbox-table-search-{{report.report_id}}" type="checkbox" [(ngModel)]="report.selected" (change)="toggleCheckbox(report)" class="w-4 h-4 text-blue-600 bg-gray-500 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="checkbox-table-search-{{report.report_id}}" class="sr-only">checkbox</label>
-                      </div>
-                    </td>
-                    <td scope="row" class=" w-full px-6 py-4 font-medium text-gray-900 whitespace-nowrap  bg-gray-50 dark:bg-gray-700">
-                      {{ report.title }}
-                    </td>
-                  </tr>
+            <tr *ngFor="let report of reports" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <td class="w-4 p-4">
+                <div class="flex items-center">
+                  <input id="checkbox-table-search-{{report.report_id}}" type="checkbox" [(ngModel)]="report.selected" (change)="toggleCheckbox(report)" class="w-4 h-4 text-blue-600 bg-gray-500 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                  <label for="checkbox-table-search-{{report.report_id}}" class="sr-only">checkbox</label>
                 </div>
-              </div>
-            </div>
+              </td>
+              <td scope="row" class="w-full px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:bg-gray-700">
+                {{ report.title }}
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

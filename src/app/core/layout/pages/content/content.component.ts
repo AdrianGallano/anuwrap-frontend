@@ -63,8 +63,8 @@ export class ContentComponent implements OnInit {
       'save anchor autolink autosave  charmap code directionality fullscreen  image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
     toolbar:
       'save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | image media | table | codesample fullscreen | insertdatetime preview print | searchreplace | a11ycheck',
-    setup: (editor: any) => {
-      editor.on('init', this.initializeContent(editor));
+      setup: (editor: any) => {
+        editor.on('init', () => this.initializeContent(editor));
     },
     save_onsavecallback: (editor: any) => {
       this.saveContent(editor);

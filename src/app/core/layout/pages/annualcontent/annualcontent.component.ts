@@ -1,11 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
-import { ContentService } from '../../../../shared/services/content.service';
-import { HttpClient } from '@angular/common/http';
+import { AnnualContentService } from '../../../../shared/services/annualcontent.service';
 import tinymce from 'tinymce';
 import { AiComponent } from "../../../../shared/ai/ai.component";
-import { relative } from 'path';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,7 +16,7 @@ imports: [EditorModule, AiComponent, CommonModule],
   templateUrl: './annualcontent.component.html',
   styleUrl: './annualcontent.component.css'
 })
-export class AnnualcontentComponent implements OnInit{
+export class AnnualContentComponent implements OnInit{
   public editorConfig = {
     selector: '#editor',
     height: '700px',
@@ -63,35 +61,36 @@ export class AnnualcontentComponent implements OnInit{
       'save anchor autolink autosave  charmap code directionality fullscreen  image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
     toolbar:
       'save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | image media | table | codesample fullscreen | insertdatetime preview print | searchreplace | a11ycheck',
-    setup: (editor: any) => {
-      editor.on('init', this.initializeContent(editor));
+      setup: (editor: any) => {
+        editor.on('init', () => this.initializeContent(editor));
     },
     save_onsavecallback: (editor: any) => {
-      this.saveContent(editor);
+      this.saveAnnualContent(editor);
     },
   };
 
-  content = {
-    report_id: 0,
-    body: '',
+  annualContentId: any;
+  
+  annual_content = {
+    annual_report_id: 0,
+    annual_body: '',
   };
 
   successMessage= '';
   errorMessage='';
   successTimeout: any;
-  contentId: number | null | undefined;
 
   constructor(
     private aRoute: ActivatedRoute,
     private route: Router,
-    private contentservice: ContentService,
+    private annualContentService: AnnualContentService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
-      this.contentId = +params['params']['content_id'];
-      console.log(this.contentId);
+      this.annualContentId = +params['params']['annual_content_id'];
+      console.log("ANNUAL CONTENT ID", this.annualContentId);
     });
     const modal = document.getElementById('defaultModal');
     if (modal) {
@@ -102,36 +101,37 @@ export class AnnualcontentComponent implements OnInit{
 
   initializeContent(editor: any) {
 
-    this.contentservice.getContent(this.contentId).subscribe(
+    this.annualContentService.getAnnualContent(this.annualContentId).subscribe(
       (response) => {
-        editor.setContent(response.data.content.body);
-        console.log(response)
-        this.content.report_id = response.data.content.report_id
-        this.content.body = response.data.content.body
+        editor.setContent(response.data.annual_content.annual_body);
+        this.annual_content.annual_report_id = response.data.annual_content.annual_report_id
+        this.annual_content.annual_body = response.data.annual_content.annual_body
       },
       (error) => {
-        console.log('Error content');
+        console.log('Error annual_content');
         console.log(error);
       }
     );
   }
 
-  saveContent(editor: any): void {
+  saveAnnualContent(editor: any): void {
     const contentBody = editor.getContent();
 
-    this.content.body = contentBody;
+    this.annual_content.annual_body = contentBody;
 
-    this.contentservice.editContent(this.content, this.contentId).subscribe(
+    this.annualContentService.editAnnualContent(this.annual_content, this.annualContentId).subscribe(
       (response) => {
         console.log(response);
         this.successMessage = "Updated Successfully"
         this.showMessage('success');
+        
         this.cdr.detectChanges();
       },
       (error) => {
         console.log(error);
         this.errorMessage = "Update Failed"
         this.showMessage('error');
+        
         this.cdr.detectChanges();
       }
     );
@@ -155,7 +155,7 @@ export class AnnualcontentComponent implements OnInit{
 }
 
   navigateToAnnualReportList(): void {
-    this.route.navigate([`../../annualreportlist`], {relativeTo: this.aRoute})
+    this.route.navigate([`../../../../annualreportlist`], {relativeTo: this.aRoute})
   }
 }
 

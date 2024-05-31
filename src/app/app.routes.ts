@@ -33,7 +33,6 @@ import { AnnualreportlistComponent } from './core/layout/pages/annualreport/annu
 import { EditannualreportComponent } from './core/layout/pages/annualreport/editannualreport/editannualreport.component';
 import { DeleteannualreportComponent } from './core/layout/pages/annualreport/deleteannualreport/deleteannualreport.component';
 import { ViewannualreportComponent } from './core/layout/pages/annualreport/viewannualreport/viewannualreport.component';
-import { ChatwithaiComponent } from './core/layout/pages/chatwithai/chatwithai.component';
 import { CreatereportselectionComponent } from './core/layout/pages/reportselection/createreportselection/createreportselection.component';
 import { EditreportselectionComponent } from './core/layout/pages/reportselection/editreportselection/editreportselection.component';
 import { DeletereportselectionComponent } from './core/layout/pages/reportselection/deletereportselection/deletereportselection.component';
@@ -52,85 +51,85 @@ import { TemplatelistComponent } from './core/layout/pages/templatelist/template
 import { ContentComponent } from './core/layout/pages/content/content.component';
 import { TemplatelistParentComponent } from './core/layout/pages/report/templatelist-parent/templatelist-parent.component';
 import { ChartComponent } from './core/layout/pages/chart/chart.component';
-import { AnnualcontentComponent } from './core/layout/pages/annualcontent/annualcontent.component';
+import { AnnualContentComponent } from './core/layout/pages/annualcontent/annualcontent.component';
 
 
 export const routes: Routes = [
-        {
-            path: '404',
-            component: NotfoundComponent
-        },
-        {
-            path: '401',
-            component: UnauthorizedComponent
-        },
-        {
-            path: '',
-            redirectTo: 'login',
-            pathMatch: 'full'
-        },
-        {
-            path: 'login',
-            component: LoginComponent
-        },
-        {
-            path: 'chart',
-            component: ChartComponent
-        },
-        {
-            path:'',
-            component: ParentComponent,
-            children: [
-                {
-                    path: 'register',
-                    component: RegisterComponent
-                },
-                {
-                    path: 'register-success',
-                    component: RegisterSuccessComponent
-                },
-                {
-                    path: 'workspacelist',
-                    component: WorkspacelistComponent,
-                    canActivate: [authenticationGuard]
-                },
-                {
-                    path: 'profile',    
-                    component: ProfileComponent,
-                    canActivate: [authenticationGuard]
-                },
-                {
-                    path: 'editprofile',
-                    component: EditprofileComponent,
-                    canActivate: [authenticationGuard]
-                },
-                {
-                    path: 'createworkspace',
-                    component: CreateworkspaceComponent,
-                    canActivate: [authenticationGuard]
-                },
-                {
-                    path: 'joinworkspace',
-                    component: JoinworkspaceComponent,
-                    canActivate: [authenticationGuard]
-                },
-                {
-                    path: 'leaveworkspace/:workspace_id',
-                    component: LeaveworkspaceComponent,
-                    canActivate: [authenticationGuard]
-                },
-                {
-                    path: 'deleteworkspace/:workspace_id',
-                    component: DeleteworkspaceComponent,
-                    canActivate: [authenticationGuard]
-                },
-                {   
-                    path: 'editworkspace/:workspace_id',
-                    component: EditworkspaceComponent,
-                    canActivate: [authenticationGuard]
-                },
-                {
-                    path: 'workspace/:workspace_id',
+    {
+        path: '404',
+        component: NotfoundComponent
+    },
+    {
+        path: '401',
+        component: UnauthorizedComponent
+    },
+    {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'chart',
+        component: ChartComponent
+    },
+    {
+        path: '',
+        component: ParentComponent,
+        children: [
+            {
+                path: 'register',
+                component: RegisterComponent
+            },
+            {
+                path: 'register-success',
+                component: RegisterSuccessComponent
+            },
+            {
+                path: 'workspacelist',
+                component: WorkspacelistComponent,
+                canActivate: [authenticationGuard]
+            },
+            {
+                path: 'profile',
+                component: ProfileComponent,
+                canActivate: [authenticationGuard]
+            },
+            {
+                path: 'editprofile',
+                component: EditprofileComponent,
+                canActivate: [authenticationGuard]
+            },
+            {
+                path: 'createworkspace',
+                component: CreateworkspaceComponent,
+                canActivate: [authenticationGuard]
+            },
+            {
+                path: 'joinworkspace',
+                component: JoinworkspaceComponent,
+                canActivate: [authenticationGuard]
+            },
+            {
+                path: 'leaveworkspace/:workspace_id',
+                component: LeaveworkspaceComponent,
+                canActivate: [authenticationGuard]
+            },
+            {
+                path: 'deleteworkspace/:workspace_id',
+                component: DeleteworkspaceComponent,
+                canActivate: [authenticationGuard]
+            },
+            {
+                path: 'editworkspace/:workspace_id',
+                component: EditworkspaceComponent,
+                canActivate: [authenticationGuard]
+            },
+            {
+                path: 'workspace/:workspace_id',
                 children: [
                     {
                         path: '',
@@ -157,18 +156,18 @@ export const routes: Routes = [
                         component: TemplatelistParentComponent,
                         canActivate: [authenticationGuard],
                         children: [
-                          {
-                            path: '',
-                            component: TemplatelistComponent,
-                            canActivate: [authenticationGuard]
-                          },
-                          {
-                            path: 'content/:content_id',
-                            component: ContentComponent,
-                            canActivate: [authenticationGuard]
-                          }
+                            {
+                                path: '',
+                                component: TemplatelistComponent,
+                                canActivate: [authenticationGuard]
+                            },
+                            {
+                                path: 'content/:content_id',
+                                component: ContentComponent,
+                                canActivate: [authenticationGuard]
+                            }
                         ]
-                      },
+                    },
                     {
                         path: 'editreport/:report_id',
                         component: EditreportComponent,
@@ -185,10 +184,10 @@ export const routes: Routes = [
                         canActivate: [authenticationGuard]
                     },
                     {
-                        path: 'createannualreport/:workspace_id',
+                        path: 'createannualreport',
                         component: CreateannualreportComponent,
                         canActivate: [authenticationGuard]
-                        
+
                     },
                     {
                         path: 'editannualreport/:annual_report_id',
@@ -200,24 +199,14 @@ export const routes: Routes = [
                         component: DeleteannualreportComponent,
                         canActivate: [authenticationGuard]
                     },
+
                     {
-                        path: 'annualcontent/:annual_report_id',
-                        component: AnnualcontentComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'viewannualreport/:annual_report_id',
-                        component: ViewannualreportComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'chatwithai',
-                        component: ChatwithaiComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'createreportselection/:annual_report_id',
+                        path: 'annualreport/:annual_report_id',
                         component: CreatereportselectionComponent,
+                        canActivate: [authenticationGuard]
+                    },                    {
+                        path: 'annualreport/:annual_report_id/annual_content/:annual_content_id',
+                        component: AnnualContentComponent,
                         canActivate: [authenticationGuard]
                     },
                     {
@@ -231,58 +220,8 @@ export const routes: Routes = [
                         canActivate: [authenticationGuard]
                     },
                     {
-                        path: 'viewaccomplishmentreport/:report_id',
-                        component: ViewaccomplishmentreportComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'createaccomplishmentreport/:report_id',
-                        component: CreateaccomplishmentreportComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'editaccomplishmentreport/:accomplishment_report_id',
-                        component: EditaccomplishmentreportComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'deleteaccomplishmentreport/:accomplishment_report_id',
-                        component: DeleteaccomplishmentreportComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'accomplishmentreportitem/:accomplishment_report_id',
-                        component: AccomplishmentreportitemComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'viewannualreport-facultymatrix/:annual_report_id',
-                        component: ViewannualreportComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'viewannualreport-accomplishmentreport/:annual_report_id',
-                        component: ViewannualreportAccomplishmentreportComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
                         path: 'createreportselection/:annual_report_id',
                         component: CreatereportselectionComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'createreportselection-accomplishmentreport/:annual_report_id',
-                        component: CreatereportselectionAccomplishmentComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'annualreportitem-facultymatrix/:annual_report_id',
-                        component: AnnualreportitemFacultyMatrixComponent,
-                        canActivate: [authenticationGuard]
-                    },
-                    {
-                        path: 'annualreportitem-accomplishmentreport/:annual_report_id',
-                        component: AnnualreportitemAccomplishmentreportComponent,
                         canActivate: [authenticationGuard]
                     },
                 ]
@@ -291,8 +230,8 @@ export const routes: Routes = [
                 path: '**',
                 component: NotfoundComponent
             },
-            
-            ]
-            
-        }
+
+        ]
+
+    }
 ];

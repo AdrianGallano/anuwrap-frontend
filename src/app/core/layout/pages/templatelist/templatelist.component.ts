@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { TemplatelistParentComponent } from '../report/templatelist-parent/templatelist-parent.component';
@@ -6,6 +6,7 @@ import { ContentService } from '../../../../shared/services/content.service';
 import { response } from 'express';
 import { AiComponent } from '../../../../shared/ai/ai.component';
 import { CommonModule } from '@angular/common';
+import { chdir } from 'process';
 
 @Component({
   selector: 'app-templatelist',
@@ -35,102 +36,106 @@ export class TemplatelistComponent {
 
   templates: any[] = [
     {
+      image: '../../../../../assets/img/blanktemplate.png',
+      code: '',
+    },
+    {
       image: '../../../../../assets/img/accomplishment.png',
       code: `<hr>
-        <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="blob:http://localhost:4200/746f8e33-779e-4a45-9611-24c56f207d71" width="81" height="90"></div>
-        <p><span style="font-size: 12pt;"><img style="float: left;" src="blob:http://localhost:4200/2084e06d-7bcf-49da-9b60-3c4f5daf8a41" width="76" height="76"></span></p>
-        <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Faculty</strong><br><span style="font-size: 12pt;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ACCOMPLISHMENT REPORT</strong></span><span style="font-weight: bold;"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2nd Semester A.Y. 2023 - 2024<br>&nbsp; &nbsp;&nbsp;</span></p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;"><span style="font-size: 14pt;"><strong><div class="break"></div></strong></span></p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <hr>
-        <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="blob:http://localhost:4200/746f8e33-779e-4a45-9611-24c56f207d71" width="81" height="90"></div>
-        <p><span style="font-size: 12pt;"><img style="float: left;" src="blob:http://localhost:4200/2084e06d-7bcf-49da-9b60-3c4f5daf8a41" width="76" height="76"></span></p>
-        <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;"><div class="break"></div></p>
-        <p>&nbsp;</p>
-        <hr>
-        <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="blob:http://localhost:4200/746f8e33-779e-4a45-9611-24c56f207d71" width="81" height="90"></div>
-        <p><span style="font-size: 12pt;"><img style="float: left;" src="blob:http://localhost:4200/2084e06d-7bcf-49da-9b60-3c4f5daf8a41" width="76" height="76"></span></p>
-        <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <hr>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png" width="81" height="90"></div>
+      <p><span style="font-size: 12pt;"><img src="../../../../../assets/img/GC.png" width="76" height="76"></span></p>
+      <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
+      <p style="line-height: 1.1;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;"><strong>Faculty</strong><br><span style="font-size: 12pt;"><strong>ACCOMPLISHMENT REPORT</strong></span><span style="font-weight: bold;"><br>2nd Semester A.Y. 2023 - 2024<br>&nbsp; &nbsp;&nbsp;</span></p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1; text-align: left;"><span style="font-size: 14pt;"><strong><div class="break"></div></strong></span></p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <hr>
+      <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png" width="81" height="90"></div>
+      <p><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png" width="76" height="76"></span></p>
+      <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;"><div class="break"></div></p>
+      <p>&nbsp;</p>
+      <hr>
+      <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png" width="81" height="90"></div>
+      <p><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png" width="76" height="76"></span></p>
+      <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <hr>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
         `,
     },
     {
       image: '../../../../../assets/img/faculty.png',
       code: `<hr>
-        <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="blob:http://localhost:4200/f58a4004-e7d6-45bb-870c-feff7ac3cdb2" width="129" height="129"></div>
-        <p><span style="font-size: 12pt;"><img style="float: left;" src="blob:http://localhost:4200/cb84d9ec-4dec-459f-ae59-77a021f71b35" width="130" height="130"></span></p>
+        <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png" width="129" height="129"></div>
+        <p><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png" width="130" height="130"></span></p>
         <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
         <p style="line-height: 1.1; text-align: center;"><strong>FACULTY MATRIX</strong><br>2nd Semester A.Y. 2023-2024</p>
         <table style="border-collapse: collapse; width: 94.4948%; height: 329.222px;" border="1"><colgroup><col style="width: 4.67128%;"><col style="width: 4.67128%;"><col style="width: 3.38499%;"><col style="width: 3.45269%;"><col style="width: 3.11419%;"><col style="width: 4.19738%;"><col style="width: 10.3581%;"><col style="width: 8.12397%;"><col style="width: 7.85317%;"><col style="width: 6.97307%;"><col style="width: 6.70227%;"><col style="width: 6.70227%;"><col style="width: 7.10847%;"><col style="width: 7.78547%;"><col style="width: 14.8262%;"></colgroup>
@@ -235,8 +240,9 @@ export class TemplatelistComponent {
   constructor(
     private aRoute: ActivatedRoute,
     private route: Router,
-    private contService: ContentService
-  ) {}
+    private contService: ContentService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     if (typeof document !== 'undefined') {
@@ -274,6 +280,7 @@ export class TemplatelistComponent {
         this.route.navigate([`./content/${this.contentId}`], {
           relativeTo: this.aRoute,
         });
+        this.cdr.detectChanges();
       },
       (error) => {
         console.error('Error creating content:', error);

@@ -65,4 +65,15 @@ export class ReportselectionService {
       return throwError('Unauthorized access');
     }
   }
+
+  getFilterReportSelections(annualReportId:any): Observable<any> {
+    const authInfo = this.tokenService.getAuth();
+    if (authInfo) {
+      const headers = authInfo[2];
+      return this.http.get<any>(`${this.apiUrl}/report-selections?annual_report_id=${annualReportId}`, { headers: headers });
+    } else {
+      // Handle unauthorized access
+      return throwError('Unauthorized access');
+    }
+  }
 }

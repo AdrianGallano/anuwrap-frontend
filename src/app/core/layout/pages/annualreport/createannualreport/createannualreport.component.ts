@@ -13,6 +13,7 @@ import { ReportService } from '../../../../../shared/services/report.service';
 export class CreateannualreportComponent {
 
   annualReport= {
+    annual_report_id: 0,
     annualreport_title: '',
     description: '',
     workspace_id: 0,
@@ -50,7 +51,9 @@ export class CreateannualreportComponent {
 
     this.annualReportService.createAnnualReport(this.annualReport).subscribe(
       (response) => {
-        this.route.navigate([`../../annualreportlist`], {relativeTo: this.aRoute})
+        console.log();
+        this.annualReport.annual_report_id = response.data.annualReport.annual_report_id
+        this.route.navigate([`../annualreport/${this.annualReport.annual_report_id}`], {relativeTo: this.aRoute})
     },
     (error) => {
         console.log(error);
@@ -59,7 +62,7 @@ export class CreateannualreportComponent {
 }
 
 navigateToAnnualReportList(){
-  this.route.navigate([`../../annualreportlist`], { relativeTo: this.aRoute });
+  this.route.navigate([`../annualreportlist`], { relativeTo: this.aRoute });
 }
 
 }

@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { ReportService } from '../../../../../shared/services/report.service';
 import { ReportselectionService } from '../../../../../shared/services/reportselection.service';
 import { AiComponent } from "../../../../../shared/ai/ai.component";
+import { AnnualContentService } from '../../../../../shared/services/annualcontent.service';
 
 @Component({
     selector: 'app-annualreportlist',
@@ -22,22 +23,29 @@ export class AnnualreportlistComponent {
     workspaceId: any;
     annualReportId: any;
     reportSelections: any[] = [];
-    annualReport: any[]=[];
-    old_annualReport: any[]= [];
+    annualReport: any[] = [];
+    old_annualReport: any[] = [];
+    annualContents: any[] = [];  // Store all annual contents here
     annualReport_filter = "";
+    annualContent: any = {
+        annual_report_id: 0,
+        annual_body: ''
+    };
 
     constructor(
         private route: Router,
         private aRoute: ActivatedRoute,
         private reportSelect: ReportselectionService,
-        private annualReportService: AnnualreportService
-    ) {}
+        private annualReportService: AnnualreportService,
+        private annualContentService: AnnualContentService
+    ) { }
 
     ngOnInit(): void {
         this.aRoute.paramMap.subscribe((params: Params) => {
-            this.workspaceId = params["params"]["workspace_id"];
+            this.workspaceId = params['params']['workspace_id'];
             this.fetchAnnualReports();
             this.fetchReportSelection();
+            this.fetchAnnualContents(); // Fetch annual contents here
         });
     }
 
@@ -45,10 +53,23 @@ export class AnnualreportlistComponent {
         this.annualReportService.getAnnualReports(this.workspaceId).subscribe(
             (response) => {
                 this.annualReport = response.data.reports;
-                this.old_annualReport = this.annualReport
+                this.old_annualReport = this.annualReport;
+                console.log(response);
             },
             (error) => {
                 console.log('Error fetching annual reports:', error);
+            }
+        );
+    }
+
+    fetchAnnualContents(): void {
+        this.annualContentService.getAnnualContents().subscribe(
+            (response) => {
+                this.annualContents = response.data.annual_content;  // Store fetched contents here
+                console.log('Annual contents:', this.annualContents);
+            },
+            (error) => {
+                console.log('Error fetching annual content:', error);
             }
         );
     }
@@ -58,9 +79,7 @@ export class AnnualreportlistComponent {
             (response) => {
                 if (response && response.data && Array.isArray(response.data.reportSelections)) {
                     this.reportSelections = response.data.reportSelections;
-
-                    // After fetching reportSelections, you can directly handle navigation
-                    // based on the data retrieved
+                    console.log(this.reportSelections);
                 } else {
                     console.log('Invalid or empty response for fetchReportSelection');
                 }
@@ -72,20 +91,23 @@ export class AnnualreportlistComponent {
     }
 
     searchReport() {
-      this.annualReport = this.old_annualReport;
-      this.annualReport = this.old_annualReport.filter(annualReport => {
-        return annualReport.annualreport_title.includes(this.annualReport_filter); 
-      });
-      console.log(this.annualReport_filter);
+        this.annualReport = this.old_annualReport.filter(annualReport => {
+            return annualReport.annualreport_title.includes(this.annualReport_filter);
+        });
+        console.log(this.annualReport_filter);
     }
 
-
     openAnnualReport(annualReportId: any) {
-        this.route.navigate([`../annualcontent/${annualReportId}`], { relativeTo: this.aRoute });
+        const matchingContent = this.annualContents.find(content => content.annual_report_id === annualReportId);
+        if (matchingContent) {
+            this.route.navigate([`../annualreport/${annualReportId}/annual_content/${matchingContent.annual_content_id}`], { relativeTo: this.aRoute });
+        } else {
+            console.log('No matching annual content found for the given annual report ID.');
+        }
     }
 
     navigateToCreateAnnualReport() {
-        this.route.navigate([`../createannualreport/${this.workspaceId}`], { relativeTo: this.aRoute });
+        this.route.navigate([`../createannualreport`], { relativeTo: this.aRoute });
     }
 
     navigateToDeleteAnnualReport(annualReportId: any) {
