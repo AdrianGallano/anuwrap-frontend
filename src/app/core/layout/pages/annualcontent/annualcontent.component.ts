@@ -152,10 +152,6 @@ export class AnnualContentComponent implements OnInit{
     }, 3000);
 }
 
-createSelection(): void {
-  this.route.navigate([`../../../../annualreport/${this.annual_content.annual_report_id}`], {relativeTo: this.aRoute})
-}
-
   navigateToAnnualReportList(): void {
     this.route.navigate([`../../../../annualreportlist`], {relativeTo: this.aRoute})
   }
