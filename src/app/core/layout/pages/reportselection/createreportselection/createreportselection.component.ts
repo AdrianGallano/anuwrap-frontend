@@ -124,7 +124,6 @@ export class CreatereportselectionComponent {
         },
         (error: any) => {
           this.error = 'No changes to submit';
-          console.log('No changes to submit');
         }
       );
     }

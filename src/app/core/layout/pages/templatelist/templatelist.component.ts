@@ -66,70 +66,9 @@ export class TemplatelistComponent {
       <p style="line-height: 1; text-align: left;">&nbsp;</p>
       <p style="line-height: 1; text-align: left;">&nbsp;</p>
       <p style="line-height: 1; text-align: left;">&nbsp;</p>
+      
       <p style="line-height: 1; text-align: left;"><span style="font-size: 14pt;"><strong><div class="break"></div></strong></span></p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <hr>
-      <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png" width="81" height="90"></div>
-      <p><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png" width="76" height="76"></span></p>
-      <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;"><div class="break"></div></p>
-      <p>&nbsp;</p>
-      <hr>
-      <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png" width="81" height="90"></div>
-      <p><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png" width="76" height="76"></span></p>
-      <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <hr>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-        `,
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p> `,
     },
     {
       image: '../../../../../assets/img/faculty.png',
@@ -187,42 +126,42 @@ export class TemplatelistComponent {
         </td>
         </tr>
         <tr style="height: 133.222px;">
-        <td style="text-align: center;"><span style="font-size: 8pt;">Ferreol</span></td>
+        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
         <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Ashley Kier</span></p>
+        <p><span style="font-size: 8pt;"></span></p>
         </td>
         <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Grey</span></p>
+        <p><span style="font-size: 8pt;"></span></p>
         </td>
-        <td style="text-align: center;"><span style="font-size: 8pt;">25</span></td>
-        <td style="text-align: center;"><span style="font-size: 8pt;">M</span></td>
+        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
+        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
         <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">P</span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">NCII Computer Technology</span></p>
+        <p><span style="font-size: 8pt;"></span></p>
         </td>
         <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">N/A</span></p>
-        </td>
-        <td style="text-align: center;"><span style="font-size: 8pt;">Masters in Science In Computer Science</span></td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Bachelor of Science In Computer Science</span></p>
+        <p><span style="font-size: 8pt;"></span></p>
         </td>
         <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Computer Science</span></p>
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
         </td>
         <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Enrolled</span></p>
+        <p><span style="font-size: 8pt;"></span></p>
         </td>
         <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Program Coordinator</span></p>
+        <p><span style="font-size: 8pt;"></span></p>
         </td>
         <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">7 Years</span></p>
+        <p><span style="font-size: 8pt;"></span></p>
         </td>
         <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">1. Philippine Society of Computer Science<br>2. Association of computing education Deans and Program Heads</span></p>
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
         </td>
         </tr>
         </tbody>

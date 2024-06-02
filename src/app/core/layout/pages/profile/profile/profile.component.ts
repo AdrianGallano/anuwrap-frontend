@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
 
     this.userService.createUserAvatar(event, this.user.user_id).subscribe(
       (response) => {
+        console.log(response)
       },
       (error) => {
         console.error('Error uploading user avatar:', error);
