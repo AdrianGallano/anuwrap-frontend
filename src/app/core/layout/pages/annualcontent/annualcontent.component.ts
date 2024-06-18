@@ -52,7 +52,7 @@ export class AnnualContentComponent implements OnInit{
         padding: 4rem;
       }
 
-      .collage-container, .img-container {
+      .collage-container {
         display: flex;
         flex-wrap: wrap;
         margin: 20px auto;
@@ -61,10 +61,20 @@ export class AnnualContentComponent implements OnInit{
         padding: 10px;
       }
 
+      .img-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 20px auto;
+        gap: 10px;
+        border: 1px solid #000;
+        padding: 10px;
+        min-height: 300px
+      }
+
       .collage-container > div, .img-container > div {
         flex: 1 1 calc(33% - 10px);
         overflow: hidden;
-        max-height: 300px;
+        max-height: 2000px;
       }
 
       .collage-container img, .img-container img {
@@ -74,6 +84,8 @@ export class AnnualContentComponent implements OnInit{
 
       .image-placeholder {
         background-color: #ccc;
+        min-height: 300px;
+        max-width: 100%
       }
     }
     

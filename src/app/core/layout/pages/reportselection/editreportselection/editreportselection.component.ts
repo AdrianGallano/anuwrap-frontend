@@ -18,14 +18,13 @@ export class EditreportselectionComponent {
   workspaceId: any;
   reports: any[] = [];
   filteredReports: any[] = [];
-  annual_report_id: number | undefined;
   error: string | null = null;;
   selectAllChecked = false;
   reportSelections: any[] = [];
   newReportSelections: any[] = [];
   annualContent: any = {
     annual_report_id: 0,
-    annual_body: 'eto ay malupet'
+    annual_body: ''
   }
   annual_content_id= 0;
   annualContentArray: any = []
@@ -61,9 +60,8 @@ export class EditreportselectionComponent {
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.workspaceId = params['params']['workspace_id'];
-      this.annual_report_id = +params['params']['annual_report_id'];
+      this.annualContent.annual_report_id = +params['params']['annual_report_id'];
       this.annual_content_id = +params['params']['annual_content_id'];
-      this.annualContent.annual_report_id = this.annual_report_id;
       this.fetchData();
       this.fetchReportSelection();
     });
@@ -94,11 +92,10 @@ export class EditreportselectionComponent {
         const reportSelections = response.data.reportSelections;
         // Filter report selections for the current annual_report_id
         this.reportSelections = reportSelections.filter((selection: any) => {
-          return selection.annual_report_id === this.annual_report_id;
+          return selection.annual_report_id === this.annualContent.annual_report_id;
         });
         // Cross-reference with reports
         this.markSelectedReports();
-        this.cdr
       },
       (error) => {
         console.log('Error fetching report selections:', error);
@@ -163,43 +160,24 @@ export class EditreportselectionComponent {
       const isReportSelected = this.reportSelections.some(selection => selection.report_id === report.report_id);
   
       if (isReportSelected && !report.selected) {
-        deleteRequests.push(this.reportSelectionService.deleteReportSelection(this.annual_report_id, report.report_id));
-      } else if (!isReportSelected && report.selected) {
-        const payload = { report_id: report.report_id, annual_report_id: this.annual_report_id };
+        deleteRequests.push(this.reportSelectionService.deleteReportSelection(this.annualContent.annual_report_id, report.report_id));
+      }
+      else if (!isReportSelected && report.selected) {
+        const payload = { report_id: report.report_id, annual_report_id: this.annualContent.annual_report_id };
         addRequests.push(this.reportSelectionService.createReportSelection(payload));
       }
     });
   
-    if (deleteRequests.length > 0) {
-      forkJoin(deleteRequests).subscribe(
-        () => {
-          if (addRequests.length > 0) {
-            forkJoin(addRequests).subscribe(
-              () => {
-                this.fetchUpdatedReportSelections();
-              },
-              (error: any) => {
-                console.log('Error adding report selections:', error);
-                this.handleSelectionError('Error adding report selections');
-              }
-            );
-          } else {
-            this.fetchUpdatedReportSelections();
-          }
-        },
-        (error: any) => {
-          console.log('Error deleting report selections:', error);
-          this.handleSelectionError('Error deleting report selections');
-        }
-      );
-    } else if (addRequests.length > 0) {
-      forkJoin(addRequests).subscribe(
-        () => {
+    if (addRequests.length > 0 || deleteRequests.length > 0) {
+      forkJoin([...addRequests, ...deleteRequests]).subscribe(
+        (responses: any[]) => {
           this.fetchUpdatedReportSelections();
         },
         (error: any) => {
-          console.log('Error adding report selections:', error);
-          this.handleSelectionError('Error adding report selections');
+          this.error = 'No changes to submit';
+          setTimeout(() => {
+            this.error = null;
+          }, 3000);
         }
       );
     } else {
@@ -208,36 +186,33 @@ export class EditreportselectionComponent {
   }
   
   fetchUpdatedReportSelections(): void {
-    this.reportSelectionService.getFilterReportSelections(this.annual_report_id).subscribe(
+    this.reportSelectionService.getFilterReportSelections(this.annualContent.annual_report_id).subscribe(
       (response) => {
         this.newReportSelections = response.data.reportSelections;
         this.annualContentArray = this.newReportSelections.map((selection: any) => selection.body);
         this.annualContent.annual_body = this.annualContentArray.join('<br>');
   
         this.annualContentService.editAnnualContent(this.annualContent, this.annual_content_id).subscribe(
-          () => {
+          (response) => {
             this.navigateToAnnualReportList();
           },
           (error) => {
-            console.log('Error creating annual content:', error);
+            console.log('Error editing annual content:', error);
             this.navigateToAnnualReportList();
           }
         );
       },
       (error) => {
         console.log('Error fetching report selections:', error.error.message);
-        this.handleSelectionError('Please select a report');
+        
+        this.noreportslectionerror = "Please select a report"
+        setTimeout(() => {
+          this.noreportslectionerror = null;
+        }, 3000);
       }
     );
   }
-  
-  handleSelectionError(errorMessage: string): void {
-    this.error = errorMessage;
-    setTimeout(() => {
-      this.error = null;
-    }, 3000);
-  }
-  
+
   navigateToAnnualReportList(): void {
     this.route.navigate([`../../../annual_content/${this.annual_content_id}`], { relativeTo: this.aRoute });
 
