@@ -17,6 +17,7 @@ import { Observable, forkJoin } from 'rxjs';
 export class CreatereportselectionComponent {
   workspaceId: any;
   reports: any[] = [];
+  filteredReports: any[] = [];
   annual_report_id: number | undefined;
   error = '';
   selectAllChecked = false;
@@ -28,6 +29,24 @@ export class CreatereportselectionComponent {
     annual_body: 'eto ay malupet'
   }
   annualContentArray: any = []
+  filterType = 'all';
+  selectedYear: string | undefined;
+  selectedMonth: string | undefined;
+  availableYears: string[] = [];
+  availableMonths = [
+    { name: 'January', value: '01' },
+    { name: 'February', value: '02' },
+    { name: 'March', value: '03' },
+    { name: 'April', value: '04' },
+    { name: 'May', value: '05' },
+    { name: 'June', value: '06' },
+    { name: 'July', value: '07' },
+    { name: 'August', value: '08' },
+    { name: 'September', value: '09' },
+    { name: 'October', value: '10' },
+    { name: 'November', value: '11' },
+    { name: 'December', value: '12' }
+  ];
 
   constructor(
     private route: Router,
@@ -57,6 +76,9 @@ export class CreatereportselectionComponent {
         });
         // Cross-reference with report selections
         this.markSelectedReports();
+        this.extractAvailableYears();
+        this.filterReports();
+        console.log(response)
       },
       (error) => {
         console.log('Error fetching reports:', error);
@@ -88,6 +110,34 @@ export class CreatereportselectionComponent {
         report.selected = !!foundSelection; // Set to true if found, false otherwise
       });
     }
+  }
+
+  extractAvailableYears(): void {
+    const yearsSet = new Set<string>();
+    this.reports.forEach(report => {
+      if (report.date_created) {
+        const year = report.date_created.split('-')[0];
+        yearsSet.add(year);
+      }
+    });
+    this.availableYears = Array.from(yearsSet);
+  }
+
+  filterReports(): void {
+    if (this.filterType === 'yearly' && this.selectedYear) {
+      this.filteredReports = this.reports.filter(report => report.date_created && report.date_created.startsWith(this.selectedYear));
+    } else if (this.filterType === 'monthly' && this.selectedYear && this.selectedMonth) {
+      this.filteredReports = this.reports.filter(report => {
+        const [year, month] = report.date_created.split('-');
+        return year === this.selectedYear && month === this.selectedMonth;
+      });
+    } else {
+      this.filteredReports = this.reports;
+    }
+  }
+
+  onFilterTypeChange(): void {
+    this.filterReports();
   }
 
   toggleCheckbox(report: any): void {

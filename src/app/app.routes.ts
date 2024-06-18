@@ -73,6 +73,10 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
+        path: 'collage',
+        component: CollageitemComponent
+    },
+    {
         path: 'chart',
         component: ChartComponent
     },
@@ -207,6 +211,11 @@ export const routes: Routes = [
                     },                    {
                         path: 'annualreport/:annual_report_id/annual_content/:annual_content_id',
                         component: AnnualContentComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
+                        path: 'annualreport/:annual_report_id/annual_content/:annual_content_id/reportselection',
+                        component: EditreportselectionComponent,
                         canActivate: [authenticationGuard]
                     },
                     {

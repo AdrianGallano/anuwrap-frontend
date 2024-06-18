@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
-import { AnnualreportService } from '../../../../../shared/services/annualreport.service';
 import { CommonModule } from '@angular/common';
 import { ReportService } from '../../../../../shared/services/report.service';
 import { ReportselectionService } from '../../../../../shared/services/reportselection.service';
+import { AnnualContentService } from '../../../../../shared/services/annualcontent.service';
+import { Observable, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-editreportselection',
@@ -16,161 +17,234 @@ import { ReportselectionService } from '../../../../../shared/services/reportsel
 export class EditreportselectionComponent {
   workspaceId: any;
   reports: any[] = [];
-  checkedReports: number[] = [];
+  filteredReports: any[] = [];
   annual_report_id: number | undefined;
-  reportSelection: any[] = [];
-  reportTypes:any[]=[];
-  selectedReportTypeId: number | undefined;
- 
-
+  error: string | null = null;;
+  selectAllChecked = false;
+  reportSelections: any[] = [];
+  newReportSelections: any[] = [];
+  annualContent: any = {
+    annual_report_id: 0,
+    annual_body: 'eto ay malupet'
+  }
+  annual_content_id= 0;
+  annualContentArray: any = []
+  filterType = 'all';
+  selectedYear: string | undefined;
+  selectedMonth: string | undefined;
+  availableYears: string[] = [];
+  availableMonths = [
+    { name: 'January', value: '01' },
+    { name: 'February', value: '02' },
+    { name: 'March', value: '03' },
+    { name: 'April', value: '04' },
+    { name: 'May', value: '05' },
+    { name: 'June', value: '06' },
+    { name: 'July', value: '07' },
+    { name: 'August', value: '08' },
+    { name: 'September', value: '09' },
+    { name: 'October', value: '10' },
+    { name: 'November', value: '11' },
+    { name: 'December', value: '12' }
+  ];
+  noreportslectionerror: string | null = null;
 
   constructor(
     private route: Router,
     private aRoute: ActivatedRoute,
     private reportService: ReportService,
-    private reportSelect: ReportselectionService,
+    private reportSelectionService: ReportselectionService,
+    private annualContentService: AnnualContentService,
     private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
-      this.workspaceId = params["params"]["workspace_id"];
-      this.annual_report_id = params["params"]["annual_report_id"];
-      this.fetchReportTypes();
+      this.workspaceId = params['params']['workspace_id'];
+      this.annual_report_id = +params['params']['annual_report_id'];
+      this.annual_content_id = +params['params']['annual_content_id'];
+      this.annualContent.annual_report_id = this.annual_report_id;
       this.fetchData();
+      this.fetchReportSelection();
     });
   }
 
   fetchData(): void {
-    
-    if (this.selectedReportTypeId === undefined) {
-      return;
-    }
-  
     this.reportService.getReports(this.workspaceId).subscribe(
       (response) => {
-        
-        this.reports = response.data.report.filter((report: any) => {
-          return report.report_type_id === this.selectedReportTypeId;
+        this.reports = response.data.report;
+        // Initialize selected state to false
+        this.reports.forEach(report => {
+          report.selected = false;
         });
-
-        this.fetchReportSelection(); // Fetch report selections after filtering reports
+        // Cross-reference with report selections
+        this.markSelectedReports();
+        this.extractAvailableYears();
+        this.filterReports();
       },
       (error) => {
         console.log('Error fetching reports:', error);
       }
     );
   }
-  
-  
-  fetchReportTypes(): void {
-    this.reportService.getReportType().subscribe(
-      (response) => {
-        this.reportTypes = response.data.reportType;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
 
-  onReportTypeChange(event: any): void {
-    const selectedValue = event.target.value; // Access value from event target
-    this.selectedReportTypeId = parseInt(selectedValue, 10) as number; // Parse value to number
-    this.fetchData(); // Trigger data fetch when dropdown value changes
-  }
-  
-  
   fetchReportSelection(): void {
-    this.reportSelect.getReportSelections().subscribe(
+    this.reportSelectionService.getReportSelections().subscribe(
       (response) => {
         const reportSelections = response.data.reportSelections;
-        this.reportSelection = reportSelections.filter((selection: any) => {
-          return selection.annual_report_id === Number(this.annual_report_id);
+        // Filter report selections for the current annual_report_id
+        this.reportSelections = reportSelections.filter((selection: any) => {
+          return selection.annual_report_id === this.annual_report_id;
         });
-        
-        // Manually trigger change detection after data update
-        this.cdr.detectChanges();
+        // Cross-reference with reports
+        this.markSelectedReports();
+        this.cdr
       },
       (error) => {
-        console.log('Error fetching report selection:', error);
+        console.log('Error fetching report selections:', error);
       }
     );
   }
 
-  toggleCheckbox(reportId: number): void {
-    const index = this.checkedReports.indexOf(reportId);
-    if (index === -1) {
-      // Checkbox was checked, add to array
-      this.checkedReports.push(reportId);
+  markSelectedReports(): void {
+    if (this.reports.length && this.reportSelections.length) {
+      this.reports.forEach(report => {
+        const foundSelection = this.reportSelections.find((selection: any) => selection.report_id === report.report_id);
+        report.selected = !!foundSelection; // Set to true if found, false otherwise
+        console.log(foundSelection)
+      });
+    }
+  }
+
+  extractAvailableYears(): void {
+    const yearsSet = new Set<string>();
+    this.reports.forEach(report => {
+      if (report.date_created) {
+        const year = report.date_created.split('-')[0];
+        yearsSet.add(year);
+      }
+    });
+    this.availableYears = Array.from(yearsSet);
+  }
+
+  filterReports(): void {
+    if (this.filterType === 'yearly' && this.selectedYear) {
+      this.filteredReports = this.reports.filter(report => report.date_created && report.date_created.startsWith(this.selectedYear));
+    } else if (this.filterType === 'monthly' && this.selectedYear && this.selectedMonth) {
+      this.filteredReports = this.reports.filter(report => {
+        const [year, month] = report.date_created.split('-');
+        return year === this.selectedYear && month === this.selectedMonth;
+      });
     } else {
-      // Checkbox was unchecked, remove from array
-      this.checkedReports.splice(index, 1);
+      this.filteredReports = this.reports;
     }
   }
 
-  isChecked(reportId: number): boolean {
-    return this.reportSelection.some((selection) => selection.report_id === reportId);
+  onFilterTypeChange(): void {
+    this.filterReports();
   }
 
-  editReportSelection(): void {
-    if (this.checkedReports.length === 0) {
-      return;
-    }
+  toggleCheckbox(report: any): void {
+    report.selected = report.selected;
+  }
+
+  toggleSelectAll(): void {
+    this.selectAllChecked = !this.selectAllChecked;
+    this.reports.forEach(report => {
+      report.selected = this.selectAllChecked;
+    });
+  }
+
+  createReportSelection(): void {
+    const addRequests: Observable<any>[] = [];
+    const deleteRequests: Observable<any>[] = [];
   
-    const reportTypeIds = this.reports.map(report => report.report_type_id);
-    const distinctReportTypeIds = Array.from(new Set(reportTypeIds));
+    this.reports.forEach(report => {
+      const isReportSelected = this.reportSelections.some(selection => selection.report_id === report.report_id);
   
-    if (distinctReportTypeIds.length > 1) {
-      return;
-    }
-  
-    const singleReportTypeId = distinctReportTypeIds[0]; // Get the single reportTypeId
-  
-    this.checkedReports.forEach((reportId) => {
-      if (this.isChecked(reportId)) {
-        // Delete report selection for checked report
-        this.reportSelect.deleteReportSelection(this.annual_report_id, reportId).subscribe(
-          (response) => {
-          },
-          (error) => {
-            console.error(`Error deleting report ${reportId}:`, error);
-          }
-        );
-      } else {
-        // Create report selection for unchecked report
-        this.reportSelect.createReportSelection({ report_id: reportId, annual_report_id: this.annual_report_id }).subscribe(
-          (response) => {
-          },
-          (error) => {
-            console.error(`Error submitting report ${reportId}:`, error);
-          }
-        );
+      if (isReportSelected && !report.selected) {
+        deleteRequests.push(this.reportSelectionService.deleteReportSelection(this.annual_report_id, report.report_id));
+      } else if (!isReportSelected && report.selected) {
+        const payload = { report_id: report.report_id, annual_report_id: this.annual_report_id };
+        addRequests.push(this.reportSelectionService.createReportSelection(payload));
       }
     });
   
-    // Navigate based on the singleReportTypeId
-    if (singleReportTypeId === 1) {
-      this.route.navigate([`../../viewannualreport-facultymatrix/${this.annual_report_id}`], { relativeTo: this.aRoute });
-    } else if (singleReportTypeId === 2) {
-      this.route.navigate([`../../viewannualreport-accomplishmentreport/${this.annual_report_id}`], { relativeTo: this.aRoute });
+    if (deleteRequests.length > 0) {
+      forkJoin(deleteRequests).subscribe(
+        () => {
+          if (addRequests.length > 0) {
+            forkJoin(addRequests).subscribe(
+              () => {
+                this.fetchUpdatedReportSelections();
+              },
+              (error: any) => {
+                console.log('Error adding report selections:', error);
+                this.handleSelectionError('Error adding report selections');
+              }
+            );
+          } else {
+            this.fetchUpdatedReportSelections();
+          }
+        },
+        (error: any) => {
+          console.log('Error deleting report selections:', error);
+          this.handleSelectionError('Error deleting report selections');
+        }
+      );
+    } else if (addRequests.length > 0) {
+      forkJoin(addRequests).subscribe(
+        () => {
+          this.fetchUpdatedReportSelections();
+        },
+        (error: any) => {
+          console.log('Error adding report selections:', error);
+          this.handleSelectionError('Error adding report selections');
+        }
+      );
     } else {
-      console.log('Unsupported report type for navigation.');
-      return;
+      this.fetchUpdatedReportSelections();
     }
   }
   
+  fetchUpdatedReportSelections(): void {
+    this.reportSelectionService.getFilterReportSelections(this.annual_report_id).subscribe(
+      (response) => {
+        this.newReportSelections = response.data.reportSelections;
+        this.annualContentArray = this.newReportSelections.map((selection: any) => selection.body);
+        this.annualContent.annual_body = this.annualContentArray.join('<br>');
   
-
-  navigateToAnnualReportList(): void {
-    this.route.navigate([`../../annualreportlist`], { relativeTo: this.aRoute });
+        this.annualContentService.editAnnualContent(this.annualContent, this.annual_content_id).subscribe(
+          () => {
+            this.navigateToAnnualReportList();
+          },
+          (error) => {
+            console.log('Error creating annual content:', error);
+            this.navigateToAnnualReportList();
+          }
+        );
+      },
+      (error) => {
+        console.log('Error fetching report selections:', error.error.message);
+        this.handleSelectionError('Please select a report');
+      }
+    );
   }
+  
+  handleSelectionError(errorMessage: string): void {
+    this.error = errorMessage;
+    setTimeout(() => {
+      this.error = null;
+    }, 3000);
+  }
+  
+  navigateToAnnualReportList(): void {
+    this.route.navigate([`../../../annual_content/${this.annual_content_id}`], { relativeTo: this.aRoute });
+
+ }
 
   navigateToViewAnnualReport(): void {
-    this.route.navigate([`../../viewannualreport/${this.annual_report_id}`], { relativeTo: this.aRoute });
-  }
-
-  addMoreSelection(): void {
-    this.route.navigate([`../../createreportselection/${this.annual_report_id}`], { relativeTo: this.aRoute });
+    this.route.navigate([`../../../annual_content/${this.annual_content_id}`], { relativeTo: this.aRoute });
+ 
   }
 }

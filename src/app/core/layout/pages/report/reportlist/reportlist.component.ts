@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
   import { NavigationComponent } from '../../../../../shared/navigation/navigation.component';
   import { ActivatedRoute, Router, RouterModule, Params } from '@angular/router';
   import { ReportService } from '../../../../../shared/services/report.service';
@@ -32,7 +32,8 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
       private aRoute: ActivatedRoute,
       private annualReportService: AnnualreportService,
       private contentService: ContentService,
-      private userWorkspaceService: UserworkspaceService
+      private userWorkspaceService: UserworkspaceService,
+      private cdr: ChangeDetectorRef
     ) {
     }
 
@@ -49,6 +50,7 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
         (response) => {
           this.reports = response.data.report;
           this.old_state = this.reports
+          this.cdr
         },
         (error) => {
           console.log(error);

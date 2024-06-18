@@ -52,6 +52,30 @@
     </label>
   </div>
 </label>
+      <!-- Template 3-->
+<label class="m-2 h-full w-full cursor-pointer hover:bg-slate-300" (click)="selectTemplate(templates[3])">
+  <div class="mb-3 mt-3 h-60 w-full overflow-y-auto overflow-x-hidden rounded-lg border border-gray-300 p-6 shadow-md">
+    <div class="text-center mb-2 flex-row">
+      <p class="text-gray-600 text-sm font-medium">Teaching and Learning</p>
+      <input type="radio" name="template" [checked]="selectedTemplate === 3">
+    </div>
+    <label class="flex justify-center items-center">
+      <img [src]="templates[3].image" alt="Template Image">
+    </label>
+  </div>
+</label>
+      <!-- Template 4-->
+<label class="m-2 h-full w-full cursor-pointer hover:bg-slate-300" (click)="selectTemplate(templates[4])">
+  <div class="mb-3 mt-3 h-60 w-full overflow-y-auto overflow-x-hidden rounded-lg border border-gray-300 p-6 shadow-md">
+    <div class="text-center mb-2 flex-row">
+      <p class="text-gray-600 text-sm font-medium">Faculty Schedule</p>
+      <input type="radio" name="template" [checked]="selectedTemplate === 4">
+    </div>
+    <label class="flex justify-center items-center">
+      <img [src]="templates[4].image" alt="Template Image">
+    </label>
+  </div>
+</label>
         
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { AnnualreportService } from '../../../../../shared/services/annualreport.service';
@@ -37,7 +37,8 @@ export class AnnualreportlistComponent {
         private aRoute: ActivatedRoute,
         private reportSelect: ReportselectionService,
         private annualReportService: AnnualreportService,
-        private annualContentService: AnnualContentService
+        private annualContentService: AnnualContentService,
+        private cdr: ChangeDetectorRef
     ) { }
 
     ngOnInit(): void {
@@ -54,6 +55,7 @@ export class AnnualreportlistComponent {
             (response) => {
                 this.annualReport = response.data.reports;
                 this.old_annualReport = this.annualReport;
+                this.cdr
             },
             (error) => {
                 console.log('Error fetching annual reports:', error);

@@ -53,6 +53,7 @@ export class WorkspacelistComponent implements OnInit {
       (response) => {
         this.workspaces = response.data.userWorkspace;
         this.old_workspace = this.workspaces;
+        this.cdr;
       },
       (error) => {
         console.error('Error fetching workspaces:', error);
