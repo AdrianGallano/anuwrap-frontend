@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { ContentService } from '../../../../shared/services/content.service';
@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import tinymce from 'tinymce';
 import { AiComponent } from "../../../../shared/ai/ai.component";
 import { CommonModule } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
+import * as XLSX from 'xlsx';
+import * as mammoth from 'mammoth';
 
 @Component({
   selector: 'app-content',
@@ -18,7 +21,9 @@ import { CommonModule } from '@angular/common';
   imports: [EditorModule, AiComponent, CommonModule]
 })
 export class ContentComponent implements OnInit {
-  public editorConfig = {
+  editor: any; // Declare editor property
+
+  editorConfig = {
     selector: '#editor',
     height: '700px',
     menubar: true,
@@ -88,6 +93,7 @@ export class ContentComponent implements OnInit {
         min-height: 300px;
         max-width: 100%
       }
+      
     }
     
     @media print {
@@ -128,8 +134,14 @@ export class ContentComponent implements OnInit {
     }
     `,
     plugins: 'save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
-    toolbar: 'save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | addPageButton | insertImgContainer | insertFacultyNewTable | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
+    toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | addPageButton | insertImgContainer | insertFacultyNewTable | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
     setup: (editor: any) => {
+      this.editor = editor;
+
+      editor.ui.registry.addButton('uploadCustomFile', {
+        text: 'Open File',
+        onAction: () => this.openFilePicker(editor)
+      });
       editor.ui.registry.addMenuButton('addPageButton', {
         text: 'Add Page',
         fetch: (callback: any) => {
@@ -141,11 +153,6 @@ export class ContentComponent implements OnInit {
           ];
           callback(items);
         }
-      });
-
-      editor.ui.registry.addButton('insertFacultyNewTable', {
-        text: 'Add new row',
-        onAction: () => this.insertFacultyNewRow(editor)
       });
 
       editor.ui.registry.addMenuButton('insertCollage', {
@@ -167,6 +174,11 @@ export class ContentComponent implements OnInit {
         onAction: () => this.insertImgContainer(editor)
       });
 
+      editor.ui.registry.addButton('insertFacultyNewTable', {
+        text: 'Add new row',
+        onAction: () => this.insertFacultyNewRow(editor)
+      });
+
       editor.on('init', () => this.initializeContent(editor));
     },
     save_onsavecallback: (editor: any) => {
@@ -183,44 +195,131 @@ export class ContentComponent implements OnInit {
   errorMessage = '';
   successTimeout: any;
   contentId: number | null | undefined;
+  isBrowser: boolean;
 
   constructor(
     private aRoute: ActivatedRoute,
     private route: Router,
-    private contentservice: ContentService,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private contentService: ContentService,
+    private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
-      this.contentId = +params['params']['content_id'];
+      this.contentId = +params['params']['content_id']; 
     });
+
     const modal = document.getElementById('defaultModal');
-    if (modal) {
-    } else {
+    if (!modal) {
       console.error('Modal with id defaultModal not found or not initialized.');
+    }
+
+    if (this.isBrowser) {
+      // Safe to use navigator if needed
+      console.log(navigator.userAgent);
     }
   }
 
   initializeContent(editor: any) {
-    this.contentservice.getContent(this.contentId).subscribe(
+    this.contentService.getContent(this.contentId).subscribe(
       (response) => {
         editor.setContent(response.data.content.body);
         this.content.report_id = response.data.content.report_id;
         this.content.body = response.data.content.body;
       },
       (error) => {
-        console.log('Error content');
-        console.log(error);
+        console.error('Error fetching content:', error);
       }
     );
+  }
+
+  openFilePicker(editor: any): void {
+    const fileInput = document.createElement('input');
+    fileInput.setAttribute('type', 'file');
+    fileInput.setAttribute('accept', '.csv, .xlsx, .xls, .doc, .docx');
+
+    fileInput.onchange = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      const file: File = (target.files as FileList)[0];
+      const reader: FileReader = new FileReader();
+
+      reader.onload = (event: any) => {
+        const contents: string | ArrayBuffer = event.target.result;
+        if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+          this.handleExcel(contents as string);
+        } else if (file.name.endsWith('.csv')) {
+          this.handleCSV(contents as string);
+        } else if (file.name.endsWith('.doc') || file.name.endsWith('.docx')) {
+          this.handleDoc(contents as ArrayBuffer);
+        } else {
+          console.error('Unsupported file format');
+        }
+      };
+
+      if (file.name.endsWith('.doc') || file.name.endsWith('.docx')) {
+        reader.readAsArrayBuffer(file);
+      } else {
+        reader.readAsBinaryString(file);
+      }
+    };
+
+    fileInput.click();
+  }
+
+  private handleExcel(contents: string): void {
+    const workbook = XLSX.read(contents, { type: 'binary' });
+    const firstSheetName = workbook.SheetNames[0];
+    const excelData: any[] = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName], { header: 1 });
+
+    const htmlTable = this.convertExcelToHtmlTable(excelData);
+    this.updateEditorContent(htmlTable);
+  }
+
+  private handleCSV(contents: string): void {
+    const lines: string[] = contents.split('\n');
+    const csvData = lines.map(line => line.split(','));
+
+    const htmlTable = this.convertExcelToHtmlTable(csvData);
+    this.updateEditorContent(htmlTable);
+  }
+
+  private handleDoc(contents: ArrayBuffer): void {
+    mammoth.convertToHtml({ arrayBuffer: contents }).then(result => {
+      this.updateEditorContent(result.value);
+    }).catch(error => {
+      console.error('Error converting DOCX to HTML:', error);
+    });
+  }
+
+  private updateEditorContent(content: string): void {
+    if (this.editor) {
+      this.editor.setContent(content);
+    } else {
+      console.error('TinyMCE editor instance is not available.');
+    }
+  }
+
+  private convertExcelToHtmlTable(excelData: any[]): string {
+    let html = '<table>';
+    excelData.forEach(row => {
+      html += '<tr>';
+      row.forEach((cell: any) => {
+        html += `<td>${cell}</td>`;
+      });
+      html += '</tr>';
+    });
+    html += '</table>';
+    return html;
   }
 
   saveContent(editor: any): void {
     const contentBody = editor.getContent();
     this.content.body = contentBody;
 
-    this.contentservice.editContent(this.content, this.contentId).subscribe(
+    this.contentService.editContent(this.content, this.contentId).subscribe(
       (response) => {
         this.successMessage = "Updated Successfully";
         this.showMessage('success');
@@ -253,6 +352,7 @@ export class ContentComponent implements OnInit {
   navigateToReportList(): void {
     this.route.navigate([`../../../../reportlist`], { relativeTo: this.aRoute });
   }
+  
 
   insertNewAccomplishmentPage(editor: any): void {
     const newPage = `

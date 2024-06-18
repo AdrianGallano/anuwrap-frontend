@@ -217,6 +217,7 @@ export class AnnualContentComponent implements OnInit{
       }
     );
   }
+  
 
   saveAnnualContent(editor: any): void {
     const contentBody = editor.getContent();
