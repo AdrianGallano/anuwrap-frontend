@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { ContentService } from '../../../../shared/services/content.service';
 import { HttpClient } from '@angular/common/http';
-import tinymce from 'tinymce';
+import tinymce, { Editor } from 'tinymce';
 import { AiComponent } from "../../../../shared/ai/ai.component";
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
@@ -38,15 +38,11 @@ export class ContentComponent implements OnInit {
     pagebreak_separator: '<div class="break"></div>',
     tableofcontents_depth: 4,
     content_style: `
-    body {
-      background: #fff;
-    }
-
     @media (min-width: 840px) {
       html {
         background: #eceef4;
         min-height: 100%;
-        padding: 0 .5rem
+        padding: 0 .5rem;
       }
 
       body {
@@ -65,16 +61,23 @@ export class ContentComponent implements OnInit {
         gap: 10px;
         border: 1px solid #000;
         padding: 10px;
+        cursor: move;
       }
 
       .img-container {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 20px auto;
+        cursor: move;
         gap: 10px;
+        margin: 20px auto;
         border: 1px solid #000;
         padding: 10px;
-        min-height: 300px
+      }
+
+      .img-container:hover {
+        opacity: 0.5;
+      }
+
+      .collage-container:hover {
+        opacity: 0.5;
       }
 
       .collage-container > div, .img-container > div {
@@ -91,11 +94,10 @@ export class ContentComponent implements OnInit {
       .image-placeholder {
         background-color: #ccc;
         min-height: 300px;
-        max-width: 100%
+        max-width: 100%;
       }
-      
     }
-    
+
     @media print {
       body#tinymce.mce-content-body {
         background-color: #fff;
@@ -105,34 +107,51 @@ export class ContentComponent implements OnInit {
         min-height: initial;
       }
 
-      body#tinymce.mce-content-body .collage-container,
-      body#tinymce.mce-content-body .img-container {
+      .collage-container {
         display: flex;
         flex-wrap: wrap;
         margin: 20px auto;
         gap: 10px;
         border: 1px solid #000;
         padding: 10px;
+        cursor: move;
       }
 
-      body#tinymce.mce-content-body .collage-container > div,
-      body#tinymce.mce-content-body .img-container > div {
+      .img-container {
+        cursor: move;
+        gap: 10px;
+        margin: 20px auto;
+        border: 1px solid #000;
+        padding: 10px;
+      }
+
+      .img-container:hover {
+        opacity: 0.5;
+      }
+
+      .collage-container:hover {
+        opacity: 0.5;
+      }
+
+      .collage-container > div, .img-container > div {
         flex: 1 1 calc(33% - 10px);
         overflow: hidden;
-        max-height: 300px;
+        max-height: 2000px;
       }
 
-      body#tinymce.mce-content-body .collage-container img,
-      body#tinymce.mce-content-body .img-container img {
+      .collage-container img, .img-container img {
         width: 100%;
         height: 100%;
       }
 
-      body#tinymce.mce-content-body .image-placeholder {
+      .image-placeholder {
         background-color: #ccc;
+        min-height: 300px;
+        max-width: 100%;
       }
+
     }
-    `,
+  `,
     plugins: 'save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
     toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | addPageButton | insertImgContainer | insertFacultyNewTable | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
     setup: (editor: any) => {
@@ -180,6 +199,48 @@ export class ContentComponent implements OnInit {
       });
 
       editor.on('init', () => this.initializeContent(editor));
+
+      editor.on('NodeChange', () => {
+      console.log('NodeChange event triggered');
+      // Additional logic based on node change
+    });
+    editor.on('dragstart', (event: DragEvent) => {
+      const targetElement = event.target as HTMLElement;
+      if (targetElement.classList.contains('img-container')) {
+        if (event.dataTransfer) {
+          event.dataTransfer.setData('text/html', targetElement.outerHTML);
+          event.dataTransfer.effectAllowed = 'move';
+          // Optionally set a drag image for visual feedback
+          const dragImage = new Image();
+          dragImage.src = 'path/to/drag-image.png';
+          event.dataTransfer.setDragImage(dragImage, 0, 0);
+        }
+      }
+    });
+
+    editor.on('dragover', (event: DragEvent) => {
+      event.preventDefault();
+    });
+
+    editor.on('drop', (event: DragEvent) => {
+      event.preventDefault();
+      if (event.dataTransfer) {
+        const droppedHTML = event.dataTransfer.getData('text/html');
+        editor.selection.setContent(droppedHTML); // Insert content at current selection
+      }
+    });
+    editor.on('keyup', (event: KeyboardEvent) => {
+      // Handle keyup events
+    });
+    editor.on('keydown', (event: KeyboardEvent) => {
+      // Handle keydown events
+    });
+    editor.on('focus', (event: FocusEvent) => {
+      // Handle focus events
+    });
+    editor.on('blur', (event: FocusEvent) => {
+      // Handle blur events
+    });
     },
     save_onsavecallback: (editor: any) => {
       this.saveContent(editor);
@@ -354,7 +415,7 @@ export class ContentComponent implements OnInit {
   }
   
 
-  insertNewAccomplishmentPage(editor: any): void {
+  insertNewAccomplishmentPage(editor: Editor): void {
     const newPage = `
     <p><img src="../../../../../assets/img/header2.jpg" width="1205" height="242"></p>
         <p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">BSEMC Accomplishment Comprehensive Narrative Report</span></strong></p>
@@ -378,7 +439,7 @@ export class ContentComponent implements OnInit {
     editor.insertContent(newPage);
   }
 
-  insertNewFacultyPage(editor: any): void {
+  insertNewFacultyPage(editor: Editor): void {
     const newPage = `
     <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png" width="129" height="129"></div>
         <p><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png" width="130" height="130"></span></p>
@@ -482,7 +543,7 @@ export class ContentComponent implements OnInit {
     editor.insertContent(newPage);
   }
 
-  insertNewTeachingPage(editor: any): void {
+  insertNewTeachingPage(editor: Editor): void {
     const newPage = `
     <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png" width="81" height="90"></div>
       <p><img style="float: left;" src="assets/img/GC.png" width="76" height="76"></p>
@@ -656,7 +717,7 @@ export class ContentComponent implements OnInit {
     editor.insertContent(newPage);
   }
 
-  insertNewFacultySchedPage(editor: any): void {
+  insertNewFacultySchedPage(editor: Editor): void {
     const newPage = `
       <div style="float: right; margin-right: 10px; border-radius: 50px;"><span style="font-family: arial, helvetica, sans-serif;"><img src="../../../../../assets/img/CCS.png" width="76" height="76"></span></div>
       <p><span style="font-family: arial, helvetica, sans-serif;"><img style="float: left;" src="../../../../../assets/img/GC.png" width="76" height="76"></span></p>
@@ -796,7 +857,7 @@ export class ContentComponent implements OnInit {
     `;
     editor.insertContent(newPage);
   }
-  insertFacultyNewRow(editor: any): void {
+  insertFacultyNewRow(editor: Editor): void {
     const newRow = `
       <table style="border-collapse: collapse; width: 94.4948%; height: 133.222px;" border="1"><colgroup><col style="width: 4.67128%;"><col style="width: 4.67128%;"><col style="width: 3.38499%;"><col style="width: 3.45269%;"><col style="width: 3.11419%;"><col style="width: 4.19738%;"><col style="width: 10.3581%;"><col style="width: 8.12397%;"><col style="width: 7.85317%;"><col style="width: 6.97307%;"><col style="width: 6.70227%;"><col style="width: 6.70227%;"><col style="width: 7.10847%;"><col style="width: 7.78547%;"><col style="width: 14.8262%;"></colgroup>
         <tbody>
@@ -842,9 +903,9 @@ export class ContentComponent implements OnInit {
     editor.insertContent(newRow);
   }
 
-  insertCollage(editor: any, count: number): void {
+  insertCollage(editor: Editor, count: number): void {
     const collageTemplate = `
-    <div class="collage-container" style="width: 900px; display: flex; flex-wrap: wrap; gap: 20px;">
+    <div class="collage-container" style="width: 900px; display: flex; flex-wrap: wrap; gap: 20px; resize: both; overflow: auto;">
     ${Array.from({ length: count }).map(() => `
           <div class="image-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: auto;">
             <div class="image-placeholder" style="height: 300px; background-color: #ccc;"></div>
@@ -858,12 +919,12 @@ export class ContentComponent implements OnInit {
     editor.insertContent(collageTemplate);
   }
   
-  insertImgContainer(editor: any): void {
+  insertImgContainer(editor: Editor) {
     const imgContainer = `
       <div class="img-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: auto;">
         <div class="image-placeholder" style="height: 300px; background-color: #ccc;"></div>
-        <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; max-width: 1000px%; max-height: 1000px; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
-          CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
+        <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
+              CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
         </div>
       </div>
     `;
