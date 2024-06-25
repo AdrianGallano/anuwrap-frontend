@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, AfterViewInit } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { OnInit } from '@angular/core';
@@ -12,18 +12,8 @@ import { UserService } from '../services/user.service';
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.css'
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit, AfterViewInit {
   workspaceId: any;
-  ngOnInit(): void {
-    if (typeof document !== 'undefined') {
-      initFlowbite();
-    }
-    this.aRoute.paramMap.subscribe((params: Params) => {
-      this.workspaceId = params['params']['workspace_id'];
-    });
-
-    this.getData();
-  }
 
   user = {
     username: "",
@@ -33,7 +23,22 @@ export class NavigationComponent implements OnInit {
     imageName: ""
   };
 
-  constructor(private userService: UserService, private tokenService: TokenService, private route: Router, private aRoute: ActivatedRoute) { }
+  constructor(private cdr: ChangeDetectorRef, private userService: UserService, private tokenService: TokenService, private route: Router, private aRoute: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.aRoute.paramMap.subscribe((params: Params) => {
+      this.workspaceId = params['params']['workspace_id'];
+    });
+
+    this.getData();
+  }
+
+  ngAfterViewInit(): void {
+    // Initialize Flowbite after the view has been initialized
+    if (typeof document !== 'undefined') {
+      initFlowbite();
+    }
+  }
 
   getData(): void {
     this.userService.getUserInformation().subscribe(
@@ -43,16 +48,18 @@ export class NavigationComponent implements OnInit {
         this.user.lastname = response.data.user.last_name;
         this.user.email = response.data.user.email;
         this.user.imageName = response.data.user.image_name;
+        this.cdr.detectChanges(); // Ensure the view is updated
       },
       (error) => {
         console.error('Error fetching user information:', error);
       }
     );
   }
+
   signOut(): void {
-    this.tokenService.clearAuth();
-}
- 
+    this.route.navigate([`/logout-confirm`], { relativeTo: this.aRoute });
+  }
+
   navigateToAnnualReportList(){
     this.route.navigate([`../annualreportlist`], { relativeTo: this.aRoute });
   }

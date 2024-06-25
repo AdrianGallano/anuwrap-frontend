@@ -46,7 +46,8 @@ export class AnnualreportlistComponent {
             this.workspaceId = params['params']['workspace_id'];
             this.fetchAnnualReports();
             this.fetchReportSelection();
-            this.fetchAnnualContents(); // Fetch annual contents here
+            this.fetchAnnualContents(); 
+            this.cdr.detectChanges();
         });
     }
 
@@ -55,7 +56,7 @@ export class AnnualreportlistComponent {
             (response) => {
                 this.annualReport = response.data.reports;
                 this.old_annualReport = this.annualReport;
-                this.cdr
+                this.cdr.detectChanges();
             },
             (error) => {
                 console.log('Error fetching annual reports:', error);

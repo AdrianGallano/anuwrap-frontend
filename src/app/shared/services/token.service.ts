@@ -37,17 +37,36 @@ export class TokenService {
     return token && userId ? [token, userId, this.headers] : null;
   }
 
-  clearAuth(): void {
-    try {
-      this.cookieService.delete(this.TOKEN_KEY);
-      this.cookieService.delete(this.USER_ID_KEY);
-      
-      this.route.navigate(['/login']);
-    } catch (error) {
-      console.error('Error clearing auth:', error);
+  clearAuth(retryCount: number = 3): void {
+    let attempts = 0;
+    const attemptDelete = () => {
+      try {
+        console.log("Attempting to clear auth...");
+        this.cookieService.delete(this.TOKEN_KEY, '/');
+        this.cookieService.delete(this.USER_ID_KEY, '/');
+    
+        const token = this.cookieService.get(this.TOKEN_KEY);
+        const userId = this.cookieService.get(this.USER_ID_KEY);
+    
+        if (!token && !userId) {
+          console.log("Auth cleared successfully");
+          this.route.navigate(['/login']);
+        } else {
+          throw new Error("Failed to clear auth");
+        }
+      } catch (error) {
+        if (attempts < retryCount) {
+          attempts++;
+          console.error(`Retrying to clear auth (${attempts}/${retryCount})...`);
+          attemptDelete();
+        } else {
+          console.error('Error clearing auth after multiple attempts:', error);
+        }
+      }
+    };
+    
+    attemptDelete();
     }
-  }
-
 
   getUserId(): string | null {
     return this.cookieService.get(this.USER_ID_KEY);

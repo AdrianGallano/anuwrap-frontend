@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { AfterViewInit, Component } from '@angular/core';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { OnInit } from '@angular/core';
 import { TokenService } from '../services/token.service';
@@ -13,12 +13,16 @@ import { UserService } from '../services/user.service';
   styleUrl: './navigation-bar.component.css'
 })
 
-export class NavigationBarComponent implements OnInit {
+export class NavigationBarComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
+    this.getData();
+  }
+
+  ngAfterViewInit(): void {
+    // Initialize Flowbite after the view has been initialized
     if (typeof document !== 'undefined') {
       initFlowbite();
     }
-    this.getData();
   }
 
   user = {
@@ -29,7 +33,7 @@ export class NavigationBarComponent implements OnInit {
     imageName: ""
   };
 
-  constructor(private userService: UserService, private tokenService: TokenService, private route: Router) { }
+  constructor(private userService: UserService, private tokenService: TokenService, private route: Router, private aRoute: ActivatedRoute) { }
 
   getData(): void {
     this.userService.getUserInformation().subscribe(
@@ -47,9 +51,8 @@ export class NavigationBarComponent implements OnInit {
   }
 
   signOut(): void {
-    this.tokenService.clearAuth();
-    this.route.navigate(['/login']);
-  }
+    this.route.navigate([`/logout-confirm`], { relativeTo: this.aRoute });
+}
 
 }
 

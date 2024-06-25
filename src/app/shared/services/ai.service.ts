@@ -14,7 +14,7 @@ export class AiService {
   private generativeAI: GoogleGenerativeAI;
   private apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=';
   constructor(private tokenService: TokenService, private http: HttpClient) {
-    this.generativeAI = new GoogleGenerativeAI("AIzaSyAEpWDga9rWUbJ99WwF-DgwamUrPor7j6o");
+    this.generativeAI = new GoogleGenerativeAI("AIzaSyBMZ3QqsPXIX7ZHmZTla0lzEe3IvQaPPzo");
   }
 
   async postAIResponse(aiPrompt: any): Promise<string> {

@@ -42,6 +42,7 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
         this.workspaceId = params['params']['workspace_id'];
         this.fetchReports();
         this.fetchReportTypes();
+        this.cdr.detectChanges();
       });
     }
 
@@ -50,7 +51,7 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
         (response) => {
           this.reports = response.data.report;
           this.old_state = this.reports
-          this.cdr
+          this.cdr.detectChanges()
         },
         (error) => {
           console.log(error);

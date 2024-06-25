@@ -52,6 +52,7 @@ import { ContentComponent } from './core/layout/pages/content/content.component'
 import { TemplatelistParentComponent } from './core/layout/pages/report/templatelist-parent/templatelist-parent.component';
 import { ChartComponent } from './core/layout/pages/chart/chart.component';
 import { AnnualContentComponent } from './core/layout/pages/annualcontent/annualcontent.component';
+import { LogoutConfirmComponent } from './core/layout/pages/authentication/logout-confirm/logout-confirm.component';
 
 
 export const routes: Routes = [
@@ -91,6 +92,10 @@ export const routes: Routes = [
             {
                 path: 'register-success',
                 component: RegisterSuccessComponent
+            },
+            {
+                path: 'logout-confirm',
+                component: LogoutConfirmComponent
             },
             {
                 path: 'workspacelist',

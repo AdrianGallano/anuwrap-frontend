@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, AfterViewInit, Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NavigationComponent } from "../../../../shared/navigation/navigation.component";
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -121,6 +121,7 @@ export class DashboardComponent implements AfterViewInit {
         private userWorkspaceService: UserworkspaceService,
         private reportService: ReportService,
         private aRoute: ActivatedRoute,
+        private cdr: ChangeDetectorRef,
         @Inject(PLATFORM_ID) private platformId: Object
     ) { }
 
