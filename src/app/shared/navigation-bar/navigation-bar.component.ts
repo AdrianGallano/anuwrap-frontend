@@ -4,13 +4,14 @@ import { initFlowbite } from 'flowbite';
 import { OnInit } from '@angular/core';
 import { TokenService } from '../services/token.service';
 import { UserService } from '../services/user.service';
+import { DropdownComponent } from "../dropdown/dropdown.component";
 
 @Component({
-  selector: 'app-navigation-bar',
-  standalone: true,
-  imports: [RouterModule],
-  templateUrl: './navigation-bar.component.html',
-  styleUrl: './navigation-bar.component.css'
+    selector: 'app-navigation-bar',
+    standalone: true,
+    templateUrl: './navigation-bar.component.html',
+    styleUrl: './navigation-bar.component.css',
+    imports: [RouterModule, DropdownComponent]
 })
 
 export class NavigationBarComponent implements OnInit, AfterViewInit{

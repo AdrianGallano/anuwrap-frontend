@@ -32,70 +32,33 @@ export class AnnualContentComponent implements OnInit{
     pagebreak_separator: '<div class="break"></div>',
     tableofcontents_depth: 4,
     content_style: `
-    body {
-      background: #fff;
-    }
-
     @media (min-width: 840px) {
       html {
         background: #eceef4;
         min-height: 100%;
-        padding: 0 .5rem
+        padding: 0 .5rem;
       }
 
       body {
-        background-color: #fff;
-        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
-        box-sizing: border-box;
+        background-color: rgba(0,0,0,0);
         margin: 1rem auto 0;
         min-height: calc(100vh - 1rem);
         padding: 4rem;
+        box-sizing: border-box;
       }
 
-      .collage-container {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 20px auto;
-        gap: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-      }
-
-      .img-container {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 20px auto;
-        gap: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-        min-height: 300px
-      }
-
-      .collage-container > div, .img-container > div {
-        flex: 1 1 calc(33% - 10px);
-        overflow: hidden;
-        max-height: 2000px;
-      }
-
-      .collage-container img, .img-container img {
-        width: 100%;
-        height: 100%;
-      }
-
-      .image-placeholder {
-        background-color: #ccc;
-        min-height: 300px;
-        max-width: 100%
-      }
-    }
-    
-    @media print {
-      body#tinymce.mce-content-body {
+      .whole-page {
         background-color: #fff;
-        box-shadow: none;
-        margin: 0;
-        padding: 0;
-        min-height: initial;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+        box-sizing: border-box;
+        overflow: auto;
+      }
+
+      .content {
+        margin-left: 2rem;
+        margin-right: 2rem;
       }
 
       .collage-container {
@@ -105,16 +68,23 @@ export class AnnualContentComponent implements OnInit{
         gap: 10px;
         border: 1px solid #000;
         padding: 10px;
+        cursor: move;
       }
 
       .img-container {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 20px auto;
+        cursor: move;
         gap: 10px;
+        margin: 20px auto;
         border: 1px solid #000;
         padding: 10px;
-        min-height: 300px
+      }
+
+      .img-container:hover {
+        opacity: 0.5;
+      }
+
+      .collage-container:hover {
+        opacity: 0.5;
       }
 
       .collage-container > div, .img-container > div {
@@ -131,12 +101,143 @@ export class AnnualContentComponent implements OnInit{
       .image-placeholder {
         background-color: #ccc;
         min-height: 300px;
-        max-width: 100%
+        max-width: 100%;
+      }
+
+      .header img,
+      .footer img {
+        width: 100%;
+        display: block;
+      }
+
+      .header,
+      .footer {
+        width: 100%;
+        text-align: center; /* Optional: Center align content */
+        margin: 0; /* Remove any default margin */
+        padding: 0; /* Remove any default padding */
+        box-sizing: border-box; /* Ensure padding and border are included in width */
+      }
+
+      .footer {
+        margin-top: 1rem; /* Optional: Add space between content and footer */
+      }
+
+      .gc-logo img{
+        width: 128px;
+        height: 128px;
+      }
+      
+      .ccs-logo img{
+        width: 130px;
+        height: 130px;
+      }
+
+    }
+
+    @media print {
+    @page {
+      size: auto;
+      margin: 0;
+    }
+
+    body {
+      background-color: rgba(0,0,0,0);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Print only the whole-page content */
+    body > *:not(.whole-page) {
+      display: none;
+    }
+      .whole-page {
+        background-color: #fff;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      .content {
+        margin-left: 2rem;
+        margin-right: 2rem;
+      }
+
+      .collage-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 20px auto;
+        gap: 10px;
+        border: 1px solid #000;
+        padding: 10px;
+        cursor: move;
+      }
+
+      .img-container {
+        cursor: move;
+        gap: 10px;
+        margin: 20px auto;
+        border: 1px solid #000;
+        padding: 10px;
+      }
+
+      .img-container:hover {
+        opacity: 0.5;
+      }
+
+      .collage-container:hover {
+        opacity: 0.5;
+      }
+
+      .collage-container > div, .img-container > div {
+        flex: 1 1 calc(33% - 10px);
+        overflow: hidden;
+        max-height: 2000px;
+      }
+
+      .collage-container img, .img-container img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .image-placeholder {
+        background-color: #ccc;
+        min-height: 300px;
+        max-width: 100%;
+      }
+
+      .header img,
+      .footer img {
+        width: 100%;
+        display: block;
+      }
+
+      .header,
+      .footer {
+        width: 100%;
+        text-align: center; /* Optional: Center align content */
+        margin: 0; /* Remove any default margin */
+        padding: 0; /* Remove any default padding */
+        box-sizing: border-box; /* Ensure padding and border are included in width */
+      }
+
+      .footer {
+        margin-top: 1rem; /* Optional: Add space between content and footer */
+      }
+
+      .gc-logo img{
+        width: 128px;
+        height: 128px;
+      }
+      
+      .ccs-logo img{
+        width: 130px;
+        height: 130px;
       }
     }
-    `,
+  `,
     plugins: 'save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
-    toolbar: 'save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | addPageButton | insertImgContainer | insertFacultyNewTable | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
+    toolbar: 'save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | addPageButton | insertImgContainer | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
     setup: (editor: any) => {
       editor.ui.registry.addMenuButton('addPageButton', {
         text: 'Add Page',
@@ -171,11 +272,6 @@ export class AnnualContentComponent implements OnInit{
       editor.ui.registry.addButton('insertImgContainer', {
         text: 'Add Image',
         onAction: () => this.insertImgContainer(editor)
-      });
-
-      editor.ui.registry.addButton('insertFacultyNewTable', {
-        text: 'Add new row',
-        onAction: () => this.insertFacultyNewRow(editor)
       });
 
       editor.on('init', () => this.initializeContent(editor));
@@ -278,7 +374,11 @@ export class AnnualContentComponent implements OnInit{
 
   insertNewAccomplishmentPage(editor: any): void {
     const newPage = `
-    <p><img src="../../../../../assets/img/header2.jpg" width="1205" height="242"></p>
+    <div class="whole-page">
+    <div class="header">
+      <img src="../../../../../assets/img/header2.jpg" width="1205" height="242">
+    </div>
+    <div class= "content">
         <p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">BSEMC Accomplishment Comprehensive Narrative Report</span></strong></p>
         <p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Renewal of Institutional Membership for Animation Council of the Philippines (ACPI)</span></strong><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong></p>
         <p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Gordon College &ndash; College of Computer Studies renewed it&rsquo;s academic membership with Animation Council of the Philippines (ACPI). This renewal signifies our unwavering commitment in the field of animation and our dedication to supporting the initiatives of ACPI. Our institution has long recognized the vital role played by ACPI in advancing and promoting the field of animation in the Philippines. Since our initial membership commencement on September 2021, our active involvement in ACPI has been a source of pride. Renewing our membership was a natural choice to maintain our contributions to the growth and development of our BSEMC students in the field of animation.</span></p>
@@ -295,119 +395,129 @@ export class AnnualContentComponent implements OnInit{
         <p style="line-height: 1; text-align: left;">&nbsp;</p>
         <p style="line-height: 1; text-align: left;">&nbsp;</p>
         <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;"><img src="../../../../../assets/img/footer2.jpg" width="1201" height="166"><div class="break"></div></p>
-        `;
+        </div>
+    <div class="footer">
+      <img src="../../../../../assets/img/footer2.jpg" width="1201" height="166">
+      <div class="break"></div>
+    </div>
+    </div>
+  `;
     editor.insertContent(newPage);
   }
 
   insertNewFacultyPage(editor: any): void {
     const newPage = `
-    <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png" width="129" height="129"></div>
-        <p><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png" width="130" height="130"></span></p>
-        <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
-        <p style="line-height: 1.1; text-align: center;"><strong>FACULTY MATRIX</strong><br>2nd Semester A.Y. 2023-2024</p>
-        <table style="border-collapse: collapse; width: 94.4948%; height: 329.222px;" border="1"><colgroup><col style="width: 4.67128%;"><col style="width: 4.67128%;"><col style="width: 3.38499%;"><col style="width: 3.45269%;"><col style="width: 3.11419%;"><col style="width: 4.19738%;"><col style="width: 10.3581%;"><col style="width: 8.12397%;"><col style="width: 7.85317%;"><col style="width: 6.97307%;"><col style="width: 6.70227%;"><col style="width: 6.70227%;"><col style="width: 7.10847%;"><col style="width: 7.78547%;"><col style="width: 14.8262%;"></colgroup>
-        <tbody>
-        <tr style="height: 82.1806px;">
-        <td style="text-align: center;" colspan="3"><span style="font-size: 8pt;">Name</span></td>
-        <td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">AGE</span><br><span style="font-size: 8pt;"><br></span></td>
-        <td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">SEX</span><br><span style="font-size: 8pt;"><br></span></td>
-        <td style="text-align: center;" rowspan="2">
-        <p><span style="font-size: 8pt;">TENURE</span><br><span style="font-size: 8pt;">(P/COS)</span></p>
-        </td>
-        <td style="text-align: center;" rowspan="2">
-        <p><span style="font-size: 8pt;">Related Certification/Appropriate Current PRC License</span></p>
-        </td>
-        <td style="text-align: center;" colspan="5">Educational Background (Specify Degree Obtained)</td>
-        <td style="text-align: center;" rowspan="2">
-        <p><span style="font-size: 8pt;">&nbsp;</span></p>
-        <p><span style="font-size: 8pt;">Designation</span></p>
-        </td>
-        <td style="text-align: center;" rowspan="2">
-        <p><span style="font-size: 8pt;">Teaching experience (No. of years)</span></p>
-        </td>
-        <td style="text-align: center;" rowspan="2">
-        <p><span style="font-size: 8pt;">Membership in Professional Organization</span></p>
-        </td>
-        </tr>
-        <tr style="height: 113.819px;">
-        <td style="text-align: center;"><span style="font-size: 8pt;">Last Name</span></td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">First Name</span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Middle Initial</span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Doctorate Degree</span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Master&rsquo;s Degree</span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Baccalaureate Degree</span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Specialization</span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;">Enrollment Status (Enrolled or Not enrolled)</span></p>
-        </td>
-        </tr>
-        <tr style="height: 133.222px;">
-        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        <td style="text-align: center;">
-        <p><span style="font-size: 8pt;"></span></p>
-        </td>
-        </tr>
-        </tbody>
-        </table>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-    `;
+    <div class="whole-page">
+    <div class="content">
+      <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png"></div>
+      <p class="gc-logo"><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png"></span></p>
+      <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
+      <p style="line-height: 1.1; text-align: center;"><strong>FACULTY MATRIX</strong><br>2nd Semester A.Y. 2023-2024</p>
+      <table style="border-collapse: collapse; width: 94.4948%; height: 329.222px;" border="1"><colgroup><col style="width: 4.67128%;"><col style="width: 4.67128%;"><col style="width: 3.38499%;"><col style="width: 3.45269%;"><col style="width: 3.11419%;"><col style="width: 4.19738%;"><col style="width: 10.3581%;"><col style="width: 8.12397%;"><col style="width: 7.85317%;"><col style="width: 6.97307%;"><col style="width: 6.70227%;"><col style="width: 6.70227%;"><col style="width: 7.10847%;"><col style="width: 7.78547%;"><col style="width: 14.8262%;"></colgroup>
+      <tbody>
+      <tr style="height: 82.1806px;">
+      <td style="text-align: center;" colspan="3"><span style="font-size: 8pt;">Name</span></td>
+      <td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">AGE</span><br><span style="font-size: 8pt;"><br></span></td>
+      <td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">SEX</span><br><span style="font-size: 8pt;"><br></span></td>
+      <td style="text-align: center;" rowspan="2">
+      <p><span style="font-size: 8pt;">TENURE</span><br><span style="font-size: 8pt;">(P/COS)</span></p>
+      </td>
+      <td style="text-align: center;" rowspan="2">
+      <p><span style="font-size: 8pt;">Related Certification/Appropriate Current PRC License</span></p>
+      </td>
+      <td style="text-align: center;" colspan="5">Educational Background (Specify Degree Obtained)</td>
+      <td style="text-align: center;" rowspan="2">
+      <p><span style="font-size: 8pt;">&nbsp;</span></p>
+      <p><span style="font-size: 8pt;">Designation</span></p>
+      </td>
+      <td style="text-align: center;" rowspan="2">
+      <p><span style="font-size: 8pt;">Teaching experience (No. of years)</span></p>
+      </td>
+      <td style="text-align: center;" rowspan="2">
+      <p><span style="font-size: 8pt;">Membership in Professional Organization</span></p>
+      </td>
+      </tr>
+      <tr style="height: 113.819px;">
+      <td style="text-align: center;"><span style="font-size: 8pt;">Last Name</span></td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;">First Name</span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;">Middle Initial</span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;">Doctorate Degree</span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;">Master&rsquo;s Degree</span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;">Baccalaureate Degree</span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;">Specialization</span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;">Enrollment Status (Enrolled or Not enrolled)</span></p>
+      </td>
+      </tr>
+      <tr style="height: 133.222px;">
+      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
+      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      <td style="text-align: center;">
+      <p><span style="font-size: 8pt;"></span></p>
+      </td>
+      </tr>
+      </tbody>
+      </table>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      </div>
+      </div>`;
     editor.insertContent(newPage);
   }
 
   insertNewTeachingPage(editor: any): void {
     const newPage = `
-    <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png" width="81" height="90"></div>
-      <p><img style="float: left;" src="assets/img/GC.png" width="76" height="76"></p>
+    <div class="whole-page">
+    <div class="content">
+    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+      <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
       <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
       <p style="line-height: 1.1; text-align: center;"><br><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Teaching and Learning Monitoring Form -2</span></strong></p>
       <p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Faculty:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; College/Department:</span></span></p>
@@ -572,7 +682,12 @@ export class AnnualContentComponent implements OnInit{
       <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;">&nbsp;</p>
       <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;">&nbsp;</p>
       <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;"><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 10pt;">GC-Acad-Form-<span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<u><br></u></span><span style="font-size: 8pt;"><span style="font-size: 12pt;"><span style="font-size: 10pt;">cc. VPA</span></span></span></span><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 8pt;"><span style="font-size: 12pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><span style="font-size: 10pt;">A, Dean, HRMU, Faculty&nbsp;&nbsp;</span></span></span></span></span><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 8pt;"><span style="font-size: 12pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"> &nbsp;</span></span></span></span></strong></p>
-      <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 8pt;"><span style="font-size: 12pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><div class="break"></div></span></span></span></span></strong></p>
+      <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 8pt;"><span style="font-size: 12pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"></span></span></span></span></strong></p>
+      </div>
+      </div>
+      <div class="footer">
+      <div class="break"></div>
+    </div>
       </div>
     `;
     editor.insertContent(newPage);
@@ -580,8 +695,10 @@ export class AnnualContentComponent implements OnInit{
 
   insertNewFacultySchedPage(editor: any): void {
     const newPage = `
-      <div style="float: right; margin-right: 10px; border-radius: 50px;"><span style="font-family: arial, helvetica, sans-serif;"><img src="../../../../../assets/img/CCS.png" width="76" height="76"></span></div>
-      <p><span style="font-family: arial, helvetica, sans-serif;"><img style="float: left;" src="../../../../../assets/img/GC.png" width="76" height="76"></span></p>
+    <div class="whole-page">
+    <div class="content">
+      <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><span style="font-family: arial, helvetica, sans-serif;"><img src="../../../../../assets/img/CCS.png"></span></div>
+      <p class="gc-logo"><span style="font-family: arial, helvetica, sans-serif;"><img style="float: left;" src="../../../../../assets/img/GC.png"></span></p>
       <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt; font-family: arial, helvetica, sans-serif;">Republic of the Philippines&nbsp;</span><br><span style="font-family: arial, helvetica, sans-serif;"><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></span></p>
       <p style="line-height: 0.5; text-align: center;"><span style="font-family: arial, helvetica, sans-serif;"> <strong><span lang="EN-US" style="font-size: 12pt;">INDIVIDUAL FACULTY LOAD AND SCHEDULE</span></strong> </span></p>
       <p style="line-height: 0.5; text-align: center;"><span style="font-family: arial, helvetica, sans-serif;"> <strong><span lang="EN-US" style="font-size: 9.0pt; color: black; mso-bidi-font-style: italic;">Semester: 1st, Academic Year: <u>2022 - 2023</u></span></strong> </span></p>
@@ -715,15 +832,21 @@ export class AnnualContentComponent implements OnInit{
       <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
       <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
       <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      </div>
+      <div class="footer">
+      <div class="break"></div>
+    </div>
+      </div>
     `;
     editor.insertContent(newPage);
   }
 
-
   insertNewEventReportPage(editor: any): void {
     const newPage = `
-    <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png" width="81" height="90"></div>
-    <p><img style="float: left;" src="assets/img/GC.png" width="76" height="76"></p>
+    <div class="whole-page">
+    <div class="content">
+    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+    <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
     <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
     <p style="line-height: 1.1; text-align: center;"><br><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Event Report</span></strong></p>
     <p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Faculty:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; College/Department:</span></span></p>
@@ -749,8 +872,8 @@ export class AnnualContentComponent implements OnInit{
     <p><span style="font-family: 'times new roman', times, serif;"><strong>Suggestions for future events:</strong></span></p>
     <p><div class="break"></div></p>
     
-    <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png" width="81" height="90"></div>
-    <p><img style="float: left;" src="assets/img/GC.png" width="76" height="76"></p>
+    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+    <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
     <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
     <p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></span></p>
     <p><span style="font-family: 'times new roman', times, serif;"><strong>Budget overview:</strong></span></p>
@@ -770,14 +893,21 @@ export class AnnualContentComponent implements OnInit{
     <div class="text-box" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.</div>
     </div>
     </div>
-    <p><strong>&nbsp;</strong></p>`;
+    <p><strong>&nbsp;</strong></p>
+    </div>
+    <div class="footer">
+      <div class="break"></div>
+    </div>
+    </div>`;
     editor.insertContent(newPage);
   }
   
   insertNewFinancialReportPage(editor: any): void {
     const newPage = `
-    <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png" width="81" height="90"></div>
-    <p><img style="float: left;" src="assets/img/GC.png" width="76" height="76"></p>
+    <div class="whole-page">
+    <div class="content">
+    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+    <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
     <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
     <p style="line-height: 1.1; text-align: center;"><br><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Financial Report</span></strong></p>
     <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Name of Organization:</span></strong></p>
@@ -845,8 +975,8 @@ export class AnnualContentComponent implements OnInit{
     <p><span style="font-family: 'times new roman', times, serif;">Prepared by:</span></p>
     <p><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><span style="font-family: 'times new roman', times, serif;"><div class="break"></div></span></span></span></p>
     
-    <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png" width="81" height="90"></div>
-    <p><img style="float: left;" src="assets/img/GC.png" width="76" height="76"></p>
+    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+    <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
     <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
     <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
     <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
@@ -870,16 +1000,23 @@ export class AnnualContentComponent implements OnInit{
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
-    <p><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><span style="font-family: 'times new roman', times, serif;"><div class="break"></div></span></span></span></p>
+    <p><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><span style="font-family: 'times new roman', times, serif;"></span></span></span></p>
     <p>&nbsp;</p>
-    <p>&nbsp;</p>`;
+    <p>&nbsp;</p>
+    </div>
+    <div class="footer">
+      <div class="break"></div>
+    </div>
+    </div>`;
     editor.insertContent(newPage);
   }
 
   insertNewSummaryReportPage(editor: any): void {
     const newPage = `
-    <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png" width="81" height="90"></div>
-    <p><img style="float: left;" src="assets/img/GC.png" width="76" height="76"></p>
+    <div class="whole-page">
+    <div class="content">
+    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+    <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
     <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
     <p style="line-height: 1.1; text-align: center;"><br><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">SUMMARY OF ACCOMPLISHMENTS AND ACTIVITIES</span></strong></p>
     <p style="line-height: 1.1; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">FOR 1<sup>st</sup> Semester A.Y. 2023 - 2024</span></strong></p>
@@ -963,8 +1100,8 @@ export class AnnualContentComponent implements OnInit{
     <p class="MsoNormal">&nbsp;</p>
     <p class="MsoNormal"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;"><div class="break"></div></span></strong></p>
     
-    <div style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png" width="81" height="90"></div>
-    <p><img style="float: left;" src="assets/img/GC.png" width="76" height="76"></p>
+    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+    <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
     <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
     <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
     <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
@@ -1010,69 +1147,38 @@ export class AnnualContentComponent implements OnInit{
     <p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Noted by:</span></strong></p>
     <p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
     <p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-tab-count: 4;"><span style="text-decoration: underline;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong></span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><span style="mso-spacerun: yes;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span><span style="mso-tab-count: 1;">&nbsp; &nbsp; &nbsp;&nbsp;</span></span></strong></p>
-    <p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Organization/Council Adviser<span style="mso-tab-count: 3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-tab-count: 1;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Date</span></strong></p>`;
+    <p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Organization/Council Adviser<span style="mso-tab-count: 3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-tab-count: 1;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Date</span></strong></p>
+    </div>
+    <div class="footer">
+      <div class="break"></div>
+    </div>
+    </div>`;
     editor.insertContent(newPage);
-  }
-
-  insertFacultyNewRow(editor: any): void {
-    const newRow = `
-      <table style="border-collapse: collapse; width: 94.4948%; height: 133.222px;" border="1"><colgroup><col style="width: 4.67128%;"><col style="width: 4.67128%;"><col style="width: 3.38499%;"><col style="width: 3.45269%;"><col style="width: 3.11419%;"><col style="width: 4.19738%;"><col style="width: 10.3581%;"><col style="width: 8.12397%;"><col style="width: 7.85317%;"><col style="width: 6.97307%;"><col style="width: 6.70227%;"><col style="width: 6.70227%;"><col style="width: 7.10847%;"><col style="width: 7.78547%;"><col style="width: 14.8262%;"></colgroup>
-        <tbody>
-          <tr style="height: 133.222px;">
-            <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-            <td style="text-align: center;">
-              <p><span style="font-size: 8pt;"></span></p>
-            </td>
-            <td style="text-align: center;">
-              <p><span style="font-size: 8pt;"></span></p>
-            </td>
-            <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-            <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-            <td style="text-align: center;">
-              <p><span style="font-size: 8pt;"></span></p>
-            </td>
-            <td style="text-align: center;">
-              <p><span style="font-size: 8pt;"></span></p>
-            </td>
-            <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-            <td style="text-align: center;">
-              <p><span style="font-size: 8pt;"></span></p>
-            </td>
-            <td style="text-align: center;">
-              <p><span style="font-size: 8pt;"></span></p>
-            </td>
-            <td style="text-align: center;">
-              <p><span style="font-size: 8pt;"></span></p>
-            </td>
-            <td style="text-align: center;">
-              <p><span style="font-size: 8pt;"></span></p>
-            </td>
-            <td style="text-align: center;">
-              <p><span style="font-size: 8pt;"></span></p>
-            </td>
-            <td style="text-align: center;">
-              <p><span style="font-size: 8pt;"></span></p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    `;
-    editor.insertContent(newRow);
   }
 
   insertCollage(editor: any, count: number): void {
     const collageTemplate = `
-      <div class="collage-container" style="width: 900px">
-        ${Array.from({ length: count }).map(() => '<div><div class="image-placeholder" style="height: 300px; background-color: #ccc;"></div></div>').join('')}
+    <div class="collage-container" style="width: 900px; display: flex; flex-wrap: wrap; gap: 20px; resize: both; overflow: auto;">
+    ${Array.from({ length: count }).map(() => `
+          <div class="image-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: auto;">
+            <div class="image-placeholder" style="height: 300px; background-color: #ccc;"></div>
+            <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
+              CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
+            </div>
+          </div>
+        `).join('')}
       </div>
     `;
     editor.insertContent(collageTemplate);
   }
-
-  insertImgContainer(editor: any): void {
+  
+  insertImgContainer(editor: any) {
     const imgContainer = `
-      <div class="img-container" style="width: 300px; height: 300px">
-        <div><div class="image-placeholder" style="height: 100%; background-color: #ccc;"></div></div>
+      <div class="img-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: auto;">
+        <div class="image-placeholder" style="height: 300px; background-color: #ccc;"></div>
+        <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
+              CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
+        </div>
       </div>
     `;
     editor.insertContent(imgContainer);

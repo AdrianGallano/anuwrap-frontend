@@ -67,7 +67,6 @@ export class TokenService {
     
     attemptDelete();
     }
-
   getUserId(): string | null {
     return this.cookieService.get(this.USER_ID_KEY);
   }

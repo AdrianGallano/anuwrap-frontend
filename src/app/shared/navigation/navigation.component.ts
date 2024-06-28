@@ -1,31 +1,24 @@
-import { ChangeDetectorRef, Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { OnInit } from '@angular/core';
 import { TokenService } from '../services/token.service';
 import { UserService } from '../services/user.service';
+import { DropdownComponent } from "../dropdown/dropdown.component";
 
 @Component({
-  selector: 'app-navigation',
-  standalone: true,
-  imports: [RouterModule],
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.css'
+    selector: 'app-navigation',
+    standalone: true,
+    templateUrl: './navigation.component.html',
+    styleUrl: './navigation.component.css',
+    imports: [RouterModule, DropdownComponent]
 })
-export class NavigationComponent implements OnInit, AfterViewInit {
+export class NavigationComponent implements OnInit {
   workspaceId: any;
-
-  user = {
-    username: "",
-    firstname: "",
-    lastname: "",
-    email: "",
-    imageName: ""
-  };
-
-  constructor(private cdr: ChangeDetectorRef, private userService: UserService, private tokenService: TokenService, private route: Router, private aRoute: ActivatedRoute) { }
-
   ngOnInit(): void {
+    if (typeof document !== 'undefined') {
+      initFlowbite();
+    }
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.workspaceId = params['params']['workspace_id'];
     });
@@ -33,12 +26,14 @@ export class NavigationComponent implements OnInit, AfterViewInit {
     this.getData();
   }
 
-  ngAfterViewInit(): void {
-    // Initialize Flowbite after the view has been initialized
-    if (typeof document !== 'undefined') {
-      initFlowbite();
-    }
-  }
+  user = {
+    username: "",
+    firstname: "",
+    lastname: "",
+    email: ""
+  };
+
+  constructor(private userService: UserService, private tokenService: TokenService, private route: Router, private aRoute: ActivatedRoute) { }
 
   getData(): void {
     this.userService.getUserInformation().subscribe(
@@ -47,19 +42,16 @@ export class NavigationComponent implements OnInit, AfterViewInit {
         this.user.firstname = response.data.user.first_name;
         this.user.lastname = response.data.user.last_name;
         this.user.email = response.data.user.email;
-        this.user.imageName = response.data.user.image_name;
-        this.cdr.detectChanges(); // Ensure the view is updated
       },
       (error) => {
         console.error('Error fetching user information:', error);
       }
     );
   }
-
   signOut(): void {
-    this.route.navigate([`/logout-confirm`], { relativeTo: this.aRoute });
-  }
-
+    this.tokenService.clearAuth();
+}
+ 
   navigateToAnnualReportList(){
     this.route.navigate([`../annualreportlist`], { relativeTo: this.aRoute });
   }
