@@ -1,21 +1,123 @@
 .message-popup {
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 15px;
-    border-radius: 5px;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    z-index: 1000;
-    transition: opacity 0.5s ease-in-out;
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.success-popup {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  max-width: 250px;
+  background: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: -1px 1px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1023;
+  animation: slideInRight 0.3s ease-in-out forwards, fadeOut 0.5s ease-in-out forwards 3s;
+  transform: translateX(110%);
+}
+
+.toast-icon img {
+  width: 30px; 
+  height: 25px; 
+}
+
+
+.toast.closing {
+  animation: slideOutRight 0.5s ease-in-out forwards;
+}
+
+.toast-progress {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background-color: #2ecc71;
+  animation: toastProgress 3s ease-in-out forwards;
+}
+
+.toast-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toast-icon {
+  padding: 0.35rem 0.5rem;
+  font-size: 1.5rem;
+}
+
+.toast-message {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #000000;
+  padding: 0.5rem;
+}
+
+.toast.toast-success {
+  background: #95eab8;
+}
+
+.toast.toast-success .toast-progress {
+  background-color: #2ecc71;
+}
+
+.toast.toast-info {
+  background-color: #2ecc71;
+}
+
+.toast.toast-info .toast-progress {
+  background-color: #3498db;
+}
+
+@keyframes slideInRight {
+  0% {
+      transform: translateX(110%);
   }
-  
-  .success-popup {
-    background-color: rgb(255, 255, 255);
+  75% {
+      transform: translateX(-10%);
   }
-  
-  .error-popup {
-    background-color: red;
+  100% {
+      transform: translateX(0%);
   }
-  
+}
+
+@keyframes slideOutRight {
+  0% {
+      transform: translateX(0%);
+  }
+  25% {
+      transform: translateX(-10%);
+  }
+  100% {
+      transform: translateX(110%);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+
+@keyframes toastProgress {
+  0% {
+      width: 100%;
+  }
+  100% {
+      width: 0%;
+  }
+}

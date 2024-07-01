@@ -131,6 +131,20 @@
     </label>
   </div>
 </label>
+<!-- Syllabus -->
+<label class="m-2 h-full w-full cursor-pointer hover:bg-slate-300" (click)="selectTemplate(templates[8])">
+  <div class="mb-3 mt-3 h-60 w-full overflow-y-auto overflow-x-hidden rounded-lg border border-gray-300 p-6 shadow-md">
+    <div class="text-center mb-2 -mt-5 flex-row">
+      <input type="radio" name="template" [checked]="selectedTemplate === 7">
+    </div>
+    <div class="text-center mb-2 flex-row">
+      <p class="text-gray-600 text-sm font-medium">Syllabus</p>
+    </div>
+    <label class="flex justify-center items-center">
+      <img [src]="templates[8].image" alt="Template Image">
+    </label>
+  </div>
+</label>
         
       </div>
     </div>
