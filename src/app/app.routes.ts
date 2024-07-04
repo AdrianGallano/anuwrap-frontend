@@ -53,6 +53,8 @@ import { TemplatelistParentComponent } from './core/layout/pages/report/template
 import { ChartComponent } from './core/layout/pages/chart/chart.component';
 import { AnnualContentComponent } from './core/layout/pages/annualcontent/annualcontent.component';
 import { LogoutConfirmComponent } from './core/layout/pages/authentication/logout-confirm/logout-confirm.component';
+import { DeleteallreportsComponent } from './core/layout/pages/report/deleteallreports/deleteallreports.component';
+import { DeleteallannualreportsComponent } from './core/layout/pages/annualreport/deleteallannualreports/deleteallannualreports.component';
 
 
 export const routes: Routes = [
@@ -188,6 +190,11 @@ export const routes: Routes = [
                         canActivate: [authenticationGuard]
                     },
                     {
+                        path: 'deleteallselectedreport',
+                        component: DeleteallreportsComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
                         path: 'annualreportlist',
                         component: AnnualreportlistComponent,
                         canActivate: [authenticationGuard]
@@ -206,6 +213,11 @@ export const routes: Routes = [
                     {
                         path: 'deleteannualreport/:annual_report_id',
                         component: DeleteannualreportComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
+                        path: 'deleteselectedannualreports',
+                        component: DeleteallannualreportsComponent,
                         canActivate: [authenticationGuard]
                     },
 

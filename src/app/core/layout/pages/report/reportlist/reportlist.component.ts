@@ -42,7 +42,6 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
         this.workspaceId = params['params']['workspace_id'];
         this.fetchReports();
         this.fetchReportTypes();
-        this.cdr.detectChanges();
       });
     }
 
@@ -51,7 +50,7 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
         (response) => {
           this.reports = response.data.report;
           this.old_state = this.reports
-          this.cdr.detectChanges()
+          this.cdr.detectChanges();
         },
         (error) => {
           console.log(error);
@@ -88,6 +87,27 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
       this.reports = this.reports.filter(report => {
         return report.title.includes(this.report_filter); 
       });
+    }
+
+    // Method to check if any report is selected
+  isAnyReportSelected(): boolean {
+    return this.reports.some(report => report.selected);
+  }
+
+    toggleSelectAll(event: any) {
+      const checked = event.target.checked;
+      this.reports.forEach(report => {
+        report.selected = checked;
+      });
+    }
+  
+    navigateTodeleteSelectedReports(): void {
+      const selectedReportIds = this.reports.filter(report => report.selected).map(report => report.report_id);
+    this.route.navigate([`../deleteallselectedreport`], {
+      relativeTo: this.aRoute,
+      queryParams: { reportIds: selectedReportIds.join(',') }
+    });
+
     }
 
     navigateToCreateReport(): void {

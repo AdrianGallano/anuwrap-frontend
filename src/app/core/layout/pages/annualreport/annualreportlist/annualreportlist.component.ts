@@ -105,6 +105,27 @@ export class AnnualreportlistComponent {
         }
     }
 
+    // Method to check if any report is selected
+  isAnyReportSelected(): boolean {
+    return this.annualReport.some(report => report.selected);
+  }
+
+    toggleSelectAll(event: any) {
+        const checked = event.target.checked;
+        this.annualReport.forEach(report => {
+          report.selected = checked;
+        });
+      }
+    
+      navigateTodeleteSelectedReports(): void {
+        const selectedReportIds = this.annualReport.filter(report => report.selected).map(report => report.annual_report_id);
+      this.route.navigate([`../deleteselectedannualreports`], {
+        relativeTo: this.aRoute,
+        queryParams: { reportIds: selectedReportIds.join(',') }
+      });
+  
+      }
+
     navigateToCreateAnnualReport() {
         this.route.navigate([`../createannualreport`], { relativeTo: this.aRoute });
     }
@@ -116,4 +137,5 @@ export class AnnualreportlistComponent {
     navigateToEditAnnualReport(annualReportId: any) {
         this.route.navigate([`../editannualreport/${annualReportId}`], { relativeTo: this.aRoute });
     }
+
 }

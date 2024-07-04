@@ -65,8 +65,10 @@ export class TemplatelistComponent {
 </div>
 </div>
 </div>
-<div class="footer"><img src="../../../../../assets/img/footer2.jpg" width="1445" height="159"></div></div>
+<div class="footer"></div></div>
+</div>
 <div class="break"></div>
+<div class="whole-page">
 <div class="content">
 <div class="header"><img src="../../../../../assets/img/header2.jpg" width="1380" height="172"></div>
 <div class="content-body">
@@ -85,7 +87,8 @@ export class TemplatelistComponent {
 <p style="line-height: 1.1;">&nbsp;</p>
 <p style="line-height: 1.1;">&nbsp;</p>
 </div>
-<div class="footer"><img src="../../../../../assets/img/footer2.jpg" width="1445" height="159"></div>
+<div class="footer"></div>
+</div>
 </div>
 </div>
 <p><div class="break"></div></p>`,
@@ -93,113 +96,114 @@ export class TemplatelistComponent {
     // faculty matrix
     {
       image: '../../../../../assets/img/faculty.png',
-      code: `
-    <div class="whole-page">
-    <div class="content">
-    <div class="faculty-header">
-      <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png"></div>
-      <p class="gc-logo"><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png"></span></p>
-      <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
-      <p style="line-height: 1.1; text-align: center;"><strong>FACULTY MATRIX</strong><br>2nd Semester A.Y. 2023-2024</p>
-      </div>
-      <table style="border-collapse: collapse; width: 94.4948%; height: 329.222px;" border="1"><colgroup><col style="width: 4.67128%;"><col style="width: 4.67128%;"><col style="width: 3.38499%;"><col style="width: 3.45269%;"><col style="width: 3.11419%;"><col style="width: 4.19738%;"><col style="width: 10.3581%;"><col style="width: 8.12397%;"><col style="width: 7.85317%;"><col style="width: 6.97307%;"><col style="width: 6.70227%;"><col style="width: 6.70227%;"><col style="width: 7.10847%;"><col style="width: 7.78547%;"><col style="width: 14.8262%;"></colgroup>
-      <tbody>
-      <tr style="height: 82.1806px;">
-      <td style="text-align: center;" colspan="3"><span style="font-size: 8pt;">Name</span></td>
-      <td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">AGE</span><br><span style="font-size: 8pt;"><br></span></td>
-      <td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">SEX</span><br><span style="font-size: 8pt;"><br></span></td>
-      <td style="text-align: center;" rowspan="2">
-      <p><span style="font-size: 8pt;">TENURE</span><br><span style="font-size: 8pt;">(P/COS)</span></p>
-      </td>
-      <td style="text-align: center;" rowspan="2">
-      <p><span style="font-size: 8pt;">Related Certification/Appropriate Current PRC License</span></p>
-      </td>
-      <td style="text-align: center;" colspan="5">Educational Background (Specify Degree Obtained)</td>
-      <td style="text-align: center;" rowspan="2">
-      <p><span style="font-size: 8pt;">&nbsp;</span></p>
-      <p><span style="font-size: 8pt;">Designation</span></p>
-      </td>
-      <td style="text-align: center;" rowspan="2">
-      <p><span style="font-size: 8pt;">Teaching experience (No. of years)</span></p>
-      </td>
-      <td style="text-align: center;" rowspan="2">
-      <p><span style="font-size: 8pt;">Membership in Professional Organization</span></p>
-      </td>
-      </tr>
-      <tr style="height: 113.819px;">
-      <td style="text-align: center;"><span style="font-size: 8pt;">Last Name</span></td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">First Name</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Middle Initial</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Doctorate Degree</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Master&rsquo;s Degree</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Baccalaureate Degree</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Specialization</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Enrollment Status (Enrolled or Not enrolled)</span></p>
-      </td>
-      </tr>
-      <tr style="height: 133.222px;">
-      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      </tr>
-      </tbody>
-      </table>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <div class="faculty-footer"></div>
-      </div>
-      </div>
-      <div class="break"></div>`,
+      code: `<div class="whole-page">
+      <div class="faculty-content">
+          <div class="faculty-header">
+            <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png"></div>
+            <p class="gc-logo"><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png"></span></p>
+            <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
+            <p style="line-height: 1.1; text-align: center;"><strong>FACULTY MATRIX</strong><br>2nd Semester A.Y. 2023-2024</p>
+          </div>
+          <div class="faculty-content-body">
+        <table style="border-collapse: collapse; width: 94.4948%; height: 329.222px;" border="1"><colgroup><col style="width: 4.67128%;"><col style="width: 4.67128%;"><col style="width: 3.38499%;"><col style="width: 3.45269%;"><col style="width: 3.11419%;"><col style="width: 4.19738%;"><col style="width: 10.3581%;"><col style="width: 8.12397%;"><col style="width: 7.85317%;"><col style="width: 6.97307%;"><col style="width: 6.70227%;"><col style="width: 6.70227%;"><col style="width: 7.10847%;"><col style="width: 7.78547%;"><col style="width: 14.8262%;"></colgroup>
+        <tbody>
+        <tr style="height: 82.1806px;">
+        <td style="text-align: center;" colspan="3"><span style="font-size: 8pt;">Name</span></td>
+        <td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">AGE</span><br><span style="font-size: 8pt;"><br></span></td>
+        <td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">SEX</span><br><span style="font-size: 8pt;"><br></span></td>
+        <td style="text-align: center;" rowspan="2">
+        <p><span style="font-size: 8pt;">TENURE</span><br><span style="font-size: 8pt;">(P/COS)</span></p>
+        </td>
+        <td style="text-align: center;" rowspan="2">
+        <p><span style="font-size: 8pt;">Related Certification/Appropriate Current PRC License</span></p>
+        </td>
+        <td style="text-align: center;" colspan="5">Educational Background (Specify Degree Obtained)</td>
+        <td style="text-align: center;" rowspan="2">
+        <p><span style="font-size: 8pt;">&nbsp;</span></p>
+        <p><span style="font-size: 8pt;">Designation</span></p>
+        </td>
+        <td style="text-align: center;" rowspan="2">
+        <p><span style="font-size: 8pt;">Teaching experience (No. of years)</span></p>
+        </td>
+        <td style="text-align: center;" rowspan="2">
+        <p><span style="font-size: 8pt;">Membership in Professional Organization</span></p>
+        </td>
+        </tr>
+        <tr style="height: 113.819px;">
+        <td style="text-align: center;"><span style="font-size: 8pt;">Last Name</span></td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;">First Name</span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;">Middle Initial</span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;">Doctorate Degree</span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;">Master&rsquo;s Degree</span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;">Baccalaureate Degree</span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;">Specialization</span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;">Enrollment Status (Enrolled or Not enrolled)</span></p>
+        </td>
+        </tr>
+        <tr style="height: 133.222px;">
+        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
+        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        <td style="text-align: center;">
+        <p><span style="font-size: 8pt;"></span></p>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        </div>
+        <div class="faculty-footer"></div>
+        </div>
+        </div>
+        <div class="break"></div>`,
     },
     // teaching and learning
     {

@@ -6,23 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { ReportService } from '../../../../../shared/services/report.service';
 import { FacultymatrixService } from '../../../../../shared/services/facultymatrix.service';
 
-interface FacultyMatrixEntry {
-  faculty_matrix_id: number;
-  report_id: number;
-  name: string;
-  position: string;
-  tenure: string;
-  status: number;
-  related_certificate: string;
-  doctorate_degree: string;
-  masters_degree: string;
-  baccalaureate_degree: string;
-  specification: string;
-  enrollment_status: string;
-  designation: string;
-  teaching_experience: number;
-  organization_membership: string;
-}
 
 @Component({
   selector: 'app-deletereport',
@@ -34,9 +17,7 @@ interface FacultyMatrixEntry {
 export class DeletereportComponent implements OnInit {
   workspaceId: any;
   reportId: any;
-  facultyMatrixId: any;
   report: any = {};
-  facultyMatrices: FacultyMatrixEntry[] = [];
   constructor(private route: Router, private aRoute: ActivatedRoute, private reportService: ReportService, private facultyMatrixService: FacultymatrixService) {
   }
 
@@ -74,6 +55,10 @@ export class DeletereportComponent implements OnInit {
     } else {
       console.error('Report ID is missing.');
     }
+  }
+
+  deleteAllReport(): void {
+
   }
   
 

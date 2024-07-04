@@ -202,6 +202,9 @@ export class ContentComponent implements OnInit {
       display: none;
     }
       .whole-page {
+       display: flex;
+  flex-direction: column;
+  align-items: stretch;
         background-color: #fff;
         width: 100%;
         height: 100%;
@@ -290,6 +293,8 @@ export class ContentComponent implements OnInit {
       }
 
       .img-container {
+      display: flex;
+        flex-wrap: wrap;
         cursor: move;
         gap: 10px;
         border: 1px solid #000;
@@ -343,6 +348,7 @@ export class ContentComponent implements OnInit {
     width: 100%;
     buttom: 0;
     z-index: 1000; 
+    page-break-inside: avoid;
   }
 
   .header {
@@ -359,6 +365,7 @@ export class ContentComponent implements OnInit {
     width: 100%;
     bottom: 0;
     z-index: 1000; 
+    page-break-inside: avoid;
   }
 
   /* Content-body */
@@ -739,7 +746,6 @@ editor.on('drop', (event: DragEvent) => {
         <p style="line-height: 1; text-align: left;">&nbsp;</p>
         </div>
     <div class="footer">
-     <img src="../../../../../assets/img/footer2.jpg" width="1445" height="159">
     </div>
     </div>
     </div>
