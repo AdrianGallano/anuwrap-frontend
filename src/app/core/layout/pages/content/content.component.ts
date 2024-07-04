@@ -207,13 +207,13 @@ export class ContentComponent implements OnInit {
         height: 100%;
         box-sizing: border-box;
         page-break-after: always;
-        position: relative;
       }
 
       .content {
         margin-top: 0;
         margin-buttom: 0;
         page-break-inside: avoid; 
+        position: relative;
       }
 
       .faculty-content {
@@ -222,6 +222,7 @@ export class ContentComponent implements OnInit {
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
+        position: relative;
         }
 
         .teaching-content {
@@ -230,6 +231,7 @@ export class ContentComponent implements OnInit {
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
+        position: relative;
         }
 
         .facultysched-content {
@@ -238,6 +240,7 @@ export class ContentComponent implements OnInit {
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
+        position: relative;
         }
 
         .event-content {
@@ -246,6 +249,7 @@ export class ContentComponent implements OnInit {
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
+        position: relative;
         }
 
         .financial-content {
@@ -254,6 +258,7 @@ export class ContentComponent implements OnInit {
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
+        position: relative;
         }
 
         .summary-content {
@@ -262,6 +267,7 @@ export class ContentComponent implements OnInit {
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
+        position: relative;
         }
 
         .syllabus-content {
@@ -270,6 +276,7 @@ export class ContentComponent implements OnInit {
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
+        position: relative;
           
         }
 
@@ -350,7 +357,7 @@ export class ContentComponent implements OnInit {
   .footer {
   position: absolute;  
     width: 100%;
-    buttom: 0;
+    bottom: 0;
     z-index: 1000; 
   }
 
@@ -358,8 +365,8 @@ export class ContentComponent implements OnInit {
 
   .content-body {
       page-break-inside: avoid;
-     padding-top: 400px;
-    margin-buttom: 2rem;
+     padding-top: 275px;
+     margin: 0 50px 0 50px;
   }
 
   .faculty-content-body {
@@ -386,14 +393,17 @@ export class ContentComponent implements OnInit {
     margin-buttom: 2rem;
     }
 
+
       .gc-logo img{
         width: 128px;
         height: 128px;
+        padding: 2px
       }
       
       .ccs-logo img{
         width: 130px;
         height: 130px;
+        padding: 2px;
       }
     }
   `,  
@@ -729,7 +739,7 @@ editor.on('drop', (event: DragEvent) => {
         <p style="line-height: 1; text-align: left;">&nbsp;</p>
         </div>
     <div class="footer">
-      <img src="../../../../../assets/img/footer2.jpg" width="1201" height="166">
+     <img src="../../../../../assets/img/footer2.jpg" width="1445" height="159">
     </div>
     </div>
     </div>
@@ -1220,7 +1230,9 @@ editor.on('drop', (event: DragEvent) => {
     <p><span style="font-family: 'times new roman', times, serif;"><strong>Suggestions for future events:</strong></span></p>
     </div>
     <div class="event-footer"></div>
-    <p><div class="break"></div></p>
+    </div>
+    <div class="break"></div>
+    <div class="event-content">
     <div class="event-header">
     <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
     <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
@@ -1331,8 +1343,10 @@ editor.on('drop', (event: DragEvent) => {
     <p><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><span style="font-family: 'times new roman', times, serif;">
     </div>
     <div class="financial-footer"></div>
-    <div class="break"></div></span></span></span></p>
     
+    </div>
+    <div class="break"></div>
+    <div class="financial-content">
     <div class="financial-header">
     <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
     <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
@@ -1465,8 +1479,10 @@ editor.on('drop', (event: DragEvent) => {
     <p class="MsoNormal"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">
     </div>
     <div class="summary-footer"></div>
-    <div class="break"></div></span></strong></p>
     
+    </div>
+    <div class="break"></div>
+    <div class="summary-content">
     <div class="summary-header">
     <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
     <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>

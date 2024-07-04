@@ -65,8 +65,9 @@ export class TemplatelistComponent {
 </div>
 </div>
 </div>
-<div class="footer"><img style="width: 1372px; display: block; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;" src="../../../../../assets/img/footer2.jpg" width="1445" height="159"></div>
+<div class="footer"><img src="../../../../../assets/img/footer2.jpg" width="1445" height="159"></div></div>
 <div class="break"></div>
+<div class="content">
 <div class="header"><img src="../../../../../assets/img/header2.jpg" width="1380" height="172"></div>
 <div class="content-body">
 <p style="line-height: 1.1;">&nbsp;</p>
@@ -565,7 +566,9 @@ export class TemplatelistComponent {
       <p><span style="font-family: 'times new roman', times, serif;"><strong>Lessons learned:</strong></span></p>
       <p><span style="font-family: 'times new roman', times, serif;"><strong>Suggestions for future events:</strong></span></p>
       <div class="event-footer"></div>
-      <p><div class="break"></div></p>
+      </div>
+      <div class="break"></div>
+      <div class="event-content">
       <div class="event-header">
       <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
       <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
@@ -672,8 +675,9 @@ export class TemplatelistComponent {
     <p><span style="font-family: 'times new roman', times, serif;">Prepared by:</span></p>
     <p><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><span style="font-family: 'times new roman', times, serif;">
     <div class="financial-footer"></div>
-    <div class="break"></div></span></span></span></p>
-    
+    </div>
+    <div class="break"></div>
+    <div class="financial-content">
     <div class="financial-header">
     <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
     <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
@@ -802,7 +806,9 @@ export class TemplatelistComponent {
     <p class="MsoNormal">&nbsp;</p>
     <p class="MsoNormal"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">
     <div class="summary-footer"></div>
-    <div class="break"></div></span></strong></p>
+    </div>
+    <div class="break"></div>
+    <div class="summary-content">
     
     <div class="summary-header">
     <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
