@@ -463,6 +463,7 @@ export class ContentComponent implements OnInit {
       
 // Assume 'editor' is your TinyMCE instance
 let originalElement: HTMLElement | null = null;
+let positions: { id: string, left: string, top: string }[] = [];
 
 editor.on('dragstart', (event: DragEvent) => {
   const targetElement = event.target as HTMLElement;
@@ -474,6 +475,14 @@ editor.on('dragstart', (event: DragEvent) => {
 
     // Clone the dragged element
     const draggedElement = targetElement.cloneNode(true) as HTMLElement;
+
+    // Ensure that the cloned element retains its original position attributes
+    if (targetElement.style.position === 'absolute') {
+      draggedElement.style.position = 'absolute';
+      draggedElement.style.left = targetElement.style.left;
+      draggedElement.style.top = targetElement.style.top;
+    }
+
     event.dataTransfer!.setData('text/html', draggedElement.outerHTML);
     event.dataTransfer!.effectAllowed = 'move';
   }
@@ -503,10 +512,14 @@ editor.on('drop', (event: DragEvent) => {
       const offsetX = event.clientX - pageRect.left;
       const offsetY = event.clientY - pageRect.top;
 
+      // Store position in attributes
+      insertedElement.setAttribute('data-left', offsetX.toString());
+      insertedElement.setAttribute('data-top', offsetY.toString());
+
       // Adjust the style for absolute positioning based on offsetX and offsetY
       insertedElement.style.position = 'absolute';
       insertedElement.style.left = offsetX + 'px';
-      insertedElement.style.top = offsetY + 'px'; // Adjusting top position
+      insertedElement.style.top = offsetY + 'px';
 
       // Append the inserted element to the drop target
       dropTarget.appendChild(insertedElement);
@@ -519,8 +532,6 @@ editor.on('drop', (event: DragEvent) => {
     }
   }
 });
-
-
 
        
       editor.on('keyup', (event: KeyboardEvent) => {
@@ -667,6 +678,7 @@ editor.on('drop', (event: DragEvent) => {
     }
   }
   
+  
 
   private convertExcelToHtmlTable(excelData: any[]): string {
     let html = '<table>';
@@ -682,9 +694,9 @@ editor.on('drop', (event: DragEvent) => {
   }
 
   saveContent(editor: any): void {
-    const contentBody = editor.getContent();
+    const contentBody = editor.getBody().innerHTML; // Get entire HTML content
     this.content.body = contentBody;
-
+  
     this.contentService.editContent(this.content, this.contentId).subscribe(
       (response) => {
         this.successMessage = "Updated Successfully";
@@ -699,6 +711,7 @@ editor.on('drop', (event: DragEvent) => {
       }
     );
   }
+  
 
   showMessage(type: string): void {
     if (this.successTimeout) {

@@ -3,12 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { AnnualreportService } from '../../../../../shared/services/annualreport.service';
 import { ReportService } from '../../../../../shared/services/report.service';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 @Component({
-  selector: 'app-createannualreport',
-  standalone: true,
-  imports: [RouterModule, FormsModule],
-  templateUrl: './createannualreport.component.html',
-  styleUrl: './createannualreport.component.css'
+    selector: 'app-createannualreport',
+    standalone: true,
+    templateUrl: './createannualreport.component.html',
+    styleUrl: './createannualreport.component.css',
+    imports: [RouterModule, FormsModule, AiComponent]
 })
 export class CreateannualreportComponent {
 

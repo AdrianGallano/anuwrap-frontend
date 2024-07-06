@@ -20,10 +20,8 @@ export class CreatereportComponent implements OnInit {
   workspaceId: any = null;
   report = {
     title: '',
-    report_type_id: 0,
     workspace_id: 0
   };
-  reportTypes: any;
   reportId: any;
   error= ""
 
@@ -31,8 +29,6 @@ export class CreatereportComponent implements OnInit {
     private reportService: ReportService,
     private route: Router,
     private aRoute: ActivatedRoute,
-    private tokenService: TokenService,
-    private facultyMatrix: FacultymatrixService
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +37,6 @@ export class CreatereportComponent implements OnInit {
     }
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.report.workspace_id = params['params']['workspace_id'];
-      this.fetchReportTypes();
     });
     const modal = document.getElementById('defaultModal');
         if (modal) {
@@ -53,21 +48,10 @@ export class CreatereportComponent implements OnInit {
         }
   }
 
-  fetchReportTypes(): void {
-    this.reportService.getReportType().subscribe(
-      (response) => {
-        this.reportTypes = response.data.reportType;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+
 
 
   createReport(): void {
-
-    
 
     this.reportService.createReport(this.report).subscribe(
       (response) => {
