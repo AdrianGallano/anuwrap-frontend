@@ -27,17 +27,19 @@ export class DeleteallannualreportsComponent {
   }
 
   deleteReports(): void {
-    this.reportIds.forEach(reportId => {
-      this.annualReportService.deleteAnnualReport(reportId).subscribe(
-        (response) => {
-          this.route.navigate(['../annualreportlist'], { relativeTo: this.aRoute });
-        },
-        (error) => {
-          console.log('Error deleting report:', error);
-        }
-      );
+    const deletePromises = this.reportIds.map(reportId => {
+      return this.annualReportService.deleteAnnualReport(reportId).toPromise();
+    });
+  
+    Promise.all(deletePromises).then(() => {
+      setTimeout(() => {
+        this.route.navigate(['../annualreportlist'], { relativeTo: this.aRoute });
+      }, 1000); // Add a 1-second delay before redirecting
+    }).catch(error => {
+      console.log('Error deleting reports:', error);
     });
   }
+  
 
   goToReports() {
     this.route.navigate(['../annualreportlist'], { relativeTo: this.aRoute })

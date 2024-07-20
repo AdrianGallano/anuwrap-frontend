@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavigationBarComponent } from '../../../../../shared/navigation-bar/navigation-bar.component';
 import { UserService } from '../../../../../shared/services/user.service';
@@ -23,9 +23,13 @@ export class ProfileComponent implements OnInit {
     imageName: ""
   };
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.fetchUser();
+  }
+
+  fetchUser() {
     this.userService.getUserInformation().subscribe(
       (response) => {
         this.user.user_id = response.data.user.user_id;
@@ -34,6 +38,7 @@ export class ProfileComponent implements OnInit {
         this.user.lastname = response.data.user.last_name;
         this.user.email = response.data.user.email;
         this.user.imageName = response.data.user.image_name;
+        this.cdr.detectChanges();
       },
       (error) => {
         console.error('Error fetching user information:', error);
@@ -46,6 +51,7 @@ export class ProfileComponent implements OnInit {
     this.userService.createUserAvatar(event, this.user.user_id).subscribe(
       (response) => {
         console.log(response)
+        this.fetchUser();
       },
       (error) => {
         console.error('Error uploading user avatar:', error);

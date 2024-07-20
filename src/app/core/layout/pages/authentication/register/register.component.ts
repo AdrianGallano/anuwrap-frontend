@@ -46,7 +46,7 @@ export class RegisterComponent {
           let errors = error.error.errors;
           this.errors["username"] = errors["username"];
           this.errors["email"] = errors["email"];
-          this.errors["firstname"] = errors["firstname"];
+          this.errors.firstname = "username should contain only letters, numbers, and underscores";
           this.errors["lastname"] = errors["lastname"];
           this.errors["password"] = errors["password"];
           this.errors["password1"] = errors["password1"];

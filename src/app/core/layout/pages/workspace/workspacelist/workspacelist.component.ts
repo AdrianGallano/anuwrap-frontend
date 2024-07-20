@@ -57,6 +57,7 @@ export class WorkspacelistComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching workspaces:', error);
+        this.cdr.detectChanges();
       }
     );
   }

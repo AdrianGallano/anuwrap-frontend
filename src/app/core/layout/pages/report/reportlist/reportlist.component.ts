@@ -41,9 +41,10 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
       this.aRoute.paramMap.subscribe((params: Params) => {
         this.workspaceId = params['params']['workspace_id'];
         this.fetchReports();
-        this.fetchReportTypes();
       });
     }
+
+    
 
     fetchReports(): void {
       this.reportService.getReports(this.workspaceId).subscribe(

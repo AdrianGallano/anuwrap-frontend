@@ -19,11 +19,9 @@ export class EditreportComponent implements OnInit {
   workspaceId: any = null;
   report = {
     title: '',
-    report_type_id: '0',
     workspace_id: '',
   };
   reportId: any;
-  reportTypes: any;
   error: string | null = null;
 
   constructor(
@@ -43,26 +41,14 @@ export class EditreportComponent implements OnInit {
       this.workspaceId = params['params']['workspace_id'];
       this.fetchReport();
     });
-    this.fetchReportTypes();
     
   }
 
-  fetchReportTypes(): void {
-    this.reportService.getReportType().subscribe(
-      (response) => {
-        this.reportTypes = response.data.reportType;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
 
   fetchReport(): void {
     this.reportService.getReport(this.reportId).subscribe(
       (response) => {
         const fetchedReport = response.data.report;
-        this.report.report_type_id = fetchedReport.report_type_id;
         this.report.title = fetchedReport.title;
       },
       (error) => {
@@ -73,14 +59,12 @@ export class EditreportComponent implements OnInit {
   
   editReport(): void {
     this.report.workspace_id = this.workspaceId;
-    this.report.report_type_id = this.report.report_type_id.toString();
   
     this.reportService.editReport(this.report, this.reportId).subscribe(
       (response) => {
         this.route.navigate(['../../reportlist'], { relativeTo: this.aRoute });
       },
       (error) => {
-        this.error = "Select a report type";
   
         // Clear the error message after 3 seconds
         setTimeout(() => {

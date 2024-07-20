@@ -52,15 +52,26 @@ export class ContentComponent implements OnInit {
         min-height: calc(100vh - 1rem);
         padding: 4rem;
         box-sizing: border-box;
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 794px;
+        height: auto;
+        position: relative;
       }
-  
+
+
       .whole-page {
+
         background-color: #fff;
-        width: 100%;
-        height: 100%;
+        width: 794px;
+        height: 1065px;
         box-shadow: 0 0 4px rgba(0, 0, 0, .15);
         box-sizing: border-box;
-        overflow: auto;
+        position: relative;
+
       }
   
       /* Adjust margins and paddings as needed for different content sections */
@@ -73,17 +84,40 @@ export class ContentComponent implements OnInit {
       .summary-content,
       .syllabus-content {
         margin: 0 auto;
-        padding: 0 2rem; /* Adjust padding as per your layout */
+        padding: 0 2rem;
+        position: relative;
+      }
+
+      .content-body table {
+        width: 100%;
+        height: auto;
+        table-layout: fixed;
+        border-collapse: collapse;
+      }
+
+      .content-body th, .content-body td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        word-wrap: break-word; 
+        overflow: hidden; 
+        text-align: center;
+      }
+
+      .content-body tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .content-body tr:hover {
+        background-color: #ddd;
+      }
+
+      .content-body img {
+      max-height: 500px;
+      max-width: 80%;
+      margin: 0 auto;
       }
   
-      .collage-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-        cursor: move;
-      }
+      
   
       .handle {
         position: absolute;
@@ -116,45 +150,54 @@ export class ContentComponent implements OnInit {
         right: 0;
         cursor: nwse-resize;
       }
-  
-      .img-container {
-        cursor: move;
-        gap: 10px;
-        flex-wrap: wrap;
-        border: 1px solid #000;
-        padding: 10px;
-        display: inline-block;
-        position: relative;
-      }
-  
-      .img-container:hover {
-        opacity: 0.5;
-      }
-  
-      .collage-container:hover {
-        opacity: 0.5;
-      }
-  
-      .collage-container > div,
-      .img-container > div {
-        flex: 1 1 calc(33% - 10px);
-        overflow: hidden;
-        max-height: 2000px;
-      }
-  
-      .collage-container img,
-      .img-container img {
-        width: 100%;
-        height: 100%;
-        resize: both;
-      }
-  
-      .image-placeholder {
-        background-color: #ccc;
-        min-height: 300px;
-        max-width: 100%;
-      }
-  
+
+
+  .collage-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 1px solid #000;
+  padding: 10px;
+  cursor: move;
+  margin: 0 auto;
+}
+
+.img-wrapper {
+  cursor: move;
+  gap: 10px;
+  flex-wrap: wrap;
+  border: 1px solid #000;
+  padding: 10px;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.collage-container > div,
+.img-wrapper > div {
+  flex: 1 1 calc(33% - 10px);
+  overflow: hidden;
+  max-height: 900px;
+}
+
+
+
+.image-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  max-height: 200px;
+  background-color: #ccc;
+}
+
+.image-placeholder img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+}
+
+
+
       .header img,
       .footer img {
         width: 100%;
@@ -195,6 +238,7 @@ export class ContentComponent implements OnInit {
       background-color: rgba(0,0,0,0);
       margin: 0;
       padding: 0;
+      position: relative;
     }
 
     /* Print only the whole-page content */
@@ -202,14 +246,12 @@ export class ContentComponent implements OnInit {
       display: none;
     }
       .whole-page {
-       display: flex;
-  flex-direction: column;
-  align-items: stretch;
         background-color: #fff;
         width: 100%;
-        height: 100%;
+        height: auto;
         box-sizing: border-box;
         page-break-after: always;
+        position: relative;
       }
 
       .content {
@@ -264,7 +306,7 @@ export class ContentComponent implements OnInit {
         position: relative;
         }
 
-        .summary-content {
+        summary-content {
          margin-top: 0;
         margin-buttom: 0;
         margin-left: 2rem;
@@ -283,48 +325,50 @@ export class ContentComponent implements OnInit {
           
         }
 
-      .collage-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-        cursor: move;
-      }
+  .collage-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 1px solid #000;
+  padding: 10px;
+  cursor: move;
+  margin: 0 auto;
+  position: absolute;
+}
 
-      .img-container {
-      display: flex;
-        flex-wrap: wrap;
-        cursor: move;
-        gap: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-      }
+.img-wrapper {
+  cursor: move;
+  gap: 10px;
+  flex-wrap: wrap;
+  border: 1px solid #000;
+  padding: 10px;
+  display: inline-block;
+  margin: 0 auto;
+  position: absolute;
+}
 
-      .img-container:hover {
-        opacity: 0.5;
-      }
+.collage-container > div,
+.img-wrapper > div {
+  flex: 1 1 calc(33% - 10px);
+  overflow: hidden;
+  max-height: 900px;
+}
 
-      .collage-container:hover {
-        opacity: 0.5;
-      }
 
-      .collage-container > div, .img-container > div {
-        flex: 1 1 calc(33% - 10px);
-        overflow: hidden;
-        max-height: 2000px;
-      }
 
-      .collage-container img, .img-container img {
-        width: 100%;
-        height: 100%;
-      }
+.image-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  max-height: 200px;
+  background-color: #ccc;
+}
 
-      .image-placeholder {
-        background-color: #ccc;
-        min-height: 300px;
-        max-width: 100%;
-      }
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+}
 
       .header img,
       .footer img {
@@ -348,7 +392,6 @@ export class ContentComponent implements OnInit {
     width: 100%;
     buttom: 0;
     z-index: 1000; 
-    page-break-inside: avoid;
   }
 
   .header {
@@ -365,14 +408,13 @@ export class ContentComponent implements OnInit {
     width: 100%;
     bottom: 0;
     z-index: 1000; 
-    page-break-inside: avoid;
   }
 
   /* Content-body */
 
   .content-body {
       page-break-inside: avoid;
-     padding-top: 275px;
+     padding-top: 160px;
      margin: 0 50px 0 50px;
   }
 
@@ -380,6 +422,7 @@ export class ContentComponent implements OnInit {
       page-break-inside: avoid;
      padding-top: 300px;
     margin-buttom: 2rem;
+
   }
 
    .event-content-body {
@@ -400,6 +443,11 @@ export class ContentComponent implements OnInit {
     margin-buttom: 2rem;
     }
 
+     .summary-content-body{
+    padding-top: 250px;
+    padding-right: 10px;
+    }
+
 
       .gc-logo img{
         width: 128px;
@@ -412,6 +460,27 @@ export class ContentComponent implements OnInit {
         height: 130px;
         padding: 2px;
       }
+
+      .content-body table {
+    width: 100%;
+    height: auto;
+    table-layout: fixed;
+  }
+
+  .content-body th, .content-body td {
+    word-wrap: break-word;
+    overflow: hidden;
+  }
+.content-body img {
+max-height: 500px;
+max-width: 80%;
+margin: 0 auto;
+}
+
+      table {
+      page-break-inside: avoid;
+      margin: 0 auto;
+      }
     }
   `,  
     plugins: 'save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
@@ -420,13 +489,14 @@ export class ContentComponent implements OnInit {
       this.editor = editor;
 
       editor.ui.registry.addButton('uploadCustomFile', {
-        text: 'Open File',
+        text: 'Import File',
         onAction: () => this.openFilePicker(editor)
       });
       editor.ui.registry.addMenuButton('addPageButton', {
         text: 'Add Page',
         fetch: (callback: any) => {
           const items = [
+            { type: 'menuitem', text: 'Blank Report Page', onAction: () => this.insertNewEmptyPage(editor) },
             { type: 'menuitem', text: 'Accomplishment Report Page', onAction: () => this.insertNewAccomplishmentPage(editor) },
             { type: 'menuitem', text: 'Faculty Matrix Report Page', onAction: () => this.insertNewFacultyPage(editor) },
             { type: 'menuitem', text: 'Teaching And Learning Report Page', onAction: () => this.insertNewTeachingPage(editor) },
@@ -460,16 +530,14 @@ export class ContentComponent implements OnInit {
       }); 
 
       editor.on('init', () => this.initializeContent(editor));
-      
-// Assume 'editor' is your TinyMCE instance
+
 let originalElement: HTMLElement | null = null;
-let positions: { id: string, left: string, top: string }[] = [];
 
 editor.on('dragstart', (event: DragEvent) => {
   const targetElement = event.target as HTMLElement;
 
   // Check if the dragged element is draggable
-  if (targetElement.closest('body') && (targetElement.classList.contains('img-container') || targetElement.classList.contains('collage-container'))) {
+  if (targetElement.closest('.whole-page') && (targetElement.classList.contains('img-wrapper') || targetElement.classList.contains('collage-wrapper'))) {
     // Set the targetElement as the original element
     originalElement = targetElement;
 
@@ -506,11 +574,11 @@ editor.on('drop', (event: DragEvent) => {
     if (tempDiv.children.length > 0) {
       const insertedElement = tempDiv.children[0] as HTMLElement;
 
-      // Calculate the drop position relative to the whole-page container
-      const wholePage = dropTarget.closest('body') as HTMLElement;
+      // Calculate the drop position relative to the body container
+      const wholePage = dropTarget.closest('.whole-page') as HTMLElement;
       const pageRect = wholePage.getBoundingClientRect();
       const offsetX = event.clientX - pageRect.left;
-      const offsetY = event.clientY - pageRect.top;
+      const offsetY = event.clientY - pageRect.top - 210;
 
       // Store position in attributes
       insertedElement.setAttribute('data-left', offsetX.toString());
@@ -598,6 +666,7 @@ editor.on('drop', (event: DragEvent) => {
         editor.setContent(response.data.content.body);
         this.content.report_id = response.data.content.report_id;
         this.content.body = response.data.content.body;
+        console.log(this.content.body)
       },
       (error) => {
         console.error('Error fetching content:', error);
@@ -642,19 +711,19 @@ editor.on('drop', (event: DragEvent) => {
     const workbook = XLSX.read(contents, { type: 'binary' });
     const firstSheetName = workbook.SheetNames[0];
     const excelData: any[] = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName], { header: 1 });
-
+  
     const htmlTable = this.convertExcelToHtmlTable(excelData);
     this.updateEditorContent(htmlTable);
   }
-
+  
   private handleCSV(contents: string): void {
     const lines: string[] = contents.split('\n');
     const csvData = lines.map(line => line.split(','));
-
+  
     const htmlTable = this.convertExcelToHtmlTable(csvData);
     this.updateEditorContent(htmlTable);
   }
-
+  
   private handleDoc(contents: ArrayBuffer): void {
     mammoth.convertToHtml({ arrayBuffer: contents }).then(result => {
       this.updateEditorContent(result.value);
@@ -662,24 +731,7 @@ editor.on('drop', (event: DragEvent) => {
       console.error('Error converting DOCX to HTML:', error);
     });
   }
-
-  private updateEditorContent(content: string): void {
-    if (this.editor) {
-      const wrappedContent = `
-        <div class="whole-page">
-          <div class="content">
-            ${content}
-          </div>
-        </div>
-      `;
-      this.editor.setContent(wrappedContent);
-    } else {
-      console.error('TinyMCE editor instance is not available.');
-    }
-  }
   
-  
-
   private convertExcelToHtmlTable(excelData: any[]): string {
     let html = '<table>';
     excelData.forEach(row => {
@@ -692,16 +744,40 @@ editor.on('drop', (event: DragEvent) => {
     html += '</table>';
     return html;
   }
+  
+  
+
+  private updateEditorContent(content: string): void {
+    if (this.editor) {
+      const wrappedContent = `
+        <div class="whole-page">
+          <div class="content">
+            <div class="content-body">
+              ${content}
+            </div>
+          </div>
+        </div>
+        <div class="break"></div>
+      `;
+      this.editor.setContent(wrappedContent);
+    } else {
+      console.error('TinyMCE editor instance is not available.');
+    }
+  }
+  
+  
 
   saveContent(editor: any): void {
-    const contentBody = editor.getBody().innerHTML; // Get entire HTML content
+    const contentBody = editor.getContent(); // Get entire HTML content
     this.content.body = contentBody;
+    console.log(contentBody )
   
     this.contentService.editContent(this.content, this.contentId).subscribe(
       (response) => {
         this.successMessage = "Updated Successfully";
         this.showMessage('success');
         this.cdr.detectChanges();
+        this.initializeContent(editor);
       },
       (error) => {
         console.log(error);
@@ -712,6 +788,267 @@ editor.on('drop', (event: DragEvent) => {
     );
   }
   
+
+  printContent(): void {
+    if (this.isBrowser) {
+      const contentBody = this.editor.getBody().innerHTML.trim();
+      
+      const printWindow: any = window.open('', '_blank');
+      printWindow.document.open();
+      printWindow.document.write(`
+        <html>
+          <head>
+            <style>
+            @media print {
+    @page {
+      size: auto;
+      margin: 0;
+    }
+
+    body {
+      background-color: rgba(0,0,0,0);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Print only the whole-page content */
+    body > *:not(.whole-page) {
+      display: none;
+    }
+
+      .whole-page {
+        background-color: #fff;
+        width: 100%;
+        height: 100%;
+        page-break-after: always;
+        overflow: hidden;
+      }
+
+      .content {
+        margin-top: 0;
+        margin-buttom: 0;
+        page-break-inside: avoid; 
+        position: relative;
+      }
+
+      .faculty-content {
+       margin-top: 0;
+        margin-buttom: 0;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        page-break-inside: avoid; 
+        position: relative;
+        }
+
+        .teaching-content {
+         margin-top: 0;
+        margin-buttom: 0;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        page-break-inside: avoid; 
+        position: relative;
+        }
+
+        .facultysched-content {
+         margin-top: 0;
+        margin-buttom: 0;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        page-break-inside: avoid; 
+        position: relative;
+        }
+
+        .event-content {
+         margin-top: 0;
+        margin-buttom: 0;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        page-break-inside: avoid; 
+        position: relative;
+        }
+
+        .financial-content {
+         margin-top: 0;
+        margin-buttom: 0;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        page-break-inside: avoid; 
+        position: relative;
+        }
+
+        .summary-content {
+         margin-top: 0;
+        margin-buttom: 0;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        page-break-inside: avoid; 
+        position: relative;
+        }
+
+        .syllabus-content {
+         margin-top: 0;
+        margin-buttom: 0;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        page-break-inside: avoid; 
+        position: relative;
+          
+        }
+
+      .collage-container {
+      position: relative;
+      z-index: 999;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        border: 1px solid #000;
+        padding: 10px;
+        cursor: move;
+      }
+
+      .img-container {
+      position: relative;
+      z-index: 999;
+      display: flex;
+        flex-wrap: wrap;
+        cursor: move;
+        gap: 10px;
+        border: 1px solid #000;
+        padding: 10px;
+      }
+
+      .img-container:hover {
+        opacity: 0.5;
+      }
+
+      .collage-container:hover {
+        opacity: 0.5;
+      }
+
+      .collage-container > div, .img-container > div {
+        flex: 1 1 calc(33% - 10px);
+        overflow: hidden;
+        max-height: 2000px;
+      }
+
+      .collage-container img, .img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .image-placeholder {
+        min-height: 300px;
+        max-width: 100%;
+      }
+
+      .header img,
+      .footer img {
+        width: 100%;
+        display: block;
+      }
+
+      /* Headers */
+  .faculty-header, .teaching-header, .facultysched-header, .event-header, .financial-header, .summary-header, .syllabus-header {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  /* Footers */
+  .faculty-footer, .teaching-footer, .facultysched-footer, .event-footer, .financial-footer, .summary-footer, .syllabus-footer {
+    position: absolute;  
+    width: 100%;
+    buttom: 0;
+    z-index: 1000; 
+    page-break-inside: avoid;
+  }
+
+  .header {
+   position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  .footer {
+  position: absolute;  
+    width: 100%;
+    bottom: 0;
+    z-index: 1000; 
+    page-break-inside: avoid;
+  }
+
+  /* Content-body */
+
+  .content-body {
+      page-break-inside: avoid;
+     padding-top: 275px;
+     margin: 0 50px 0 50px;
+  }
+
+  .faculty-content-body {
+      page-break-inside: avoid;
+     padding-top: 300px;
+    margin-buttom: 2rem;
+  }
+
+
+   .event-content-body {
+       page-break-inside: avoid;
+     padding-top: 150px;
+    margin-buttom: 2rem;
+   }
+
+   .facultysched-content-body {
+       page-break-inside: avoid;
+     padding-top: 150px;
+    margin-buttom: 2rem;
+   }
+
+   .teaching-content-body, .financial-content-body, .summary-content-body, .syllabus-content-body {
+    page-break-inside: avoid;
+     padding-top: 150px;
+    margin-buttom: 2rem;
+    }
+
+    td, th {
+    min-height: 10px;
+    }
+
+
+      .gc-logo img{
+        width: 128px;
+        height: 128px;
+        padding: 2px
+      }
+      
+      .ccs-logo img{
+        width: 130px;
+        height: 130px;
+        padding: 2px;
+      }
+    }
+            </style>
+          </head>
+          <body>
+            ${contentBody}
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      
+      printWindow.onload = () => {
+        printWindow.print();
+        printWindow.close();
+      };
+    }
+  }
 
   showMessage(type: string): void {
     if (this.successTimeout) {
@@ -731,152 +1068,400 @@ editor.on('drop', (event: DragEvent) => {
   navigateToReportList(): void {
     this.route.navigate([`../../../../reportlist`], { relativeTo: this.aRoute });
   }
+
+
+  insertNewEmptyPage(editor: Editor): void {
+    const newPage =`<div class="whole-page" style="height: 1123px">
+
+</div>
+<p><div class="break"></div></p>`
+    editor.insertContent(newPage)
+  }
   
 
   insertNewAccomplishmentPage(editor: Editor): void {
-    const newPage = `
-    <div class="whole-page">
-    <div class="content">
-    <div class="header">
-      <img src="../../../../../assets/img/header2.jpg" width="1205" height="242">
-    </div>
-    <div class= "content-body">
-        <p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">BSEMC Accomplishment Comprehensive Narrative Report</span></strong></p>
-        <p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Renewal of Institutional Membership for Animation Council of the Philippines (ACPI)</span></strong><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong></p>
-        <p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Gordon College &ndash; College of Computer Studies renewed it&rsquo;s academic membership with Animation Council of the Philippines (ACPI). This renewal signifies our unwavering commitment in the field of animation and our dedication to supporting the initiatives of ACPI. Our institution has long recognized the vital role played by ACPI in advancing and promoting the field of animation in the Philippines. Since our initial membership commencement on September 2021, our active involvement in ACPI has been a source of pride. Renewing our membership was a natural choice to maintain our contributions to the growth and development of our BSEMC students in the field of animation.</span></p>
-        <p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">The renewal of our institutional membership with the Animation Council of the Philippines is a testament to our enduring commitment to the growth and excellence our BSEMC Students in the field of animation. We eagerly anticipate continuing our active involvement, collaborating with fellow members and academic institutions, and contributing to ACPI's mission to further enhance the country's animation landscape.</span></p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        <p style="line-height: 1; text-align: left;">&nbsp;</p>
-        </div>
-    <div class="footer">
-    </div>
-    </div>
-    </div>
-    <div class="break"></div>
-  `;
+    const newPage = `<div class="whole-page">
+<div class="content">
+<div class="header"><img src="../../../../../assets/img/header2.jpg" width="1380" height="172"></div>
+<div class="content-body">
+<p style="line-height: 1.1;">&nbsp;</p>
+<p style="line-height: 1.1;">&nbsp;</p>
+<div class="img-wrapper" style="width: 600px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move;" draggable="true" data-left="69" data-top="115.60000038146973">
+<div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">
+<div class="image-placeholder" style="height: 200px; background-color: #ccc;">&nbsp;</div>
+</div>
+<div class="text-box" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.</div>
+</div>
+<p>&nbsp;</p>
+<p style="line-height: 1.1;">&nbsp;</p>
+<p style="line-height: 1.1;">&nbsp;</p>
+</div>
+<div class="footer">&nbsp;</div>
+</div>
+</div>
+<p><div class="break"></div></p>`;
     editor.insertContent(newPage);
   }
 
   insertNewFacultyPage(editor: Editor): void {
-    const newPage = `
-    <div class="whole-page">
-    <div class="faculty-content">
-        <div class="faculty-header">
-          <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png"></div>
-          <p class="gc-logo"><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png"></span></p>
-          <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
-          <p style="line-height: 1.1; text-align: center;"><strong>FACULTY MATRIX</strong><br>2nd Semester A.Y. 2023-2024</p>
-        </div>
-        <div class="faculty-content-body">
-      <table style="border-collapse: collapse; width: 94.4948%; height: 329.222px;" border="1"><colgroup><col style="width: 4.67128%;"><col style="width: 4.67128%;"><col style="width: 3.38499%;"><col style="width: 3.45269%;"><col style="width: 3.11419%;"><col style="width: 4.19738%;"><col style="width: 10.3581%;"><col style="width: 8.12397%;"><col style="width: 7.85317%;"><col style="width: 6.97307%;"><col style="width: 6.70227%;"><col style="width: 6.70227%;"><col style="width: 7.10847%;"><col style="width: 7.78547%;"><col style="width: 14.8262%;"></colgroup>
-      <tbody>
-      <tr style="height: 82.1806px;">
-      <td style="text-align: center;" colspan="3"><span style="font-size: 8pt;">Name</span></td>
-      <td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">AGE</span><br><span style="font-size: 8pt;"><br></span></td>
-      <td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">SEX</span><br><span style="font-size: 8pt;"><br></span></td>
-      <td style="text-align: center;" rowspan="2">
-      <p><span style="font-size: 8pt;">TENURE</span><br><span style="font-size: 8pt;">(P/COS)</span></p>
-      </td>
-      <td style="text-align: center;" rowspan="2">
-      <p><span style="font-size: 8pt;">Related Certification/Appropriate Current PRC License</span></p>
-      </td>
-      <td style="text-align: center;" colspan="5">Educational Background (Specify Degree Obtained)</td>
-      <td style="text-align: center;" rowspan="2">
-      <p><span style="font-size: 8pt;">&nbsp;</span></p>
-      <p><span style="font-size: 8pt;">Designation</span></p>
-      </td>
-      <td style="text-align: center;" rowspan="2">
-      <p><span style="font-size: 8pt;">Teaching experience (No. of years)</span></p>
-      </td>
-      <td style="text-align: center;" rowspan="2">
-      <p><span style="font-size: 8pt;">Membership in Professional Organization</span></p>
-      </td>
-      </tr>
-      <tr style="height: 113.819px;">
-      <td style="text-align: center;"><span style="font-size: 8pt;">Last Name</span></td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">First Name</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Middle Initial</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Doctorate Degree</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Master&rsquo;s Degree</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Baccalaureate Degree</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Specialization</span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;">Enrollment Status (Enrolled or Not enrolled)</span></p>
-      </td>
-      </tr>
-      <tr style="height: 133.222px;">
-      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;"><span style="font-size: 8pt;"></span></td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      <td style="text-align: center;">
-      <p><span style="font-size: 8pt;"></span></p>
-      </td>
-      </tr>
-      </tbody>
-      </table>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      </div>
-      <div class="faculty-footer"></div>
-      </div>
-      </div>
-      <div class="break"></div>`;
+    const newPage = `<div class="whole-page">
+<div class="faculty-content">
+<div class="faculty-header">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png"></div>
+<p class="gc-logo"><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png"></span></p>
+<p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
+<p style="line-height: 1.1; text-align: center;"><strong>FACULTY MATRIX</strong><br>2nd Semester A.Y. 2023-2024</p>
+</div>
+<div class="faculty-content-body">
+<div class="faculty-table-wrapper">
+<table style="border-collapse: collapse; margin: 0 auto; width: 80%; height: 424.663px;" border="1"><colgroup><col style="width: 4.56615%;"><col style="width: 4.56615%;"><col style="width: 5.00102%;"><col style="width: 3.58769%;"><col style="width: 3.37025%;"><col style="width: 5.65333%;"><col style="width: 14.242%;"><col style="width: 6.52307%;"><col style="width: 5.76204%;"><col style="width: 8.47999%;"><col style="width: 8.47999%;"><col style="width: 7.06666%;"><col style="width: 6.30732%;"><col style="width: 8.26087%;"><col style="width: 8.04512%;"></colgroup>
+<tbody>
+<tr style="height: 153.463px;">
+<td style="text-align: center;" colspan="3"><span style="font-size: 8pt;">Name</span></td>
+<td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">AGE</span><br><span style="font-size: 8pt;"><br></span></td>
+<td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">SEX</span><br><span style="font-size: 8pt;"><br></span></td>
+<td style="text-align: center;" rowspan="2">
+<p><span style="font-size: 8pt;">TENURE</span><br><span style="font-size: 8pt;">(P/COS)</span></p>
+</td>
+<td style="text-align: center;" rowspan="2">
+<p><span style="font-size: 8pt;">Related Certification/Appropriate Current PRC License</span></p>
+</td>
+<td style="text-align: center;" colspan="5">Educational Background (Specify Degree Obtained)</td>
+<td style="text-align: center;" rowspan="2">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+<p><span style="font-size: 8pt;">Designation</span></p>
+</td>
+<td style="text-align: center;" rowspan="2">
+<p><span style="font-size: 8pt;">Teaching experience (No. of years)</span></p>
+</td>
+<td style="text-align: center;" rowspan="2">
+<p><span style="font-size: 8pt;">Membership in Professional Organization</span></p>
+</td>
+</tr>
+<tr style="height: 135.2px;">
+<td style="text-align: center;"><span style="font-size: 8pt;">Last Name</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">First Name</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">Middle Initial</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">Doctorate Degree</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">Master&rsquo;s Degree</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">Baccalaureate Degree</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">Specialization</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">Enrollment Status (Enrolled or Not enrolled)</span></p>
+</td>
+</tr>
+<tr style="height: 68px;">
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+</tr>
+<tr style="height: 68px;">
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+<td style="text-align: center;">
+<p><span style="font-size: 8pt;">&nbsp;</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div>
+<div class="faculty-footer">&nbsp;</div>
+</div>
+</div>
+<p><div class="break"></div></p>`;
     editor.insertContent(newPage);
   }
 
@@ -1216,72 +1801,70 @@ editor.on('drop', (event: DragEvent) => {
   }
 
   insertNewEventReportPage(editor: Editor): void {
-    const newPage = `
-    <div class="whole-page">
-    <div class="event-content">
-    <div class="event-header">
-    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
-    <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
-    <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
-    <p style="line-height: 1.1; text-align: center;"><br><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Event Report</span></strong></p>
-    </div>
-        <div class="event-content-body">
-    <p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Faculty:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; College/Department:</span></span></p>
-    <p class="MsoNormal" style="text-align: left;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span></strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"> &nbsp;Date Covered:</span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date Submitted:</span></span></p>
-    <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-    <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Brief overview of the event:</span></strong></p>
-    <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Objectives and goals:</span></strong></p>
-    <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-    <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Event planning process:</span></strong></p>
-    <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Team members involved:</span></strong></p>
-    <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Budget and resources:</span></strong></p>
-    <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-    <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Description of the event activities:</span></strong></p>
-    <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Number of attendees:</span></strong></p>
-    <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Key speakers or guests:</span></strong></p>
-    <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-    <p><strong><span style="font-family: 'times new roman', times, serif;">Goals met:</span></strong></p>
-    <p><strong><span style="font-family: 'times new roman', times, serif;">Feedback from attendees:</span></strong></p>
-    <p><strong><span style="font-family: 'times new roman', times, serif;">Positive impacts:</span></strong></p>
-    <p>&nbsp;</p>
-    <p><span style="font-family: 'times new roman', times, serif;"><strong>Issues encountered:</strong></span></p>
-    <p><span style="font-family: 'times new roman', times, serif;"><strong>Lessons learned:</strong></span></p>
-    <p><span style="font-family: 'times new roman', times, serif;"><strong>Suggestions for future events:</strong></span></p>
-    </div>
-    <div class="event-footer"></div>
-    </div>
-    <div class="break"></div>
-    <div class="event-content">
-    <div class="event-header">
-    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
-    <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
-    <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
-    </div>
-        <div class="event-content-body">
-    <p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></span></p>
-    <p><span style="font-family: 'times new roman', times, serif;"><strong>Budget overview:</strong></span></p>
-    <p><span style="font-family: 'times new roman', times, serif;"><strong>Actual expenditures:</strong></span></p>
-    <p><span style="font-family: 'times new roman', times, serif;"><strong>Sponsorship and donations:</strong></span></p>
-    <p>&nbsp;</p>
-    <p><span style="font-family: 'times new roman', times, serif;"><strong>Overall assessment of the event:</strong></span></p>
-    <p><span style="font-family: 'times new roman', times, serif;"><strong>Recommendations for future events:</strong></span></p>
-    <p>&nbsp;</p>
-    <div class="collage-container" style="width: 900px; display: flex; flex-wrap: wrap; gap: 20px; resize: both; overflow: auto;">
-    <div class="image-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: auto;">
-    <div class="image-placeholder" style="height: 300px; background-color: #ccc;">&nbsp;</div>
-    <div class="text-box" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.</div>
-    </div>
-    <div class="image-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: auto;">
-    <div class="image-placeholder" style="height: 300px; background-color: #ccc;">&nbsp;</div>
-    <div class="text-box" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.</div>
-    </div>
-    </div>
-    <p><strong>&nbsp;</strong></p>
-    </div>
-    <div class="event-footer"></div>
-    </div>
-    </div>
-    <div class="break"></div>`;
+    const newPage = `<div class="whole-page">
+<div class="event-content">
+<div class="event-header">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
+<p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
+<p style="line-height: 1.1; text-align: center;"><br><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Event Report</span></strong></p>
+</div>
+<div class="event-content-body">
+<p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Faculty:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; College/Department:</span></span></p>
+<p class="MsoNormal" style="text-align: left;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span></strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"> &nbsp;Date Covered:</span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date Submitted:</span></span></p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Brief overview of the event:</span></strong></p>
+<p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Objectives and goals:</span></strong></p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Event planning process:</span></strong></p>
+<p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Team members involved:</span></strong></p>
+<p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Budget and resources:</span></strong></p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Description of the event activities:</span></strong></p>
+<p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Number of attendees:</span></strong></p>
+<p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Key speakers or guests:</span></strong></p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p><strong><span style="font-family: 'times new roman', times, serif;">Goals met:</span></strong></p>
+<p><strong><span style="font-family: 'times new roman', times, serif;">Feedback from attendees:</span></strong></p>
+<p><strong><span style="font-family: 'times new roman', times, serif;">Positive impacts:</span></strong></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 'times new roman', times, serif;"><strong>Issues encountered:</strong></span></p>
+<p><span style="font-family: 'times new roman', times, serif;"><strong>Lessons learned:</strong></span></p>
+<p><span style="font-family: 'times new roman', times, serif;"><strong>Suggestions for future events:</strong></span></p>
+</div>
+<div class="event-footer">&nbsp;</div>
+</div>
+<div class="break"></div>
+<div class="event-content">
+<div class="event-header">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
+<p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
+</div>
+<div class="event-content-body">
+<p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></span></p>
+<p><span style="font-family: 'times new roman', times, serif;"><strong>Budget overview:</strong></span></p>
+<p><span style="font-family: 'times new roman', times, serif;"><strong>Actual expenditures:</strong></span></p>
+<p><span style="font-family: 'times new roman', times, serif;"><strong>Sponsorship and donations:</strong></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 'times new roman', times, serif;"><strong>Overall assessment of the event:</strong></span></p>
+<p><span style="font-family: 'times new roman', times, serif;"><strong>Recommendations for future events:</strong></span></p>
+<div class="collage-wrapper" style="width: 700px; resize: both; overflow: hidden;">
+<div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
+<div class="image-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #000;">
+<div class="image-placeholder" style="height: 300px; background-color: #ccc;">&nbsp;</div>
+</div>
+<div class="image-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #000;">
+<div class="image-placeholder" style="height: 300px; background-color: #ccc;">&nbsp;</div>
+</div>
+</div>
+<div class="text-box" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.</div>
+&nbsp;</div>
+</div>
+<div class="event-footer">&nbsp;</div>
+</div>
+</div>
+<p><div class="break"></div></p>`;
     editor.insertContent(newPage);
   }
   
@@ -1406,158 +1989,158 @@ editor.on('drop', (event: DragEvent) => {
   }
 
   insertNewSummaryReportPage(editor: Editor): void {
-    const newPage = `
-    <div class="whole-page">
-    <div class="summary-content">
-    <div class="summary-header">
-    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
-    <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
-    <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
-    <p style="line-height: 1.1; text-align: center;"><br><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">SUMMARY OF ACCOMPLISHMENTS AND ACTIVITIES</span></strong></p>
-    <p style="line-height: 1.1; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">FOR 1<sup>st</sup> Semester A.Y. 2023 - 2024</span></strong></p>
-    <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-    </div>
-        <div class="summary-content-body">
-    <p style="line-height: 1.1; text-align: left; padding-left: 40px;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">Name of Student Organization<span style="mso-tab-count: 1;">&nbsp; &nbsp;</span>:</span></strong></p>
-    <p style="line-height: 1.1; text-align: left; padding-left: 40px;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">Name of President<span style="mso-tab-count: 3;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>:&nbsp;</span></strong></p>
-    <table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 801.391px; width: 958px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
-    <tbody>
-    <tr style="height: 93px;">
-    <td style="width: 217.3px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Activities Undertaken</span></strong></p>
-    </td>
-    <td style="width: 226.812px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Dates and Places / Platform</span></strong></p>
-    </td>
-    <td style="width: 243.363px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Activity Main Objective</span></strong></p>
-    </td>
-    <td style="width: 208.925px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Remarks</span></strong></p>
-    </td>
-    </tr>
-    <tr style="height: 174px;">
-    <td style="width: 217.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-    <td style="width: 226.812px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-    <td style="width: 243.363px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal">&nbsp;</p>
-    </td>
-    <td style="width: 208.925px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
-    </td>
-    </tr>
-    <tr style="height: 120px;">
-    <td style="width: 217.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal">&nbsp;</p>
-    </td>
-    <td style="width: 226.812px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
-    </td>
-    <td style="width: 243.363px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
-    </td>
-    <td style="width: 208.925px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
-    </td>
-    </tr>
-    <tr style="height: 228px;">
-    <td style="width: 217.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal">&nbsp;</p>
-    </td>
-    <td style="width: 226.812px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
-    </td>
-    <td style="width: 243.363px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
-    </td>
-    <td style="width: 208.925px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
-    </td>
-    </tr>
-    <tr style="height: 186.391px;">
-    <td style="width: 217.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal">&nbsp;</p>
-    </td>
-    <td style="width: 226.812px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
-    </td>
-    <td style="width: 243.363px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
-    </td>
-    <td style="width: 208.925px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    <p class="MsoNormal" style="padding-left: 40px; text-align: center;">&nbsp;</p>
-    <p class="MsoNormal" style="text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">What were the problems encountered by the officers of the Student Organization in conducting activities?</span></strong></p>
-    <p class="MsoNormal" style="padding-left: 80px;">&nbsp;</p>
-    <p class="MsoNormal" style="padding-left: 80px;">&nbsp;</p>
-    <p class="MsoNormal">&nbsp;</p>
-    <p class="MsoNormal"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">
-    </div>
-    <div class="summary-footer"></div>
-    
-    </div>
-    <div class="break"></div>
-    <div class="summary-content">
-    <div class="summary-header">
-    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
-    <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
-    <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
-    <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-    <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
-    </div>
-        <div class="summary-content-body">
-    <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-    <table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 535.391px; width: 958px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
-    <tbody>
-    <tr style="height: 278.781px;">
-    <td style="width: 217.094px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
-    </td>
-    <td style="width: 226.594px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
-    </td>
-    <td style="width: 243.125px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
-    </td>
-    <td style="width: 208.688px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
-    </td>
-    </tr>
-    <tr style="height: 256.609px;">
-    <td style="width: 217.094px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-    <td style="width: 226.594px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-    <td style="width: 243.125px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal">&nbsp;</p>
-    </td>
-    <td style="width: 208.688px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
-    <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    <p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; text-align: center;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">&nbsp;</span></p>
-    <p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Prepared by: </span></strong></p>
-    <p class="MsoNormal" style="line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
-    <p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><u><span style="mso-spacerun: yes;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></u></span></strong></p>
-    <p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 72pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Secretary</span></strong></p>
-    <p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
-    <p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
-    <p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-spacerun: yes;"><span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span></span></strong></p>
-    <p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 72pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">President</span></strong></p>
-    <p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
-    <p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Noted by:</span></strong></p>
-    <p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
-    <p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-tab-count: 4;"><span style="text-decoration: underline;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong></span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><span style="mso-spacerun: yes;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span><span style="mso-tab-count: 1;">&nbsp; &nbsp; &nbsp;&nbsp;</span></span></strong></p>
-    <p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Organization/Council Adviser<span style="mso-tab-count: 3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-tab-count: 1;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Date</span></strong></p>
-    </div>
-    <div class="summary-footer"></div>
-    </div>
-    </div>
-    <div class="break"></div>`;
+    const newPage = `<div class="whole-page">
+<div class="summary-content">
+<div class="summary-header">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
+<p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
+<p style="line-height: 1.1; text-align: center;"><br><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">SUMMARY OF ACCOMPLISHMENTS AND ACTIVITIES</span></strong></p>
+<p style="line-height: 1.1; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">FOR 1<sup>st</sup> Semester A.Y. 2023 - 2024</span></strong></p>
+<p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+</div>
+<div class="summary-content-body">
+<p style="line-height: 1.1; text-align: left; padding-left: 40px;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">Name of Student Organization<span style="mso-tab-count: 1;">&nbsp; &nbsp;</span>:</span></strong></p>
+<p style="line-height: 1.1; text-align: left; padding-left: 40px;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">Name of President<span style="mso-tab-count: 3;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>:&nbsp;</span></strong></p>
+<table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 801.391px; width: 990px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr style="height: 93px;">
+<td style="width: 225.3px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Activities Undertaken</span></strong></p>
+</td>
+<td style="width: 234.8px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Dates and Places / Platform</span></strong></p>
+</td>
+<td style="width: 251.35px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Activity Main Objective</span></strong></p>
+</td>
+<td style="width: 216.95px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Remarks</span></strong></p>
+</td>
+</tr>
+<tr style="height: 174px;">
+<td style="width: 225.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 234.8px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 251.35px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal">&nbsp;</p>
+</td>
+<td style="width: 216.95px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
+</td>
+</tr>
+<tr style="height: 120px;">
+<td style="width: 225.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal">&nbsp;</p>
+</td>
+<td style="width: 234.8px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
+</td>
+<td style="width: 251.35px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
+</td>
+<td style="width: 216.95px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
+</td>
+</tr>
+<tr style="height: 228px;">
+<td style="width: 225.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal">&nbsp;</p>
+</td>
+<td style="width: 234.8px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
+</td>
+<td style="width: 251.35px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
+</td>
+<td style="width: 216.95px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
+</td>
+</tr>
+<tr style="height: 186.391px;">
+<td style="width: 225.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal">&nbsp;</p>
+</td>
+<td style="width: 234.8px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
+</td>
+<td style="width: 251.35px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
+</td>
+<td style="width: 216.95px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="MsoNormal" style="padding-left: 40px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">What were the problems encountered by the officers of the Student Organization in conducting activities?</span></strong></p>
+<p class="MsoNormal" style="padding-left: 80px;">&nbsp;</p>
+<p class="MsoNormal" style="padding-left: 80px;">&nbsp;</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;"> </span></strong></p>
+</div>
+<div class="summary-footer">&nbsp;</div>
+</div>
+<strong style="mso-bidi-font-weight: normal;"> </strong></div>
+<p><strong style="mso-bidi-font-weight: normal;"> <div class="break"></div></strong></p>
+<div class="whole-page">
+<div class="summary-content">
+<div class="summary-header">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
+<p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+</div>
+<div class="summary-content-body">
+<p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+<table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 535.391px; width: 996px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr style="height: 278.781px;">
+<td style="width: 226.8px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
+</td>
+<td style="width: 236.3px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
+</td>
+<td style="width: 252.862px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
+</td>
+<td style="width: 218.438px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
+</td>
+</tr>
+<tr style="height: 256.609px;">
+<td style="width: 226.8px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 236.3px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 252.862px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal">&nbsp;</p>
+</td>
+<td style="width: 218.438px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; text-align: center;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">&nbsp;</span></p>
+<p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Prepared by: </span></strong></p>
+<p class="MsoNormal" style="line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
+<p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><u><span style="mso-spacerun: yes;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></u></span></strong></p>
+<p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 72pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Secretary</span></strong></p>
+<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
+<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
+<p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-spacerun: yes;"><span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span></span></strong></p>
+<p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 72pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">President</span></strong></p>
+<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
+<p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Noted by:</span></strong></p>
+<p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
+<p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-tab-count: 4;"><span style="text-decoration: underline;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong></span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><span style="mso-spacerun: yes;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span><span style="mso-tab-count: 1;">&nbsp; &nbsp; &nbsp;&nbsp;</span></span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Organization/Council Adviser<span style="mso-tab-count: 3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-tab-count: 1;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Date</span></strong></p>
+</div>
+<div class="summary-footer">&nbsp;</div>
+</div>
+</div>
+<p><strong style="mso-bidi-font-weight: normal;"><div class="break"></div></strong></p>`;
     editor.insertContent(newPage);
   }
 
@@ -1603,37 +2186,40 @@ editor.on('drop', (event: DragEvent) => {
 
   insertCollage(editor: Editor, count: number): void {
     const collageTemplate = `
-    <div class="collage-container" style="width: 900px; display: flex; flex-wrap: wrap; gap: 20px; resize: both; overflow: hidden;">
-    ${Array.from({ length: count }).map(() => `
-          <div class="image-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden;">
-            <div class="image-placeholder" style="height: 300px; background-color: #ccc;"></div>
-            <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
-              CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
+      <div class="collage-wrapper" style="width: 600px; height: auto; resize: both; overflow: hidden; margin: 0 auto;">
+        <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
+          ${Array.from({ length: count }).map(() => `
+            <div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;"> 
+              <div class="image-placeholder" style="height: 100px; background-color: #ccc;"></div>
             </div>
-          </div>
-        `).join('')}
+          `).join('')}
+        </div>
+        <div class="text-box" contenteditable="true" style="flex: 1; min-height: 50px; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
+          CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
+        </div>
       </div>
     `;
     editor.insertContent(collageTemplate);
-
-    // After inserting, find the last inserted img-container and attach dragstart event listener
-    const lastImgContainer = document.querySelector('.collage-container:last-child');
-    if (lastImgContainer) {
-      lastImgContainer.addEventListener('dragstart', (event: Event) => {
+  
+    // After inserting, find the last inserted collage-wrapper and attach dragstart event listener
+    const lastCollageWrapper = document.querySelector('.collage-wrapper:last-child');
+    if (lastCollageWrapper) {
+      lastCollageWrapper.addEventListener('dragstart', (event: Event) => {
         const dragEvent = event as DragEvent;
         if (dragEvent.dataTransfer) {
-          dragEvent.dataTransfer.setData('text/html', lastImgContainer.outerHTML);
+          dragEvent.dataTransfer.setData('text/html', lastCollageWrapper.outerHTML);
           dragEvent.dataTransfer.effectAllowed = 'move';
         }
       });
     }
-
   }
   
   insertImgContainer(editor: Editor) {
     const imgContainer = `
-      <div class="img-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move;" draggable="true">
-        <div class="image-placeholder" style="height: 300px; background-color: #ccc;"></div>
+      <div class="img-wrapper" style="width: 600px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move;" draggable="true">
+      <div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">  
+      <div class="image-placeholder" style="height: 200px; background-color: #ccc;"></div>
+      </div>
         <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
           CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
         </div>
@@ -1643,7 +2229,7 @@ editor.on('drop', (event: DragEvent) => {
     editor.insertContent(imgContainer);
   
     // Attach event listener for dragstart to move the existing container
-    const imgContainerElement = document.querySelector('.img-container:last-child');
+    const imgContainerElement = document.querySelector('.img-wrapper:last-child');
     if (imgContainerElement) {
       imgContainerElement.addEventListener('dragstart', (event: Event) => {
         const dragEvent = event as DragEvent;
@@ -1654,5 +2240,6 @@ editor.on('drop', (event: DragEvent) => {
       });
     }
   }
+  
   
 }

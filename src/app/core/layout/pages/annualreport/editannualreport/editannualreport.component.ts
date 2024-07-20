@@ -3,13 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { AnnualreportService } from '../../../../../shared/services/annualreport.service';
 import { CommonModule } from '@angular/common';
+import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-  selector: 'app-editannualreport',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './editannualreport.component.html',
-  styleUrl: './editannualreport.component.css'
+    selector: 'app-editannualreport',
+    standalone: true,
+    templateUrl: './editannualreport.component.html',
+    styleUrl: './editannualreport.component.css',
+    imports: [CommonModule, FormsModule, AiComponent]
 })
 export class EditannualreportComponent {
   annualReport= {
