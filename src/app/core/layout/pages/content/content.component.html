@@ -1,8 +1,8 @@
-<div class="overflow-hidden h-full">
+<div class="overflow-hidden h-full z-10">
     <div class="flex justify-between">
       <button (click)="navigateToReportList()" type="button" class="py-2.5 px-5 m-2 mt-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Back</button>
-      <!-- <button (click)="printContent()" type="button" class="py-2.5 px-5 m-2 mt-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Back</button>
-       -->
+      <button (click)="openManageSentencesDialog()" type="button" class="py-2.5 px-5 m-2 mt-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Manage Pre-determined text</button>
+      
     </div>
     <div *ngIf="successMessage" class="toast success-popup">
       <div class="toast-content-wrapper">
@@ -14,6 +14,6 @@
     <div *ngIf="errorMessage" class="message-popup error-popup">
       {{ errorMessage }}
     </div>
-    <editor apiKey="wosa4nwcx3nlec1v6cen5dztn0bu47iepff6m1h3jxcq4l5v" [init]="editorConfig"></editor>
+    <editor apiKey="wosa4nwcx3nlec1v6cen5dztn0bu47iepff6m1h3jxcq4l5v" [init]="editorConfig" class="z-10"></editor>
     <app-ai></app-ai>
     </div>

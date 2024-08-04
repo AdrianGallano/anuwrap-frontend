@@ -71,6 +71,7 @@ export class CreatereportselectionComponent {
       (response) => {
         this.reports = response.data.report;
         // Initialize selected state to false
+        console.log(this.reports)
         this.reports.forEach(report => {
           report.selected = false;
         });

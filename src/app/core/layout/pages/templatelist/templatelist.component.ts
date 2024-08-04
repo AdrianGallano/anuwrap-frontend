@@ -71,7 +71,7 @@ export class TemplatelistComponent {
     // faculty matrix
     {
       image: '../../../../../assets/img/faculty.png',
-      code: `<div class="whole-page">
+      code: `<div class="whole-page-with-table">
 <div class="faculty-content">
 <div class="faculty-header">
 <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png"></div>
@@ -434,7 +434,7 @@ export class TemplatelistComponent {
     {
       image:`../../../../../assets/img/teachingandmonitoring.png` ,
       code:`
-    <div class="whole-page">
+    <div class="whole-page-with-table">
     <div class="teaching-content">
     <div class="teaching-header">
     <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
@@ -956,7 +956,7 @@ export class TemplatelistComponent {
     // summary of accomplisment report
     {
       image:`../../../../../assets/img/SUMMARY_ACCOMP_REPORT.png` ,
-      code: `<div class="whole-page">
+      code: `<div class="whole-page-with-table">
 <div class="summary-content">
 <div class="summary-header">
 <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
@@ -1050,7 +1050,7 @@ export class TemplatelistComponent {
 </div>
 <strong style="mso-bidi-font-weight: normal;"> </strong></div>
 <p><strong style="mso-bidi-font-weight: normal;"> <div class="break"></div></strong></p>
-<div class="whole-page">
+<div class="whole-page-with-table">
 <div class="summary-content">
 <div class="summary-header">
 <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>

@@ -10,6 +10,10 @@ import { isPlatformBrowser } from '@angular/common';
 import * as XLSX from 'xlsx';
 import * as mammoth from 'mammoth';
 import { DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { SentanceService } from '../../../../shared/services/sentance.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ManageTextComponent } from '../../../../shared/popup/manage-text/manage-text.component';
+import { interval, Subscription, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-content',
@@ -23,7 +27,10 @@ import { DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class ContentComponent implements OnInit {
   editor: any; // Declare editor property
-
+  sentences: any[] = [];
+  private pollingSubscription: Subscription | null = null;
+  private readonly POLLING_INTERVAL = 5000;
+  
   editorConfig = {
     selector: '#editor',
     height: '700px',
@@ -57,7 +64,7 @@ export class ContentComponent implements OnInit {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 794px;
+        width: auto;
         height: auto;
         position: relative;
       }
@@ -67,11 +74,49 @@ export class ContentComponent implements OnInit {
 
         background-color: #fff;
         width: 794px;
-        height: 1065px;
+        height: auto;
         box-shadow: 0 0 4px rgba(0, 0, 0, .15);
         box-sizing: border-box;
         position: relative;
 
+      }
+
+      .whole-page-with-table {
+
+        background-color: #fff;
+        width: auto;
+        height: auto;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+        box-sizing: border-box;
+        position: relative;
+
+      }
+
+      .import-whole-page {
+
+        background-color: #fff;
+        width: 794px;
+        height: 100%;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+        box-sizing: border-box;
+        position: relative;
+
+      }
+
+      .import-whole-page-landscape {
+
+        background-color: #fff;
+        width: auto;
+        height: auto;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+        box-sizing: border-box;
+        position: relative;
+
+      }
+
+      .content {
+      width: 100%;
+      min-height: 1123px;
       }
   
       /* Adjust margins and paddings as needed for different content sections */
@@ -239,10 +284,14 @@ export class ContentComponent implements OnInit {
       margin: 0;
       padding: 0;
       position: relative;
+      display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 
     /* Print only the whole-page content */
-    body > *:not(.whole-page) {
+    body > *:not(.whole-page, .import-whole-page, .import-whole-page-landscape, .whole-page-with-table) {
       display: none;
     }
       .whole-page {
@@ -254,16 +303,47 @@ export class ContentComponent implements OnInit {
         position: relative;
       }
 
+      .whole-page-with-table {
+        background-color: #fff;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        page-break-after: always;
+        position: relative;
+      }
+
+      .import-whole-page {
+        background-color: #fff;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        page-break-after: always;
+        position: relative;
+
+      }
+
+      .import-whole-page-landscape {
+
+        background-color: #fff;
+        width: 1123px;
+        height: auto;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+        box-sizing: border-box;
+        position: relative;
+
+      }
+
       .content {
-        margin-top: 0;
-        margin-buttom: 0;
         page-break-inside: avoid; 
+        position: relative;
+        margin: 0 auto;
+        padding: 0 2rem;
         position: relative;
       }
 
       .faculty-content {
        margin-top: 0;
-        margin-buttom: 0;
+        margin-bottom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -272,7 +352,7 @@ export class ContentComponent implements OnInit {
 
         .teaching-content {
          margin-top: 0;
-        margin-buttom: 0;
+        margin-bottom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -281,7 +361,7 @@ export class ContentComponent implements OnInit {
 
         .facultysched-content {
          margin-top: 0;
-        margin-buttom: 0;
+        margin-bottom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -290,7 +370,7 @@ export class ContentComponent implements OnInit {
 
         .event-content {
          margin-top: 0;
-        margin-buttom: 0;
+        margin-bottom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -299,7 +379,7 @@ export class ContentComponent implements OnInit {
 
         .financial-content {
          margin-top: 0;
-        margin-buttom: 0;
+        margin-bottom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -308,7 +388,7 @@ export class ContentComponent implements OnInit {
 
         summary-content {
          margin-top: 0;
-        margin-buttom: 0;
+        margin-bottom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -317,7 +397,7 @@ export class ContentComponent implements OnInit {
 
         .syllabus-content {
          margin-top: 0;
-        margin-buttom: 0;
+        margin-bottom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -331,20 +411,17 @@ export class ContentComponent implements OnInit {
   gap: 10px;
   border: 1px solid #000;
   padding: 10px;
-  cursor: move;
   margin: 0 auto;
-  position: absolute;
 }
 
 .img-wrapper {
-  cursor: move;
+
   gap: 10px;
   flex-wrap: wrap;
   border: 1px solid #000;
   padding: 10px;
   display: inline-block;
   margin: 0 auto;
-  position: absolute;
 }
 
 .collage-container > div,
@@ -384,17 +461,20 @@ export class ContentComponent implements OnInit {
     left: 0;
     right: 0;
     z-index: 1000;
+    display: block;
   }
 
   /* Footers */
   .faculty-footer, .teaching-footer, .facultysched-footer, .event-footer, .financial-footer, .summary-footer, .syllabus-footer {
     position: absolute;  
     width: 100%;
-    buttom: 0;
+    bottom: 0;
     z-index: 1000; 
+    display: block;
   }
 
   .header {
+  display: block;
    position: absolute;
     width: 100%;
     top: 0;
@@ -415,32 +495,31 @@ export class ContentComponent implements OnInit {
   .content-body {
       page-break-inside: avoid;
      padding-top: 160px;
-     margin: 0 50px 0 50px;
   }
 
   .faculty-content-body {
       page-break-inside: avoid;
      padding-top: 300px;
-    margin-buttom: 2rem;
+    margin-bottom: 2rem;
 
   }
 
    .event-content-body {
        page-break-inside: avoid;
      padding-top: 150px;
-    margin-buttom: 2rem;
+    margin-bottom: 2rem;
    }
 
    .facultysched-content-body {
        page-break-inside: avoid;
      padding-top: 150px;
-    margin-buttom: 2rem;
+    margin-bottom: 2rem;
    }
 
    .teaching-content-body, .financial-content-body, .summary-content-body, .syllabus-content-body {
     page-break-inside: avoid;
      padding-top: 150px;
-    margin-buttom: 2rem;
+    margin-bottom: 2rem;
     }
 
      .summary-content-body{
@@ -484,7 +563,7 @@ margin: 0 auto;
     }
   `,  
     plugins: 'save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
-    toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | addPageButton | insertImgContainer | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
+    toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | insertSentence | addPageButton | insertImgContainer | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
     setup: (editor: any) => {
       this.editor = editor;
 
@@ -492,11 +571,23 @@ margin: 0 auto;
         text: 'Import File',
         onAction: () => this.openFilePicker(editor)
       });
+
+      editor.ui.registry.addMenuButton('insertSentence', {
+        text: 'Insert Sentence',
+        fetch: (callback: any) => {
+          const items = this.sentences.map((sentence: any) => ({
+            type: 'menuitem',
+            text: sentence.text,
+            onAction: () => this.insertSentence(editor, sentence.text)
+          }));
+          callback(items);
+        }
+      });
+      
       editor.ui.registry.addMenuButton('addPageButton', {
         text: 'Add Page',
         fetch: (callback: any) => {
-          const items = [
-            { type: 'menuitem', text: 'Blank Report Page', onAction: () => this.insertNewEmptyPage(editor) },
+        const items = [
             { type: 'menuitem', text: 'Accomplishment Report Page', onAction: () => this.insertNewAccomplishmentPage(editor) },
             { type: 'menuitem', text: 'Faculty Matrix Report Page', onAction: () => this.insertNewFacultyPage(editor) },
             { type: 'menuitem', text: 'Teaching And Learning Report Page', onAction: () => this.insertNewTeachingPage(editor) },
@@ -517,8 +608,6 @@ margin: 0 auto;
             { type: 'menuitem', text: 'Double', onAction: () => this.insertCollage(editor, 2) },
             { type: 'menuitem', text: 'Triple', onAction: () => this.insertCollage(editor, 3) },
             { type: 'menuitem', text: 'Quadruple', onAction: () => this.insertCollage(editor, 4) },
-            { type: 'menuitem', text: 'Quintuple', onAction: () => this.insertCollage(editor, 5) },
-            { type: 'menuitem', text: 'Sextuple', onAction: () => this.insertCollage(editor, 6) }
           ];
           callback(items);
         }
@@ -530,93 +619,155 @@ margin: 0 auto;
       }); 
 
       editor.on('init', () => this.initializeContent(editor));
+      let originalElement: HTMLElement | null = null;
 
-let originalElement: HTMLElement | null = null;
+      editor.on('init', () => this.initializeContent(editor));
 
-editor.on('dragstart', (event: DragEvent) => {
-  const targetElement = event.target as HTMLElement;
+      // Start drag operation on double-click
+      editor.on('dblclick', (event: MouseEvent) => {
+        const targetElement = event.target as HTMLElement;
 
-  // Check if the dragged element is draggable
-  if (targetElement.closest('.whole-page') && (targetElement.classList.contains('img-wrapper') || targetElement.classList.contains('collage-wrapper'))) {
-    // Set the targetElement as the original element
-    originalElement = targetElement;
+        // Check if the double-clicked element is draggable
+        if (targetElement.closest('.whole-page') && (targetElement.classList.contains('img-wrapper') || targetElement.classList.contains('collage-wrapper'))) {
+          originalElement = targetElement;
 
-    // Clone the dragged element
-    const draggedElement = targetElement.cloneNode(true) as HTMLElement;
+          // Create a drag event and dispatch it
+          const dragEvent = new DragEvent('dragstart', {
+            bubbles: true,
+            cancelable: true,
+            dataTransfer: new DataTransfer()
+          });
 
-    // Ensure that the cloned element retains its original position attributes
-    if (targetElement.style.position === 'absolute') {
-      draggedElement.style.position = 'absolute';
-      draggedElement.style.left = targetElement.style.left;
-      draggedElement.style.top = targetElement.style.top;
-    }
+          // Clone the dragged element
+          const draggedElement = targetElement.cloneNode(true) as HTMLElement;
 
-    event.dataTransfer!.setData('text/html', draggedElement.outerHTML);
-    event.dataTransfer!.effectAllowed = 'move';
-  }
-});
+          // Ensure that the cloned element retains its original position attributes
+          if (targetElement.style.position === 'absolute') {
+            draggedElement.style.position = 'absolute';
+            draggedElement.style.left = targetElement.style.left;
+            draggedElement.style.top = targetElement.style.top;
+          }
 
-editor.on('dragover', (event: DragEvent) => {
-  event.preventDefault();
-});
+          dragEvent.dataTransfer!.setData('text/html', draggedElement.outerHTML);
+          dragEvent.dataTransfer!.effectAllowed = 'move';
 
-editor.on('drop', (event: DragEvent) => {
-  event.preventDefault();
-  const dropTarget = event.target as HTMLElement;
-  const contentToInsert = event.dataTransfer!.getData('text/html');
+          // Dispatch the drag event to start dragging
+          targetElement.dispatchEvent(dragEvent);
+        }
+      });
 
-  if (contentToInsert && dropTarget && originalElement) {
-    // Create a temporary div to hold the dropped content
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = contentToInsert.trim();
+      editor.on('dragstart', (event: DragEvent) => {
+        const targetElement = event.target as HTMLElement;
 
-    // Ensure only one child is inserted
-    if (tempDiv.children.length > 0) {
-      const insertedElement = tempDiv.children[0] as HTMLElement;
+        // Check if the dragged element is draggable
+        if (targetElement.closest('.whole-page') && (targetElement.classList.contains('img-wrapper') || targetElement.classList.contains('collage-wrapper'))) {
+          originalElement = targetElement;
 
-      // Calculate the drop position relative to the body container
-      const wholePage = dropTarget.closest('.whole-page') as HTMLElement;
-      const pageRect = wholePage.getBoundingClientRect();
-      const offsetX = event.clientX - pageRect.left;
-      const offsetY = event.clientY - pageRect.top - 210;
+          // Clone the dragged element
+          const draggedElement = targetElement.cloneNode(true) as HTMLElement;
 
-      // Store position in attributes
-      insertedElement.setAttribute('data-left', offsetX.toString());
-      insertedElement.setAttribute('data-top', offsetY.toString());
+          // Ensure that the cloned element retains its original position attributes
+          if (targetElement.style.position === 'absolute') {
+            draggedElement.style.position = 'absolute';
+            draggedElement.style.left = targetElement.style.left;
+            draggedElement.style.top = targetElement.style.top;
+          }
 
-      // Adjust the style for absolute positioning based on offsetX and offsetY
-      insertedElement.style.position = 'absolute';
-      insertedElement.style.left = offsetX + 'px';
-      insertedElement.style.top = offsetY + 'px';
+          event.dataTransfer!.setData('text/html', draggedElement.outerHTML);
+          event.dataTransfer!.effectAllowed = 'move';
+        }
+      });
 
-      // Append the inserted element to the drop target
-      dropTarget.appendChild(insertedElement);
+      editor.on('dragover', (event: DragEvent) => {
+        event.preventDefault(); // Necessary to allow dropping
+      });
 
-      // Remove the original element from its previous position
-      if (originalElement) {
-        originalElement.remove();
-        originalElement = null; // Reset originalElement after removal
+      editor.on('drop', (event: DragEvent) => {
+        event.preventDefault();
+
+        // Get the drop target element
+        const dropTarget = event.target as HTMLElement;
+        const contentToInsert = event.dataTransfer!.getData('text/html');
+
+        if (contentToInsert && dropTarget) {
+          // Find the nearest .whole-page container
+          const wholePage = dropTarget.closest('.whole-page') as HTMLElement;
+          if (wholePage) {
+            // Create a temporary div to hold the dropped content
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = contentToInsert.trim();
+
+            // Ensure only one child is inserted
+            if (tempDiv.children.length > 0) {
+              const insertedElement = tempDiv.children[0] as HTMLElement;
+
+              // Calculate the drop position relative to the .whole-page container
+              const pageRect = wholePage.getBoundingClientRect();
+              const offsetX = event.clientX - pageRect.left;
+              const offsetY = event.clientY - pageRect.top;
+
+              // Store position in attributes
+              insertedElement.setAttribute('data-left', offsetX.toString());
+              insertedElement.setAttribute('data-top', offsetY.toString());
+              insertedElement.style.position = 'absolute';
+              insertedElement.style.left = offsetX + 'px';
+              insertedElement.style.top = offsetY + 'px';
+              
+
+              // Append the inserted element to the .whole-page container
+              wholePage.appendChild(insertedElement);
+
+              // Remove the original element from its previous position
+              if (originalElement) {
+                originalElement.remove();
+                originalElement = null; // Reset originalElement after removal
+              }
+            }
+          }
+        }
+      });
+
+      let draggingElement: HTMLElement | null = null;
+      let offsetX: number;
+      let offsetY: number;
+
+      editor.on('mousedown', (event: MouseEvent) => {
+        const targetElement = event.target as HTMLElement;
+
+        // Check if the element is draggable
+        if (targetElement.closest('.whole-page') && (targetElement.classList.contains('img-wrapper') || targetElement.classList.contains('collage-wrapper'))) {
+          draggingElement = targetElement;
+
+          // Calculate the initial offset between the mouse position and the element's position
+          const rect = targetElement.getBoundingClientRect();
+          offsetX = event.clientX - rect.left;
+          offsetY = event.clientY - rect.top;
+
+          // Add event listeners for mouse movement and release
+          document.addEventListener('mousemove', onMouseMove);
+          document.addEventListener('mouseup', onMouseUp);
+        }
+      });
+
+      function onMouseMove(event: MouseEvent) {
+        if (draggingElement) {
+          // Update the position of the dragging element
+          const newLeft = event.clientX - offsetX;
+          const newTop = event.clientY - offsetY;
+
+          draggingElement.style.position = 'absolute';
+          draggingElement.style.left = newLeft + 'px';
+          draggingElement.style.top = newTop + 'px';
+        }
       }
-    }
-  }
-});
 
-       
-      editor.on('keyup', (event: KeyboardEvent) => {
-        // Handle keyup events
-      });
-      editor.on('keydown', (event: KeyboardEvent) => {
-        // Handle keydown events
-      });
-      editor.on('focus', (event: FocusEvent) => {
-        // Handle focus events
-      });
-      editor.on('blur', (event: FocusEvent) => {
-        // Handle blur events
-      });
-
-      editor.on('NodeChange', () => {
-    });
+      function onMouseUp() {
+        if (draggingElement) {
+          // Remove event listeners
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+        }
+      }
     },
     save_onsavecallback: (editor: any) => {
       this.saveContent(editor);
@@ -639,12 +790,15 @@ editor.on('drop', (event: DragEvent) => {
     private route: Router,
     private contentService: ContentService,
     private cdr: ChangeDetectorRef,
+    private sentenceService: SentanceService,
+    public dialog: MatDialog,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   ngOnInit(): void {
+    this.startPolling();
     this.aRoute.paramMap.subscribe((params: Params) => {
       this.contentId = +params['params']['content_id']; 
     });
@@ -656,6 +810,10 @@ editor.on('drop', (event: DragEvent) => {
 
     if (this.isBrowser) {
     }
+  }
+
+  ngOnDestroy(): void {
+    this.stopPolling();
   }
 
   
@@ -672,6 +830,16 @@ editor.on('drop', (event: DragEvent) => {
         console.error('Error fetching content:', error);
       }
     );
+    const positions = JSON.parse(localStorage.getItem('positions') || '{}');
+  Object.keys(positions).forEach((id) => {
+    const { left, top } = positions[id];
+    const element = document.querySelector(`[data-id="${id}"]`) as HTMLElement;
+    if (element) {
+      element.style.position = 'absolute';
+      element.style.left = `${left}px`;
+      element.style.top = `${top}px`;
+    }
+  });
   }
 
   openFilePicker(editor: any): void {
@@ -713,7 +881,7 @@ editor.on('drop', (event: DragEvent) => {
     const excelData: any[] = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName], { header: 1 });
   
     const htmlTable = this.convertExcelToHtmlTable(excelData);
-    this.updateEditorContent(htmlTable);
+    this.updateEditorContentLandscape(htmlTable);
   }
   
   private handleCSV(contents: string): void {
@@ -721,7 +889,7 @@ editor.on('drop', (event: DragEvent) => {
     const csvData = lines.map(line => line.split(','));
   
     const htmlTable = this.convertExcelToHtmlTable(csvData);
-    this.updateEditorContent(htmlTable);
+    this.updateEditorContentLandscape(htmlTable);
   }
   
   private handleDoc(contents: ArrayBuffer): void {
@@ -750,7 +918,25 @@ editor.on('drop', (event: DragEvent) => {
   private updateEditorContent(content: string): void {
     if (this.editor) {
       const wrappedContent = `
-        <div class="whole-page">
+        <div class="import-whole-page">
+          <div class="content">
+            <div class="content-body">
+              ${content}
+            </div>
+          </div>
+        </div>
+        <div class="break"></div>
+      `;
+      this.editor.setContent(wrappedContent);
+    } else {
+      console.error('TinyMCE editor instance is not available.');
+    }
+  }
+
+  private updateEditorContentLandscape(content: string): void {
+    if (this.editor) {
+      const wrappedContent = `
+        <div class="import-whole-page-landscape">
           <div class="content">
             <div class="content-body">
               ${content}
@@ -767,288 +953,67 @@ editor.on('drop', (event: DragEvent) => {
   
   
 
-  saveContent(editor: any): void {
-    const contentBody = editor.getContent(); // Get entire HTML content
-    this.content.body = contentBody;
-    console.log(contentBody )
-  
-    this.contentService.editContent(this.content, this.contentId).subscribe(
-      (response) => {
-        this.successMessage = "Updated Successfully";
-        this.showMessage('success');
-        this.cdr.detectChanges();
-        this.initializeContent(editor);
-      },
-      (error) => {
-        console.log(error);
-        this.errorMessage = "Update Failed";
-        this.showMessage('error');
-        this.cdr.detectChanges();
-      }
-    );
-  }
-  
-
-  printContent(): void {
-    if (this.isBrowser) {
-      const contentBody = this.editor.getBody().innerHTML.trim();
-      
-      const printWindow: any = window.open('', '_blank');
-      printWindow.document.open();
-      printWindow.document.write(`
-        <html>
-          <head>
-            <style>
-            @media print {
-    @page {
-      size: auto;
-      margin: 0;
-    }
-
-    body {
-      background-color: rgba(0,0,0,0);
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Print only the whole-page content */
-    body > *:not(.whole-page) {
-      display: none;
-    }
-
-      .whole-page {
-        background-color: #fff;
-        width: 100%;
-        height: 100%;
-        page-break-after: always;
-        overflow: hidden;
-      }
-
-      .content {
-        margin-top: 0;
-        margin-buttom: 0;
-        page-break-inside: avoid; 
-        position: relative;
-      }
-
-      .faculty-content {
-       margin-top: 0;
-        margin-buttom: 0;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        page-break-inside: avoid; 
-        position: relative;
-        }
-
-        .teaching-content {
-         margin-top: 0;
-        margin-buttom: 0;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        page-break-inside: avoid; 
-        position: relative;
-        }
-
-        .facultysched-content {
-         margin-top: 0;
-        margin-buttom: 0;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        page-break-inside: avoid; 
-        position: relative;
-        }
-
-        .event-content {
-         margin-top: 0;
-        margin-buttom: 0;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        page-break-inside: avoid; 
-        position: relative;
-        }
-
-        .financial-content {
-         margin-top: 0;
-        margin-buttom: 0;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        page-break-inside: avoid; 
-        position: relative;
-        }
-
-        .summary-content {
-         margin-top: 0;
-        margin-buttom: 0;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        page-break-inside: avoid; 
-        position: relative;
-        }
-
-        .syllabus-content {
-         margin-top: 0;
-        margin-buttom: 0;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        page-break-inside: avoid; 
-        position: relative;
-          
-        }
-
-      .collage-container {
-      position: relative;
-      z-index: 999;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-        cursor: move;
-      }
-
-      .img-container {
-      position: relative;
-      z-index: 999;
-      display: flex;
-        flex-wrap: wrap;
-        cursor: move;
-        gap: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-      }
-
-      .img-container:hover {
-        opacity: 0.5;
-      }
-
-      .collage-container:hover {
-        opacity: 0.5;
-      }
-
-      .collage-container > div, .img-container > div {
-        flex: 1 1 calc(33% - 10px);
-        overflow: hidden;
-        max-height: 2000px;
-      }
-
-      .collage-container img, .img-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .image-placeholder {
-        min-height: 300px;
-        max-width: 100%;
-      }
-
-      .header img,
-      .footer img {
-        width: 100%;
-        display: block;
-      }
-
-      /* Headers */
-  .faculty-header, .teaching-header, .facultysched-header, .event-header, .financial-header, .summary-header, .syllabus-header {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-  }
-
-  /* Footers */
-  .faculty-footer, .teaching-footer, .facultysched-footer, .event-footer, .financial-footer, .summary-footer, .syllabus-footer {
-    position: absolute;  
-    width: 100%;
-    buttom: 0;
-    z-index: 1000; 
-    page-break-inside: avoid;
-  }
-
-  .header {
-   position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-  }
-
-  .footer {
-  position: absolute;  
-    width: 100%;
-    bottom: 0;
-    z-index: 1000; 
-    page-break-inside: avoid;
-  }
-
-  /* Content-body */
-
-  .content-body {
-      page-break-inside: avoid;
-     padding-top: 275px;
-     margin: 0 50px 0 50px;
-  }
-
-  .faculty-content-body {
-      page-break-inside: avoid;
-     padding-top: 300px;
-    margin-buttom: 2rem;
-  }
-
-
-   .event-content-body {
-       page-break-inside: avoid;
-     padding-top: 150px;
-    margin-buttom: 2rem;
-   }
-
-   .facultysched-content-body {
-       page-break-inside: avoid;
-     padding-top: 150px;
-    margin-buttom: 2rem;
-   }
-
-   .teaching-content-body, .financial-content-body, .summary-content-body, .syllabus-content-body {
-    page-break-inside: avoid;
-     padding-top: 150px;
-    margin-buttom: 2rem;
-    }
-
-    td, th {
-    min-height: 10px;
-    }
-
-
-      .gc-logo img{
-        width: 128px;
-        height: 128px;
-        padding: 2px
-      }
-      
-      .ccs-logo img{
-        width: 130px;
-        height: 130px;
-        padding: 2px;
-      }
-    }
-            </style>
-          </head>
-          <body>
-            ${contentBody}
-          </body>
-        </html>
-      `);
-      printWindow.document.close();
-      
-      printWindow.onload = () => {
-        printWindow.print();
-        printWindow.close();
+  // Class method to convert Blob URL to Base64
+  async blobUrlToBase64(blobUrl: string): Promise<string> {
+    const response = await fetch(blobUrl);
+    const blob = await response.blob();
+    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+      reader.onloadend = () => {
+        const base64data = reader.result as string;
+        resolve(base64data);
       };
-    }
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
   }
+
+  // Method to replace blob URLs with base64 URLs
+  async replaceBlobUrlsWithBase64(htmlContent: string): Promise<string> {
+    const blobUrlRegex = /blob:http:\/\/localhost:4200\/[a-f0-9\-]+/g;
+    const blobUrls = htmlContent.match(blobUrlRegex);
+    if (!blobUrls) return htmlContent;
+
+    for (const blobUrl of blobUrls) {
+      try {
+        const base64Url = await this.blobUrlToBase64(blobUrl);
+        htmlContent = htmlContent.replace(blobUrl, base64Url);
+      } catch (error) {
+        console.error('Error converting blob URL:', blobUrl, error);
+      }
+    }
+
+    return htmlContent;
+  }
+
+  // Save content method
+  saveContent(editor: any): void {
+    const contentBody = editor.getBody().innerHTML; // Get entire HTML content
+
+    // Find and replace all blob URLs with base64 URLs
+    this.replaceBlobUrlsWithBase64(contentBody).then((updatedContent) => {
+      this.content.body = updatedContent;
+      console.log(updatedContent);
+
+      this.contentService.editContent(this.content, this.contentId).subscribe(
+        (response) => {
+          this.successMessage = "Updated Successfully";
+          this.showMessage('success');
+          this.cdr.detectChanges();
+          this.initializeContent(editor);
+        },
+        (error) => {
+          console.log(error);
+          this.errorMessage = "Update Failed";
+          this.showMessage('error');
+          this.cdr.detectChanges();
+        }
+      );
+    }).catch((error) => {
+      console.log('Error converting blob URLs to base64:', error);
+    });
+  }
+  
 
   showMessage(type: string): void {
     if (this.successTimeout) {
@@ -1084,27 +1049,31 @@ editor.on('drop', (event: DragEvent) => {
 <div class="content">
 <div class="header"><img src="../../../../../assets/img/header2.jpg" width="1380" height="172"></div>
 <div class="content-body">
-<p style="line-height: 1.1;">&nbsp;</p>
-<p style="line-height: 1.1;">&nbsp;</p>
-<div class="img-wrapper" style="width: 600px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move;" draggable="true" data-left="69" data-top="115.60000038146973">
-<div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">
-<div class="image-placeholder" style="height: 200px; background-color: #ccc;">&nbsp;</div>
+<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">BSEMC Accomplishment Comprehensive Narrative Report</span></strong></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Renewal of Institutional Membership for Animation Council of the Philippines (ACPI)</span></strong><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Gordon College &ndash; College of Computer Studies renewed it&rsquo;s academic membership with Animation Council of the Philippines (ACPI). This renewal signifies our unwavering commitment in the field of animation and our dedication to supporting the initiatives of ACPI. Our institution has long recognized the vital role played by ACPI in advancing and promoting the field of animation in the Philippines. Since our initial membership commencement on September 2021, our active involvement in ACPI has been a source of pride. Renewing our membership was a natural choice to maintain our contributions to the growth and development of our BSEMC students in the field of animation.</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">The renewal of our institutional membership with the Animation Council of the Philippines is a testament to our enduring commitment to the growth and excellence our BSEMC Students in the field of animation. We eagerly anticipate continuing our active involvement, collaborating with fellow members and academic institutions, and contributing to ACPI's mission to further enhance the country's animation landscape.</span></p>
+<div class="collage-wrapper" style="width: 600px; height: auto; resize: both; overflow: hidden; margin: 0 auto;">
+<div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
+<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;">
+<div class="image-placeholder" style="height: 100px; background-color: #ccc;">&nbsp;</div>
 </div>
-<div class="text-box" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.</div>
+<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;">
+<div class="image-placeholder" style="height: 100px; background-color: #ccc;">&nbsp;</div>
 </div>
-<p>&nbsp;</p>
-<p style="line-height: 1.1;">&nbsp;</p>
-<p style="line-height: 1.1;">&nbsp;</p>
 </div>
-<div class="footer">&nbsp;</div>
+<div class="text-box" style="flex: 1; min-height: 50px; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.</div>
+</div>
+<p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+</div>
 </div>
 </div>
 <p><div class="break"></div></p>`;
     editor.insertContent(newPage);
   }
 
-  insertNewFacultyPage(editor: Editor): void {
-    const newPage = `<div class="whole-page">
+  insertNewFacultyPage(editor: any): void {
+    const newPage = `<div class="whole-page-with-table">
 <div class="faculty-content">
 <div class="faculty-header">
 <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png"></div>
@@ -1465,9 +1434,9 @@ editor.on('drop', (event: DragEvent) => {
     editor.insertContent(newPage);
   }
 
-  insertNewTeachingPage(editor: Editor): void {
+  insertNewTeachingPage(editor: any): void {
     const newPage = `
-    <div class="whole-page">
+    <div class="whole-page-with-table">
     <div class="teaching-content">
     <div class="teaching-header">
     <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
@@ -1649,7 +1618,7 @@ editor.on('drop', (event: DragEvent) => {
     editor.insertContent(newPage);
   }
 
-  insertNewFacultySchedPage(editor: Editor): void {
+  insertNewFacultySchedPage(editor: any): void {
     const newPage = `
     <div class="whole-page">
     <div class="facultysched-content">
@@ -1800,7 +1769,7 @@ editor.on('drop', (event: DragEvent) => {
     editor.insertContent(newPage);
   }
 
-  insertNewEventReportPage(editor: Editor): void {
+  insertNewEventReportPage(editor: any): void {
     const newPage = `<div class="whole-page">
 <div class="event-content">
 <div class="event-header">
@@ -1868,7 +1837,7 @@ editor.on('drop', (event: DragEvent) => {
     editor.insertContent(newPage);
   }
   
-  insertNewFinancialReportPage(editor: Editor): void {
+  insertNewFinancialReportPage(editor: any): void {
     const newPage = `
     <div class="whole-page">
     <div class="financial-content">
@@ -1988,8 +1957,8 @@ editor.on('drop', (event: DragEvent) => {
     editor.insertContent(newPage);
   }
 
-  insertNewSummaryReportPage(editor: Editor): void {
-    const newPage = `<div class="whole-page">
+  insertNewSummaryReportPage(editor: any): void {
+    const newPage = `<div class="whole-page-with-table">
 <div class="summary-content">
 <div class="summary-header">
 <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
@@ -2083,7 +2052,7 @@ editor.on('drop', (event: DragEvent) => {
 </div>
 <strong style="mso-bidi-font-weight: normal;"> </strong></div>
 <p><strong style="mso-bidi-font-weight: normal;"> <div class="break"></div></strong></p>
-<div class="whole-page">
+<div class="whole-page-with-table">
 <div class="summary-content">
 <div class="summary-header">
 <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
@@ -2144,7 +2113,7 @@ editor.on('drop', (event: DragEvent) => {
     editor.insertContent(newPage);
   }
 
-  insertNewSyllabusReportPage(editor: Editor): void {
+  insertNewSyllabusReportPage(editor: any): void {
     const newPage = `<div class="whole-page">
 <div class="syllabus-content">
 <div class="syllabus-header">
@@ -2240,6 +2209,81 @@ editor.on('drop', (event: DragEvent) => {
       });
     }
   }
+
+  private startPolling(): void {
+    this.pollingSubscription = interval(this.POLLING_INTERVAL).pipe(
+      switchMap(() => this.sentenceService.getTexts())
+    ).subscribe(
+      (response) => {
+        this.sentences = response.data.sentences || [];
+        this.initializeSentenceButtons(this.sentences);
+      },
+      (error) => {
+        console.error('Error loading sentences:', error);
+      }
+    );
+  }
+
+  private stopPolling(): void {
+    if (this.pollingSubscription) {
+      this.pollingSubscription.unsubscribe();
+    }
+  }
   
+
+  initializeSentenceButtons(sentences: any[]) {
+    const editor = this.editor; // Ensure this.editor is correctly initialized
   
+    editor.ui.registry.addMenuButton('insertSentence', {
+      text: 'Insert Sentence',
+      fetch: (callback: any) => {
+        const items = sentences.map((sentence: any) => ({
+          type: 'menuitem',
+          text: sentence.text,
+          onAction: () => {
+            console.log('Menu item clicked:', sentence.text); // Debugging line
+            this.insertSentence(editor, sentence.text);
+          }
+        }));
+        callback(items);
+      }
+    });
+  
+    editor.ui.registry.addButton('manageSentences', {
+      text: 'Manage Sentences',
+      onAction: () => this.openManageSentencesDialog()
+    });
+  }
+  
+
+  insertSentence(editor: any, sentence: string) {
+    // Get current selection
+    const selection = editor.selection.getNode();
+    
+    // Log current selection
+    console.log('Selected node before insertion:', selection);
+    
+    // Insert the sentence at the cursor position
+    editor.execCommand('mceInsertContent', false, sentence);
+    
+    // Log the content after insertion
+    console.log('Content after insertion:', editor.getContent());
+  }
+
+
+
+  openManageSentencesDialog() {
+    const dialogRef = this.dialog.open(ManageTextComponent, {
+      width: '500px',
+      data: { sentences: this.sentences }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.startPolling(); // Refresh the list of sentences
+      }
+    });
+  }
+
+ 
 }

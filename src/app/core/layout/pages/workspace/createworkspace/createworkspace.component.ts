@@ -42,7 +42,9 @@ createWorkspace() {
       } else {
         console.warn('No workspace data found in the response.');
       }
-      this.route.navigate(['../workspacelist'])
+      setTimeout(() => {
+        this.route.navigate(['../workspacelist'], { relativeTo: this.aRoute });
+      }, 1000);
     },
     (error) => {
       console.error('Error creating workspace:', error);

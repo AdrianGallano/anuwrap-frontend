@@ -46,16 +46,63 @@ export class AnnualContentComponent implements OnInit{
         padding: 4rem;
         box-sizing: border-box;
         overflow: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: auto;
+        height: auto;
+        position: relative;
       }
 
 
       .whole-page {
-      display: inline-block;
+
         background-color: #fff;
-        width: 100%;
-        height: 1123px;
+        width: 794px;
+        height: auto;
         box-shadow: 0 0 4px rgba(0, 0, 0, .15);
         box-sizing: border-box;
+        position: relative;
+
+      }
+
+      .whole-page-with-table {
+
+        background-color: #fff;
+        width: auto;
+        height: auto;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+        box-sizing: border-box;
+        position: relative;
+
+      }
+
+      .import-whole-page {
+
+        background-color: #fff;
+        width: 794px;
+        height: auto;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+        box-sizing: border-box;
+        position: relative;
+
+      }
+
+      .import-whole-page-landscape {
+
+        background-color: #fff;
+        width: 1123px;
+        height: auto;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+        box-sizing: border-box;
+        position: relative;
+
+      }
+
+      .content {
+      width: 100%;
+      height: 1123px;
       }
   
       /* Adjust margins and paddings as needed for different content sections */
@@ -69,6 +116,36 @@ export class AnnualContentComponent implements OnInit{
       .syllabus-content {
         margin: 0 auto;
         padding: 0 2rem;
+        position: relative;
+      }
+
+      .content-body table {
+        width: 100%;
+        height: auto;
+        table-layout: fixed;
+        border-collapse: collapse;
+      }
+
+      .content-body th, .content-body td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        word-wrap: break-word; 
+        overflow: hidden; 
+        text-align: center;
+      }
+
+      .content-body tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .content-body tr:hover {
+        background-color: #ddd;
+      }
+
+      .content-body img {
+      max-height: 500px;
+      max-width: 80%;
+      margin: 0 auto;
       }
   
       
@@ -105,45 +182,53 @@ export class AnnualContentComponent implements OnInit{
         cursor: nwse-resize;
       }
 
-      .collage-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-        cursor: move;
-        margin: 0 auto;
-      }
-  
-      .img-container {
-        cursor: move;
-        gap: 10px;
-        flex-wrap: wrap;
-        border: 1px solid #000;
-        padding: 10px;
-        display: inline-block;
-        margin: 0 auto;
-      }
-  
-      .collage-container > div,
-      .img-container > div {
-        flex: 1 1 calc(33% - 10px);
-        overflow: hidden;
-        max-height: 2000px;
-      }
-  
-      .collage-wrapper img,
-      .img-container img {
-        width: 100%;
-        height: 100%;
-      }
-  
-      .image-placeholder {
-        background-color: #ccc;
-        min-height: 300px;
-        max-width: 100%;
-      }
-  
+
+  .collage-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 1px solid #000;
+  padding: 10px;
+  cursor: move;
+  margin: 0 auto;
+}
+
+.img-wrapper {
+  cursor: move;
+  gap: 10px;
+  flex-wrap: wrap;
+  border: 1px solid #000;
+  padding: 10px;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.collage-container > div,
+.img-wrapper > div {
+  flex: 1 1 calc(33% - 10px);
+  overflow: hidden;
+  max-height: 900px;
+}
+
+
+
+.image-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  max-height: 200px;
+  background-color: #ccc;
+}
+
+.image-placeholder img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+}
+
+
+
       .header img,
       .footer img {
         width: 100%;
@@ -184,24 +269,61 @@ export class AnnualContentComponent implements OnInit{
       background-color: rgba(0,0,0,0);
       margin: 0;
       padding: 0;
+      position: relative;
+      display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 
     /* Print only the whole-page content */
-    body > *:not(.whole-page) {
+    body > *:not(.whole-page, .import-whole-page, .import-whole-page-landscape, .whole-page-with-table) {
       display: none;
     }
       .whole-page {
         background-color: #fff;
         width: 100%;
-        height: 100%;
+        height: auto;
         box-sizing: border-box;
         page-break-after: always;
+        position: relative;
+      }
+
+      .whole-page-with-table {
+        background-color: #fff;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        page-break-after: always;
+        position: relative;
+      }
+
+      .import-whole-page {
+        background-color: #fff;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        page-break-after: always;
+        position: relative;
+
+      }
+
+      .import-whole-page-landscape {
+
+        background-color: #fff;
+        width: 1123px;
+        height: auto;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+        box-sizing: border-box;
+        position: relative;
+
       }
 
       .content {
-        margin-top: 0;
-        margin-buttom: 0;
         page-break-inside: avoid; 
+        position: relative;
+        margin: 0 auto;
+        padding: 0 2rem;
         position: relative;
       }
 
@@ -269,48 +391,47 @@ export class AnnualContentComponent implements OnInit{
           
         }
 
-      .collage-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-        cursor: move;
-        margin: 0 auto;
-      }
+  .collage-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 1px solid #000;
+  padding: 10px;
+  margin: 0 auto;
+}
 
-      .img-container {
-        cursor: move;
-        gap: 10px;
-        border: 1px solid #000;
-        padding: 10px;
-        margin: 0 auto;
-      }
+.img-wrapper {
 
-      .img-container:hover {
-        opacity: 0.5;
-      }
+  gap: 10px;
+  flex-wrap: wrap;
+  border: 1px solid #000;
+  padding: 10px;
+  display: inline-block;
+  margin: 0 auto;
+}
 
-      .collage-wrapper:hover {
-        opacity: 0.5;
-      }
+.collage-container > div,
+.img-wrapper > div {
+  flex: 1 1 calc(33% - 10px);
+  overflow: hidden;
+  max-height: 900px;
+}
 
-      .collage-container > div, .img-container > div {
-        flex: 1 1 calc(33% - 10px);
-        overflow: hidden;
-        max-height: 2000px;
-      }
 
-      .collage-wrapper img, .img-container img {
-        width: 100%;
-        height: 100%;
-      }
 
-      .image-placeholder {
-        background-color: #ccc;
-        min-height: 300px;
-        max-width: 100%;
-      }
+.image-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  max-height: 200px;
+  background-color: #ccc;
+}
+
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+}
 
       .header img,
       .footer img {
@@ -326,6 +447,7 @@ export class AnnualContentComponent implements OnInit{
     left: 0;
     right: 0;
     z-index: 1000;
+    display: block;
   }
 
   /* Footers */
@@ -334,9 +456,11 @@ export class AnnualContentComponent implements OnInit{
     width: 100%;
     buttom: 0;
     z-index: 1000; 
+    display: block;
   }
 
   .header {
+  display: block;
    position: absolute;
     width: 100%;
     top: 0;
@@ -357,7 +481,6 @@ export class AnnualContentComponent implements OnInit{
   .content-body {
       page-break-inside: avoid;
      padding-top: 160px;
-     margin: 0 50px 0 50px;
   }
 
   .faculty-content-body {
@@ -403,6 +526,22 @@ export class AnnualContentComponent implements OnInit{
         padding: 2px;
       }
 
+      .content-body table {
+    width: 100%;
+    height: auto;
+    table-layout: fixed;
+  }
+
+  .content-body th, .content-body td {
+    word-wrap: break-word;
+    overflow: hidden;
+  }
+.content-body img {
+max-height: 500px;
+max-width: 80%;
+margin: 0 auto;
+}
+
       table {
       page-break-inside: avoid;
       margin: 0 auto;
@@ -416,7 +555,6 @@ export class AnnualContentComponent implements OnInit{
         text: 'Add Page',
         fetch: (callback: any) => {
           const items = [
-            { type: 'menuitem', text: 'Blank Report Page', onAction: () => this.insertNewEmptyPage(editor) },
             { type: 'menuitem', text: 'Accomplishment Report Page', onAction: () => this.insertNewAccomplishmentPage(editor) },
             { type: 'menuitem', text: 'Faculty Matrix Report Page', onAction: () => this.insertNewFacultyPage(editor) },
             { type: 'menuitem', text: 'Teaching And Learning Report Page', onAction: () => this.insertNewTeachingPage(editor) },
@@ -437,8 +575,6 @@ export class AnnualContentComponent implements OnInit{
             { type: 'menuitem', text: 'Double', onAction: () => this.insertCollage(editor, 2) },
             { type: 'menuitem', text: 'Triple', onAction: () => this.insertCollage(editor, 3) },
             { type: 'menuitem', text: 'Quadruple', onAction: () => this.insertCollage(editor, 4) },
-            { type: 'menuitem', text: 'Quintuple', onAction: () => this.insertCollage(editor, 5) },
-            { type: 'menuitem', text: 'Sextuple', onAction: () => this.insertCollage(editor, 6) }
           ];
           callback(items);
         }
@@ -451,77 +587,75 @@ export class AnnualContentComponent implements OnInit{
 
       editor.on('init', () => this.initializeContent(editor));
       
-// Assume 'editor' is your TinyMCE instance
-let originalElement: HTMLElement | null = null;
-let positions: { id: string, left: string, top: string }[] = [];
+      let originalElement: HTMLElement | null = null;
 
-editor.on('dragstart', (event: DragEvent) => {
-  const targetElement = event.target as HTMLElement;
-
-  // Check if the dragged element is draggable
-  if (targetElement.closest('body') && (targetElement.classList.contains('img-container') || targetElement.classList.contains('collage-wrapper'))) {
-    // Set the targetElement as the original element
-    originalElement = targetElement;
-
-    // Clone the dragged element
-    const draggedElement = targetElement.cloneNode(true) as HTMLElement;
-
-    // Ensure that the cloned element retains its original position attributes
-    if (targetElement.style.position === 'absolute') {
-      draggedElement.style.position = 'absolute';
-      draggedElement.style.left = targetElement.style.left;
-      draggedElement.style.top = targetElement.style.top;
-    }
-
-    event.dataTransfer!.setData('text/html', draggedElement.outerHTML);
-    event.dataTransfer!.effectAllowed = 'move';
-  }
-});
-
-editor.on('dragover', (event: DragEvent) => {
-  event.preventDefault();
-});
-
-editor.on('drop', (event: DragEvent) => {
-  event.preventDefault();
-  const dropTarget = event.target as HTMLElement;
-  const contentToInsert = event.dataTransfer!.getData('text/html');
-
-  if (contentToInsert && dropTarget && originalElement) {
-    // Create a temporary div to hold the dropped content
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = contentToInsert.trim();
-
-    // Ensure only one child is inserted
-    if (tempDiv.children.length > 0) {
-      const insertedElement = tempDiv.children[0] as HTMLElement;
-
-      // Calculate the drop position relative to the body container
-      const wholePage = dropTarget.closest('body') as HTMLElement;
-      const pageRect = wholePage.getBoundingClientRect();
-      const offsetX = event.clientX - pageRect.left;
-      const offsetY = event.clientY - pageRect.top;
-
-      // Store position in attributes
-      insertedElement.setAttribute('data-left', offsetX.toString());
-      insertedElement.setAttribute('data-top', offsetY.toString());
-
-      // Adjust the style for absolute positioning based on offsetX and offsetY
-      insertedElement.style.position = 'absolute';
-      insertedElement.style.left = offsetX + 'px';
-      insertedElement.style.top = offsetY + 'px';
-
-      // Append the inserted element to the drop target
-      dropTarget.appendChild(insertedElement);
-
-      // Remove the original element from its previous position
-      if (originalElement) {
-        originalElement.remove();
-        originalElement = null; // Reset originalElement after removal
-      }
-    }
-  }
-});
+      editor.on('dragstart', (event: DragEvent) => {
+        const targetElement = event.target as HTMLElement;
+      
+        // Check if the dragged element is draggable
+        if (targetElement.closest('.whole-page') && (targetElement.classList.contains('img-wrapper') || targetElement.classList.contains('collage-wrapper'))) {
+          // Set the targetElement as the original element
+          originalElement = targetElement;
+      
+          // Clone the dragged element
+          const draggedElement = targetElement.cloneNode(true) as HTMLElement;
+      
+          // Ensure that the cloned element retains its original position attributes
+          if (targetElement.style.position === 'absolute') {
+            draggedElement.style.position = 'absolute';
+            draggedElement.style.left = targetElement.style.left;
+            draggedElement.style.top = targetElement.style.top;
+          }
+      
+          event.dataTransfer!.setData('text/html', draggedElement.outerHTML);
+          event.dataTransfer!.effectAllowed = 'move';
+        }
+      });
+      
+      editor.on('dragover', (event: DragEvent) => {
+        event.preventDefault();
+      });
+      
+      editor.on('drop', (event: DragEvent) => {
+        event.preventDefault();
+        const dropTarget = event.target as HTMLElement;
+        const contentToInsert = event.dataTransfer!.getData('text/html');
+      
+        if (contentToInsert && dropTarget && originalElement) {
+          // Create a temporary div to hold the dropped content
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = contentToInsert.trim();
+      
+          // Ensure only one child is inserted
+          if (tempDiv.children.length > 0) {
+            const insertedElement = tempDiv.children[0] as HTMLElement;
+      
+            // Calculate the drop position relative to the body container
+            const wholePage = dropTarget.closest('.whole-page') as HTMLElement;
+            const pageRect = wholePage.getBoundingClientRect();
+            const offsetX = event.clientX - pageRect.left;
+            const offsetY = event.clientY - pageRect.top - 210;
+      
+            // Store position in attributes
+            insertedElement.setAttribute('data-left', offsetX.toString());
+            insertedElement.setAttribute('data-top', offsetY.toString());
+      
+            // Adjust the style for absolute positioning based on offsetX and offsetY
+            insertedElement.style.position = 'absolute';
+            insertedElement.style.left = offsetX + 'px';
+            insertedElement.style.top = offsetY + 'px';
+      
+            // Append the inserted element to the drop target
+            dropTarget.appendChild(insertedElement);
+      
+            // Remove the original element from its previous position
+            if (originalElement) {
+              originalElement.remove();
+              originalElement = null; // Reset originalElement after removal
+            }
+          }
+        }
+      });
 
     },
     save_onsavecallback: (editor: any) => {
@@ -638,18 +772,18 @@ editor.on('drop', (event: DragEvent) => {
 <p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Renewal of Institutional Membership for Animation Council of the Philippines (ACPI)</span></strong><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong></p>
 <p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Gordon College &ndash; College of Computer Studies renewed it&rsquo;s academic membership with Animation Council of the Philippines (ACPI). This renewal signifies our unwavering commitment in the field of animation and our dedication to supporting the initiatives of ACPI. Our institution has long recognized the vital role played by ACPI in advancing and promoting the field of animation in the Philippines. Since our initial membership commencement on September 2021, our active involvement in ACPI has been a source of pride. Renewing our membership was a natural choice to maintain our contributions to the growth and development of our BSEMC students in the field of animation.</span></p>
 <p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">The renewal of our institutional membership with the Animation Council of the Philippines is a testament to our enduring commitment to the growth and excellence our BSEMC Students in the field of animation. We eagerly anticipate continuing our active involvement, collaborating with fellow members and academic institutions, and contributing to ACPI's mission to further enhance the country's animation landscape.</span></p>
-<div class="collage-wrapper" style="width: 700px; resize: both; overflow: hidden;">
+<div class="collage-wrapper" style="width: 600px; height: auto; resize: both; overflow: hidden; margin: 0 auto;">
 <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
-<div class="image-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #000;">
-<div class="image-placeholder" style="height: 300px; background-color: #ccc;">&nbsp;</div>
+<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;">
+<div class="image-placeholder" style="height: 100px; background-color: #ccc;">&nbsp;</div>
 </div>
-<div class="image-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #000;">
-<div class="image-placeholder" style="height: 300px; background-color: #ccc;">&nbsp;</div>
+<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;">
+<div class="image-placeholder" style="height: 100px; background-color: #ccc;">&nbsp;</div>
 </div>
 </div>
-<div class="text-box" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.</div>
-&nbsp;</div>
-<p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;">&nbsp;</p>
+<div class="text-box" style="flex: 1; min-height: 50px; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.</div>
+</div>
+<p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
 </div>
 </div>
 </div>
@@ -658,7 +792,7 @@ editor.on('drop', (event: DragEvent) => {
   }
 
   insertNewFacultyPage(editor: any): void {
-    const newPage = `<div class="whole-page">
+    const newPage = `<div class="whole-page-with-table">
 <div class="faculty-content">
 <div class="faculty-header">
 <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png"></div>
@@ -1021,7 +1155,7 @@ editor.on('drop', (event: DragEvent) => {
 
   insertNewTeachingPage(editor: any): void {
     const newPage = `
-    <div class="whole-page">
+    <div class="whole-page-with-table">
     <div class="teaching-content">
     <div class="teaching-header">
     <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
@@ -1543,7 +1677,7 @@ editor.on('drop', (event: DragEvent) => {
   }
 
   insertNewSummaryReportPage(editor: any): void {
-    const newPage = `<div class="whole-page">
+    const newPage = `<div class="whole-page-with-table">
 <div class="summary-content">
 <div class="summary-header">
 <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
@@ -1637,7 +1771,7 @@ editor.on('drop', (event: DragEvent) => {
 </div>
 <strong style="mso-bidi-font-weight: normal;"> </strong></div>
 <p><strong style="mso-bidi-font-weight: normal;"> <div class="break"></div></strong></p>
-<div class="whole-page">
+<div class="whole-page-with-table">
 <div class="summary-content">
 <div class="summary-header">
 <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
@@ -1740,39 +1874,40 @@ editor.on('drop', (event: DragEvent) => {
 
   insertCollage(editor: any, count: number): void {
     const collageTemplate = `
-    <div class="collage-wrapper" style="width: 700px; resize: both; overflow: hidden;">
-    <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px;  overflow: hidden;">
-    ${Array.from({ length: count }).map(() => `
-          <div class="image-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #000;">
-            <div class="image-placeholder" style="height: 300px; background-color: #ccc;"></div>
-            
-          </div>
-        `).join('')}
-      </div>
-      <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
-              CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
+      <div class="collage-wrapper" style="width: 600px; height: auto; resize: both; overflow: hidden; margin: 0 auto;">
+        <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
+          ${Array.from({ length: count }).map(() => `
+            <div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;"> 
+              <div class="image-placeholder" style="height: 100px; background-color: #ccc;"></div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="text-box" contenteditable="true" style="flex: 1; min-height: 50px; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
+          CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
+        </div>
       </div>
     `;
     editor.insertContent(collageTemplate);
-
-    // After inserting, find the last inserted img-container and attach dragstart event listener
-    const lastImgContainer = document.querySelector('.collage-wrapper:last-child');
-    if (lastImgContainer) {
-      lastImgContainer.addEventListener('dragstart', (event: Event) => {
+  
+    // After inserting, find the last inserted collage-wrapper and attach dragstart event listener
+    const lastCollageWrapper = document.querySelector('.collage-wrapper:last-child');
+    if (lastCollageWrapper) {
+      lastCollageWrapper.addEventListener('dragstart', (event: Event) => {
         const dragEvent = event as DragEvent;
         if (dragEvent.dataTransfer) {
-          dragEvent.dataTransfer.setData('text/html', lastImgContainer.outerHTML);
+          dragEvent.dataTransfer.setData('text/html', lastCollageWrapper.outerHTML);
           dragEvent.dataTransfer.effectAllowed = 'move';
         }
       });
     }
-
   }
   
   insertImgContainer(editor: any) {
     const imgContainer = `
-      <div class="img-container" style="width: 300px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move;" draggable="true">
-        <div class="image-placeholder" style="min-height: 300px; background-color: #ccc;"></div>
+      <div class="img-wrapper" style="width: 600px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move;" draggable="true">
+      <div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">  
+      <div class="image-placeholder" style="height: 200px; background-color: #ccc;"></div>
+      </div>
         <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
           CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
         </div>
@@ -1782,7 +1917,7 @@ editor.on('drop', (event: DragEvent) => {
     editor.insertContent(imgContainer);
   
     // Attach event listener for dragstart to move the existing container
-    const imgContainerElement = document.querySelector('.img-container:last-child');
+    const imgContainerElement = document.querySelector('.img-wrapper:last-child');
     if (imgContainerElement) {
       imgContainerElement.addEventListener('dragstart', (event: Event) => {
         const dragEvent = event as DragEvent;

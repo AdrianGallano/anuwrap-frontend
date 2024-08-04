@@ -122,3 +122,7 @@
   }
 }
 
+.tox-tinymce-aux {
+  z-index: 10 !important; /* Adjust as needed */
+}
+
