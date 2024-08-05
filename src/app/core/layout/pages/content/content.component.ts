@@ -130,7 +130,6 @@ export class ContentComponent implements OnInit {
       .syllabus-content {
         margin: 0 auto;
         padding: 0 2rem;
-        width: 100%;
         position: relative;
       }
 
