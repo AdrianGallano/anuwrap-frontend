@@ -2,4 +2,7 @@
     width: 100%;
     max-width: 1200px; /* Adjust this as needed */
   }
+  .bg-selected {
+    background-color: #d1d5db;
+  }
   

@@ -37,11 +37,13 @@ export class TemplatelistComponent {
   templates: any[] = [
     // blank
     {
+      title:'Blank Page',
       image: '../../../../../assets/img/blanktemplate.png',
       code: '<div class="whole-page" style="height: 1123px"> </div> <div class="break"></div>',
     },
     // accomplishment report
     {
+      title:'Accomplishment Report',
       image: '../../../../../assets/img/accomplishment.png',
       code:`<div class="whole-page">
 <div class="content">
@@ -70,6 +72,7 @@ export class TemplatelistComponent {
     },
     // faculty matrix
     {
+      title:'Faculty Matrix',
       image: '../../../../../assets/img/faculty.png',
       code: `<div class="whole-page-with-table">
 <div class="faculty-content">
@@ -432,6 +435,7 @@ export class TemplatelistComponent {
     },
     // teaching and learning
     {
+      title:'Teaching and Learning',
       image:`../../../../../assets/img/teachingandmonitoring.png` ,
       code:`
     <div class="whole-page-with-table">
@@ -616,6 +620,7 @@ export class TemplatelistComponent {
     },
     // faculty schedule
     {
+      title:'Faculty Schedule',
       image:`../../../../../assets/img/facultysched.png` ,
       code: `
     <div class="whole-page">
@@ -767,6 +772,7 @@ export class TemplatelistComponent {
     },
     // event report
     {
+      title:'Event Report',
       image:`../../../../../assets/img/Eventreport.png` ,
       code:   `<div class="whole-page">
 <div class="event-content">
@@ -835,6 +841,7 @@ export class TemplatelistComponent {
     },
     // Financial report
     {
+      title:'Financial Report',
       image:`../../../../../assets/img/Financialreport.png` ,
       code: `
     <div class="whole-page">
@@ -955,6 +962,7 @@ export class TemplatelistComponent {
     },
     // summary of accomplisment report
     {
+      title:'Summary of Accomplishment Report',
       image:`../../../../../assets/img/SUMMARY_ACCOMP_REPORT.png` ,
       code: `<div class="whole-page-with-table">
 <div class="summary-content">
@@ -1111,6 +1119,7 @@ export class TemplatelistComponent {
     },
     // syllabus
     {
+      title:'Syllabus',
       image:`../../../../../assets/img/syllabus.png` ,
       code:  `<div class="whole-page">
 <div class="syllabus-content">
@@ -1148,10 +1157,6 @@ export class TemplatelistComponent {
 </div>
 </div>
 <div class="break"></div>`,
-    },
-    {
-      image:`` ,
-      code: ``,
     },
   ];
 

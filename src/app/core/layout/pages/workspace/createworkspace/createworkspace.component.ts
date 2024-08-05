@@ -29,10 +29,20 @@ ngOnInit(): void {
   this.fetchWorkspaces();
 }
 
+error: string | null = null;
+
 createWorkspace() {
   const workspaceData = {
     name: this.workspaceName
   };
+  if (!this.workspaceName) {
+    this.error = "Workspace name is required";
+    // Clear the error message after 3 seconds
+    setTimeout(() => {
+      this.error = null;
+    }, 3000);
+    return;
+  }
 
   this.workspaceService.createWorkspace(workspaceData).subscribe(
     (response) => {

@@ -23,6 +23,8 @@ export class CreateannualreportComponent {
 
   reportTypes: any;
 
+  error: string | null = null;
+
   constructor(
     private annualReportService: AnnualreportService,
     private route: Router,
@@ -49,7 +51,14 @@ export class CreateannualreportComponent {
   }
 
   createAnnualReport(): void {
-
+    if (!this.annualReport.annualreport_title) {
+      this.error = "Title is required";
+      // Clear the error message after 3 seconds
+      setTimeout(() => {
+        this.error = null;
+      }, 3000);
+      return;
+    }
     this.annualReportService.createAnnualReport(this.annualReport).subscribe(
       (response) => {
         this.annualReport.annual_report_id = response.data.annualReport.annual_report_id

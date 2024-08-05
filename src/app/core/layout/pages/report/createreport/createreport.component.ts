@@ -23,7 +23,7 @@ export class CreatereportComponent implements OnInit {
     workspace_id: 0
   };
   reportId: any;
-  error= ""
+  error: string | null = null;
 
   constructor(
     private reportService: ReportService,
@@ -52,7 +52,14 @@ export class CreatereportComponent implements OnInit {
 
 
   createReport(): void {
-
+    if (!this.report.title) {
+      this.error = "Title is required";
+      // Clear the error message after 3 seconds
+      setTimeout(() => {
+        this.error = null;
+      }, 3000);
+      return;
+    }
     this.reportService.createReport(this.report).subscribe(
       (response) => {
         this.reportId = response.data.report.report_id;
