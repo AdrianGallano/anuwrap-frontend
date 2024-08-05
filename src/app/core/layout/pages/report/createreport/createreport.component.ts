@@ -3,18 +3,15 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReportService } from '../../../../../shared/services/report.service';
-import { TokenService } from '../../../../../shared/services/token.service';
 import { initFlowbite } from 'flowbite';
-import { FacultymatrixService } from '../../../../../shared/services/facultymatrix.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AiComponent } from "../../../../../shared/ai/ai.component";
 
 @Component({
-    selector: 'app-createreport',
-    templateUrl: './createreport.component.html',
-    styleUrls: ['./createreport.component.css'],
-    standalone: true,
-    imports: [CommonModule, FormsModule, AiComponent]
+  selector: 'app-createreport',
+  templateUrl: './createreport.component.html',
+  styleUrls: ['./createreport.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, AiComponent]
 })
 export class CreatereportComponent implements OnInit {
   workspaceId: any = null;
@@ -24,6 +21,15 @@ export class CreatereportComponent implements OnInit {
   };
   reportId: any;
   error: string | null = null;
+  predefinedTitles: string[] = [
+    'Monthly Sales Report',
+    'Quarterly Performance Summary',
+    'Annual Financial Overview',
+    'Departmental Review',
+    'Project Milestone Report'
+  ];
+  selectedTitle: string = ''; 
+  showCustomInput: boolean = false; 
 
   constructor(
     private reportService: ReportService,
@@ -39,20 +45,27 @@ export class CreatereportComponent implements OnInit {
       this.report.workspace_id = params['params']['workspace_id'];
     });
     const modal = document.getElementById('defaultModal');
-        if (modal) {
-            // Initialize modal here using your modal library (e.g., Bootstrap, ng-bootstrap)
-            // For example, if using Bootstrap's modal:
-            // new bootstrap.Modal(modal).show();
-        } else {
-            console.error("Modal with id defaultModal not found or not initialized.");
-        }
+    if (modal) {
+    } else {
+      console.error("Modal with id defaultModal not found or not initialized.");
+    }
   }
 
-
-
+  onTitleSelect(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+    
+    if (selectedValue === 'custom') {
+      this.showCustomInput = true;
+      this.report.title = ''; // Clear the title for custom input
+    } else {
+      this.showCustomInput = false;
+      this.report.title = selectedValue; // Set title from predefined selection
+    }
+  }
 
   createReport(): void {
-    if (!this.report.title) {
+    if (!this.report.title.trim()) {
       this.error = "Title is required";
       // Clear the error message after 3 seconds
       setTimeout(() => {
@@ -63,11 +76,10 @@ export class CreatereportComponent implements OnInit {
     this.reportService.createReport(this.report).subscribe(
       (response) => {
         this.reportId = response.data.report.report_id;
-
-        this.route.navigate([`../report/${this.reportId}`], { relativeTo: this.aRoute })
-        },
+        this.route.navigate([`../report/${this.reportId}`], { relativeTo: this.aRoute });
+      },
       (error) => {
-        this.error = "Select a report type"
+        this.error = "An error occurred while creating the report.";
       }
     );
   }

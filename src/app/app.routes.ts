@@ -55,6 +55,7 @@ import { AnnualContentComponent } from './core/layout/pages/annualcontent/annual
 import { LogoutConfirmComponent } from './core/layout/pages/authentication/logout-confirm/logout-confirm.component';
 import { DeleteallreportsComponent } from './core/layout/pages/report/deleteallreports/deleteallreports.component';
 import { DeleteallannualreportsComponent } from './core/layout/pages/annualreport/deleteallannualreports/deleteallannualreports.component';
+import { AnalyticsComponent } from './core/layout/pages/analytics/analytics.component';
 
 
 export const routes: Routes = [
@@ -248,6 +249,11 @@ export const routes: Routes = [
                     {
                         path: 'createreportselection/:annual_report_id',
                         component: CreatereportselectionComponent,
+                        canActivate: [authenticationGuard]
+                    },
+                    {
+                        path: 'analytics',
+                        component: AnalyticsComponent,
                         canActivate: [authenticationGuard]
                     },
                 ]

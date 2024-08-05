@@ -1,81 +1,104 @@
-<div class="flex justify-center items-center m-12">
-  <div class="w-3/4">
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white border border-gray-300 p-4">
-      <h2 class="text-lg font-bold mb-4 ml-5">Create Report Selection</h2>
-      <hr class="w-full border-gray-300 mb-4">
-
-      <div *ngIf="error" class="text-red-600 mb-4">{{ error }}</div>
-
-      <!-- Filter Section -->
-      <div class="mb-4">
-        <label class="mr-4">
-          <input type="radio" name="filterType" value="all" [(ngModel)]="filterType" (change)="onFilterTypeChange()"> All
-        </label>
-        <label class="mr-4">
-          <input type="radio" name="filterType" value="yearly" [(ngModel)]="filterType" (change)="onFilterTypeChange()"> Yearly
-        </label>
-        <label>
-          <input type="radio" name="filterType" value="monthly" [(ngModel)]="filterType" (change)="onFilterTypeChange()"> Monthly
-        </label>
-
-        <div *ngIf="filterType === 'yearly'" class="mt-4">
-          <label for="yearSelect" class="mr-2">Select Year:</label>
-          <select id="yearSelect" [(ngModel)]="selectedYear" (change)="filterReports()">
-            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
-          </select>
-        </div>
-
-        <div *ngIf="filterType === 'monthly'" class="mt-4">
-          <label for="yearSelect" class="mr-2">Select Year:</label>
-          <select id="yearSelect" [(ngModel)]="selectedYear" (change)="filterReports()">
-            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
-          </select>
-
-          <label for="monthSelect" class="mr-2 ml-4">Select Month:</label>
-          <select id="monthSelect" [(ngModel)]="selectedMonth" (change)="filterReports()">
-            <option *ngFor="let month of availableMonths" [value]="month.value">{{ month.name }}</option>
-          </select>
+<div class="flex justify-center items-center p-6">
+  <div class="w-full max-w-4xl">
+    <div class="bg-white border border-gray-300 shadow-md rounded-lg p-6">
+      <!-- Title and Date Header Section -->
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold mb-2">Create Report Selection</h2>
+        <hr class="border-gray-300 mx-auto w-1/2 mb-4">
+        <div *ngIf="filterType === 'monthly' || filterType === 'yearly'" class="text-lg">
         </div>
       </div>
 
-      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <!-- Error Message -->
+      <div *ngIf="error" class="text-red-600 mb-4 p-2 bg-red-100 rounded text-center">
+        {{ error }}
+      </div>
+
+      <!-- Filter Section -->
+      <div class="mb-6">
+        <div class="flex justify-center gap-6 mb-4">
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="filterType" value="all" [(ngModel)]="filterType" (change)="onFilterTypeChange()">
+            <span>All</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="filterType" value="yearly" [(ngModel)]="filterType" (change)="onFilterTypeChange()">
+            <span>Yearly</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="radio" name="filterType" value="monthly" [(ngModel)]="filterType" (change)="onFilterTypeChange()">
+            <span>Monthly</span>
+          </label>
+        </div>
+
+        <div *ngIf="filterType === 'yearly'" class="mb-4 flex justify-center items-center">
+          <label for="yearSelect" class="mr-3">Select Year:</label>
+          <select id="yearSelect" [(ngModel)]="selectedYear" (change)="filterReports()"
+                  class="border rounded px-2 py-1">
+            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+
+        <div *ngIf="filterType === 'monthly'" class="mb-4 flex justify-center gap-4 items-center">
+          <div class="flex items-center">
+            <label for="yearSelect" class="mr-3">Select Year:</label>
+            <select id="yearSelect" [(ngModel)]="selectedYear" (change)="filterReports()"
+                    class="border rounded px-2 py-1">
+              <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
+            </select>
+          </div>
+
+          <div class="flex items-center">
+            <label for="monthSelect" class="mr-3">Select Month:</label>
+            <select id="monthSelect" [(ngModel)]="selectedMonth" (change)="filterReports()"
+                    class="border rounded px-2 py-1">
+              <option *ngFor="let month of availableMonths" [value]="month.value">{{ month.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Section -->
+      <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-gray-500 border border-gray-200 rounded-lg">
+          <thead class="bg-gray-50 text-gray-700">
             <tr>
-              <th scope="col" class="px-6 py-3 text-md font-bold flex gap-2 items-center">
-                <input id="checkbox-select-all" type="checkbox" (change)="toggleSelectAll();">
-                <label for="checkbox-select-all">Select All</label>
+              <th class="px-2 py-2 text-left w-12">
+                <div class="flex items-center">
+                  <input id="checkbox-select-all" type="checkbox" (change)="toggleSelectAll()"
+                         class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                  <label for="checkbox-select-all" class="ml-2">Select All</label>
+                </div>
               </th>
-              <th scope="col" class="px-6 py-3">Title</th>
-              <th scope="col" class="px-6 py-3">Date Created</th>
+              <th class="px-4 py-2 text-center">Title</th>
+              <th class="px-4 py-2 text-center">Date Created</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let report of filteredReports" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <td class="w-4 p-4">
-                <div class="flex items-center">
-                  <input id="checkbox-table-search-{{report.report_id}}" type="checkbox" [(ngModel)]="report.selected" (change)="toggleCheckbox(report)" class="w-4 h-4 text-blue-600 bg-gray-500 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                  <label for="checkbox-table-search-{{report.report_id}}" class="sr-only">checkbox</label>
-                </div>
+            <tr *ngFor="let report of filteredReports" class="border-b hover:bg-gray-100">
+              <td class="px-2 py-2 text-left w-12">
+                <input id="checkbox-table-search-{{report.report_id}}" type="checkbox" [(ngModel)]="report.selected"
+                       (change)="toggleCheckbox(report)"
+                       class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                <label for="checkbox-table-search-{{report.report_id}}" class="sr-only">Select Report</label>
               </td>
-              <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:bg-gray-700">
-                {{ report.title }}
-              </td>
-              <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:bg-gray-700">
-                {{ report.date_created }}
-              </td>
+              <td class="px-4 py-2 text-center">{{ report.title }}</td>
+              <td class="px-4 py-2 text-center">{{ report.humanizedDate }}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="flex justify-between mt-4">
-        <button (click)="createReportSelection()" class="flex items-center justify-center text-white bg-black hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 gap-2">
+      <!-- Buttons Section -->
+      <div class="flex justify-center mt-6">
+        <button (click)="createReportSelection()"
+                class="bg-black text-white hover:bg-gray-800 font-medium rounded-lg text-sm px-6 py-2 transition">
           Create Report Selection
         </button>
-        <button (click)="navigateToViewAnnualReport()" class="text-gray-600 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-800 mr-2">
+        <!-- <button (click)="navigateToViewAnnualReport()"
+                class="bg-gray-200 text-gray-600 hover:bg-gray-300 font-medium rounded-lg text-sm px-6 py-2 transition">
           Back To Report
-        </button>
+        </button> -->
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-
+<!-- Main modal -->
 <div id="defaultModal" tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-screen bg-gray-50">
     <div class="relative p-4 w-full max-w-2xl">
         <!-- Modal content -->
@@ -11,10 +11,20 @@
             </div>
             <form action="#">
                 <span class="text-red-600">{{ error }}</span>
-                <div class="grid gap-4 mb-4 text-center sm:grid-cols-1 ">
+                <div class="grid gap-4 mb-4 text-center sm:grid-cols-1">
+                    <!-- Title Selection -->
+                    <div>
+                        <label for="titleSelect" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select or Type Title</label>
+                        <select [(ngModel)]="selectedTitle" id="titleSelect" name="titleSelect" (change)="onTitleSelect($event)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option value="">Select a predefined title</option>
+                            <option *ngFor="let title of predefinedAnnualTitles" [value]="title">{{ title }}</option>
+                            <option value="custom">Custom Title</option>
+                        </select>
+                    </div>
+                    <!-- Title Input -->
                     <div>
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                        <input [(ngModel)] = "annualReport.annualreport_title" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type Title" required="">
+                        <input [(ngModel)]="annualReport.annualreport_title" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type Title" required="">
                     </div>
                 </div>
                 <div class="flex justify-center gap-5">
@@ -26,7 +36,6 @@
                     </button>
                 </div>
             </form>
-            
         </div>
     </div>
 </div>

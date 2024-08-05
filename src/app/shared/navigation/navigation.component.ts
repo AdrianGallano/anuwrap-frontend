@@ -60,6 +60,10 @@ export class NavigationComponent implements OnInit {
     this.route.navigate([`../reportlist`], { relativeTo: this.aRoute });
   }
 
+  navigateToAnalytics(){
+    this.route.navigate([`../analytics`], { relativeTo: this.aRoute });
+  }
+
   navigateToChatWithAI(){
     this.route.navigate([`../chatwithai`], { relativeTo: this.aRoute });
   }

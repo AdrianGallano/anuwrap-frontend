@@ -6,6 +6,7 @@ import { ReportService } from '../../../../../shared/services/report.service';
 import { ReportselectionService } from '../../../../../shared/services/reportselection.service';
 import { AnnualContentService } from '../../../../../shared/services/annualcontent.service';
 import { Observable, forkJoin } from 'rxjs';
+import moment from 'moment';
 
 @Component({
   selector: 'app-editreportselection',
@@ -74,6 +75,7 @@ export class CreatereportselectionComponent {
         console.log(this.reports)
         this.reports.forEach(report => {
           report.selected = false;
+          report.humanizedDate = moment(report.date_created).format('MMMM D, YYYY, h:mm:ss a');
         });
         // Cross-reference with report selections
         this.markSelectedReports();
