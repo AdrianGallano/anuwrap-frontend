@@ -1,0 +1,6 @@
+canvas {
+    width: 100% !important;
+    /* Ensure the canvas scales with the container */
+    height: auto !important;
+    /* Maintain aspect ratio */
+}

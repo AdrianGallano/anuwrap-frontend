@@ -8,13 +8,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AiComponent } from "../../../../shared/ai/ai.component";
 import dayjs from 'dayjs';
+import { ReportLineChartComponent } from '../../../../shared/report-line-chart/report-line-chart.component';
+import { AnnualReportLineChartComponent } from '../../../../shared/annual-report-line-chart/annual-report-line-chart.component';
+import { DashboardIntroCardComponent } from '../../../../shared/dashboard-intro-card/dashboard-intro-card.component';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
-    imports: [NavigationComponent, CommonModule, FormsModule, AiComponent]
+    imports: [NavigationComponent, CommonModule, FormsModule, AiComponent, ReportLineChartComponent, AnnualReportLineChartComponent, DashboardIntroCardComponent]
 })
 export class DashboardComponent implements AfterViewInit {
     userworkspaces: any[] = [];
