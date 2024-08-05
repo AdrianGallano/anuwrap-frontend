@@ -24,11 +24,14 @@ export class CreateannualreportComponent implements OnInit {
   }
 
   predefinedAnnualTitles: string[] = [
-    'Monthly Sales Report',
-    'Quarterly Performance Summary',
-    'Annual Financial Overview',
-    'Departmental Review',
-    'Project Milestone Report'
+    '2024 Accomplishment',
+    '2024 Faculty Matrix',
+    '2024 Teaching and Learning',
+    '2024 Faculty Schedule',
+    '2024 Event Report',
+    '2024 Financial Report',
+    '2024 Summary of Accomplishments',
+    '2024 Syllabus'
   ];
   
   selectedTitle: string = ''; 

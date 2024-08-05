@@ -22,11 +22,14 @@ export class CreatereportComponent implements OnInit {
   reportId: any;
   error: string | null = null;
   predefinedTitles: string[] = [
-    'Monthly Sales Report',
-    'Quarterly Performance Summary',
-    'Annual Financial Overview',
-    'Departmental Review',
-    'Project Milestone Report'
+    'July Accomplishment',
+    'July Faculty Matrix',
+    'July Teaching and Learning',
+    'July Faculty Schedule',
+    'July Event Report',
+    'July Financial Report',
+    'July Summary of Accomplishments',
+    'July Syllabus'
   ];
   selectedTitle: string = ''; 
   showCustomInput: boolean = false; 
