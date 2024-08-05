@@ -84,7 +84,7 @@ export class ContentComponent implements OnInit {
       .whole-page-with-table {
 
         background-color: #fff;
-        width: auto;
+        width: 100%;
         height: auto;
         box-shadow: 0 0 4px rgba(0, 0, 0, .15);
         box-sizing: border-box;
@@ -106,7 +106,7 @@ export class ContentComponent implements OnInit {
       .import-whole-page-landscape {
 
         background-color: #fff;
-        width: auto;
+        width: 100%;
         height: auto;
         box-shadow: 0 0 4px rgba(0, 0, 0, .15);
         box-sizing: border-box;
@@ -130,6 +130,7 @@ export class ContentComponent implements OnInit {
       .syllabus-content {
         margin: 0 auto;
         padding: 0 2rem;
+        width: 100%;
         position: relative;
       }
 
