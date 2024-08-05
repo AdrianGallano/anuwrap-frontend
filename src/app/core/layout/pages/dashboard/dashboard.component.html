@@ -1,104 +1,55 @@
 <app-navigation></app-navigation>
 <div class="antialiased md:ml-60">
-  <main class="grid grid-cols-2 p-4 md:mx-[35px] h-auto pt-20">
-    <div class="h-96 mb-4">
-      
-      <div
-        class="max-w-md w-full max-h-[480px] overflow-y-auto mt-12 bg-white rounded-lg dark:bg-gray-800 p-4 shadow-md md:p-6">
-        <div class="flex justify-between mb-5">
-          <div>
-            <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">{{numberOfReports}}</h5>
-            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Reports this {{timeframe}}</p>
-          </div>
-          <div
-            class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-            {{percentageChange}}%
-            <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-              viewBox="0 0 10 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M5 13V1m0 0L1 5m4-4 4 4" />
-            </svg>
-          </div>
-        </div>
-        <div id="grid-chart"></div>
-        <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between mt-5">
-          <div class="flex justify-between items-center pt-5">
-            <!-- Button -->
-            <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom"
-              class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
-              type="button">
-              Last 7 days
-              <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 10 6">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m1 1 4 4 4-4" />
-              </svg>
-            </button>
-            <!-- Dropdown menu -->
-            <div id="lastDaysdropdown"
-              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-              <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                <li>
-                  <a (click)="setTimeframe('yesterday')"
-                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
-                </li>
-                <li>
-                  <a (click)="setTimeframe('day')"
-                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
-                </li>
-                <li>
-                  <a (click)="setTimeframe('week')"
-                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                    7 days</a>
-                </li>
-                <li>
-                  <a (click)="setTimeframe('month')"
-                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                    30 days</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+  <main class="flex flex-col p-4 md:mx-[35px] h-auto pt-20">
+    <!-- INVITE CODE -->
+    <div
+      class="flex justify-center w-full max-w p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <span
+        class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">Workspace
+        invite code:</span>
+      <span
+        class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">{{code}}</span>
+    </div>
+
+    <!-- APP CHART -->
+    <div class="grid lg:grid-cols-2 gap-4 mt-5 ">
+      <app-dashboard-intro-card></app-dashboard-intro-card>
 
       <div
-        class="flex justify-center w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 mt-8">
-        <span
-          class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">Workspace
-          invite code:</span>
-        <span
-          class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">{{code}}</span>
+        class="w-full max-w-full p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 ">
+
+        <div class="flex items-center justify-between mb-4">
+          <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Users</h5>
+        </div>
+        <div class="flow-root">
+          <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+            <li *ngFor="let userworkspace of userworkspaces" class="py-3 sm:py-4">
+              <div class="flex items-center">
+                <div class="flex-shrink-0">
+                  <img class="w-8 h-8 rounded-full" src="{{userworkspace['image_name']}}" alt="Neil image">
+                </div>
+                <div class="flex-1 min-w-0 ms-4">
+                  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    {{userworkspace["username"]}}
+                  </p>
+                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                    {{userworkspace["email"]}}
+                  </p>
+                </div>
+                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                  {{userworkspace["role_name"]}}
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
+      <app-report-line-chart>
+      </app-report-line-chart>
+      <app-annual-report-line-chart>
+      </app-annual-report-line-chart>
     </div>
-    <div
-      class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 mt-12">
-      <div class="flex items-center justify-between mb-4">
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Users</h5>
-      </div>
-      <div class="flow-root">
-        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-          <li *ngFor="let userworkspace of userworkspaces" class="py-3 sm:py-4">
-            <div class="flex items-center">
-              <div class="flex-shrink-0">
-                <img class="w-8 h-8 rounded-full" src="{{userworkspace['image_name']}}" alt="Neil image">
-              </div>
-              <div class="flex-1 min-w-0 ms-4">
-                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                  {{userworkspace["username"]}}
-                </p>
-                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                  {{userworkspace["email"]}}
-                </p>
-              </div>
-              <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                {{userworkspace["role_name"]}}
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
+
   </main>
 </div>
 <app-ai></app-ai>

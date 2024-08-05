@@ -50,7 +50,6 @@ import { LeaveworkspaceComponent } from './core/layout/pages/workspace/leavework
 import { TemplatelistComponent } from './core/layout/pages/templatelist/templatelist.component';
 import { ContentComponent } from './core/layout/pages/content/content.component';
 import { TemplatelistParentComponent } from './core/layout/pages/report/templatelist-parent/templatelist-parent.component';
-import { ChartComponent } from './core/layout/pages/chart/chart.component';
 import { AnnualContentComponent } from './core/layout/pages/annualcontent/annualcontent.component';
 import { LogoutConfirmComponent } from './core/layout/pages/authentication/logout-confirm/logout-confirm.component';
 import { DeleteallreportsComponent } from './core/layout/pages/report/deleteallreports/deleteallreports.component';
@@ -79,10 +78,6 @@ export const routes: Routes = [
     {
         path: 'collage',
         component: CollageitemComponent
-    },
-    {
-        path: 'chart',
-        component: ChartComponent
     },
     {
         path: '',
@@ -226,7 +221,7 @@ export const routes: Routes = [
                         path: 'annualreport/:annual_report_id',
                         component: CreatereportselectionComponent,
                         canActivate: [authenticationGuard]
-                    },                    {
+                    }, {
                         path: 'annualreport/:annual_report_id/annual_content/:annual_content_id',
                         component: AnnualContentComponent,
                         canActivate: [authenticationGuard]

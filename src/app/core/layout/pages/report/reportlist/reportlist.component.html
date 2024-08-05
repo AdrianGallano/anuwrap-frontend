@@ -41,7 +41,6 @@
                                             <label class="ml-2">Select All</label>
                                         </th>
                                         <th scope="col" class="p-4 whitespace-nowrap">Report Name</th>
-                                        <th scope="col" class="p-4 whitespace-nowrap">Report Type</th>
                                         <th scope="col" class="p-2 whitespace-nowrap">Date Created</th>
                                         <th scope="col" class="p-2 whitespace-nowrap">Date Edited</th>
                                         <th scope="col" class="p-2 whitespace-nowrap">Actions</th>
@@ -57,11 +56,6 @@
                                                 <h2>{{ report["title"] }}</h2>
                                             </div>
                                         </th>
-                                        <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                            <div class="flex items-center justify-center">
-                                                {{ getReportTypeName(report.report_type_id) }}
-                                            </div>
-                                        </td>
                                         <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
                                             <div class="flex items-center justify-center">
                                                 {{ report.date_created | date:'medium' }}
