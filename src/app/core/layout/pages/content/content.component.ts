@@ -54,29 +54,26 @@ export class ContentComponent implements OnInit {
       }
   
       body {
-        background-color: rgba(0,0,0,0);
+        background-color: #fff;
         margin: 1rem auto 0;
         min-height: calc(100vh - 1rem);
-        padding: 4rem;
         box-sizing: border-box;
         overflow: auto;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: auto;
+        width: 794px;
         height: auto;
         position: relative;
       }
 
 
       .whole-page {
-
         background-color: #fff;
-        width: 794px;
+        width: 100%;
+        min-height: 1123px;
         height: auto;
-        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
-        box-sizing: border-box;
         position: relative;
 
       }
@@ -92,18 +89,53 @@ export class ContentComponent implements OnInit {
 
       }
 
+      .faculty-content {
+    padding: 10px;
+  }
+
+  .faculty-table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures columns are fixed width */
+  }
+
+  th, td {
+    border: 1px solid #000;
+    padding: 5px;
+    text-align: center;
+    font-size: 8pt;
+    word-wrap: break-word; /* Ensures text wraps within the cell */
+    white-space: normal; /* Allows text to wrap to new lines */
+  }
+
+  th[colspan], td[colspan] {
+    text-align: center;
+  }
+
+  .ccs-logo img, .gc-logo img {
+    max-width: 100px; /* Limits the logo size */
+    height: auto;
+  }
+
+  .faculty-header {
+    text-align: center;
+  }
+
+  .faculty-header p {
+    margin: 0;
+  }
+
+  .text-blue-500 {
+    color: blue;
+    text-decoration: underline;
+  }
+
+
       .import-whole-page {
-
-        background-color: #fff;
-        width: 794px;
-        height: 100%;
-        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
-        box-sizing: border-box;
-        position: relative;
-
-      }
-
-      .import-whole-page-landscape {
 
         background-color: #fff;
         width: 100%;
@@ -114,24 +146,106 @@ export class ContentComponent implements OnInit {
 
       }
 
+      .import-whole-page-landscape {
+
+        background-color: #fff;
+        width: 1123px;
+        height: auto;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+        box-sizing: border-box;
+        position: relative;
+
+      }
+
       .content {
       width: 100%;
-      min-height: 1123px;
+      height: auto;
       }
-  
-      /* Adjust margins and paddings as needed for different content sections */
-      .content-body,
-      .faculty-content,
-      .teaching-content,
-      .facultysched-content,
-      .event-content,
-      .financial-content,
-      .summary-content,
-      .syllabus-content {
-        margin: 0 auto;
-        padding: 0 2rem;
-        position: relative;
+
+      .teaching-header {
+      position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
       }
+
+/* General content body */
+.content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 100px;
+  position: relative;
+  height: auto;
+}
+
+/* Faculty content body */
+.faculty-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 200px;
+  position: relative;
+  height: auto;
+}
+
+/* Teaching content body */
+.teaching-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 220px;
+  position: relative;
+  height: auto;
+}
+
+/* Faculty schedule content body */
+.facultysched-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 150px;
+  position: relative;
+  height: auto;
+}
+
+/* Event content body */
+.event-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 150px;
+  position: relative;
+  height: auto;
+}
+
+/* Financial content body */
+.financial-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 150px;
+  position: relative;
+  height: auto;
+}
+
+/* Summary content body */
+.summary-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 150px;
+  position: relative;
+  height: auto;
+}
+
+/* Syllabus content body */
+.syllabus-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 150px;
+  position: relative;
+  height: auto;
+}
+
 
       .content-body table {
         width: 100%;
@@ -202,6 +316,7 @@ export class ContentComponent implements OnInit {
   flex-wrap: wrap;
   gap: 10px;
   border: 1px solid #000;
+  position: absolute;
   padding: 10px;
   cursor: move;
   margin: 0 auto;
@@ -212,6 +327,7 @@ export class ContentComponent implements OnInit {
   gap: 10px;
   flex-wrap: wrap;
   border: 1px solid #000;
+  position: absolute;
   padding: 10px;
   display: inline-block;
   margin: 0 auto;
@@ -312,6 +428,52 @@ export class ContentComponent implements OnInit {
         position: relative;
       }
 
+      .faculty-content {
+    padding: 10px;
+  }
+
+  .faculty-table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures columns are fixed width */
+  }
+
+  th, td {
+    border: 1px solid #000;
+    padding: 5px;
+    text-align: center;
+    font-size: 8pt;
+    word-wrap: break-word; /* Ensures text wraps within the cell */
+    white-space: normal; /* Allows text to wrap to new lines */
+  }
+
+  th[colspan], td[colspan] {
+    text-align: center;
+  }
+
+  .ccs-logo img, .gc-logo img {
+    max-width: 100px; /* Limits the logo size */
+    height: auto;
+  }
+
+  .faculty-header {
+    text-align: center;
+  }
+
+  .faculty-header p {
+    margin: 0;
+  }
+
+  .text-blue-500 {
+    color: blue;
+    text-decoration: underline;
+  }
+
+
       .import-whole-page {
         background-color: #fff;
         width: 100%;
@@ -341,18 +503,18 @@ export class ContentComponent implements OnInit {
         position: relative;
       }
 
-      .faculty-content {
-       margin-top: 0;
-        margin-bottom: 0;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        page-break-inside: avoid; 
-        position: relative;
-        }
+      // .faculty-content {
+      //  margin-top: 0;
+      //   margin-buttom: 0;
+      //   margin-left: 2rem;
+      //   margin-right: 2rem;
+      //   page-break-inside: avoid; 
+      //   position: relative;
+      //   }
 
         .teaching-content {
          margin-top: 0;
-        margin-bottom: 0;
+        margin-buttom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -361,7 +523,7 @@ export class ContentComponent implements OnInit {
 
         .facultysched-content {
          margin-top: 0;
-        margin-bottom: 0;
+        margin-buttom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -370,7 +532,7 @@ export class ContentComponent implements OnInit {
 
         .event-content {
          margin-top: 0;
-        margin-bottom: 0;
+        margin-buttom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -379,7 +541,7 @@ export class ContentComponent implements OnInit {
 
         .financial-content {
          margin-top: 0;
-        margin-bottom: 0;
+        margin-buttom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -388,7 +550,7 @@ export class ContentComponent implements OnInit {
 
         summary-content {
          margin-top: 0;
-        margin-bottom: 0;
+        margin-buttom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -397,7 +559,7 @@ export class ContentComponent implements OnInit {
 
         .syllabus-content {
          margin-top: 0;
-        margin-bottom: 0;
+        margin-buttom: 0;
         margin-left: 2rem;
         margin-right: 2rem;
         page-break-inside: avoid; 
@@ -462,15 +624,8 @@ export class ContentComponent implements OnInit {
     right: 0;
     z-index: 1000;
     display: block;
-  }
-
-  /* Footers */
-  .faculty-footer, .teaching-footer, .facultysched-footer, .event-footer, .financial-footer, .summary-footer, .syllabus-footer {
-    position: absolute;  
-    width: 100%;
-    bottom: 0;
-    z-index: 1000; 
-    display: block;
+    margin: 0 auto;
+    text-align: center;
   }
 
   .header {
@@ -490,42 +645,76 @@ export class ContentComponent implements OnInit {
     z-index: 1000; 
   }
 
-  /* Content-body */
-
+  /* General content body */
   .content-body {
-      page-break-inside: avoid;
-     padding-top: 160px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 100px;
+    position: relative;
+    height: auto;
   }
-
+  
+  /* Faculty content body */
   .faculty-content-body {
-      page-break-inside: avoid;
-     padding-top: 300px;
-    margin-bottom: 2rem;
-
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 200px;
+    position: relative;
+    height: auto;
   }
-
-   .event-content-body {
-       page-break-inside: avoid;
-     padding-top: 150px;
-    margin-bottom: 2rem;
-   }
-
-   .facultysched-content-body {
-       page-break-inside: avoid;
-     padding-top: 150px;
-    margin-bottom: 2rem;
-   }
-
-   .teaching-content-body, .financial-content-body, .summary-content-body, .syllabus-content-body {
-    page-break-inside: avoid;
-     padding-top: 150px;
-    margin-bottom: 2rem;
-    }
-
-     .summary-content-body{
-    padding-top: 250px;
-    padding-right: 10px;
-    }
+  
+  /* Teaching content body */
+  .teaching-content-body {
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 220px;
+    position: relative;
+    height: auto;
+  }
+  
+  /* Faculty schedule content body */
+  .facultysched-content-body {
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 150px;
+    position: relative;
+    height: auto;
+  }
+  
+  /* Event content body */
+  .event-content-body {
+    padding: 0 2rem;
+    padding-top: 150px;
+    position: relative;
+    height: auto;
+  }
+  
+  /* Financial content body */
+  .financial-content-body {
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 150px;
+    position: relative;
+    height: auto;
+  }
+  
+  /* Summary content body */
+  .summary-content-body {
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 150px;
+    position: relative;
+    height: auto;
+  }
+  
+  /* Syllabus content body */
+  .syllabus-content-body {
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 150px;
+    position: relative;
+    height: auto;
+  }
 
 
       .gc-logo img{
@@ -562,14 +751,20 @@ margin: 0 auto;
       }
     }
   `,  
-    plugins: 'save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
-    toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | insertSentence | addPageButton | insertImgContainer | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
+    plugins: 'powerpaste save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
+    toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | insertSentence | addHeader | insertImgContainer | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
+    
     setup: (editor: any) => {
       this.editor = editor;
 
       editor.ui.registry.addButton('uploadCustomFile', {
         text: 'Import File',
         onAction: () => this.openFilePicker(editor)
+      });
+
+      editor.ui.registry.addButton('addHeader', {
+        text: 'Add Header',
+        onAction: () => this.insertHeader(editor)
       });
 
       editor.ui.registry.addMenuButton('insertSentence', {
@@ -584,22 +779,22 @@ margin: 0 auto;
         }
       });
       
-      editor.ui.registry.addMenuButton('addPageButton', {
-        text: 'Add Page',
-        fetch: (callback: any) => {
-        const items = [
-            { type: 'menuitem', text: 'Accomplishment Report Page', onAction: () => this.insertNewAccomplishmentPage(editor) },
-            { type: 'menuitem', text: 'Faculty Matrix Report Page', onAction: () => this.insertNewFacultyPage(editor) },
-            { type: 'menuitem', text: 'Teaching And Learning Report Page', onAction: () => this.insertNewTeachingPage(editor) },
-            { type: 'menuitem', text: 'Faculty Schedule Report Page', onAction: () => this.insertNewFacultySchedPage(editor) },
-            { type: 'menuitem', text: 'Event Report Page', onAction: () => this.insertNewEventReportPage(editor) },
-            { type: 'menuitem', text: 'Financial Report Page', onAction: () => this.insertNewFinancialReportPage(editor) },
-            { type: 'menuitem', text: 'Summary Of Accomplishment Report Page', onAction: () => this.insertNewSummaryReportPage(editor) },
-            { type: 'menuitem', text: 'Syllabus Report Page', onAction: () => this.insertNewSyllabusReportPage(editor) }
-          ];
-          callback(items);
-        }
-      });
+      // editor.ui.registry.addMenuButton('addPageButton', {
+      //   text: 'Add Page',
+      //   fetch: (callback: any) => {
+      //   const items = [
+      //       { type: 'menuitem', text: 'Accomplishment Report Page', onAction: () => this.insertNewAccomplishmentPage(editor) },
+      //       { type: 'menuitem', text: 'Faculty Matrix Report Page', onAction: () => this.insertNewFacultyPage(editor) },
+      //       { type: 'menuitem', text: 'Teaching And Learning Report Page', onAction: () => this.insertNewTeachingPage(editor) },
+      //       { type: 'menuitem', text: 'Faculty Schedule Report Page', onAction: () => this.insertNewFacultySchedPage(editor) },
+      //       { type: 'menuitem', text: 'Event Report Page', onAction: () => this.insertNewEventReportPage(editor) },
+      //       { type: 'menuitem', text: 'Financial Report Page', onAction: () => this.insertNewFinancialReportPage(editor) },
+      //       { type: 'menuitem', text: 'Summary Of Accomplishment Report Page', onAction: () => this.insertNewSummaryReportPage(editor) },
+      //       { type: 'menuitem', text: 'Syllabus Report Page', onAction: () => this.insertNewSyllabusReportPage(editor) }
+      //     ];
+      //     callback(items);
+      //   }
+      // });
 
       editor.ui.registry.addMenuButton('insertCollage', {
         text: 'Add Collage',
@@ -619,155 +814,8 @@ margin: 0 auto;
       }); 
 
       editor.on('init', () => this.initializeContent(editor));
-      let originalElement: HTMLElement | null = null;
 
-      editor.on('init', () => this.initializeContent(editor));
-
-      // Start drag operation on double-click
-      editor.on('dblclick', (event: MouseEvent) => {
-        const targetElement = event.target as HTMLElement;
-
-        // Check if the double-clicked element is draggable
-        if (targetElement.closest('.whole-page') && (targetElement.classList.contains('img-wrapper') || targetElement.classList.contains('collage-wrapper'))) {
-          originalElement = targetElement;
-
-          // Create a drag event and dispatch it
-          const dragEvent = new DragEvent('dragstart', {
-            bubbles: true,
-            cancelable: true,
-            dataTransfer: new DataTransfer()
-          });
-
-          // Clone the dragged element
-          const draggedElement = targetElement.cloneNode(true) as HTMLElement;
-
-          // Ensure that the cloned element retains its original position attributes
-          if (targetElement.style.position === 'absolute') {
-            draggedElement.style.position = 'absolute';
-            draggedElement.style.left = targetElement.style.left;
-            draggedElement.style.top = targetElement.style.top;
-          }
-
-          dragEvent.dataTransfer!.setData('text/html', draggedElement.outerHTML);
-          dragEvent.dataTransfer!.effectAllowed = 'move';
-
-          // Dispatch the drag event to start dragging
-          targetElement.dispatchEvent(dragEvent);
-        }
-      });
-
-      editor.on('dragstart', (event: DragEvent) => {
-        const targetElement = event.target as HTMLElement;
-
-        // Check if the dragged element is draggable
-        if (targetElement.closest('.whole-page') && (targetElement.classList.contains('img-wrapper') || targetElement.classList.contains('collage-wrapper'))) {
-          originalElement = targetElement;
-
-          // Clone the dragged element
-          const draggedElement = targetElement.cloneNode(true) as HTMLElement;
-
-          // Ensure that the cloned element retains its original position attributes
-          if (targetElement.style.position === 'absolute') {
-            draggedElement.style.position = 'absolute';
-            draggedElement.style.left = targetElement.style.left;
-            draggedElement.style.top = targetElement.style.top;
-          }
-
-          event.dataTransfer!.setData('text/html', draggedElement.outerHTML);
-          event.dataTransfer!.effectAllowed = 'move';
-        }
-      });
-
-      editor.on('dragover', (event: DragEvent) => {
-        event.preventDefault(); // Necessary to allow dropping
-      });
-
-      editor.on('drop', (event: DragEvent) => {
-        event.preventDefault();
-
-        // Get the drop target element
-        const dropTarget = event.target as HTMLElement;
-        const contentToInsert = event.dataTransfer!.getData('text/html');
-
-        if (contentToInsert && dropTarget) {
-          // Find the nearest .whole-page container
-          const wholePage = dropTarget.closest('.whole-page') as HTMLElement;
-          if (wholePage) {
-            // Create a temporary div to hold the dropped content
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = contentToInsert.trim();
-
-            // Ensure only one child is inserted
-            if (tempDiv.children.length > 0) {
-              const insertedElement = tempDiv.children[0] as HTMLElement;
-
-              // Calculate the drop position relative to the .whole-page container
-              const pageRect = wholePage.getBoundingClientRect();
-              const offsetX = event.clientX - pageRect.left;
-              const offsetY = event.clientY - pageRect.top;
-
-              // Store position in attributes
-              insertedElement.setAttribute('data-left', offsetX.toString());
-              insertedElement.setAttribute('data-top', offsetY.toString());
-              insertedElement.style.position = 'absolute';
-              insertedElement.style.left = offsetX + 'px';
-              insertedElement.style.top = offsetY + 'px';
-              
-
-              // Append the inserted element to the .whole-page container
-              wholePage.appendChild(insertedElement);
-
-              // Remove the original element from its previous position
-              if (originalElement) {
-                originalElement.remove();
-                originalElement = null; // Reset originalElement after removal
-              }
-            }
-          }
-        }
-      });
-
-      let draggingElement: HTMLElement | null = null;
-      let offsetX: number;
-      let offsetY: number;
-
-      editor.on('mousedown', (event: MouseEvent) => {
-        const targetElement = event.target as HTMLElement;
-
-        // Check if the element is draggable
-        if (targetElement.closest('.whole-page') && (targetElement.classList.contains('img-wrapper') || targetElement.classList.contains('collage-wrapper'))) {
-          draggingElement = targetElement;
-
-          // Calculate the initial offset between the mouse position and the element's position
-          const rect = targetElement.getBoundingClientRect();
-          offsetX = event.clientX - rect.left;
-          offsetY = event.clientY - rect.top;
-
-          // Add event listeners for mouse movement and release
-          document.addEventListener('mousemove', onMouseMove);
-          document.addEventListener('mouseup', onMouseUp);
-        }
-      });
-
-      function onMouseMove(event: MouseEvent) {
-        if (draggingElement) {
-          // Update the position of the dragging element
-          const newLeft = event.clientX - offsetX;
-          const newTop = event.clientY - offsetY;
-
-          draggingElement.style.position = 'absolute';
-          draggingElement.style.left = newLeft + 'px';
-          draggingElement.style.top = newTop + 'px';
-        }
-      }
-
-      function onMouseUp() {
-        if (draggingElement) {
-          // Remove event listeners
-          document.removeEventListener('mousemove', onMouseMove);
-          document.removeEventListener('mouseup', onMouseUp);
-        }
-      }
+      
     },
     save_onsavecallback: (editor: any) => {
       this.saveContent(editor);
@@ -817,30 +865,28 @@ margin: 0 auto;
   }
 
   
-
   initializeContent(editor: any) {
+    console.log('Initializing content...');
     this.contentService.getContent(this.contentId).subscribe(
       (response) => {
-        editor.setContent(response.data.content.body);
+        console.log('Content fetched:', response);
         this.content.report_id = response.data.content.report_id;
         this.content.body = response.data.content.body;
-        console.log(this.content.body)
+        console.log(this.content.body);
+        editor.setContent(this.content.body);
+
+        this.setupDragAndDrop(editor)
+        
       },
       (error) => {
         console.error('Error fetching content:', error);
       }
     );
-    const positions = JSON.parse(localStorage.getItem('positions') || '{}');
-  Object.keys(positions).forEach((id) => {
-    const { left, top } = positions[id];
-    const element = document.querySelector(`[data-id="${id}"]`) as HTMLElement;
-    if (element) {
-      element.style.position = 'absolute';
-      element.style.left = `${left}px`;
-      element.style.top = `${top}px`;
-    }
-  });
   }
+  
+  
+  
+
 
   openFilePicker(editor: any): void {
     const fileInput = document.createElement('input');
@@ -1073,548 +1119,358 @@ margin: 0 auto;
   }
 
   insertNewFacultyPage(editor: any): void {
-    const newPage = `<div class="whole-page-with-table">
-<div class="faculty-content">
-<div class="faculty-header">
-<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png"></div>
-<p class="gc-logo"><span style="font-size: 12pt;"><img style="float: left;" src="../../../../../assets/img/GC.png"></span></p>
-<p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 8pt;">City Of Olongapo</span> <span style="font-weight: bold;"><br>GORDON COLLEGE <br>COLLEGE OF COMPUTER STUDIES </span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200 <br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a></span></p>
-<p style="line-height: 1.1; text-align: center;"><strong>FACULTY MATRIX</strong><br>2nd Semester A.Y. 2023-2024</p>
-</div>
-<div class="faculty-content-body">
-<div class="faculty-table-wrapper">
-<table style="border-collapse: collapse; margin: 0 auto; width: 80%; height: 424.663px;" border="1"><colgroup><col style="width: 4.56615%;"><col style="width: 4.56615%;"><col style="width: 5.00102%;"><col style="width: 3.58769%;"><col style="width: 3.37025%;"><col style="width: 5.65333%;"><col style="width: 14.242%;"><col style="width: 6.52307%;"><col style="width: 5.76204%;"><col style="width: 8.47999%;"><col style="width: 8.47999%;"><col style="width: 7.06666%;"><col style="width: 6.30732%;"><col style="width: 8.26087%;"><col style="width: 8.04512%;"></colgroup>
-<tbody>
-<tr style="height: 153.463px;">
-<td style="text-align: center;" colspan="3"><span style="font-size: 8pt;">Name</span></td>
-<td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">AGE</span><br><span style="font-size: 8pt;"><br></span></td>
-<td style="text-align: center;" rowspan="2"><span style="font-size: 8pt;">SEX</span><br><span style="font-size: 8pt;"><br></span></td>
-<td style="text-align: center;" rowspan="2">
-<p><span style="font-size: 8pt;">TENURE</span><br><span style="font-size: 8pt;">(P/COS)</span></p>
-</td>
-<td style="text-align: center;" rowspan="2">
-<p><span style="font-size: 8pt;">Related Certification/Appropriate Current PRC License</span></p>
-</td>
-<td style="text-align: center;" colspan="5">Educational Background (Specify Degree Obtained)</td>
-<td style="text-align: center;" rowspan="2">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-<p><span style="font-size: 8pt;">Designation</span></p>
-</td>
-<td style="text-align: center;" rowspan="2">
-<p><span style="font-size: 8pt;">Teaching experience (No. of years)</span></p>
-</td>
-<td style="text-align: center;" rowspan="2">
-<p><span style="font-size: 8pt;">Membership in Professional Organization</span></p>
-</td>
-</tr>
-<tr style="height: 135.2px;">
-<td style="text-align: center;"><span style="font-size: 8pt;">Last Name</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">First Name</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">Middle Initial</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">Doctorate Degree</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">Master&rsquo;s Degree</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">Baccalaureate Degree</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">Specialization</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">Enrollment Status (Enrolled or Not enrolled)</span></p>
-</td>
-</tr>
-<tr style="height: 68px;">
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-</tr>
-<tr style="height: 68px;">
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;"><span style="font-size: 8pt;">&nbsp;</span></td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-<td style="text-align: center;">
-<p><span style="font-size: 8pt;">&nbsp;</span></p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-</div>
-<div class="faculty-footer">&nbsp;</div>
-</div>
-</div>
-<p><div class="break"></div></p>`;
+    const newPage = `
+    <div class="whole-page-with-table">
+    <div class="faculty-content">
+    <div class="faculty-header">
+    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="../../../../../assets/img/CCS.png" alt="CCS Logo"></div>
+    <p class="gc-logo"><span style="font-size: 12pt;"> <img style="float: left;" src="../../../../../assets/img/GC.png" alt="GC Logo"> </span></p>
+    <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines</span><br><span style="font-size: 8pt;">City Of Olongapo</span><br><span style="font-weight: bold;">GORDON COLLEGE<br>COLLEGE OF COMPUTER STUDIES</span><br><span style="font-size: small;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200<br>Telefax No.: (047) 602-7175 loc 322<br><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a> </span></p>
+    <p style="line-height: 1.1; text-align: center;"><strong>FACULTY MATRIX</strong><br>2nd Semester A.Y. 2023-2024</p>
+    <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+    <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+    </div>
+    <div class="faculty-content-body">
+    <div class="faculty-table-wrapper">
+    <table style="width: 100%; height: 374.8px;"><colgroup><col style="width: 4.56615%;"><col style="width: 4.56615%;"><col style="width: 5.00102%;"><col style="width: 3.58769%;"><col style="width: 3.37025%;"><col style="width: 5.65333%;"><col style="width: 14.242%;"><col style="width: 6.52307%;"><col style="width: 5.76204%;"><col style="width: 8.47999%;"><col style="width: 8.47999%;"><col style="width: 7.06666%;"><col style="width: 6.30732%;"><col style="width: 8.26087%;"><col style="width: 8.04512%;"></colgroup>
+    <tbody>
+    <tr style="height: 28.525px;">
+    <td colspan="3">Name</td>
+    <td rowspan="2">AGE</td>
+    <td rowspan="2">SEX</td>
+    <td rowspan="2">TENURE<br>(P/COS)</td>
+    <td rowspan="2">Related Certification/Appropriate Current PRC License</td>
+    <td colspan="5">Educational Background (Specify Degree Obtained)</td>
+    <td rowspan="2">Designation</td>
+    <td rowspan="2">Teaching experience (No. of years)</td>
+    <td rowspan="2">Membership in Professional Organization</td>
+    </tr>
+    <tr style="height: 118.075px;">
+    <td>Last Name</td>
+    <td>First Name</td>
+    <td>Middle Initial</td>
+    <td>Doctorate Degree</td>
+    <td>Master&rsquo;s Degree</td>
+    <td>Baccalaureate Degree</td>
+    <td>Specialization</td>
+    <td>Enrollment Status (Enrolled or Not enrolled)</td>
+    </tr>
+    <tr style="height: 28.525px;">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr style="height: 28.525px;">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr style="height: 28.525px;">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr style="height: 28.525px;">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr style="height: 28.525px;">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr style="height: 28.525px;">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr style="height: 28.525px;">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr style="height: 28.525px;">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    </div>
+    <div class="faculty-footer">&nbsp;</div>
+    </div>
+    </div>
+    <p><div class="break"></div><div class="break"></div></p>`;
     editor.insertContent(newPage);
   }
 
   insertNewTeachingPage(editor: any): void {
-    const newPage = `
-    <div class="whole-page-with-table">
-    <div class="teaching-content">
+    const newPage = `<div class="whole-page-with-table">
+  <div class="teaching-content">
     <div class="teaching-header">
-    <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img src="assets/img/CCS.png"></div>
+      <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;">
+        <img src="assets/img/CCS.png">
+      </div>
       <p class="gc-logo"><img style="float: left;" src="assets/img/GC.png"></p>
-      <p style="line-height: 1.1; text-align: center;"><span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br><span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span><span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span><span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span></p>
-      <p style="line-height: 1.1; text-align: center;"><br><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Teaching and Learning Monitoring Form -2</span></strong></p>
-      </div>
-        <div class="teaching-content-body">
-      <p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Faculty:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; College/Department:</span></span></p>
-      <p class="MsoNormal" style="text-align: left;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span></strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"> &nbsp;Date Covered:</span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date Submitted:</span></span></p>
-      <div align="center">
-      <table class="MsoTableGrid" style="border-collapse: collapse; mso-table-layout-alt: fixed; border: none; mso-border-alt: solid windowtext .5pt; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt;" border="1" width="0" cellspacing="0" cellpadding="0">
-      <tbody>
-      <tr style="mso-yfti-irow: 0; mso-yfti-firstrow: yes;">
-      <td style="width: 28.1pt; border: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" rowspan="3" width="38">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">No.</span></strong></p>
-      </td>
-      <td style="width: 88.7pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" rowspan="3" width="101">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Courses Handled /</span></strong></p>
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Year &amp; Section</span></strong></p>
-      </td>
-      <td style="width: 74.35pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" rowspan="3" width="82">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Module Number</span></strong></p>
-      </td>
-      <td style="width: 9.0cm; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" colspan="4" width="410">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Synchronous</span></strong></p>
-      </td>
-      <td style="width: 239.2pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" colspan="3" width="282">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Asynchronous</span></strong></p>
-      </td>
-      </tr>
-      <tr style="mso-yfti-irow: 1;">
-      <td style="width: 9.0cm; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" colspan="4" width="410">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Virtual</span></strong></p>
-      </td>
-      <td style="width: 77.95pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" rowspan="2" width="86">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Platform</span></strong></p>
-      </td>
-      <td style="width: 3.0cm; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" rowspan="2" width="110">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Schedule of Consultations</span></strong></p>
-      </td>
-      <td style="width: 76.2pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" rowspan="2" width="86">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Activities</span></strong></p>
-      </td>
-      </tr>
-      <tr style="mso-yfti-irow: 2;">
-      <td style="width: 63.75pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="79">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Platform</span></strong></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="79">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Schedule of Meeting</span></strong></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="172">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Meeting ID</span></strong></p>
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Password / Class Password</span></strong></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="80">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: normal;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">Activities</span></strong></p>
-      </td>
-      </tr>
-      <tr style="mso-yfti-irow: 3;">
-      <td style="width: 28.1pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="38">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">1</span></p>
-      </td>
-      <td style="width: 88.7pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="101">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">BSEMC1A &amp; 1B</span></p>
-      </td>
-      <td style="width: 74.35pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="82">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">1 - 3</span></p>
-      </td>
-      <td style="width: 63.75pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="79">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Google Meet</span></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="79">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">M.T.<br>2:30 &ndash; 3:30 P.M.</span></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="172">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 9.0pt; line-height: 150%; font-family: 'Arial',sans-serif; color: #5f6368; letter-spacing: .25pt; background: white;">meet.google.com/gyo-qvbw-apm</span></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="80">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Module</span></p>
-      </td>
-      <td style="width: 77.95pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="86">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Google Meet /LAMP</span></p>
-      </td>
-      <td style="width: 3.0cm; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="110">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">M.T. </span></p>
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">12:00 &ndash; 1:00 P.M</span></p>
-      </td>
-      <td style="width: 76.2pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="86">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Module</span></p>
-      </td>
-      </tr>
-      <tr style="mso-yfti-irow: 4;">
-      <td style="width: 28.1pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="38">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">2</span></p>
-      </td>
-      <td style="width: 88.7pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="101">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">BSCS-1A</span></p>
-      </td>
-      <td style="width: 74.35pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="82">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">1.3</span></p>
-      </td>
-      <td style="width: 63.75pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="79">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Google Meet</span></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="79">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">W.Th.</span></p>
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">6:00<span style="mso-spacerun: yes;">&nbsp; </span>&ndash; 7:00 P.M</span></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="172">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 13.5pt;" align="center"><span lang="EN-US" style="font-size: 9.0pt; color: #70757a;">https://meet.google.com/cmm-axge-mcr</span></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="80">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Module</span></p>
-      </td>
-      <td style="width: 77.95pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="86">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Google Meet /LAMP</span></p>
-      </td>
-      <td style="width: 3.0cm; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="110">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">WTh <br>9:00 &ndash; 11:30 A.M.</span></p>
-      </td>
-      <td style="width: 76.2pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="86">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Module</span></p>
-      </td>
-      </tr>
-      <tr style="mso-yfti-irow: 5; mso-yfti-lastrow: yes;">
-      <td style="width: 28.1pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="38">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">3</span></p>
-      </td>
-      <td style="width: 88.7pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="101">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">BSIT1A &ndash; 1B</span></p>
-      </td>
-      <td style="width: 74.35pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="82">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">1 - 3</span></p>
-      </td>
-      <td style="width: 63.75pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="79">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Google Meet</span></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="79">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Friday</span></p>
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-family: 'Times New Roman',serif;">10:00 <span style="mso-spacerun: yes;">&nbsp;</span>12:00 P.M.</span></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="172">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 13.5pt;" align="center"><span lang="EN-US" style="font-size: 9.0pt; color: #70757a;">https://meet.google.com/rgw-wzrz-hmp</span></p>
-      </td>
-      <td style="width: 63.8pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="80">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Module</span></p>
-      </td>
-      <td style="width: 77.95pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="86">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Google Meet /LAMP</span></p>
-      </td>
-      <td style="width: 3.0cm; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="110">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">M.T. </span></p>
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">12:00 &ndash; 1:00 P.M.</span></p>
-      </td>
-      <td style="width: 76.2pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" width="86">
-      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; line-height: 150%;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 150%; font-family: 'Times New Roman',serif;">Module</span></p>
-      </td>
-      </tr>
-      </tbody>
+      <p style="line-height: 1.1; text-align: center;">
+        <span style="font-size: 8pt;">Republic of the Philippines&nbsp;</span><br>
+        <span style="font-weight: bold;"><span style="font-size: 8pt;">OFFICE OF THE VICE PRESIDENT FOR ACADEMIC AFFAIRS</span><br></span>
+        <span style="font-size: 8pt;">City of Olongapo</span><span style="font-weight: bold;"><br></span>
+        <span style="font-size: 14pt;"><strong>GORDON COLLEGE</strong></span>
+      </p>
+      <p style="line-height: 1.1; text-align: center;"><br><strong>
+        <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">
+          Teaching and Learning Monitoring Form -2
+        </span></strong>
+      </p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
+      <p style="line-height: 1.1; text-align: center;">
+        <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">
+          Teaching: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; College/Department:
+        </span>
+      </p>
+      <p class="MsoNormal" style="text-align: left;" align="center">
+        <strong>
+          <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          </span>
+        </strong>
+        <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">
+          Date Covered:
+        </span>
+        <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date Submitted:
+        </span>
+      </p>
+    </div>
+    <div align="center"></div>
+    <div class="teaching-content-body">
+      <table class="MsoTableGrid">
+        <thead>
+          <tr>
+            <th rowspan="3">No.</th>
+            <th rowspan="3">Courses Handled /<br>Year & Section</th>
+            <th rowspan="3">Module Number</th>
+            <th colspan="4">Synchronous</th>
+            <th colspan="3">Asynchronous</th>
+          </tr>
+          <tr>
+            <th colspan="4">Virtual</th>
+            <th rowspan="2">Platform</th>
+            <th rowspan="2">Schedule of Consultations</th>
+            <th rowspan="2">Activities</th>
+          </tr>
+          <tr>
+            <th>Platform</th>
+            <th>Schedule of Meeting</th>
+            <th>Meeting ID / Password / Class Password</th>
+            <th>Activities</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>BSEMC1A & 1B</td>
+            <td>1 - 3</td>
+            <td>Google Meet</td>
+            <td valign="top">M.T.<br>2:30 – 3:30 P.M.</td>
+            <td><span style="font-size: 9.0pt; color: #5f6368; letter-spacing: .25pt;">meet.google.com/gyo-qvbw-apm</span></td>
+            <td>Module</td>
+            <td>Google Meet /LAMP</td>
+            <td>Google Meet /LAMP</td>
+            <td>Activities</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>BSEMC1A & 1B</td>
+            <td>1 - 3</td>
+            <td>Google Meet</td>
+            <td valign="top">M.T.<br>2:30 – 3:30 P.M.</td>
+            <td><span style="font-size: 9.0pt; color: #5f6368; letter-spacing: .25pt;">meet.google.com/gyo-qvbw-apm</span></td>
+            <td>Module</td>
+            <td>Google Meet /LAMP</td>
+            <td>Google Meet /LAMP</td>
+            <td>Activities</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>BSEMC1A & 1B</td>
+            <td>1 - 3</td>
+            <td>Google Meet</td>
+            <td valign="top">M.T.<br>2:30 – 3:30 P.M.</td>
+            <td><span style="font-size: 9.0pt; color: #5f6368; letter-spacing: .25pt;">meet.google.com/gyo-qvbw-apm</span></td>
+            <td>Module</td>
+            <td>Google Meet /LAMP</td>
+            <td>Google Meet /LAMP</td>
+            <td>Activities</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>BSEMC1A & 1B</td>
+            <td>1 - 3</td>
+            <td>Google Meet</td>
+            <td valign="top">M.T.<br>2:30 – 3:30 P.M.</td>
+            <td><span style="font-size: 9.0pt; color: #5f6368; letter-spacing: .25pt;">meet.google.com/gyo-qvbw-apm</span></td>
+            <td>Module</td>
+            <td>Google Meet /LAMP</td>
+            <td>Google Meet /LAMP</td>
+            <td>Activities</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>BSEMC1A & 1B</td>
+            <td>1 - 3</td>
+            <td>Google Meet</td>
+            <td valign="top">M.T.<br>2:30 – 3:30 P.M.</td>
+            <td><span style="font-size: 9.0pt; color: #5f6368; letter-spacing: .25pt;">meet.google.com/gyo-qvbw-apm</span></td>
+            <td>Module</td>
+            <td>Google Meet /LAMP</td>
+            <td>Google Meet /LAMP</td>
+            <td>Activities</td>
+          </tr>
+        </tbody>
       </table>
-      <p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; tab-stops: 63.8pt 326.05pt 630.8pt;">&nbsp;</p>
-      <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-weight: bold;"><span style="font-size: 8pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="text-decoration: underline;"><span style="font-size: 12pt;">Reynaldo G. Bautista Jr </span></span><span style="font-size: 12pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <u><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Dr. Erlinda C. Abarintos</span></u></span><span style="font-size: 12pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<u><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Ms. Kristin Mendoza</span></u></span></span></span><u><span style="font-weight: bold;"><br></span></u><span style="font-size: 8pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size: 12pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Signature of Faculty&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Dean, College of Computer Studies&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Head, HRMU</span></span></span></span></strong></p>
-      <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;">&nbsp;</p>
-      <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;">&nbsp;</p>
-      <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;">&nbsp;</p>
-      <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;">&nbsp;</p>
-      <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;">&nbsp;</p>
-      <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;"><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 10pt;">GC-Acad-Form-<span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp;</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<u><br></u></span><span style="font-size: 8pt;"><span style="font-size: 12pt;"><span style="font-size: 10pt;">cc. VPA</span></span></span></span><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 8pt;"><span style="font-size: 12pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><span style="font-size: 10pt;">A, Dean, HRMU, Faculty&nbsp;&nbsp;</span></span></span></span></span><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 8pt;"><span style="font-size: 12pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"> &nbsp;</span></span></span></span></strong></p>
-      <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 8pt;"><span style="font-size: 12pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"></span></span></span></span></strong></p>
-      </div>
-      </div>
-      <div class="teaching-footer"></div>
-      </div>
-      </div>
-      <div class="break"></div>
-    `;
+    </div>
+  </div>
+</div>`;
     editor.insertContent(newPage);
   }
 
@@ -1971,71 +1827,71 @@ margin: 0 auto;
 <div class="summary-content-body">
 <p style="line-height: 1.1; text-align: left; padding-left: 40px;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">Name of Student Organization<span style="mso-tab-count: 1;">&nbsp; &nbsp;</span>:</span></strong></p>
 <p style="line-height: 1.1; text-align: left; padding-left: 40px;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">Name of President<span style="mso-tab-count: 3;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>:&nbsp;</span></strong></p>
-<table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 801.391px; width: 990px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
+<table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 791.387px; width: 741px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
 <tbody>
 <tr style="height: 93px;">
-<td style="width: 225.3px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 163.05px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Activities Undertaken</span></strong></p>
 </td>
-<td style="width: 234.8px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 172.55px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Dates and Places / Platform</span></strong></p>
 </td>
-<td style="width: 251.35px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 189.1px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Activity Main Objective</span></strong></p>
 </td>
-<td style="width: 216.95px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 154.7px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Remarks</span></strong></p>
 </td>
 </tr>
 <tr style="height: 174px;">
-<td style="width: 225.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-<td style="width: 234.8px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-<td style="width: 251.35px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 163.05px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 172.55px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 189.1px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal">&nbsp;</p>
 </td>
-<td style="width: 216.95px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 154.7px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
-<tr style="height: 120px;">
-<td style="width: 225.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
+<tr style="height: 161px;">
+<td style="width: 163.05px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal">&nbsp;</p>
 </td>
-<td style="width: 234.8px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 172.55px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
 </td>
-<td style="width: 251.35px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 189.1px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
 </td>
-<td style="width: 216.95px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 154.7px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
-<tr style="height: 228px;">
-<td style="width: 225.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
+<tr style="height: 177px;">
+<td style="width: 163.05px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal">&nbsp;</p>
 </td>
-<td style="width: 234.8px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 172.55px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
 </td>
-<td style="width: 251.35px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 189.1px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
 </td>
-<td style="width: 216.95px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 154.7px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
-<tr style="height: 186.391px;">
-<td style="width: 225.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
+<tr style="height: 186.387px;">
+<td style="width: 163.05px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal">&nbsp;</p>
 </td>
-<td style="width: 234.8px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 172.55px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
 </td>
-<td style="width: 251.35px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 189.1px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
 </td>
-<td style="width: 216.95px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 154.7px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
@@ -2063,29 +1919,29 @@ margin: 0 auto;
 </div>
 <div class="summary-content-body">
 <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-<table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 535.391px; width: 996px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
+<table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 334.363px; width: 736px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
 <tbody>
-<tr style="height: 278.781px;">
-<td style="width: 226.8px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<tr style="height: 161.762px;">
+<td style="width: 161.8px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
-<td style="width: 236.3px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 171.3px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
-<td style="width: 252.862px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 187.85px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
-<td style="width: 218.438px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 153.45px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
-<tr style="height: 256.609px;">
-<td style="width: 226.8px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-<td style="width: 236.3px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-<td style="width: 252.862px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<tr style="height: 172.6px;">
+<td style="width: 161.8px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 171.3px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 187.85px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal">&nbsp;</p>
 </td>
-<td style="width: 218.438px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 153.45px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
@@ -2155,10 +2011,10 @@ margin: 0 auto;
 
   insertCollage(editor: Editor, count: number): void {
     const collageTemplate = `
-      <div class="collage-wrapper" style="width: 600px; height: auto; resize: both; overflow: hidden; margin: 0 auto;">
+      <div class="collage-wrapper" style="width: 600px; height: auto; resize: both; overflow: hidden; margin: 0 auto; cursor: move;" draggable="true">
         <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
           ${Array.from({ length: count }).map(() => `
-            <div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;"> 
+            <div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;">
               <div class="image-placeholder" style="height: 100px; background-color: #ccc;"></div>
             </div>
           `).join('')}
@@ -2169,46 +2025,36 @@ margin: 0 auto;
       </div>
     `;
     editor.insertContent(collageTemplate);
-  
-    // After inserting, find the last inserted collage-wrapper and attach dragstart event listener
-    const lastCollageWrapper = document.querySelector('.collage-wrapper:last-child');
-    if (lastCollageWrapper) {
-      lastCollageWrapper.addEventListener('dragstart', (event: Event) => {
-        const dragEvent = event as DragEvent;
-        if (dragEvent.dataTransfer) {
-          dragEvent.dataTransfer.setData('text/html', lastCollageWrapper.outerHTML);
-          dragEvent.dataTransfer.effectAllowed = 'move';
-        }
-      });
-    }
+    this.setupDragAndDrop(editor);
   }
   
   insertImgContainer(editor: Editor) {
     const imgContainer = `
       <div class="img-wrapper" style="width: 600px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move;" draggable="true">
-      <div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">  
-      <div class="image-placeholder" style="height: 200px; background-color: #ccc;"></div>
-      </div>
+        <div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">
+          <div class="image-placeholder" style="height: 200px; background-color: #ccc;"></div>
+        </div>
         <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
           CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
         </div>
       </div>
     `;
-  
     editor.insertContent(imgContainer);
-  
-    // Attach event listener for dragstart to move the existing container
-    const imgContainerElement = document.querySelector('.img-wrapper:last-child');
-    if (imgContainerElement) {
-      imgContainerElement.addEventListener('dragstart', (event: Event) => {
-        const dragEvent = event as DragEvent;
-        if (dragEvent.dataTransfer) {
-          dragEvent.dataTransfer.setData('text/html', imgContainerElement.outerHTML);
-          dragEvent.dataTransfer.effectAllowed = 'move';
-        }
-      });
-    }
+    this.setupDragAndDrop(editor);
   }
+  
+  insertHeader(editor: any) {
+    const headerHTML = `<div class="teaching-header" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" src="assets/img/GC.png"></p>
+<p style="line-height: 1.1; text-align: center; margin: 0;"><span style="font-size: 12pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 12pt;">Office Of The Vice President For Academic Affairs<span style="font-weight: bold;"><br></span> City of Olongapo<span style="font-weight: bold;"><br></span>&nbsp;Gordon College</span></p>
+<p style="line-height: 1.1; text-align: center; margin: 0;"><br><strong> <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman', serif;">&nbsp;</span></strong></p>`;
+    editor.insertContent(headerHTML);
+    this.setupDragAndDrop(editor);
+  }
+  
+  
+  
 
   private startPolling(): void {
     this.pollingSubscription = interval(this.POLLING_INTERVAL).pipe(
@@ -2285,5 +2131,156 @@ margin: 0 auto;
     });
   }
 
- 
+  setupDragAndDrop(editor: any) {
+    console.log('Initializing drag and drop...');
+  
+    let draggingElement: HTMLElement | null = null;
+    let offsetX: number = 0;
+    let offsetY: number = 0;
+  
+    // Function to set draggable attributes
+    const setDraggableAttributes = () => {
+      const iframe = document.querySelector('.tox-edit-area__iframe') as HTMLIFrameElement;
+  
+      if (iframe) {
+        const iframeDoc = iframe.contentDocument;
+        if (iframeDoc) {
+          const elements = iframeDoc.querySelectorAll('.img-wrapper, .collage-wrapper, .teaching-header');
+          elements.forEach(element => {
+            (element as HTMLElement).draggable = true;
+          });
+        } else {
+          console.error('Iframe document not found');
+        }
+      } else {
+        console.error('Iframe not found');
+      }
+    };
+  
+    // Initial setup for draggable attributes
+    setDraggableAttributes();
+  
+    // MutationObserver to handle dynamically added elements
+    const observer = new MutationObserver(() => {
+      setDraggableAttributes(); // Apply draggable attributes to newly added elements
+    });
+  
+    const iframe = document.querySelector('.tox-edit-area__iframe') as HTMLIFrameElement;
+    if (iframe) {
+      const iframeDoc = iframe.contentDocument;
+      if (iframeDoc) {
+        observer.observe(iframeDoc.body, { childList: true, subtree: true });
+      }
+    }
+  
+    // Handle drag start
+    editor.on('dragstart', (event: DragEvent) => {
+      console.log('Drag start event triggered');
+      const targetElement = event.target as HTMLElement;
+      const iframe = document.querySelector('.tox-edit-area__iframe') as HTMLIFrameElement;
+  
+      if (iframe) {
+        const iframeDoc = iframe.contentDocument;
+        if (iframeDoc && targetElement) {
+          if (targetElement.classList.contains('img-wrapper') || 
+              targetElement.classList.contains('collage-wrapper') ||
+              targetElement.classList.contains('teaching-header')) {
+            draggingElement = targetElement;
+            const rect = targetElement.getBoundingClientRect();
+            offsetX = event.clientX - rect.left;
+            offsetY = event.clientY - rect.top;
+            console.log(`Drag started at X: ${event.clientX}, Y: ${event.clientY}`);
+          }
+        }
+      }
+    });
+  
+    // Handle drag over
+    editor.on('dragover', (event: DragEvent) => {
+      event.preventDefault(); // Required to allow drop
+      console.log(`Drag over at X: ${event.clientX}, Y: ${event.clientY}`);
+    });
+  
+    // Handle drop
+    editor.on('drop', (event: DragEvent) => {
+      event.preventDefault();
+      console.log('Drop event triggered');
+  
+      if (draggingElement) {
+        const iframe = document.querySelector('.tox-edit-area__iframe') as HTMLIFrameElement;
+        if (iframe) {
+          const iframeDoc = iframe.contentDocument;
+          if (iframeDoc) {
+            const wholePageContainer = iframeDoc.querySelector('.whole-page') as HTMLElement;
+            if (wholePageContainer) {
+              const rect = wholePageContainer.getBoundingClientRect();
+              const dropX = event.clientX - rect.left - offsetX;
+              const dropY = event.clientY - rect.top - offsetY;
+  
+              console.log(`Dropped at X: ${dropX}, Y: ${dropY}`);
+  
+              draggingElement.style.position = 'absolute';
+              draggingElement.style.left = `${dropX}px`;
+              draggingElement.style.top = `${dropY}px`;
+  
+              // Ensure the element is appended to the right container
+              if (!wholePageContainer.contains(draggingElement)) {
+                wholePageContainer.appendChild(draggingElement);
+              }
+              
+              draggingElement = null;
+            } else {
+              console.error('.whole-page not found within iframe');
+            }
+          }
+        }
+      }
+    });
+  
+    // Handle mouse down for dragging
+    document.addEventListener('mousedown', (event: MouseEvent) => {
+      console.log('Mouse down event triggered');
+      const targetElement = event.target as HTMLElement;
+      if (targetElement && (
+        targetElement.classList.contains('img-wrapper') ||
+        targetElement.classList.contains('collage-wrapper') ||
+        targetElement.classList.contains('teaching-header')
+      )) {
+        draggingElement = targetElement;
+        const rect = targetElement.getBoundingClientRect();
+        offsetX = event.clientX - rect.left;
+        offsetY = event.clientY - rect.top;
+        console.log(`Mouse down at X: ${event.clientX}, Y: ${event.clientY}`);
+      }
+    });
+  
+    // Handle mouse move for dragging
+    document.addEventListener('mousemove', (event: MouseEvent) => {
+      if (draggingElement) {
+        event.preventDefault();
+        const moveX = event.clientX - offsetX;
+        const moveY = event.clientY - offsetY;
+  
+        draggingElement.style.position = 'absolute';
+        draggingElement.style.left = `${moveX}px`;
+        draggingElement.style.top = `${moveY}px`;
+        console.log(`Mouse move at X: ${moveX}, Y: ${moveY}`);
+      }
+    });
+  
+    // Handle mouse up to stop dragging
+    document.addEventListener('mouseup', () => {
+      draggingElement = null;
+      console.log('Mouse up, dragging stopped');
+    });
+  }
+  
+  
+  
+  
+  
 }
+
+
+
+

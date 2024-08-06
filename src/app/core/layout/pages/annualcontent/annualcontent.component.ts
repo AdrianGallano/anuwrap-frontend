@@ -1,10 +1,14 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { AnnualContentService } from '../../../../shared/services/annualcontent.service';
 import tinymce from 'tinymce';
 import { AiComponent } from "../../../../shared/ai/ai.component";
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { interval, Subscription, switchMap } from 'rxjs';
+import { SentanceService } from '../../../../shared/services/sentance.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ManageTextComponent } from '../../../../shared/popup/manage-text/manage-text.component';
 
 @Component({
   selector: 'app-annualcontent',
@@ -17,7 +21,12 @@ imports: [EditorModule, AiComponent, CommonModule],
   styleUrl: './annualcontent.component.css'
 })
 export class AnnualContentComponent implements OnInit{
-  public editorConfig = {
+  editor: any; // Declare editor property
+  sentences: any[] = [];
+  private pollingSubscription: Subscription | null = null;
+  private readonly POLLING_INTERVAL = 5000;
+
+  editorConfig = {
     selector: '#editor',
     height: '700px',
     menubar: true,
@@ -40,29 +49,26 @@ export class AnnualContentComponent implements OnInit{
       }
   
       body {
-        background-color: rgba(0,0,0,0);
+        background-color: #fff;
         margin: 1rem auto 0;
         min-height: calc(100vh - 1rem);
-        padding: 4rem;
         box-sizing: border-box;
         overflow: auto;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: auto;
+        width: 794px;
         height: auto;
         position: relative;
       }
 
 
       .whole-page {
-
         background-color: #fff;
-        width: 794px;
+        width: 100%;
+        min-height: 1123px;
         height: auto;
-        box-shadow: 0 0 4px rgba(0, 0, 0, .15);
-        box-sizing: border-box;
         position: relative;
 
       }
@@ -70,7 +76,7 @@ export class AnnualContentComponent implements OnInit{
       .whole-page-with-table {
 
         background-color: #fff;
-        width: auto;
+        width: 100%;
         height: auto;
         box-shadow: 0 0 4px rgba(0, 0, 0, .15);
         box-sizing: border-box;
@@ -78,10 +84,56 @@ export class AnnualContentComponent implements OnInit{
 
       }
 
+      .faculty-content {
+    padding: 10px;
+  }
+
+  .faculty-table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures columns are fixed width */
+  }
+
+  th, td {
+    border: 1px solid #000;
+    padding: 5px;
+    text-align: center;
+    font-size: 8pt;
+    word-wrap: break-word; /* Ensures text wraps within the cell */
+    white-space: normal; /* Allows text to wrap to new lines */
+  }
+
+  th[colspan], td[colspan] {
+    text-align: center;
+  }
+
+  .ccs-logo img, .gc-logo img {
+    max-width: 100px; /* Limits the logo size */
+    height: auto;
+  }
+
+  .faculty-header {
+    text-align: center;
+  }
+
+  .faculty-header p {
+    margin: 0;
+  }
+
+  .text-blue-500 {
+    color: blue;
+    text-decoration: underline;
+  }
+
+
       .import-whole-page {
 
         background-color: #fff;
-        width: 794px;
+        width: 100%;
         height: auto;
         box-shadow: 0 0 4px rgba(0, 0, 0, .15);
         box-sizing: border-box;
@@ -102,22 +154,93 @@ export class AnnualContentComponent implements OnInit{
 
       .content {
       width: 100%;
-      height: 1123px;
+      height: auto;
       }
-  
-      /* Adjust margins and paddings as needed for different content sections */
-      .content-body,
-      .faculty-content,
-      .teaching-content,
-      .facultysched-content,
-      .event-content,
-      .financial-content,
-      .summary-content,
-      .syllabus-content {
-        margin: 0 auto;
-        padding: 0 2rem;
-        position: relative;
+
+      .teaching-header {
+      position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
       }
+
+/* General content body */
+.content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 100px;
+  position: relative;
+  height: auto;
+}
+
+/* Faculty content body */
+.faculty-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 200px;
+  position: relative;
+  height: auto;
+}
+
+/* Teaching content body */
+.teaching-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 220px;
+  position: relative;
+  height: auto;
+}
+
+/* Faculty schedule content body */
+.facultysched-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 150px;
+  position: relative;
+  height: auto;
+}
+
+/* Event content body */
+.event-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 150px;
+  position: relative;
+  height: auto;
+}
+
+/* Financial content body */
+.financial-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 150px;
+  position: relative;
+  height: auto;
+}
+
+/* Summary content body */
+.summary-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 150px;
+  position: relative;
+  height: auto;
+}
+
+/* Syllabus content body */
+.syllabus-content-body {
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 150px;
+  position: relative;
+  height: auto;
+}
+
 
       .content-body table {
         width: 100%;
@@ -188,6 +311,7 @@ export class AnnualContentComponent implements OnInit{
   flex-wrap: wrap;
   gap: 10px;
   border: 1px solid #000;
+  position: absolute;
   padding: 10px;
   cursor: move;
   margin: 0 auto;
@@ -198,6 +322,7 @@ export class AnnualContentComponent implements OnInit{
   gap: 10px;
   flex-wrap: wrap;
   border: 1px solid #000;
+  position: absolute;
   padding: 10px;
   display: inline-block;
   margin: 0 auto;
@@ -298,6 +423,52 @@ export class AnnualContentComponent implements OnInit{
         position: relative;
       }
 
+      .faculty-content {
+    padding: 10px;
+  }
+
+  .faculty-table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures columns are fixed width */
+  }
+
+  th, td {
+    border: 1px solid #000;
+    padding: 5px;
+    text-align: center;
+    font-size: 8pt;
+    word-wrap: break-word; /* Ensures text wraps within the cell */
+    white-space: normal; /* Allows text to wrap to new lines */
+  }
+
+  th[colspan], td[colspan] {
+    text-align: center;
+  }
+
+  .ccs-logo img, .gc-logo img {
+    max-width: 100px; /* Limits the logo size */
+    height: auto;
+  }
+
+  .faculty-header {
+    text-align: center;
+  }
+
+  .faculty-header p {
+    margin: 0;
+  }
+
+  .text-blue-500 {
+    color: blue;
+    text-decoration: underline;
+  }
+
+
       .import-whole-page {
         background-color: #fff;
         width: 100%;
@@ -327,14 +498,14 @@ export class AnnualContentComponent implements OnInit{
         position: relative;
       }
 
-      .faculty-content {
-       margin-top: 0;
-        margin-buttom: 0;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        page-break-inside: avoid; 
-        position: relative;
-        }
+      // .faculty-content {
+      //  margin-top: 0;
+      //   margin-buttom: 0;
+      //   margin-left: 2rem;
+      //   margin-right: 2rem;
+      //   page-break-inside: avoid; 
+      //   position: relative;
+      //   }
 
         .teaching-content {
          margin-top: 0;
@@ -448,15 +619,8 @@ export class AnnualContentComponent implements OnInit{
     right: 0;
     z-index: 1000;
     display: block;
-  }
-
-  /* Footers */
-  .faculty-footer, .teaching-footer, .facultysched-footer, .event-footer, .financial-footer, .summary-footer, .syllabus-footer {
-    position: absolute;  
-    width: 100%;
-    buttom: 0;
-    z-index: 1000; 
-    display: block;
+    margin: 0 auto;
+    text-align: center;
   }
 
   .header {
@@ -476,42 +640,76 @@ export class AnnualContentComponent implements OnInit{
     z-index: 1000; 
   }
 
-  /* Content-body */
-
+  /* General content body */
   .content-body {
-      page-break-inside: avoid;
-     padding-top: 160px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 100px;
+    position: relative;
+    height: auto;
   }
-
+  
+  /* Faculty content body */
   .faculty-content-body {
-      page-break-inside: avoid;
-     padding-top: 300px;
-    margin-buttom: 2rem;
-
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 200px;
+    position: relative;
+    height: auto;
   }
-
-   .event-content-body {
-       page-break-inside: avoid;
-     padding-top: 150px;
-    margin-buttom: 2rem;
-   }
-
-   .facultysched-content-body {
-       page-break-inside: avoid;
-     padding-top: 150px;
-    margin-buttom: 2rem;
-   }
-
-   .teaching-content-body, .financial-content-body, .summary-content-body, .syllabus-content-body {
-    page-break-inside: avoid;
-     padding-top: 150px;
-    margin-buttom: 2rem;
-    }
-
-     .summary-content-body{
-    padding-top: 250px;
-    padding-right: 10px;
-    }
+  
+  /* Teaching content body */
+  .teaching-content-body {
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 220px;
+    position: relative;
+    height: auto;
+  }
+  
+  /* Faculty schedule content body */
+  .facultysched-content-body {
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 150px;
+    position: relative;
+    height: auto;
+  }
+  
+  /* Event content body */
+  .event-content-body {
+    padding: 0 2rem;
+    padding-top: 150px;
+    position: relative;
+    height: auto;
+  }
+  
+  /* Financial content body */
+  .financial-content-body {
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 150px;
+    position: relative;
+    height: auto;
+  }
+  
+  /* Summary content body */
+  .summary-content-body {
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 150px;
+    position: relative;
+    height: auto;
+  }
+  
+  /* Syllabus content body */
+  .syllabus-content-body {
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 150px;
+    position: relative;
+    height: auto;
+  }
 
 
       .gc-logo img{
@@ -547,121 +745,73 @@ margin: 0 auto;
       margin: 0 auto;
       }
     }
-  `, 
-    plugins: 'save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
-    toolbar: 'save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | addPageButton | insertImgContainer | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
+  `,  
+    plugins: 'powerpaste save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
+    toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | insertSentence | addHeader | insertImgContainer | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
+    
     setup: (editor: any) => {
-      editor.ui.registry.addMenuButton('addPageButton', {
-        text: 'Add Page',
-        fetch: (callback: any) => {
-          const items = [
-            { type: 'menuitem', text: 'Accomplishment Report Page', onAction: () => this.insertNewAccomplishmentPage(editor) },
-            { type: 'menuitem', text: 'Faculty Matrix Report Page', onAction: () => this.insertNewFacultyPage(editor) },
-            { type: 'menuitem', text: 'Teaching And Learning Report Page', onAction: () => this.insertNewTeachingPage(editor) },
-            { type: 'menuitem', text: 'Faculty Schedule Report Page', onAction: () => this.insertNewFacultySchedPage(editor) },
-            { type: 'menuitem', text: 'Event Report Page', onAction: () => this.insertNewEventReportPage(editor) },
-            { type: 'menuitem', text: 'Financial Report Page', onAction: () => this.insertNewFinancialReportPage(editor) },
-            { type: 'menuitem', text: 'Summary Of Accomplishment Report Page', onAction: () => this.insertNewSummaryReportPage(editor) },
-            { type: 'menuitem', text: 'Syllabus Report Page', onAction: () => this.insertNewSyllabusReportPage(editor) }
-          ];
-          callback(items);
-        }
-      });
+      this.editor = editor;
 
-      editor.ui.registry.addMenuButton('insertCollage', {
-        text: 'Add Collage',
-        fetch: (callback: any) => {
-          const items = [
-            { type: 'menuitem', text: 'Double', onAction: () => this.insertCollage(editor, 2) },
-            { type: 'menuitem', text: 'Triple', onAction: () => this.insertCollage(editor, 3) },
-            { type: 'menuitem', text: 'Quadruple', onAction: () => this.insertCollage(editor, 4) },
-          ];
-          callback(items);
-        }
-      });
+      // editor.ui.registry.addButton('addHeader', {
+      //   text: 'Add Header',
+      //   onAction: () => this.insertHeader(editor)
+      // });
 
-      editor.ui.registry.addButton('insertImgContainer', {
-        text: 'Add Image',
-        onAction: () => this.insertImgContainer(editor)
-      }); 
+      // editor.ui.registry.addMenuButton('insertSentence', {
+      //   text: 'Insert Sentence',
+      //   fetch: (callback: any) => {
+      //     const items = this.sentences.map((sentence: any) => ({
+      //       type: 'menuitem',
+      //       text: sentence.text,
+      //       onAction: () => this.insertSentence(editor, sentence.text)
+      //     }));
+      //     callback(items);
+      //   }
+      // });
+      
+      // editor.ui.registry.addMenuButton('addPageButton', {
+      //   text: 'Add Page',
+      //   fetch: (callback: any) => {
+      //   const items = [
+      //       { type: 'menuitem', text: 'Accomplishment Report Page', onAction: () => this.insertNewAccomplishmentPage(editor) },
+      //       { type: 'menuitem', text: 'Faculty Matrix Report Page', onAction: () => this.insertNewFacultyPage(editor) },
+      //       { type: 'menuitem', text: 'Teaching And Learning Report Page', onAction: () => this.insertNewTeachingPage(editor) },
+      //       { type: 'menuitem', text: 'Faculty Schedule Report Page', onAction: () => this.insertNewFacultySchedPage(editor) },
+      //       { type: 'menuitem', text: 'Event Report Page', onAction: () => this.insertNewEventReportPage(editor) },
+      //       { type: 'menuitem', text: 'Financial Report Page', onAction: () => this.insertNewFinancialReportPage(editor) },
+      //       { type: 'menuitem', text: 'Summary Of Accomplishment Report Page', onAction: () => this.insertNewSummaryReportPage(editor) },
+      //       { type: 'menuitem', text: 'Syllabus Report Page', onAction: () => this.insertNewSyllabusReportPage(editor) }
+      //     ];
+      //     callback(items);
+      //   }
+      // });
+
+      // editor.ui.registry.addMenuButton('insertCollage', {
+      //   text: 'Add Collage',
+      //   fetch: (callback: any) => {
+      //     const items = [
+      //       { type: 'menuitem', text: 'Double', onAction: () => this.insertCollage(editor, 2) },
+      //       { type: 'menuitem', text: 'Triple', onAction: () => this.insertCollage(editor, 3) },
+      //       { type: 'menuitem', text: 'Quadruple', onAction: () => this.insertCollage(editor, 4) },
+      //     ];
+      //     callback(items);
+      //   }
+      // });
+
+      // editor.ui.registry.addButton('insertImgContainer', {
+      //   text: 'Add Image',
+      //   onAction: () => this.insertImgContainer(editor)
+      // }); 
 
       editor.on('init', () => this.initializeContent(editor));
-      
-      let originalElement: HTMLElement | null = null;
 
-      editor.on('dragstart', (event: DragEvent) => {
-        const targetElement = event.target as HTMLElement;
       
-        // Check if the dragged element is draggable
-        if (targetElement.closest('.whole-page') && (targetElement.classList.contains('img-wrapper') || targetElement.classList.contains('collage-wrapper'))) {
-          // Set the targetElement as the original element
-          originalElement = targetElement;
-      
-          // Clone the dragged element
-          const draggedElement = targetElement.cloneNode(true) as HTMLElement;
-      
-          // Ensure that the cloned element retains its original position attributes
-          if (targetElement.style.position === 'absolute') {
-            draggedElement.style.position = 'absolute';
-            draggedElement.style.left = targetElement.style.left;
-            draggedElement.style.top = targetElement.style.top;
-          }
-      
-          event.dataTransfer!.setData('text/html', draggedElement.outerHTML);
-          event.dataTransfer!.effectAllowed = 'move';
-        }
-      });
-      
-      editor.on('dragover', (event: DragEvent) => {
-        event.preventDefault();
-      });
-      
-      editor.on('drop', (event: DragEvent) => {
-        event.preventDefault();
-        const dropTarget = event.target as HTMLElement;
-        const contentToInsert = event.dataTransfer!.getData('text/html');
-      
-        if (contentToInsert && dropTarget && originalElement) {
-          // Create a temporary div to hold the dropped content
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = contentToInsert.trim();
-      
-          // Ensure only one child is inserted
-          if (tempDiv.children.length > 0) {
-            const insertedElement = tempDiv.children[0] as HTMLElement;
-      
-            // Calculate the drop position relative to the body container
-            const wholePage = dropTarget.closest('.whole-page') as HTMLElement;
-            const pageRect = wholePage.getBoundingClientRect();
-            const offsetX = event.clientX - pageRect.left;
-            const offsetY = event.clientY - pageRect.top - 210;
-      
-            // Store position in attributes
-            insertedElement.setAttribute('data-left', offsetX.toString());
-            insertedElement.setAttribute('data-top', offsetY.toString());
-      
-            // Adjust the style for absolute positioning based on offsetX and offsetY
-            insertedElement.style.position = 'absolute';
-            insertedElement.style.left = offsetX + 'px';
-            insertedElement.style.top = offsetY + 'px';
-      
-            // Append the inserted element to the drop target
-            dropTarget.appendChild(insertedElement);
-      
-            // Remove the original element from its previous position
-            if (originalElement) {
-              originalElement.remove();
-              originalElement = null; // Reset originalElement after removal
-            }
-          }
-        }
-      });
-
     },
     save_onsavecallback: (editor: any) => {
       this.saveAnnualContent(editor);
     },
   };
+
 
   annualContentId: any;
   
@@ -673,13 +823,19 @@ margin: 0 auto;
   successMessage= '';
   errorMessage='';
   successTimeout: any;
+  isBrowser: boolean;
 
   constructor(
     private aRoute: ActivatedRoute,
     private route: Router,
     private annualContentService: AnnualContentService,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    private sentenceService: SentanceService,
+    public dialog: MatDialog,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params: Params) => {
@@ -700,6 +856,8 @@ margin: 0 auto;
         this.annual_content.annual_report_id = response.data.annual_content.annual_report_id
         this.annual_content.annual_body = response.data.annual_content.annual_body
         this.cdr;
+
+        // this.setupDragAndDrop(editor)
       },
       (error) => {
         console.log('Error annual_content');
@@ -1872,62 +2030,271 @@ margin: 0 auto;
     editor.insertContent(newPage);
   }
 
-  insertCollage(editor: any, count: number): void {
-    const collageTemplate = `
-      <div class="collage-wrapper" style="width: 600px; height: auto; resize: both; overflow: hidden; margin: 0 auto;">
-        <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
-          ${Array.from({ length: count }).map(() => `
-            <div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;"> 
-              <div class="image-placeholder" style="height: 100px; background-color: #ccc;"></div>
-            </div>
-          `).join('')}
-        </div>
-        <div class="text-box" contenteditable="true" style="flex: 1; min-height: 50px; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
-          CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
-        </div>
-      </div>
-    `;
-    editor.insertContent(collageTemplate);
+//   insertCollage(editor: any, count: number): void {
+//     const collageTemplate = `
+//       <div class="collage-wrapper" style="width: 600px; height: auto; resize: both; overflow: hidden; margin: 0 auto; cursor: move;" draggable="true">
+//         <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
+//           ${Array.from({ length: count }).map(() => `
+//             <div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;">
+//               <div class="image-placeholder" style="height: 100px; background-color: #ccc;"></div>
+//             </div>
+//           `).join('')}
+//         </div>
+//         <div class="text-box" contenteditable="true" style="flex: 1; min-height: 50px; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
+//           CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
+//         </div>
+//       </div>
+//     `;
+//     editor.insertContent(collageTemplate);
+//     this.setupDragAndDrop(editor);
+//   }
   
-    // After inserting, find the last inserted collage-wrapper and attach dragstart event listener
-    const lastCollageWrapper = document.querySelector('.collage-wrapper:last-child');
-    if (lastCollageWrapper) {
-      lastCollageWrapper.addEventListener('dragstart', (event: Event) => {
-        const dragEvent = event as DragEvent;
-        if (dragEvent.dataTransfer) {
-          dragEvent.dataTransfer.setData('text/html', lastCollageWrapper.outerHTML);
-          dragEvent.dataTransfer.effectAllowed = 'move';
-        }
-      });
+//   insertImgContainer(editor: any) {
+//     const imgContainer = `
+//       <div class="img-wrapper" style="width: 600px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move;" draggable="true">
+//         <div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">
+//           <div class="image-placeholder" style="height: 200px; background-color: #ccc;"></div>
+//         </div>
+//         <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
+//           CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
+//         </div>
+//       </div>
+//     `;
+//     editor.insertContent(imgContainer);
+//     this.setupDragAndDrop(editor);
+//   }
+  
+//   insertHeader(editor: any) {
+//     const headerHTML = `<div class="teaching-header" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
+// <div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" src="assets/img/CCS.png"></div>
+// <p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" src="assets/img/GC.png"></p>
+// <p style="line-height: 1.1; text-align: center; margin: 0;"><span style="font-size: 12pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 12pt;">Office Of The Vice President For Academic Affairs<span style="font-weight: bold;"><br></span> City of Olongapo<span style="font-weight: bold;"><br></span>&nbsp;Gordon College</span></p>
+// <p style="line-height: 1.1; text-align: center; margin: 0;"><br><strong> <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman', serif;">&nbsp;</span></strong></p>`;
+//     editor.insertContent(headerHTML);
+//     this.setupDragAndDrop(editor);
+//   }
+  
+  
+  
+
+  private startPolling(): void {
+    this.pollingSubscription = interval(this.POLLING_INTERVAL).pipe(
+      switchMap(() => this.sentenceService.getTexts())
+    ).subscribe(
+      (response) => {
+        this.sentences = response.data.sentences || [];
+        this.initializeSentenceButtons(this.sentences);
+      },
+      (error) => {
+        console.error('Error loading sentences:', error);
+      }
+    );
+  }
+
+  private stopPolling(): void {
+    if (this.pollingSubscription) {
+      this.pollingSubscription.unsubscribe();
     }
   }
   
-  insertImgContainer(editor: any) {
-    const imgContainer = `
-      <div class="img-wrapper" style="width: 600px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move;" draggable="true">
-      <div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">  
-      <div class="image-placeholder" style="height: 200px; background-color: #ccc;"></div>
-      </div>
-        <div class="text-box" contenteditable="true" style="flex: 1; min-height: 10%; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;">
-          CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.
-        </div>
-      </div>
-    `;
+
+  initializeSentenceButtons(sentences: any[]) {
+    const editor = this.editor; // Ensure this.editor is correctly initialized
   
-    editor.insertContent(imgContainer);
+    editor.ui.registry.addMenuButton('insertSentence', {
+      text: 'Insert Sentence',
+      fetch: (callback: any) => {
+        const items = sentences.map((sentence: any) => ({
+          type: 'menuitem',
+          text: sentence.text,
+          onAction: () => {
+            console.log('Menu item clicked:', sentence.text); // Debugging line
+            this.insertSentence(editor, sentence.text);
+          }
+        }));
+        callback(items);
+      }
+    });
   
-    // Attach event listener for dragstart to move the existing container
-    const imgContainerElement = document.querySelector('.img-wrapper:last-child');
-    if (imgContainerElement) {
-      imgContainerElement.addEventListener('dragstart', (event: Event) => {
-        const dragEvent = event as DragEvent;
-        if (dragEvent.dataTransfer) {
-          dragEvent.dataTransfer.setData('text/html', imgContainerElement.outerHTML);
-          dragEvent.dataTransfer.effectAllowed = 'move';
-        }
-      });
-    }
+    editor.ui.registry.addButton('manageSentences', {
+      text: 'Manage Sentences',
+      onAction: () => this.openManageSentencesDialog()
+    });
   }
+  
+
+  insertSentence(editor: any, sentence: string) {
+    // Get current selection
+    const selection = editor.selection.getNode();
+    
+    // Log current selection
+    console.log('Selected node before insertion:', selection);
+    
+    // Insert the sentence at the cursor position
+    editor.execCommand('mceInsertContent', false, sentence);
+    
+    // Log the content after insertion
+    console.log('Content after insertion:', editor.getContent());
+  }
+
+
+
+  openManageSentencesDialog() {
+    const dialogRef = this.dialog.open(ManageTextComponent, {
+      width: '500px',
+      data: { sentences: this.sentences }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.startPolling(); // Refresh the list of sentences
+      }
+    });
+  }
+
+  // setupDragAndDrop(editor: any) {
+  //   console.log('Initializing drag and drop...');
+  
+  //   let draggingElement: HTMLElement | null = null;
+  //   let offsetX: number = 0;
+  //   let offsetY: number = 0;
+  
+  //   // Function to set draggable attributes
+  //   const setDraggableAttributes = () => {
+  //     const iframe = document.querySelector('.tox-edit-area__iframe') as HTMLIFrameElement;
+  
+  //     if (iframe) {
+  //       const iframeDoc = iframe.contentDocument;
+  //       if (iframeDoc) {
+  //         const elements = iframeDoc.querySelectorAll('.img-wrapper, .collage-wrapper, .teaching-header');
+  //         elements.forEach(element => {
+  //           (element as HTMLElement).draggable = true;
+  //         });
+  //       } else {
+  //         console.error('Iframe document not found');
+  //       }
+  //     } else {
+  //       console.error('Iframe not found');
+  //     }
+  //   };
+  
+  //   // Initial setup for draggable attributes
+  //   setDraggableAttributes();
+  
+  //   // MutationObserver to handle dynamically added elements
+  //   const observer = new MutationObserver(() => {
+  //     setDraggableAttributes(); // Apply draggable attributes to newly added elements
+  //   });
+  
+  //   const iframe = document.querySelector('.tox-edit-area__iframe') as HTMLIFrameElement;
+  //   if (iframe) {
+  //     const iframeDoc = iframe.contentDocument;
+  //     if (iframeDoc) {
+  //       observer.observe(iframeDoc.body, { childList: true, subtree: true });
+  //     }
+  //   }
+  
+  //   // Handle drag start
+  //   editor.on('dragstart', (event: DragEvent) => {
+  //     console.log('Drag start event triggered');
+  //     const targetElement = event.target as HTMLElement;
+  //     const iframe = document.querySelector('.tox-edit-area__iframe') as HTMLIFrameElement;
+  
+  //     if (iframe) {
+  //       const iframeDoc = iframe.contentDocument;
+  //       if (iframeDoc && targetElement) {
+  //         if (targetElement.classList.contains('img-wrapper') || 
+  //             targetElement.classList.contains('collage-wrapper') ||
+  //             targetElement.classList.contains('teaching-header')) {
+  //           draggingElement = targetElement;
+  //           const rect = targetElement.getBoundingClientRect();
+  //           offsetX = event.clientX - rect.left;
+  //           offsetY = event.clientY - rect.top;
+  //           console.log(`Drag started at X: ${event.clientX}, Y: ${event.clientY}`);
+  //         }
+  //       }
+  //     }
+  //   });
+  
+  //   // Handle drag over
+  //   editor.on('dragover', (event: DragEvent) => {
+  //     event.preventDefault(); // Required to allow drop
+  //     console.log(`Drag over at X: ${event.clientX}, Y: ${event.clientY}`);
+  //   });
+  
+  //   // Handle drop
+  //   editor.on('drop', (event: DragEvent) => {
+  //     event.preventDefault();
+  //     console.log('Drop event triggered');
+  
+  //     if (draggingElement) {
+  //       const iframe = document.querySelector('.tox-edit-area__iframe') as HTMLIFrameElement;
+  //       if (iframe) {
+  //         const iframeDoc = iframe.contentDocument;
+  //         if (iframeDoc) {
+  //           const wholePageContainer = iframeDoc.querySelector('.whole-page') as HTMLElement;
+  //           if (wholePageContainer) {
+  //             const rect = wholePageContainer.getBoundingClientRect();
+  //             const dropX = event.clientX - rect.left - offsetX;
+  //             const dropY = event.clientY - rect.top - offsetY;
+  
+  //             console.log(`Dropped at X: ${dropX}, Y: ${dropY}`);
+  
+  //             draggingElement.style.position = 'absolute';
+  //             draggingElement.style.left = `${dropX}px`;
+  //             draggingElement.style.top = `${dropY}px`;
+  
+  //             // Ensure the element is appended to the right container
+  //             if (!wholePageContainer.contains(draggingElement)) {
+  //               wholePageContainer.appendChild(draggingElement);
+  //             }
+              
+  //             draggingElement = null;
+  //           } else {
+  //             console.error('.whole-page not found within iframe');
+  //           }
+  //         }
+  //       }
+  //     }
+  //   });
+  
+  //   // Handle mouse down for dragging
+  //   document.addEventListener('mousedown', (event: MouseEvent) => {
+  //     console.log('Mouse down event triggered');
+  //     const targetElement = event.target as HTMLElement;
+  //     if (targetElement && (
+  //       targetElement.classList.contains('img-wrapper') ||
+  //       targetElement.classList.contains('collage-wrapper') ||
+  //       targetElement.classList.contains('teaching-header')
+  //     )) {
+  //       draggingElement = targetElement;
+  //       const rect = targetElement.getBoundingClientRect();
+  //       offsetX = event.clientX - rect.left;
+  //       offsetY = event.clientY - rect.top;
+  //       console.log(`Mouse down at X: ${event.clientX}, Y: ${event.clientY}`);
+  //     }
+  //   });
+  
+  //   // Handle mouse move for dragging
+  //   document.addEventListener('mousemove', (event: MouseEvent) => {
+  //     if (draggingElement) {
+  //       event.preventDefault();
+  //       const moveX = event.clientX - offsetX;
+  //       const moveY = event.clientY - offsetY;
+  
+  //       draggingElement.style.position = 'absolute';
+  //       draggingElement.style.left = `${moveX}px`;
+  //       draggingElement.style.top = `${moveY}px`;
+  //       console.log(`Mouse move at X: ${moveX}, Y: ${moveY}`);
+  //     }
+  //   });
+  
+  //   // Handle mouse up to stop dragging
+  //   document.addEventListener('mouseup', () => {
+  //     draggingElement = null;
+  //     console.log('Mouse up, dragging stopped');
+  //   });
+  // }
 
   navigateToReportSelection(): void {
     this.route.navigate([`./reportselection`], {relativeTo: this.aRoute})
