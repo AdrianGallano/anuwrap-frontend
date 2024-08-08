@@ -76,10 +76,6 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'collage',
-        component: CollageitemComponent
-    },
-    {
         path: '',
         component: ParentComponent,
         children: [

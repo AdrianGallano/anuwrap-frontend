@@ -39,63 +39,61 @@ export class TemplatelistComponent {
     {
       title:'Blank Page',
       image: '../../../../../assets/img/blanktemplate.png',
-      code: '<div class="whole-page" style="height: 1123px"> </div> <div class="break"></div>',
+      code: ' </div> <div class="break"></div>',
     },
     // accomplishment report
     {
       title:'Accomplishment Report',
       image: '../../../../../assets/img/accomp.png',
-      code:`<div class="whole-page">
-<div class="content">
-<div class="header">
-<div class="teaching-header img-wrapper collage-wrapper" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
-<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" src="assets/img/CCS.png"></div>
-<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" src="assets/img/GC.png"></p>
+      code:`<div class="content-body">
+<div class="teaching-header" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" draggable="true" src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" draggable="true" src="assets/img/GC.png"></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><span style="font-size: 12pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 12pt;">Office Of The Vice President For Academic Affairs<span style="font-weight: bold;"><br></span> City of Olongapo<span style="font-weight: bold;"><br></span>&nbsp;Gordon College</span></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><br><span style="font-size: 12pt;"><strong> <span lang="EN-US" style="line-height: 107%; font-family: 'Times New Roman', serif;">&nbsp;</span></strong><span lang="EN-US" style="line-height: 107%; font-family: 'Times New Roman', serif;">Accomplishment Report</span></span></p>
 </div>
-</div>
-<div class="content-body">
-<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">BSEMC Accomplishment Comprehensive Narrative Report</span></strong></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong></p>
+<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-align: center;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"> &nbsp;</span></strong></p>
+<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-align: center;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">BSEMC Accomplishment Comprehensive Narrative Report</span></strong></p>
 <p class="MsoNormal" style="margin-bottom: .0001pt;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Renewal of Institutional Membership for Animation Council of the Philippines (ACPI)</span></strong><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong></p>
 <p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Gordon College &ndash; College of Computer Studies renewed it&rsquo;s academic membership with Animation Council of the Philippines (ACPI). This renewal signifies our unwavering commitment in the field of animation and our dedication to supporting the initiatives of ACPI. Our institution has long recognized the vital role played by ACPI in advancing and promoting the field of animation in the Philippines. Since our initial membership commencement on September 2021, our active involvement in ACPI has been a source of pride. Renewing our membership was a natural choice to maintain our contributions to the growth and development of our BSEMC students in the field of animation.</span></p>
 <p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">The renewal of our institutional membership with the Animation Council of the Philippines is a testament to our enduring commitment to the growth and excellence our BSEMC Students in the field of animation. We eagerly anticipate continuing our active involvement, collaborating with fellow members and academic institutions, and contributing to ACPI's mission to further enhance the country's animation landscape.</span></p>
-<div class="collage-wrapper" style="width: 600px; height: auto; resize: both; overflow: hidden; margin: 0 auto; cursor: move;" draggable="true">
+<div class="collage-wrapper" style="width: 400px; height: auto; resize: both; overflow: hidden; margin: 0 auto; cursor: move; position: relative;" draggable="true"><button class="delete-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0); color: black; border: 2px solid black; border-radius: 5px; padding: 0.5rem 1rem; cursor: pointer; z-index: 1000;">Delete</button>
 <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
-<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;">
+<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden; position: relative;">
 <div class="image-placeholder" style="height: 100px; background-color: #ccc;">&nbsp;</div>
-</div>
-<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;">
+Figure 1</div>
+<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden; position: relative;">
 <div class="image-placeholder" style="height: 100px; background-color: #ccc;">&nbsp;</div>
+Figure 2</div>
 </div>
 </div>
-<div class="text-box" style="flex: 1; min-height: 50px; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.</div>
+<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; text-align: center;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
 </div>
-<p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;">&nbsp;</p>
-<p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;">&nbsp;</p>
-<p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;">&nbsp;</p>
-<p class="MsoNormal" style="margin-bottom: .0001pt; text-indent: 36.0pt;"></p>
-</div>
-</div>
-</div>`,
+<p><div class="break"></div></p>`,
     },
     // faculty matrix
     {
       title:'Faculty Matrix',
       image: '../../../../../assets/img/fac.png',
-      code: `<div class="whole-page-with-table">
-<div class="faculty-content">
-<div class="teaching-header img-wrapper collage-wrapper" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
-<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" src="assets/img/CCS.png"></div>
-<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" src="assets/img/GC.png"></p>
+      code: `<div class="faculty-content-body">
+<div class="teaching-header" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" draggable="true" src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" draggable="true" src="assets/img/GC.png"></p>
 <p style="line-height: 1.1; text-align: center;"><span style="font-size: 12pt;">Republic of the Philippines</span><br><span style="font-size: 12pt;">City Of Olongapo</span><br><span style="font-size: 12pt;">Gordon College</span><br><span style="font-size: 12pt;">College Of Computer Studies</span><br><span style="font-size: 12pt;"> Olongapo City Sports Complex, Donor St., East Tapinac, Olongapo City 2200<br>Telefax No.: (047) 602-7175 loc 322</span></p>
 <p style="line-height: 1.1; text-align: center;"><span style="font-size: 12pt;"><a class="text-blue-500 underline" href="http://www.gordoncollege.edu.ph/">www.gordoncollege.edu.ph</a> </span></p>
 <p style="line-height: 1.1; text-align: center;"><span style="font-size: 12pt;">Faculty<strong> </strong>Matrix</span><br><span style="font-size: 12pt;">2nd Semester A.Y. 2023-2024</span></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><br><strong> <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman', serif;">&nbsp;</span></strong></p>
 </div>
-<br>
-<div class="faculty-content-body">
 <div class="faculty-table-wrapper">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <table style="width: 100%; height: 374.8px;"><colgroup><col style="width: 4.56615%;"><col style="width: 4.56615%;"><col style="width: 5.00102%;"><col style="width: 3.58769%;"><col style="width: 3.37025%;"><col style="width: 5.65333%;"><col style="width: 14.242%;"><col style="width: 6.52307%;"><col style="width: 5.76204%;"><col style="width: 8.47999%;"><col style="width: 8.47999%;"><col style="width: 7.06666%;"><col style="width: 6.30732%;"><col style="width: 8.26087%;"><col style="width: 8.04512%;"></colgroup>
 <tbody>
 <tr style="height: 28.525px;">
@@ -298,32 +296,27 @@ export class TemplatelistComponent {
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 </div>
-<div class="faculty-footer">&nbsp;</div>
-</div>
-</div>
-<p><div class="break"></div><div class="break"></div></p>`,
+<div class="break"></div>`,
     },
     // teaching and learning
     {
       title:'Teaching and Learning',
       image:`../../../../../assets/img/teach_learn.png` ,
-      code:`<div class="whole-page-with-table">
-<div class="teaching-content">
-<div class="teaching-header">
-<div class="teaching-header img-wrapper collage-wrapper" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
-<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" src="assets/img/CCS.png"></div>
-<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" src="assets/img/GC.png"></p>
+      code:`<div class="teaching-content-body">
+<div class="teaching-header" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" draggable="true" src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" draggable="true" src="assets/img/GC.png"></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><span style="font-size: 12pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 12pt;">Office Of The Vice President For Academic Affairs<span style="font-weight: bold;"><br></span> City of Olongapo<span style="font-weight: bold;"><br></span>&nbsp;Gordon College</span></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;">Teaching and Learning<br><strong> <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman', serif;">&nbsp;</span></strong></p>
+</div>
 <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-<p style="line-height: 1.1; text-align: center;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"> Teaching: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; College/Department: </span></p>
-<p class="MsoNormal" style="text-align: left;" align="center"><strong> <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">Date Covered: </span> <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date Submitted:</span></p>
-</div>
-<br>
-<p class="MsoNormal" style="text-align: left;" align="center">&nbsp;</p>
-</div>
+<p style="line-height: 1.1; text-align: left;"><span style="font-family: 'Times New Roman', serif; font-size: 12pt;">&nbsp;</span></p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left;"><span style="font-family: 'Times New Roman', serif; font-size: 12pt;">Teaching:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;College/Department:</span></p>
+<p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp;Date Covered:&nbsp;</span> <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date Submitted:</span></p>
 <div align="center">&nbsp;</div>
-<div class="teaching-content-body">
 <table class="MsoTableGrid">
 <thead>
 <tr>
@@ -411,30 +404,27 @@ export class TemplatelistComponent {
 </table>
 <p>&nbsp;</p>
 </div>
-</div>
-</div>
-<p><div class="break"></div></p>`,
+<div class="break"></div>`,
     },
     // faculty schedule
     {
       title:'Faculty Schedule',
       image:`../../../../../assets/img/fac_sched.png` ,
-      code: `<div class="whole-page">
-<div class="facultysched-content">
-<div class="facultysched-header">
-<div class="teaching-header img-wrapper collage-wrapper" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
-<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" src="assets/img/CCS.png"></div>
-<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" src="assets/img/GC.png"></p>
-<div class="facultysched-header">
+      code: `<div class="facultysched-content-body">
+<div class="teaching-header" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" draggable="true" src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" draggable="true" src="assets/img/GC.png"></p>
 <p style="line-height: 1.1; text-align: center;"><span style="font-size: 12pt; font-family: arial, helvetica, sans-serif;">Republic of the Philippines&nbsp;</span><br><span style="font-family: arial, helvetica, sans-serif; font-size: 12pt;">Office Of The Vice President For Academic Affairs<br>City of Olongapo<br>Gordon College</span></p>
 <p style="line-height: 0.5; text-align: center;"><span style="font-family: arial, helvetica, sans-serif; font-size: 12pt;"> <span lang="EN-US">individual Faculty Load And Schedule</span></span></p>
 <p style="line-height: 0.5; text-align: center;"><span style="font-family: arial, helvetica, sans-serif; font-size: 12pt;"> <span lang="EN-US" style="color: black;">Semester: 1st, Academic Year: <u>2022 - 2023</u></span> </span></p>
 </div>
-<div class="facultysched-content-body">&nbsp;</div>
-</div>
 <p style="line-height: 0.5; text-align: center;">&nbsp;</p>
-</div>
-<div class="facultysched-content-body">
+<p style="line-height: 0.5; text-align: center;">&nbsp;</p>
+<p style="line-height: 0.5; text-align: center;">&nbsp;</p>
+<p style="line-height: 0.5; text-align: center;">&nbsp;</p>
+<p style="line-height: 0.5; text-align: center;">&nbsp;</p>
+<p style="line-height: 0.5; text-align: center;">&nbsp;</p>
+<p style="line-height: 0.5; text-align: center;">&nbsp;</p>
 <p style="line-height: 0.5; text-align: center;">&nbsp;</p>
 <p style="line-height: 0.5; text-align: center;"><span lang="EN-US" style="font-size: 9pt; color: black; font-family: arial, helvetica, sans-serif;">Name of Professor/Instructor:&nbsp;<strong>NAME</strong></span></p>
 <p style="line-height: 0.5; text-align: center;"><span lang="EN-US" style="font-size: 9pt; color: black; font-family: arial, helvetica, sans-serif;">Field of Specialization: <strong>Computer Science</strong></span></p>
@@ -566,28 +556,27 @@ export class TemplatelistComponent {
 <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
 <p style="line-height: 1.1; text-align: center;">&nbsp;</p>
 </div>
-<div class="facultysched-footer">&nbsp;</div>
-</div>
-</div>
-<p><div class="break"></div></p>`,
+<div class="break"></div>`,
     },
     // event report
     {
       title:'Event Report',
       image:`../../../../../assets/img/event.png` ,
-      code:   `<div class="whole-page">
-<div class="event-content">
-<div class="event-header">
-<div class="teaching-header img-wrapper collage-wrapper" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
-<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" src="assets/img/CCS.png"></div>
-<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" src="assets/img/GC.png"></p>
+      code:   `<div class="event-content-body">
+<div class="teaching-header" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" draggable="true" src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" draggable="true" src="assets/img/GC.png"></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><span style="font-size: 12pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 12pt;">Office Of The Vice President For Academic Affairs<span style="font-weight: bold;"><br></span> City of Olongapo<span style="font-weight: bold;"><br></span>&nbsp;Gordon College</span></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;">&nbsp;</p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><span style="font-size: 12pt;">Event Report</span></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><br><strong> <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman', serif;">&nbsp;</span></strong></p>
 </div>
-<div class="event-content-body">
-<p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp;Faculty:&nbsp; &nbsp; </span></span></p>
+<p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp;</span></span></p>
+<p class="MsoNormal" style="text-align: left;" align="center">&nbsp;</p>
+<p class="MsoNormal" style="text-align: left;" align="center">&nbsp;</p>
+<p class="MsoNormal" style="text-align: left;" align="center">&nbsp;</p>
+<p class="MsoNormal" style="text-align: left;" align="center">&nbsp;</p>
+<p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Faculty:&nbsp; &nbsp; </span></span></p>
 <p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp;College/Department:</span></span></p>
 <p class="MsoNormal" style="text-align: left;" align="center"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp;</span></span></strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Date Covered:</span></span><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></span></p>
 <p class="MsoNormal" style="text-align: left;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp;Date Submitted:</span></span></p>
@@ -617,20 +606,17 @@ export class TemplatelistComponent {
 <p>&nbsp;</p>
 <p><span style="font-family: 'times new roman', times, serif;"><strong>Overall assessment of the event:</strong></span></p>
 <p><span style="font-family: 'times new roman', times, serif;"><strong>Recommendations for future events:</strong></span></p>
-<div class="collage-wrapper" style="width: 600px; height: auto; resize: both; overflow: hidden; margin: 0 auto; cursor: move;" draggable="true">
+<div class="collage-wrapper" style="width: 400px; height: auto; resize: both; overflow: hidden; margin: 0 auto; cursor: move; position: relative;" draggable="true"><button class="delete-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0); color: black; border: 2px solid black; border-radius: 5px; padding: 0.5rem 1rem; cursor: pointer; z-index: 1000;">Delete</button>
 <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
-<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;">
+<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden; position: relative;">
 <div class="image-placeholder" style="height: 100px; background-color: #ccc;">&nbsp;</div>
-</div>
-<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden;">
+Figure 1</div>
+<div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden; position: relative;">
 <div class="image-placeholder" style="height: 100px; background-color: #ccc;">&nbsp;</div>
+Figure 2</div>
 </div>
 </div>
-<div class="text-box" style="flex: 1; min-height: 50px; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 10px;" contenteditable="true">CCS Day is an annual event dedicated to celebrating innovation and collaboration in the tech industry. This year, CCS Day brings together industry leaders, developers, and enthusiasts to explore the latest trends and technologies shaping our digital future. Participants can expect insightful keynote speeches, engaging panel discussions, and hands-on workshops designed to inspire creativity and foster meaningful connections within the community.&nbsp;</div>
-</div>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-family: 'times new roman', times, serif;"><strong>&nbsp;</strong></span></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -640,28 +626,26 @@ export class TemplatelistComponent {
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 </div>
-</div>
-<p><div class="break"></div></p>
-</div>
-</div>`,
+<div class="break"></div>`,
     },
     // Financial report
     {
       title:'Financial Report',
       image:`../../../../../assets/img/financial.png` ,
-      code: `<div class="whole-page">
-<div class="financial-content">
-<div class="financial-header">
-<div class="teaching-header img-wrapper collage-wrapper" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
-<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" src="assets/img/CCS.png"></div>
-<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" src="assets/img/GC.png"></p>
+      code: `<div class="financial-content-body">
+<div class="teaching-header" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" draggable="true" src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" draggable="true" src="assets/img/GC.png"></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><span style="font-size: 12pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 12pt;">Office Of The Vice President For Academic Affairs<span style="font-weight: bold;"><br></span> City of Olongapo<span style="font-weight: bold;"><br></span>&nbsp;Gordon College</span></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;">&nbsp;</p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><span style="font-size: 12pt;">Financial Report</span></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><br><strong> <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman', serif;">&nbsp;</span></strong></p>
 </div>
-</div>
-<div class="financial-content-body">
+<p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong></p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong></p>
 <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Name of Organization:</span></strong></p>
 <p style="line-height: 1.1; text-align: left;"><strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;School Year:&nbsp;</span></strong></p>
 <p style="line-height: 1.1; text-align: left;">&nbsp;</p>
@@ -726,9 +710,6 @@ export class TemplatelistComponent {
 <p><span style="font-family: 'times new roman', times, serif;">Cash on Hand <span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></span></p>
 <p><span style="font-family: 'times new roman', times, serif;">Prepared by:</span></p>
 <p><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><span style="font-family: 'times new roman', times, serif;"> </span></span></span></p>
-</div>
-<div class="financial-footer">&nbsp;</div>
-<div class="financial-content-body">
 <p style="line-height: 1;">&nbsp;</p>
 <p class="MsoNormal" style="text-align: left; line-height: 1;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 8pt;"><span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span> &nbsp;</span></span></span></span></p>
 <p class="MsoNormal" style="text-align: left; line-height: 1;" align="center"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 8pt;"><span lang="EN-US" style="font-size: 12.0pt; font-family: 'Times New Roman',serif;"><span style="font-size: 8pt;"><span style="font-size: 12pt;"><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Signature over Printed Name of the Treasurer</span></span></span></span></span></span></span></span></p>
@@ -753,93 +734,92 @@ export class TemplatelistComponent {
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 </div>
-<div class="financial-footer">&nbsp;</div>
-</div>
-</div>
-<p><div class="break"></div></p>`,
+<div class="break"></div>`,
     },
     // summary of accomplisment report
     {
       title:'Summary of Accomplishment Report',
       image:`../../../../../assets/img/sum_accomp.png` ,
-      code: `<div class="whole-page-with-table">
-<div class="summary-content">
-<div class="summary-header">
-<div class="teaching-header img-wrapper collage-wrapper" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
-<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" src="assets/img/CCS.png"></div>
-<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" src="assets/img/GC.png"></p>
+      code: `<div class="summary-content-body">
+<div class="teaching-header" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" draggable="true" src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" draggable="true" src="assets/img/GC.png"></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><span style="font-size: 12pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 12pt;">Office Of The Vice President For Academic Affairs<span style="font-weight: bold;"><br></span> City of Olongapo<span style="font-weight: bold;"><br></span>&nbsp;Gordon College</span></p>
-<p style="line-height: 1.1; text-align: center;"><span><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">Summary of Accomplishments And Activities</span></span></p>
-<p style="line-height: 1.1; text-align: center;"><span><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">For 1<sup>st</sup> Semester A.Y. 2023 - 2024</span></span></p>
+<p style="line-height: 1.1; text-align: center;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">Summary of Accomplishments And Activities</span></p>
+<p style="line-height: 1.1; text-align: center;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">For 1<sup>st</sup> Semester A.Y. 2023 - 2024</span></p>
 </div>
-<div class="summary-content-body">
+<p style="line-height: 1.1; text-align: left; padding-left: 40px;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left; padding-left: 40px;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left; padding-left: 40px;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left; padding-left: 40px;">&nbsp;</p>
+<p style="line-height: 1.1; text-align: left; padding-left: 40px;">&nbsp;</p>
 <p style="line-height: 1.1; text-align: left; padding-left: 40px;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">Name of Student Organization<span style="mso-tab-count: 1;">&nbsp; &nbsp;</span>:</span></strong></p>
 <p style="line-height: 1.1; text-align: left; padding-left: 40px;"><strong style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; line-height: 107%; font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma; mso-ansi-language: EN-PH; mso-fareast-language: EN-PH; mso-bidi-language: AR-SA;">Name of President<span style="mso-tab-count: 3;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>:&nbsp;</span></strong></p>
-<table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 791.387px; width: 741px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
+<table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 791.387px; width: 619px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
 <tbody>
 <tr style="height: 93px;">
-<td style="width: 163.05px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 132.25px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Activities Undertaken</span></strong></p>
 </td>
-<td style="width: 172.55px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 142.163px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Dates and Places / Platform</span></strong></p>
 </td>
-<td style="width: 189.1px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 159.425px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Activity Main Objective</span></strong></p>
 </td>
-<td style="width: 154.7px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 123.562px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">Remarks</span></strong></p>
 </td>
 </tr>
 <tr style="height: 174px;">
-<td style="width: 163.05px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-<td style="width: 172.55px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-<td style="width: 189.1px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 132.25px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 142.163px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 159.425px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal">&nbsp;</p>
 </td>
-<td style="width: 154.7px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 123.562px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
 <tr style="height: 161px;">
-<td style="width: 163.05px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 132.25px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal">&nbsp;</p>
 </td>
-<td style="width: 172.55px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 142.163px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
 </td>
-<td style="width: 189.1px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 159.425px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
 </td>
-<td style="width: 154.7px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 123.562px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
 <tr style="height: 177px;">
-<td style="width: 163.05px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 132.25px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal">&nbsp;</p>
 </td>
-<td style="width: 172.55px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 142.163px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
 </td>
-<td style="width: 189.1px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 159.425px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
 </td>
-<td style="width: 154.7px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 123.562px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
 <tr style="height: 186.387px;">
-<td style="width: 163.05px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 132.25px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal">&nbsp;</p>
 </td>
-<td style="width: 172.55px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 142.163px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="border: none; mso-padding-alt: 31.0pt 31.0pt 31.0pt 31.0pt; mso-border-shadow: yes;">&nbsp;</p>
 </td>
-<td style="width: 189.1px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 159.425px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: justify;">&nbsp;</p>
 </td>
-<td style="width: 154.7px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 123.562px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
@@ -847,74 +827,75 @@ export class TemplatelistComponent {
 </table>
 <p class="MsoNormal" style="text-align: center;">&nbsp;</p>
 <p class="MsoNormal" style="text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">What were the problems encountered by the officers of the Student Organization in conducting activities?</span></strong></p>
-<p class="MsoNormal" style="padding-left: 80px;">&nbsp;</p>
-<p class="MsoNormal" style="padding-left: 80px;">&nbsp;</p>
-<p class="MsoNormal">&nbsp;</p>
-<p class="MsoNormal"><strong style="mso-bidi-font-weight: normal;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;"> </span></strong></p>
-<strong style="mso-bidi-font-weight: normal;"> </strong></div>
-<p>&nbsp;</p>
-<p style="line-height: 1.1; text-align: center;">&nbsp;</p>
-<table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 334.363px; width: 736px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
+</div>
+<table class="MsoNormalTable" style="border-collapse: collapse; border: none; height: 334.363px; width: 622px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="0">
 <tbody>
 <tr style="height: 161.762px;">
-<td style="width: 161.8px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 133.3px; border: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
-<td style="width: 171.3px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 142.8px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
-<td style="width: 187.85px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 159.35px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
-<td style="width: 153.45px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding: 0cm 5.4pt;" valign="top">
-<p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
-</td>
+<td style="width: 124.95px; border-top: 1pt solid black; border-right: 1pt solid black; border-bottom: 1pt solid black; border-image: initial; border-left: none; padding-top: 0cm; padding-right: 5.4pt; padding-bottom: 0cm;" valign="top">&nbsp;</td>
 </tr>
 <tr style="height: 172.6px;">
-<td style="width: 161.8px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-<td style="width: 171.3px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
-<td style="width: 187.85px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 133.3px; border-right: 1pt solid black; border-bottom: 1pt solid black; border-left: 1pt solid black; border-image: initial; border-top: none; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 142.8px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">&nbsp;</td>
+<td style="width: 159.35px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal">&nbsp;</p>
 </td>
-<td style="width: 153.45px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
+<td style="width: 124.95px; border-top: none; border-left: none; border-bottom: 1pt solid black; border-right: 1pt solid black; padding: 0cm 5.4pt;" valign="top">
 <p class="MsoNormal" style="text-align: center;" align="center">&nbsp;</p>
 </td>
 </tr>
 </tbody>
 </table>
-<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; text-align: center;"><span style="font-family: 'Tahoma',sans-serif; mso-fareast-font-family: Tahoma;">&nbsp;</span></p>
-<p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Prepared by: </span></strong></p>
-<p class="MsoNormal" style="line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
-<p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><u><span style="mso-spacerun: yes;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></u></span></strong></p>
-<p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 72pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Secretary</span></strong></p>
-<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
-<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
-<p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-spacerun: yes;"><span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span></span></strong></p>
-<p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 72pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">President</span></strong></p>
-<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 36pt; line-height: normal; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
-<p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Noted by:</span></strong></p>
-<p class="MsoNormal" style="padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp;</span></strong></p>
-<p class="MsoNormal" style="text-indent: 36pt; line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-tab-count: 4;"><span style="text-decoration: underline;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong></span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><span style="mso-spacerun: yes;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span><span style="mso-tab-count: 1;">&nbsp; &nbsp; &nbsp;&nbsp;</span></span></strong></p>
-<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Organization/Council Adviser<span style="mso-tab-count: 3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-tab-count: 1;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Date</span></strong></p>
-</div>
-</div>
-<p><strong style="mso-bidi-font-weight: normal;"><div class="break"></div></strong></p>`,
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: left;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Prepared by:</span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: left;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">_________________________________________</span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Secretary</span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">_________________________________________</span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">President<br><br><br><br></span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 40px; text-align: left;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Noted by:</span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 40px; text-align: left;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">_________________________________________</span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Organization/Council Adviser</span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">________________________</span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; text-align: center;"><strong style="mso-bidi-font-weight: normal;"><span style="mso-ascii-font-family: Calibri; mso-ascii-theme-font: minor-latin; mso-hansi-font-family: Calibri; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: Calibri; mso-bidi-theme-font: minor-latin;">Date</span></strong></p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px; text-align: center;">&nbsp;</p>
+<p class="MsoNormal" style="line-height: normal; margin: 0cm 0cm 0.0001pt 36pt; padding-left: 160px;">&nbsp;</p>
+<div class="break"></div>`,
     },
     // syllabus
     {
       title:'Syllabus',
       image:`../../../../../assets/img/syllab.png` ,
-      code:  `<div class="whole-page">
-<div class="syllabus-content">
-<div class="syllabus-header">
-<div class="teaching-header img-wrapper collage-wrapper" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
-<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" src="assets/img/CCS.png"></div>
-<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" src="assets/img/GC.png"></p>
+      code:  `<div class="syllabus-content-body">
+<div class="teaching-header" style="width: 100%; margin: 0; padding: 0; border: 0; box-sizing: border-box; cursor: move;" draggable="true">
+<div class="ccs-logo" style="float: right; margin-right: 10px; border-radius: 50px;"><img style="width: 105px; height: 117px;" draggable="true" src="assets/img/CCS.png"></div>
+<p class="gc-logo"><img style="float: left; width: 96px; height: 96px;" draggable="true" src="assets/img/GC.png"></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><span style="font-size: 12pt;">Republic of the Philippines&nbsp;</span><br><span style="font-size: 12pt;">Office Of The Vice President For Academic Affairs<span style="font-weight: bold;"><br></span> City of Olongapo<span style="font-weight: bold;"><br></span>&nbsp;Gordon College</span></p>
 <p style="line-height: 1.1; text-align: center; margin: 0;"><br><strong> <span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman', serif;">&nbsp;</span></strong><span lang="EN-US" style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman', serif;">Syllabus</span></p>
 </div>
-</div>
-<div class="syllabus-content-body">
+<h6 style="text-align: left; line-height: 1;">&nbsp;</h6>
+<h6 style="text-align: left; line-height: 1;">&nbsp;</h6>
+<h6 style="text-align: left; line-height: 1;">&nbsp;</h6>
+<h6 style="text-align: left; line-height: 1;">&nbsp;</h6>
 <h6 style="text-align: left; line-height: 1;"><span style="font-family: arial, helvetica, sans-serif;"><span style="font-size: 10pt;"><strong>COURSE NUMBER&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </strong>&nbsp; : CSP22112</span></span></h6>
 <h6 style="text-align: left; line-height: 1;"><span style="font-size: 10pt; font-family: arial, helvetica, sans-serif;"><strong>COURSE DESCRIPTION&nbsp; &nbsp;</strong>: COMPUTER PROGRAMMING</span></h6>
 <h6 style="text-align: left; line-height: 1;"><span style="font-size: 10pt; font-family: arial, helvetica, sans-serif;"><strong>COURSE PROFESSOR&nbsp; &nbsp; &nbsp;: </strong>Name</span></h6>
@@ -937,10 +918,7 @@ export class TemplatelistComponent {
 </ul>
 <p>&nbsp;</p>
 </div>
-<div class="syllabus-footer">&nbsp;</div>
-</div>
-</div>
-<p><div class="break"></div></p>`,
+<div class="break"></div>`,
     },
   ];
 

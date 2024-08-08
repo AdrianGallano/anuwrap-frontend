@@ -47,6 +47,7 @@ export class EditreportselectionComponent {
     { name: 'November', value: '11' },
     { name: 'December', value: '12' }
   ];
+  searchTerm: string = '';
   noreportslectionerror: string | null = null;
 
   constructor(
@@ -127,19 +128,29 @@ export class EditreportselectionComponent {
   }
 
   filterReports(): void {
+    let filtered = this.reports;
+
     if (this.filterType === 'yearly' && this.selectedYear) {
-      this.filteredReports = this.reports.filter(report => report.date_created && report.date_created.startsWith(this.selectedYear));
+      filtered = filtered.filter(report => report.date_created && report.date_created.startsWith(this.selectedYear));
     } else if (this.filterType === 'monthly' && this.selectedYear && this.selectedMonth) {
-      this.filteredReports = this.reports.filter(report => {
+      filtered = filtered.filter(report => {
         const [year, month] = report.date_created.split('-');
         return year === this.selectedYear && month === this.selectedMonth;
       });
-    } else {
-      this.filteredReports = this.reports;
     }
+
+    if (this.searchTerm) {
+      filtered = filtered.filter(report => report.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+    }
+
+    this.filteredReports = filtered;
   }
 
   onFilterTypeChange(): void {
+    this.filterReports();
+  }
+
+  searchReports(): void {
     this.filterReports();
   }
 
@@ -149,7 +160,7 @@ export class EditreportselectionComponent {
 
   toggleSelectAll(): void {
     this.selectAllChecked = !this.selectAllChecked;
-    this.reports.forEach(report => {
+    this.filteredReports.forEach(report => {
       report.selected = this.selectAllChecked;
     });
   }

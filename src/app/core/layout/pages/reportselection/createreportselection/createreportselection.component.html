@@ -56,6 +56,15 @@
             </select>
           </div>
         </div>
+
+        <!-- Search Section -->
+        <div class="mb-6">
+          <div class="flex justify-center mb-4">
+            <label for="searchInput" class="mr-3">Search:</label>
+            <input id="searchInput" type="text" [(ngModel)]="searchTerm" (input)="searchReports()"
+                   class="border rounded px-2 py-1 w-64">
+          </div>
+        </div>
       </div>
 
       <!-- Table Section -->

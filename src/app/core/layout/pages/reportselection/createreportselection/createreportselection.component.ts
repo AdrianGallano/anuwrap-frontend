@@ -48,6 +48,7 @@ export class CreatereportselectionComponent {
     { name: 'November', value: '11' },
     { name: 'December', value: '12' }
   ];
+  searchTerm: string = '';
 
   constructor(
     private route: Router,
@@ -71,17 +72,13 @@ export class CreatereportselectionComponent {
     this.reportService.getReports(this.workspaceId).subscribe(
       (response) => {
         this.reports = response.data.report;
-        // Initialize selected state to false
-        console.log(this.reports)
         this.reports.forEach(report => {
           report.selected = false;
           report.humanizedDate = moment(report.date_created).format('MMMM D, YYYY, h:mm:ss a');
         });
-        // Cross-reference with report selections
         this.markSelectedReports();
         this.extractAvailableYears();
         this.filterReports();
-        console.log(response)
       },
       (error) => {
         console.log('Error fetching reports:', error);
@@ -93,11 +90,9 @@ export class CreatereportselectionComponent {
     this.reportSelectionService.getReportSelections().subscribe(
       (response) => {
         const reportSelections = response.data.reportSelections;
-        // Filter report selections for the current annual_report_id
         this.reportSelections = reportSelections.filter((selection: any) => {
           return selection.annual_report_id === this.annual_report_id;
         });
-        // Cross-reference with reports
         this.markSelectedReports();
       },
       (error) => {
@@ -110,7 +105,7 @@ export class CreatereportselectionComponent {
     if (this.reports.length && this.reportSelections.length) {
       this.reports.forEach(report => {
         const foundSelection = this.reportSelections.find((selection: any) => selection.report_id === report.report_id);
-        report.selected = !!foundSelection; // Set to true if found, false otherwise
+        report.selected = !!foundSelection;
       });
     }
   }
@@ -127,19 +122,29 @@ export class CreatereportselectionComponent {
   }
 
   filterReports(): void {
+    let filtered = this.reports;
+
     if (this.filterType === 'yearly' && this.selectedYear) {
-      this.filteredReports = this.reports.filter(report => report.date_created && report.date_created.startsWith(this.selectedYear));
+      filtered = filtered.filter(report => report.date_created && report.date_created.startsWith(this.selectedYear));
     } else if (this.filterType === 'monthly' && this.selectedYear && this.selectedMonth) {
-      this.filteredReports = this.reports.filter(report => {
+      filtered = filtered.filter(report => {
         const [year, month] = report.date_created.split('-');
         return year === this.selectedYear && month === this.selectedMonth;
       });
-    } else {
-      this.filteredReports = this.reports;
     }
+
+    if (this.searchTerm) {
+      filtered = filtered.filter(report => report.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+    }
+
+    this.filteredReports = filtered;
   }
 
   onFilterTypeChange(): void {
+    this.filterReports();
+  }
+
+  searchReports(): void {
     this.filterReports();
   }
 
@@ -149,7 +154,7 @@ export class CreatereportselectionComponent {
 
   toggleSelectAll(): void {
     this.selectAllChecked = !this.selectAllChecked;
-    this.reports.forEach(report => {
+    this.filteredReports.forEach(report => {
       report.selected = this.selectAllChecked;
     });
   }
@@ -181,16 +186,13 @@ export class CreatereportselectionComponent {
       );
     }
 
-    // get all the reportSelections containing the current annual report id
     this.reportSelections = this.reportSelections.filter((selection: any) => {
       return selection.annual_report_id === this.annual_report_id;
     });
 
-
     this.reportSelectionService.getFilterReportSelections(this.annual_report_id).subscribe(
       (response) => {
         this.newReportSelections = response.data.reportSelections;
-
         this.newReportSelections.forEach((newSelection: any) => {
           this.annualContentArray.push(newSelection.body);
         });
@@ -213,19 +215,13 @@ export class CreatereportselectionComponent {
         console.log('Error fetching report selections:', error);
       }
     );
-
-
-
-
   }
 
   navigateToAnnualReportList(): void {
     this.route.navigate([`../../annualreport/${this.annual_report_id}/annual_content/${this.annualContent.annual_content_id}`], { relativeTo: this.aRoute });
-
- }
+  }
 
   navigateToViewAnnualReport(): void {
     this.route.navigate([`../../annualreportlist`], { relativeTo: this.aRoute });
- 
   }
 }

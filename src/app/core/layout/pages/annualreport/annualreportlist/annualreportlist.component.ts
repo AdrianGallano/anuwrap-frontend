@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { AnnualreportService } from '../../../../../shared/services/annualreport.service';
 import { response } from 'express';
-import { error } from 'console';
 import { NavigationComponent } from "../../../../../shared/navigation/navigation.component";
 import { title } from 'process';
 import { CommonModule } from '@angular/common';
@@ -26,7 +25,7 @@ export class AnnualreportlistComponent {
     annualReport: any[] = [];
     old_annualReport: any[] = [];
     annualContents: any[] = [];  // Store all annual contents here
-    annualReport_filter = "";
+    annualReport_filter: string | null =null;
     annualContent: any = {
         annual_report_id: 0,
         annual_body: ''
@@ -59,7 +58,6 @@ export class AnnualreportlistComponent {
                 this.cdr.detectChanges();
             },
             (error) => {
-                console.log('Error fetching annual reports:', error);
             }
         );
     }
@@ -70,7 +68,6 @@ export class AnnualreportlistComponent {
                 this.annualContents = response.data.annual_content;  // Store fetched contents here
             },
             (error) => {
-                console.log('Error fetching annual content:', error);
             }
         );
     }
@@ -81,27 +78,32 @@ export class AnnualreportlistComponent {
                 if (response && response.data && Array.isArray(response.data.reportSelections)) {
                     this.reportSelections = response.data.reportSelections;
                 } else {
-                    console.log('Invalid or empty response for fetchReportSelection');
                 }
             },
             (error) => {
-                console.log('Error fetching report selections:', error);
             }
         );
     }
 
     searchReport() {
-        this.annualReport = this.old_annualReport.filter(annualReport => {
-            return annualReport.annualreport_title.includes(this.annualReport_filter);
-        });
+        if (this.annualReport_filter) {
+            const filterText = (this.annualReport_filter || '').trim().toLowerCase();
+            this.annualReport = this.old_annualReport.filter(report => {
+                const title = report.annualreport_title ? report.annualreport_title.toLowerCase() : '';  // Use correct field name
+                return title.includes(filterText);
+            });
+        } else {
+            this.annualReport = [...this.old_annualReport]; // Reset to original state if no filter
+        }
     }
+    
+    
 
     openAnnualReport(annualReportId: any) {
         const matchingContent = this.annualContents.find(content => content.annual_report_id === annualReportId);
         if (matchingContent) {
             this.route.navigate([`../annualreport/${annualReportId}/annual_content/${matchingContent.annual_content_id}`], { relativeTo: this.aRoute });
         } else {
-            console.log('No matching annual content found for the given annual report ID.');
         }
     }
 

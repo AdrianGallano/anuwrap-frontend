@@ -9,7 +9,7 @@
             <section class="bg-gray-50 antialiased">
                 <div class="mx-auto max-w-screen-2xl">
                     <div class="bg-white relative shadow-md sm:rounded-lg">
-                        <div class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
+                        <div class="sticky flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
                             <div class="w-full md:w-1/2">
                                 <div class="flex items-center">
                                     <label for="simple-search" class="sr-only">Search</label>
@@ -20,7 +20,7 @@
                                             </svg>
                                         </div>
                                         <input type="text" [(ngModel)]="report_filter" (keydown.enter)="searchReport()" id="simple-search" placeholder="Search for reports" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    </div>
+                                     </div>
                                 </div>
                             </div>
                             <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
@@ -34,7 +34,7 @@
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-sm text-left text-gray-50">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 sticky">
                                     <tr class="text-center">
                                         <th scope="col" class="p-4 whitespace-nowrap">
                                             <input type="checkbox" (change)="toggleSelectAll($event)">

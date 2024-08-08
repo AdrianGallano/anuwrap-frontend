@@ -8,7 +8,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
   import { AnnualreportService } from '../../../../../shared/services/annualreport.service';
 import { AiComponent } from "../../../../../shared/ai/ai.component";
 import { ContentService } from '../../../../../shared/services/content.service';
-import { error } from 'console';
 import { WorkspaceService } from '../../../../../shared/services/workspace.service';
 import { UserworkspaceService } from '../../../../../shared/services/userworkspace.service';
 
@@ -25,7 +24,7 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
     old_state: any[] = [];
     workspaceId = '';
     reportTypes: any[] = [];
-    report_filter = "";
+    report_filter: String | null = null;
     constructor(
       private reportService: ReportService,
       private route: Router,
@@ -54,7 +53,6 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
           this.cdr.detectChanges();
         },
         (error) => {
-          console.log(error);
         }
       );
     }
@@ -65,7 +63,6 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
           this.reportTypes = response.data.reportType;
         },
         (error) => {
-          console.log(error);
         }
       );
     }
@@ -84,10 +81,13 @@ import { UserworkspaceService } from '../../../../../shared/services/userworkspa
     }
 
     searchReport() {
-      this.reports = this.old_state;
-      this.reports = this.reports.filter(report => {
-        return report.title.includes(this.report_filter); 
-      });
+      if (this.report_filter) {
+        this.reports = this.old_state.filter(report =>
+          report.title.toLowerCase().includes(this.report_filter!.toLowerCase())
+        );
+      } else {
+        this.reports = [...this.old_state]; // Reset to original state if no filter
+      }
     }
 
     // Method to check if any report is selected
