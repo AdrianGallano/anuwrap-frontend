@@ -14,6 +14,7 @@ import { SentanceService } from '../../../../shared/services/sentance.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageTextComponent } from '../../../../shared/popup/manage-text/manage-text.component';
 import { interval, Subscription, switchMap } from 'rxjs';
+import { ManageImageComponent } from '../../../../shared/popup/manage-image/manage-image.component';
 
 @Component({
   selector: 'app-content',
@@ -264,6 +265,25 @@ export class ContentComponent implements OnInit {
           object-fit: fill;
         }
 
+        .collage-wrapper:hover .delete-btn,
+        .img-wrapper:hover .delete-btn {
+          opacity: 1;
+        }
+
+        .delete-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: red;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+      }
+
         .footer {
           margin-top: 1rem;
         }
@@ -446,7 +466,7 @@ export class ContentComponent implements OnInit {
       }
 `,  
     plugins: 'powerpaste save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
-    toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | insertSentence | addHeader | insertImgContainer | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
+    toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | insertSentence | manageImages | addHeader | insertImgContainer | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
     
     setup: (editor: any) => {
       this.editor = editor;
@@ -455,6 +475,11 @@ export class ContentComponent implements OnInit {
         text: 'Import File',
         onAction: () => this.openFilePicker(editor)
       });
+
+      editor.ui.registry.addButton('manageImages', {
+        text: 'Manage Images',
+        onAction: () => this.openImageManager(editor)
+      });   
 
       editor.ui.registry.addButton('addHeader', {
         text: 'Add Header',
@@ -526,6 +551,7 @@ export class ContentComponent implements OnInit {
   successTimeout: any;
   contentId: number | null | undefined;
   isBrowser: boolean;
+  selectedImageUrl: any;
 
   constructor(
     private aRoute: ActivatedRoute,
@@ -580,9 +606,50 @@ export class ContentComponent implements OnInit {
     );
   }
   
-  
-  
 
+  // openImageManager() {
+  //   const dialogRef = this.dialog.open(ManageImageComponent, {
+  //     width: '600px'
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result) {
+  //       // Handle result from ManageImageComponent
+  //       console.log('Selected image:', result);
+  //       this.insertImageIntoEditor(result);
+  //     }
+  //   });
+  // }
+
+  // insertImageIntoEditor(image: any) {
+  //   const url = image.path; // This should be the correct URL or path to the image
+  //   tinymce.activeEditor!.insertContent(`<img src="${url}" alt="${image.altText || ''}" />`);
+  // }
+  
+  openImageManager(editor: Editor) {
+    const dialogRef = this.dialog.open(ManageImageComponent, {
+      width: '600px',
+      height: '400px',
+      data: {} // pass any necessary data here
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const selectedImage = result;
+        this.insertImageToEditor(editor, selectedImage);
+      }
+    });
+  }
+  
+  insertImageToEditor(editor: Editor, image: any) {
+    const url = image.path; // Use the image URL
+    const imgElement = `<img src="${url}" alt="Image" style="max-width: 100%; height: auto;" />`;
+    
+    // You can choose where to insert the image
+    editor.insertContent(imgElement);
+  }
+  
+  
 
   openFilePicker(editor: any): void {
     const fileInput = document.createElement('input');
@@ -784,43 +851,47 @@ export class ContentComponent implements OnInit {
   
   insertCollage(editor: Editor, count: number): void {
     const collageTemplate = `
-      <div class="collage-wrapper" style="width: 400px; height: auto; resize: both; overflow: hidden; margin: 0 auto; cursor: move; position: relative;" draggable="true">
-        <button class="delete-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0); color: black; border: 2px solid black; border-radius: 5px; padding: 0.5rem 1rem; cursor: pointer; z-index: 1000;">Delete</button>
+      <div class="collage-wrapper" style="width: 400px; height: auto; resize: both; overflow: hidden; margin: 0 auto; cursor: move; position: relative;">
+        <button class="delete-btn">
+        Delete
+        </button>
         <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
           ${Array.from({ length: count }).map((_, index) => `
             <div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden; position: relative;">
               <div class="image-placeholder" style="height: 100px; background-color: #ccc;"></div>
-              <figcaption class="figure-caption" contenteditable="true" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, 0.5); color: white; padding: 5px; text-align: center;">
+              <figcaption class="figure-caption" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, 0.5); color: white; padding: 5px; text-align: center;">
                 Figure ${index + 1}
               </figcaption>
             </div>
           `).join('')}
         </div>
       </div>
-    </div>
     `;
     editor.insertContent(collageTemplate);
     this.setupDragAndDrop(editor);
     this.setupDeleteFunctionality(editor);
   }
-
   insertImgContainer(editor: Editor): void {
-  const imgContainer = `
-    <div class="img-wrapper" style="width: 200px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move; position: relative;" draggable="true">
-      <button class="delete-btn" style="position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0); color: black; border: 2px solid black; border-radius: 5px; padding: 0.5rem 1rem; cursor: pointer; z-index: 1000;">Delete</button>
-      <div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">
-        <div class="image-placeholder" style="height: 200px; background-color: #ccc;"></div>
-          <figcaption class="figure-caption" contenteditable="true" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, 0.5); color: white; padding: 5px; text-align: center;">
+    const imgContainer = `
+      <div class="img-wrapper" style="width: 200px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move; position: relative;">
+        <button class="delete-btn">
+        Delete
+        </button>
+        <div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">
+          <div class="image-placeholder" style="height: 200px; background-color: #ccc;"></div>
+          <figcaption class="figure-caption" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, 0.5); color: white; padding: 5px; text-align: center;">
             Figure 1
           </figcaption>
         </div>
       </div>
-    </div>  
-  `;
-  editor.insertContent(imgContainer);
-  this.setupDragAndDrop(editor);
-  this.setupDeleteFunctionality(editor);
-}
+    `;
+    editor.insertContent(imgContainer);
+    this.setupDragAndDrop(editor);
+    this.setupDeleteFunctionality(editor);
+  }
+  
+  
+  
 insertHeader(editor: any) {
   const headerHTML = `
     <div class="teaching-header" style="
