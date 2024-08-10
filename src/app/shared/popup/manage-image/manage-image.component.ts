@@ -23,20 +23,18 @@ export class ManageImageComponent {
     this.loadImages();
   }
 
-  // Handle file input change
   onFileChange(event: any): void {
-    const file = event.target.files[0]; // Get the file from the input event
+    const file = event.target.files[0];
     this.selectedFile = file;
   }
 
-  // Upload the selected image when the button is clicked
   uploadImage(): void {
     if (this.selectedFile) {
       this.imageService.uploadImage(this.selectedFile).subscribe(
         response => {
           console.log('Image uploaded successfully', response);
-          this.loadImages(); // Reload images after upload
-          this.selectedFile = null; // Reset selected file
+          this.loadImages();
+          this.selectedFile = null; 
         },
         error => {
           console.error('Error uploading image', error);
@@ -48,7 +46,7 @@ export class ManageImageComponent {
   loadImages() {
     this.imageService.getAllImage().subscribe(
       (response: any) => {
-        this.images = response.data.images; // Adjust according to API response structure
+        this.images = response.data.images; 
       },
       (error) => {
         console.error('Error loading images:', error);
@@ -69,7 +67,7 @@ export class ManageImageComponent {
 
   selectImage(image: any) {
     this.selectedImage = image;
-    this.dialogRef.close(this.selectedImage); // Close the dialog and return the selected image
+    this.dialogRef.close(this.selectedImage); 
   }
 
   close() {

@@ -136,3 +136,9 @@
   opacity: 1;
 }
 
+
+[data-mce-menu-item="true"] {
+  white-space: normal; 
+  padding: 8px; 
+}
+

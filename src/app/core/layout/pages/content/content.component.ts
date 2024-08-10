@@ -265,25 +265,6 @@ export class ContentComponent implements OnInit {
           object-fit: fill;
         }
 
-        .collage-wrapper:hover .delete-btn,
-        .img-wrapper:hover .delete-btn {
-          opacity: 1;
-        }
-
-        .delete-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: red;
-        color: white;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 5px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: 1000;
-      }
-
         .footer {
           margin-top: 1rem;
         }
@@ -297,6 +278,7 @@ export class ContentComponent implements OnInit {
           width: 130px;
           height: 130px;
         }
+
       }
 
       /* Print styles */
@@ -466,7 +448,7 @@ export class ContentComponent implements OnInit {
       }
 `,  
     plugins: 'powerpaste save anchor autolink autosave charmap code directionality fullscreen image insertdatetime link lists media nonbreaking pagebreak preview quickbars searchreplace table visualblocks wordcount',
-    toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | insertSentence | manageImages | addHeader | insertImgContainer | table | insertCollage | insertdatetime preview print | searchreplace | a11ycheck',
+    toolbar: 'uploadCustomFile | save undo redo | fontfamily fontsize | bold italic underline strikethrough | indent outdent | bullist numlist | alignleft aligncenter alignright alignjustify | blockquote formatselect fontselect fontsizeselect | forecolor backcolor | insertImgContainer | insertCollage | addHeader |table | insertdatetime preview print | searchreplace | a11ycheck',
     
     setup: (editor: any) => {
       this.editor = editor;
@@ -485,35 +467,6 @@ export class ContentComponent implements OnInit {
         text: 'Add Header',
         onAction: () => this.insertHeader(editor)
       });
-
-      editor.ui.registry.addMenuButton('insertSentence', {
-        text: 'Insert Sentence',
-        fetch: (callback: any) => {
-          const items = this.sentences.map((sentence: any) => ({
-            type: 'menuitem',
-            text: sentence.text,
-            onAction: () => this.insertSentence(editor, sentence.text)
-          }));
-          callback(items);
-        }
-      });
-      
-      // editor.ui.registry.addMenuButton('addPageButton', {
-      //   text: 'Add Page',
-      //   fetch: (callback: any) => {
-      //   const items = [
-      //       { type: 'menuitem', text: 'Accomplishment Report Page', onAction: () => this.insertNewAccomplishmentPage(editor) },
-      //       { type: 'menuitem', text: 'Faculty Matrix Report Page', onAction: () => this.insertNewFacultyPage(editor) },
-      //       { type: 'menuitem', text: 'Teaching And Learning Report Page', onAction: () => this.insertNewTeachingPage(editor) },
-      //       { type: 'menuitem', text: 'Faculty Schedule Report Page', onAction: () => this.insertNewFacultySchedPage(editor) },
-      //       { type: 'menuitem', text: 'Event Report Page', onAction: () => this.insertNewEventReportPage(editor) },
-      //       { type: 'menuitem', text: 'Financial Report Page', onAction: () => this.insertNewFinancialReportPage(editor) },
-      //       { type: 'menuitem', text: 'Summary Of Accomplishment Report Page', onAction: () => this.insertNewSummaryReportPage(editor) },
-      //       { type: 'menuitem', text: 'Syllabus Report Page', onAction: () => this.insertNewSyllabusReportPage(editor) }
-      //     ];
-      //     callback(items);
-      //   }
-      // });
 
       editor.ui.registry.addMenuButton('insertCollage', {
         text: 'Add Collage',
@@ -628,8 +581,8 @@ export class ContentComponent implements OnInit {
   
   openImageManager(editor: Editor) {
     const dialogRef = this.dialog.open(ManageImageComponent, {
-      width: '600px',
-      height: '400px',
+      width: '80%',
+      height: '600px',
       data: {} // pass any necessary data here
     });
   
@@ -642,10 +595,9 @@ export class ContentComponent implements OnInit {
   }
   
   insertImageToEditor(editor: Editor, image: any) {
-    const url = image.path; // Use the image URL
+    const url = image.path;
     const imgElement = `<img src="${url}" alt="Image" style="max-width: 100%; height: auto;" />`;
     
-    // You can choose where to insert the image
     editor.insertContent(imgElement);
   }
   
@@ -852,9 +804,6 @@ export class ContentComponent implements OnInit {
   insertCollage(editor: Editor, count: number): void {
     const collageTemplate = `
       <div class="collage-wrapper" style="width: 400px; height: auto; resize: both; overflow: hidden; margin: 0 auto; cursor: move; position: relative;">
-        <button class="delete-btn">
-        Delete
-        </button>
         <div class="collage-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 10px; overflow: hidden;">
           ${Array.from({ length: count }).map((_, index) => `
             <div class="image-container" style="width: 30%; margin-bottom: 20px; overflow: hidden; position: relative;">
@@ -868,28 +817,25 @@ export class ContentComponent implements OnInit {
       </div>
     `;
     editor.insertContent(collageTemplate);
-    this.setupDragAndDrop(editor);
     this.setupDeleteFunctionality(editor);
+    this.setupKeyDeleteFunctionality(editor);
   }
+  
   insertImgContainer(editor: Editor): void {
     const imgContainer = `
       <div class="img-wrapper" style="width: 200px; margin-bottom: 20px; display: flex; flex-direction: column; resize: both; overflow: hidden; cursor: move; position: relative;">
-        <button class="delete-btn">
-        Delete
-        </button>
         <div class="image-container" style="width: 100%; margin-bottom: 20px; overflow: hidden;">
           <div class="image-placeholder" style="height: 200px; background-color: #ccc;"></div>
           <figcaption class="figure-caption" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, 0.5); color: white; padding: 5px; text-align: center;">
             Figure 1
           </figcaption>
         </div>
-      </div>
+      </div>  
     `;
     editor.insertContent(imgContainer);
     this.setupDragAndDrop(editor);
-    this.setupDeleteFunctionality(editor);
+    this.setupKeyDeleteFunctionality(editor);
   }
-  
   
   
 insertHeader(editor: any) {
@@ -976,6 +922,27 @@ applyHeaderStyling(editor: any) {
         }
     }
 }
+
+
+setupKeyDeleteFunctionality(editor: Editor): void {
+  const wrappers = editor.getBody().querySelectorAll('.collage-wrapper, .img-wrapper');
+
+  wrappers.forEach((wrapper) => {
+    wrapper.addEventListener('click', () => {
+      wrapper.setAttribute('tabindex', '0');
+      (wrapper as HTMLElement).focus();
+
+      wrapper.addEventListener('keydown', (event) => {
+        const keyboardEvent = event as KeyboardEvent; 
+        if (keyboardEvent.key === 'Delete' || keyboardEvent.key === 'Backspace') {
+          // Remove the selected wrapper
+          wrapper.remove();
+        }
+      });
+    });
+  });
+}
+
   
 
   private startPolling(): void {
@@ -984,7 +951,6 @@ applyHeaderStyling(editor: any) {
     ).subscribe(
       (response) => {
         this.sentences = response.data.sentences || [];
-        this.initializeSentenceButtons(this.sentences);
       },
       (error) => {
         console.error('Error loading sentences:', error);
@@ -997,58 +963,17 @@ applyHeaderStyling(editor: any) {
       this.pollingSubscription.unsubscribe();
     }
   }
-  
-
-  initializeSentenceButtons(sentences: any[]) {
-    const editor = this.editor; // Ensure this.editor is correctly initialized
-  
-    editor.ui.registry.addMenuButton('insertSentence', {
-      text: 'Insert Sentence',
-      fetch: (callback: any) => {
-        const items = sentences.map((sentence: any) => ({
-          type: 'menuitem',
-          text: sentence.text,
-          onAction: () => {
-            console.log('Menu item clicked:', sentence.text); // Debugging line
-            this.insertSentence(editor, sentence.text);
-          }
-        }));
-        callback(items);
-      }
-    });
-  
-    editor.ui.registry.addButton('manageSentences', {
-      text: 'Manage Sentences',
-      onAction: () => this.openManageSentencesDialog()
-    });
-  }
-  
-
-  insertSentence(editor: any, sentence: string) {
-    // Get current selection
-    const selection = editor.selection.getNode();
-    
-    // Log current selection
-    console.log('Selected node before insertion:', selection);
-    
-    // Insert the sentence at the cursor position
-    editor.execCommand('mceInsertContent', false, sentence);
-    
-    // Log the content after insertion
-    console.log('Content after insertion:', editor.getContent());
-  }
-
-
 
   openManageSentencesDialog() {
     const dialogRef = this.dialog.open(ManageTextComponent, {
-      width: '500px',
+      width: '80%',
+      height: '100%',
       data: { sentences: this.sentences }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.startPolling(); // Refresh the list of sentences
+        this.startPolling(); 
       }
     });
   }
@@ -1119,7 +1044,6 @@ applyHeaderStyling(editor: any) {
                     const rect = targetElement.getBoundingClientRect();
                     offsetX = event.clientX - rect.left;
                     offsetY = event.clientY - rect.top;
-                    console.log(`Drag started at X: ${event.clientX}, Y: ${event.clientY}`);
                 }
             }
         }
@@ -1128,7 +1052,6 @@ applyHeaderStyling(editor: any) {
     // Handle drag over
     editor.on('dragover', (event: DragEvent) => {
         event.preventDefault(); // Required to allow drop
-        console.log(`Drag over at X: ${event.clientX}, Y: ${event.clientY}`);
     });
 
     // Handle drop
@@ -1147,7 +1070,6 @@ applyHeaderStyling(editor: any) {
                         const dropX = event.clientX - rect.left - offsetX;
                         const dropY = event.clientY - rect.top - offsetY;
 
-                        console.log(`Dropped at X: ${dropX}, Y: ${dropY}`);
 
                         draggingElement.style.position = 'absolute';
                         draggingElement.style.left = `${dropX}px`;
@@ -1169,7 +1091,6 @@ applyHeaderStyling(editor: any) {
 
     // Handle mouse down for dragging
     document.addEventListener('mousedown', (event: MouseEvent) => {
-        console.log('Mouse down event triggered');
         const targetElement = event.target as HTMLElement;
         if (targetElement && (
             targetElement.classList.contains('img-wrapper') ||
@@ -1181,7 +1102,6 @@ applyHeaderStyling(editor: any) {
             const rect = targetElement.getBoundingClientRect();
             offsetX = event.clientX - rect.left;
             offsetY = event.clientY - rect.top;
-            console.log(`Mouse down at X: ${event.clientX}, Y: ${event.clientY}`);
         }
     });
 
@@ -1195,14 +1115,12 @@ applyHeaderStyling(editor: any) {
             draggingElement.style.position = 'absolute';
             draggingElement.style.left = `${moveX}px`;
             draggingElement.style.top = `${moveY}px`;
-            console.log(`Mouse move at X: ${moveX}, Y: ${moveY}`);
         }
     });
 
     // Handle mouse up to stop dragging
     document.addEventListener('mouseup', () => {
         draggingElement = null;
-        console.log('Mouse up, dragging stopped');
     });
 }
 

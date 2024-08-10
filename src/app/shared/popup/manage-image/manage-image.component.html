@@ -1,23 +1,23 @@
-<div class="container mx-auto p-4">
+<div class="container mx-auto p-8 max-w-full max-h-full bg-white rounded-lg">
   <!-- Form for uploading images -->
-  <form (ngSubmit)="uploadImage()" #uploadForm="ngForm" class="mb-6">
-    <div class="flex items-center mb-4">
-      <input type="file" (change)="onFileChange($event)" class="file-input mr-4" />
-      <button type="submit" [disabled]="!selectedFile" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:bg-gray-400">
+  <form (ngSubmit)="uploadImage()" #uploadForm="ngForm" class="mb-8 w-full">
+    <div class="flex items-center mb-6">       
+        -<input (change)="onFileChange($event)" class="block w-full mr-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+        <button type="submit" [disabled]="!selectedFile" class="bg-gray-800 text-white py-2 px-6 rounded-lg hover:bg-gray-600 disabled:bg-gray-400">
         Upload
       </button>
     </div>
   </form>
 
   <!-- List of images with select functionality -->
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     <div *ngFor="let image of images" class="relative group border border-gray-300 rounded-lg overflow-hidden shadow-lg">
-      <img [src]="image.path" alt="Image" class="w-full h-40 object-cover group-hover:opacity-75 transition-opacity duration-300" />
+      <img [src]="image.path" alt="Image" class="w-full h-48 object-cover group-hover:opacity-75 transition-opacity duration-300" />
       <div class="absolute inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <button (click)="selectImage(image)" class="bg-green-500 text-white py-2 px-4 rounded mr-2 hover:bg-green-600">
+        <button (click)="selectImage(image)" class="bg-gray-800 text-white py-2 px-6 rounded-lg mr-2 hover:bg-gray-600">
           Select
         </button>
-        <button (click)="deleteImage(image.img_id)" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">
+        <button (click)="deleteImage(image.img_id)" class="bg-red-500 text-white py-2 px-6 rounded-lg hover:bg-red-600">
           Delete
         </button>
       </div>
